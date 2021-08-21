@@ -1,0 +1,162 @@
+name: Parkour
+main: world.bentobox.parkour.Parkour
+version: ${version}${build.number}
+api-version: 1.17
+metrics: true
+icon: "IRON_PRESSURE_PLATE"
+repository: "BentoBoxWorld/Parkour"
+
+authors: tastybento
+
+permissions:    
+  parkour.island:
+   description: Allow island command usage
+   default: true
+  parkour.island.create:
+    description: Allow island creation
+    default: true
+  parkour.island.home:
+    description: Allow teleporting to player island
+    default: true
+  parkour.island.sethome:
+    description: Let the player use the sethome command
+    default: true
+  parkour.island.info:
+    description: Let the player check other players info
+    default: true
+  parkour.island.lock:
+    description: Allows island locking
+    default: true
+  parkour.island.near:
+    description: Players can see nearby island names
+    default: true
+  parkour.island.expel:
+    description: Allows expelling of visitors
+    default: true
+  parkour.island.ban:
+    description: Allows banning of visitors
+    default: true
+  parkour.island.settings:
+    description: Player can see server settings
+    default: true
+  parkour.island.language:
+    description: Player can select a language
+    default: true
+  parkour.island.name:
+    description: Player can set the name of their island
+    default: true
+  parkour.island.spawn:
+    description: Player can use the island spawn command if spawn exists
+    default: true
+  parkour.island.reset:
+    description: Player can use the island reset or restart command
+    default: true  
+  parkour.island.team:
+    description: Let a player use team command
+    default: true
+  parkour.island.team.setowner:
+    description: Let a player change the team owner
+    default: true
+  parkour.island.team.invite:
+    description: Let a player invite others
+    default: true
+  parkour.island.team.reject:
+    description: Let a player reject invites
+    default: true
+  parkour.island.team.leave:
+    description: Let a player leave the team
+    default: true
+  parkour.island.team.kick:
+    description: Let a player kick team members
+    default: true
+  parkour.island.team.accept:
+    description: Let a player accept invitations
+    default: true
+  parkour.island.team.trust:
+    description: Let a player use team trust commands
+    default: true
+  parkour.island.team.coop:
+    description: Let a player use team coop commands
+    default: true
+  parkour.island.team.promote:
+    description: Let a player use promote commands
+    default: true
+  parkour.settings.*:
+    description: Allow use of settings on island
+    default: true
+  parkour.mod.info:
+    description: Let a moderator see info on a player
+    default: op
+  parkour.mod.clearreset:
+    description: Allow clearing of island reset limit
+    default: false
+  parkour.mod.bypasscooldowns:
+    description: Allow moderator to bypass cooldowns
+    default: op
+  parkour.mod.bypassdelays:
+    description: Allow moderator to bypass delays
+    default: op
+  parkour.mod.bypassprotect:
+    description: Allow moderator to bypass island protection
+    default: op
+  parkour.mod.bypassexpel:
+    description: Allow moderator to bypass island expulsion
+    default: op
+  parkour.mod.switch:
+    description: Allows moderator to switch bypass protection on and off
+    default: op
+  parkour.mod.lock:
+    description: Locks or unlocks an island
+    default: op
+  parkour.mod.bypasslock:
+    description: Bypasses an island lock
+    default: op
+  parkour.mod.bypassban:
+    description: Bypasses island ban
+    default: op  
+  parkour.mod.team:
+    description: Enables modification of teams via kick and add commands
+    default: false
+  parkour.admin.tp:
+    description: Allows teleport to an island
+    default: op    
+  parkour.admin.clearresetall:
+    description: Allow clearing of island reset limit of all players
+    default: op
+  parkour.admin.reload:
+    description: Reload the config.yml
+    default: op
+  parkour.admin.delete:
+    description: Let a player completely remove a player (including island)
+    default: op
+  parkour.admin.register:
+    description: Let a player register the nearest island to another player.
+    default: op
+  parkour.admin.unregister:
+    description: Removes a player from an island without deleting the island blocks.
+    default: op
+  parkour.admin.setspawn:
+    description: Allows use of spawn tools
+    default: op
+  parkour.admin.setrange:
+    description: Allows setting of island protection range
+    default: op
+  parkour.admin.settingsreset:
+    description: Resets all the islands to default protection settings
+    default: op
+  parkour.admin.noban:
+    description: Player cannot be banned from an island
+    default: op
+  parkour.admin.noexpel:
+    description: Player cannot be expelled from an island
+    default: op
+  parkour.admin.setlanguage:
+    description: Resets all player languages and sets the default language
+    default: op
+  parkour.admin.getrank:
+    description: Get a player's rank
+    default: op
+  parkour.admin.setrank:
+    description: Set a player's rank
+    default: op
+    
