@@ -13,12 +13,14 @@ import world.bentobox.bentobox.api.commands.admin.DefaultAdminCommand;
 import world.bentobox.bentobox.api.commands.island.DefaultPlayerCommand;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
+import world.bentobox.parkour.commands.KitCommand;
 import world.bentobox.parkour.generators.ChunkGeneratorWorld;
+import world.bentobox.parkour.listeners.MakeTrackListener;
+import world.bentobox.parkour.listeners.TimerListener;
 
 /**
- * Main BSkyBlock class - provides an island minigame in the sky
+ * Main Parkour class
  * @author tastybento
- * @author Poslovitch
  */
 public class Parkour extends GameModeAddon implements Listener {
 
@@ -46,13 +48,14 @@ public class Parkour extends GameModeAddon implements Listener {
             public void setup()
             {
                 super.setup();
+                new KitCommand(getAddon(), this);
             }
         };
         adminCommand = new DefaultAdminCommand(this) {};
 
         // Register listeners
-        //this.registerListener(new AdvancementListener(this));
-        //this.registerListener(new JoinListener(this));
+        this.registerListener(new MakeTrackListener(this));
+        this.registerListener(new TimerListener(this));
     }
 
     private boolean loadSettings() {
@@ -60,7 +63,7 @@ public class Parkour extends GameModeAddon implements Listener {
         settings = configObject.loadConfigObject();
         if (settings == null) {
             // Disable
-            logError("Brix settings could not load! Addon disabled.");
+            logError("Parkour settings could not load! Addon disabled.");
             setState(State.DISABLED);
             return false;
         }
@@ -81,7 +84,7 @@ public class Parkour extends GameModeAddon implements Listener {
     @Override
     public void onReload() {
         if (loadSettings()) {
-            log("Reloaded Brix settings");
+            log("Reloaded Parkour settings");
         }
     }
 
@@ -96,7 +99,7 @@ public class Parkour extends GameModeAddon implements Listener {
     public void createWorlds() {
         String worldName = settings.getWorldName().toLowerCase();
         if (getServer().getWorld(worldName) == null) {
-            log("Creating Brix world ...");
+            log("Creating Parkour world ...");
         }
 
         // Create the world if it does not exist
@@ -104,14 +107,14 @@ public class Parkour extends GameModeAddon implements Listener {
         // Make the nether if it does not exist
         if (settings.isNetherGenerate()) {
             if (getServer().getWorld(worldName + NETHER) == null) {
-                log("Creating Brix's Nether...");
+                log("Creating Parkour's Nether...");
             }
             netherWorld = settings.isNetherIslands() ? getWorld(worldName, World.Environment.NETHER, chunkGenerator) : getWorld(worldName, World.Environment.NETHER, null);
         }
         // Make the end if it does not exist
         if (settings.isEndGenerate()) {
             if (getServer().getWorld(worldName + THE_END) == null) {
-                log("Creating Brix's End World...");
+                log("Creating Parkour's End World...");
             }
             endWorld = settings.isEndIslands() ? getWorld(worldName, World.Environment.THE_END, chunkGenerator) : getWorld(worldName, World.Environment.THE_END, null);
         }

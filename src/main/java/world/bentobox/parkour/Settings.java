@@ -98,7 +98,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("Admins can change protection sizes for players individually using /bsbadmin range set <player> <new range>")
     @ConfigComment("or set this permission: parkour.island.range.<number>")
     @ConfigEntry(path = "world.protection-range")
-    private int islandProtectionRange = 50;
+    private int islandProtectionRange = 100;
 
     @ConfigComment("Start islands at these coordinates. This is where new islands will start in the")
     @ConfigComment("world. These must be a factor of your island distance, but the plugin will auto")
