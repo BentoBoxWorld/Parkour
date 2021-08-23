@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
@@ -21,19 +20,13 @@ import world.bentobox.parkour.Parkour;
  * @author tastybento
  *
  */
-public class MakeTrackListener implements Listener {
-
-    private static final String START = "Parkour_Start";
-    private static final String END = "Parkour_End";
-    private Parkour addon;
-
-
+public class MakeTrackListener extends AbstractListener {
 
     /**
      * @param addon
      */
     public MakeTrackListener(Parkour addon) {
-        this.addon = addon;
+        super(addon);
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -84,8 +77,4 @@ public class MakeTrackListener implements Listener {
         }
     }
 
-    private boolean isLocEquals(Location l1, String l2) {
-        Location l3 = Util.getLocationString(l2);
-        return l1.getWorld().equals(l3.getWorld()) && l1.getBlockX() == l3.getBlockX() && l1.getBlockY() == l3.getBlockY() && l1.getBlockZ() == l3.getBlockZ();
-    }
 }
