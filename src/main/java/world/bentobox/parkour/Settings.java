@@ -119,7 +119,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("Area height - Lowest is 5.")
     @ConfigComment("It is the y coordinate of the bedrock block in the blueprint.")
     @ConfigEntry(path = "world.area-height")
-    private int islandHeight = 5;
+    private int islandHeight = 100;
 
     @ConfigComment("Use your own world generator for this world.")
     @ConfigComment("In this case, the plugin will not generate anything.")

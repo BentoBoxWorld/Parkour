@@ -1,15 +1,16 @@
 {
   "uniqueId": "default",
-  "icon": "PAPER",
-  "displayName": "Default bundle",
+  "icon": "ORANGE_CONCRETE",
+  "displayName": "Starter Parkour",
   "description": [
-    "§bDefault bundle of blueprints"
+    "A starter Parkour",
+    "with instructions."
   ],
   "requirePermission": false,
   "blueprints": {
-    "NORMAL": "bedrock",
-    "NETHER": "bedrock",
-    "THE_END": "bedrock"
+    "NORMAL": "starter",
+    "NETHER": "starter",
+    "THE_END": "starter"
   },
   "slot": 0
 }
