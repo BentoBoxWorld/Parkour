@@ -16,7 +16,7 @@ import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.parkour.commands.TopCommand;
 import world.bentobox.parkour.generators.ChunkGeneratorWorld;
 import world.bentobox.parkour.listeners.MakeCourseListener;
-import world.bentobox.parkour.listeners.VisitorListener;
+import world.bentobox.parkour.listeners.CourseRunnerListener;
 
 /**
  * Main Parkour class
@@ -59,7 +59,7 @@ public class Parkour extends GameModeAddon implements Listener {
 
         // Register listeners
         this.registerListener(new MakeCourseListener(this));
-        this.registerListener(new VisitorListener(this));
+        this.registerListener(new CourseRunnerListener(this));
     }
 
     private boolean loadSettings() {

@@ -36,7 +36,7 @@ import world.bentobox.parkour.Parkour;
  * @author tastybento
  *
  */
-public class VisitorListener extends AbstractListener {
+public class CourseRunnerListener extends AbstractListener {
 
     private final Map<UUID, Location> checkpoints = new HashMap<>();
     private final Map<UUID, Long> timers = new HashMap<>();
@@ -44,7 +44,7 @@ public class VisitorListener extends AbstractListener {
     /**
      * @param addon Parkour addon
      */
-    public VisitorListener(Parkour addon) {
+    public CourseRunnerListener(Parkour addon) {
         super(addon);
     }
 
