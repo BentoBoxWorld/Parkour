@@ -49,7 +49,7 @@ public class ParkourManager {
     }
 
     private void saveIsland(Island island) {
-        handler.saveObjectAsync(getFromDb(island));
+        handler.saveObjectAsync(getIsland(island));
     }
 
     /**
