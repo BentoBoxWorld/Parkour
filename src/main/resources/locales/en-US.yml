@@ -31,6 +31,7 @@ parkour:
     description: "&e [number]"
     your-rank: "&a Your rank: [number]"
     beat-previous-time: "&d You beat your previous time!"
+    did-not-beat-previous-time: "&b You didn't beat your previous time!"
   errors:
     not-on-island: "&c You must be on an island to do that"
   
