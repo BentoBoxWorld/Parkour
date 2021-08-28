@@ -16,14 +16,11 @@ import world.bentobox.parkour.Parkour;
  */
 public class ChunkGeneratorWorld extends ChunkGenerator {
 
-    private final Parkour addon;
-
     /**
      * @param addon - addon
      */
     public ChunkGeneratorWorld(Parkour addon) {
         super();
-        this.addon = addon;
     }
 
 

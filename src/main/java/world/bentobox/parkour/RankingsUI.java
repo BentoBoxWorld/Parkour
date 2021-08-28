@@ -22,12 +22,12 @@ public class RankingsUI {
 
     private static final int[] SLOTS = new int[] {4, 12, 14, 19, 20, 21, 22, 23, 24, 25};
 
-    private Parkour addon;
+    private final Parkour addon;
     // Background
     private final PanelItem background;
 
     /**
-     * @param addon
+     * @param addon Parkour addon
      */
     public RankingsUI(Parkour addon) {
         this.addon = addon;

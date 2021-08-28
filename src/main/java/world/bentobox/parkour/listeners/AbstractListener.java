@@ -14,14 +14,14 @@ import world.bentobox.parkour.Parkour;
 public abstract class AbstractListener implements Listener {
 
     protected static final DecimalFormat DF2 = new DecimalFormat("#.##");
-    {
+    static {
         DF2.setRoundingMode(RoundingMode.UP);
     }
     protected static final String START = "Parkour_Start";
     protected static final String END = "Parkour_End";
     protected Parkour addon;
     /**
-     * @param addon
+     * @param addon Parkour addon
      */
     public AbstractListener(Parkour addon) {
         this.addon = addon;

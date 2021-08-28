@@ -7,7 +7,7 @@ parkour:
   already-set: "&c Start and End already set! Break one to reset."
   start-removed: "&b Start removed!"
   end-removed: "&b End removed!"
-  resetting-start-end: "&e Reseting start and end points!"
+  resetting-start-end: "&e Resetting start and end points!"
   start: "&b Parkour start!"
   no-start-yet: "&c There is no start set up yet."
   no-end-yet: "&c There is no end set up yet."

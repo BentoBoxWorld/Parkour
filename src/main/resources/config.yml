@@ -43,7 +43,7 @@ world:
   # /!\ BentoBox currently does not support changing this value mid-game. If you do need to change it, do a full reset of your databases and worlds.
   distance-between-islands: 400
   # Default protection range radius in blocks. Cannot be larger than distance.
-  # Admins can change protection sizes for players individually using /bsbadmin range set <player> <new range>
+  # Admins can change protection sizes for players individually using /pkadmin range set <player> <new range>
   # or set this permission: parkour.island.range.<number>
   protection-range: 100
   # Start islands at these coordinates. This is where new islands will start in the
@@ -322,7 +322,7 @@ area:
   # Accessed via /is sethome <number> or /is go <number>
   max-homes: 5
   reset:
-    # How many resets a player is allowed (manage with /bsbadmin reset add/remove/reset/set command)
+    # How many resets a player is allowed (manage with /pkadmin reset add/remove/reset/set command)
     # Value of -1 means unlimited, 0 means hardcore - no resets.
     # Example, 2 resets means they get 2 resets or 3 areas lifetime
     reset-limit: -1
@@ -421,7 +421,7 @@ area:
     # 
     # Here are some examples of valid commands to execute:
     #    * "[SUDO] bbox version"
-    #    * "bsbadmin deaths set [player] 0"
+    #    * "pkadmin deaths set [player] 0"
     on-join: []
     # List of commands to run when a player leaves an area, resets his area or gets kicked from it.
     # These commands are run by the console, unless otherwise stated using the [SUDO] prefix,
@@ -432,7 +432,7 @@ area:
     # 
     # Here are some examples of valid commands to execute:
     #    * '[SUDO] bbox version'
-    #    * 'bsbadmin deaths set [player] 0'
+    #    * 'pkadmin deaths set [player] 0'
     # 
     # Note that player-executed commands might not work, as these commands can be run with said player being offline.
     on-leave: []

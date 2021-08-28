@@ -38,11 +38,11 @@ import world.bentobox.parkour.Parkour;
  */
 public class VisitorListener extends AbstractListener {
 
-    private Map<UUID, Location> checkpoints = new HashMap<>();
-    private Map<UUID, Long> timers = new HashMap<>();
+    private final Map<UUID, Location> checkpoints = new HashMap<>();
+    private final Map<UUID, Long> timers = new HashMap<>();
 
     /**
-     * @param addon
+     * @param addon Parkour addon
      */
     public VisitorListener(Parkour addon) {
         super(addon);
@@ -143,7 +143,7 @@ public class VisitorListener extends AbstractListener {
 
             // Check if start and end is set
             if (metaStart.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
-                if (!metaEnd.isPresent()) {
+                if (metaEnd.isEmpty()) {
                     user.sendMessage("parkour.set-the-end");
                     return;
                 }

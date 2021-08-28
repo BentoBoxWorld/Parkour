@@ -111,7 +111,7 @@ public class ParkourManager {
         Stream<Entry<UUID, Long>> stream = getIsland(island).getRankings().entrySet().stream()
                 .filter(e -> e.getValue() > 0)
                 .sorted(Map.Entry.comparingByValue());
-        return stream.takeWhile(x -> !x.getKey().equals(uuid)).map(Map.Entry::getKey).collect(Collectors.toList()).size() + 1;
+        return (int) stream.takeWhile(x -> !x.getKey().equals(uuid)).map(Entry::getKey).count() + 1;
     }
 
     public long getTime(Island island, UUID uniqueId) {

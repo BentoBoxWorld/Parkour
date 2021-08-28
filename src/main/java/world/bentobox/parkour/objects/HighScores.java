@@ -20,7 +20,7 @@ public class HighScores implements DataObject {
      * uniqueId is the island's UUID
      */
     @Expose
-    private String uniqueId = "";
+    private String uniqueId;
 
     /**
      * Player UUID key, time taken in milliseconds

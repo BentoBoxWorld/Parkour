@@ -56,7 +56,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>16</java.version>
         <!-- Non-minecraft related dependencies -->
-        <powermock.version>2.0.2</powermock.version>
+        <powermock.version>2.0.9</powermock.version>
         <!-- More visible way how to change dependency versions -->
         <spigot.version>1.17.1-R0.1-SNAPSHOT</spigot.version>
         <bentobox.version>1.17.1</bentobox.version>
@@ -137,7 +137,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.0.0</version>
+            <version>3.12.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>

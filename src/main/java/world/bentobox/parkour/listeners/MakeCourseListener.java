@@ -23,7 +23,7 @@ import world.bentobox.parkour.Parkour;
 public class MakeCourseListener extends AbstractListener {
 
     /**
-     * @param addon
+     * @param addon Parkour addon
      */
     public MakeCourseListener(Parkour addon) {
         super(addon);
