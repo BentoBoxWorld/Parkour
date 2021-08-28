@@ -166,11 +166,14 @@ public class VisitorListener extends AbstractListener {
                     long previous = addon.getPm().getTime(island, e.getPlayer().getUniqueId());
                     if (duration < previous) {
                         user.sendMessage("parkour.top.beat-previous-time");
+                        // Store
+                        addon.getPm().addScore(island, user, duration);
+                    } else {
+                        user.sendMessage("parkour.top.did-not-beat-previous-time");
                     }
                     // Say rank
                     user.sendMessage("parkour.top.your-rank", TextVariables.NUMBER, String.valueOf(addon.getPm().getRank(island, e.getPlayer().getUniqueId())));
-                    // Store
-                    addon.getPm().addScore(island, user, duration);
+
                 }
             }
         }
