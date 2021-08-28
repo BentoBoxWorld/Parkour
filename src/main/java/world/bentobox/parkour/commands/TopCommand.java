@@ -20,7 +20,7 @@ public class TopCommand extends CompositeCommand {
     public void setup() {
         this.setPermission("parkour.top");
         setOnlyPlayer(true);
-        setDescription("parkour.commands.top.description");
+        setDescription("parkour.commands.parkour.top.description");
     }
     @Override
     public boolean canExecute(User user, String label, List<String> args) {

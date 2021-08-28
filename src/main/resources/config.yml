@@ -43,7 +43,7 @@ world:
   # /!\ BentoBox currently does not support changing this value mid-game. If you do need to change it, do a full reset of your databases and worlds.
   distance-between-islands: 400
   # Default protection range radius in blocks. Cannot be larger than distance.
-  # Admins can change protection sizes for players individually using /pkadmin range set <player> <new range>
+  # Admins can change protection sizes for players individually using /bsbadmin range set <player> <new range>
   # or set this permission: parkour.island.range.<number>
   protection-range: 100
   # Start islands at these coordinates. This is where new islands will start in the
@@ -59,7 +59,7 @@ world:
   offset-z: 0
   # Area height - Lowest is 5.
   # It is the y coordinate of the bedrock block in the blueprint.
-  area-height: 5
+  area-height: 100
   # Use your own world generator for this world.
   # In this case, the plugin will not generate anything.
   # If used, you must specify the world name and generator in the bukkit.yml file.
@@ -121,8 +121,10 @@ world:
     DRAGON_EGG: false
     ISLAND_RESPAWN: true
     REDSTONE: false
-    CREEPER_GRIEFING: false
+    CREEPER_GRIEFING: true
+    VISITOR_KEEP_INVENTORY: true
     BUCKET: false
+    PETS_STAY_AT_HOME: true
     ENDER_PEARL: false
     DOOR: true
     NATURAL_SPAWNING_OUTSIDE_RANGE: false
@@ -145,13 +147,13 @@ world:
     BREAK_SPAWNERS: false
     LEVER: false
     ELYTRA: true
-    COARSE_DIRT_TILLING: false
+    COARSE_DIRT_TILLING: true
     RIDING: false
     CAKE: false
     HURT_MONSTERS: false
     ARMOR_STAND: false
     NAME_TAG: false
-    ENDERMAN_GRIEFING: true
+    ENDERMAN_GRIEFING: false
     CLEAN_SUPER_FLAT: false
     TRADING: true
     EGGS: false
@@ -227,8 +229,8 @@ world:
     BREAK_HOPPERS: 500
     FURNACE: 500
     MONSTER_SPAWNERS_SPAWN: 500
-    ANVIL: 500
     MINECART: 500
+    ANVIL: 500
     FISH_SCOOPING: 500
     FIRE_IGNITE: 500
     END_PORTAL: 500
@@ -241,8 +243,8 @@ world:
     LEVER: 0
     ELYTRA: 0
     CAKE: 500
-    RIDING: 500
     HURT_MONSTERS: 0
+    RIDING: 500
     NAME_TAG: 500
     ARMOR_STAND: 500
     TRADING: 0
@@ -252,8 +254,8 @@ world:
     FLINT_AND_STEEL: 500
     NETHER_PORTAL: 0
     LECTERN: 500
-    CROP_TRAMPLE: 500
     ITEM_PICKUP: 0
+    CROP_TRAMPLE: 500
     DROPPER: 500
     BREWING: 500
     TNT_PRIMING: 500
@@ -263,26 +265,26 @@ world:
     COMMAND_RANKS: 500
     BEACON: 500
     TRAPDOOR: 500
-    PRESSURE_PLATE: 0
     EXPERIENCE_BOTTLE_THROWING: 500
+    PRESSURE_PLATE: 0
     DYE: 500
     PLACE_BLOCKS: 500
     ITEM_FRAME: 500
     CRAFTING: 0
     SHEARING: 500
-    ANIMAL_SPAWNERS_SPAWN: 500
     ENCHANTING: 500
+    ANIMAL_SPAWNERS_SPAWN: 500
     BOAT: 0
-    SPAWN_EGGS: 500
     BED: 500
+    SPAWN_EGGS: 500
     MILKING: 500
     DISPENSER: 500
     GATE: 0
     EXPERIENCE_PICKUP: 500
     HOPPER: 500
     LEASH: 500
-    MOUNT_INVENTORY: 500
     BREAK_BLOCKS: 500
+    MOUNT_INVENTORY: 500
     CHORUS_FRUIT: 500
     CONTAINER: 500
     POTION_THROWING: 500
@@ -300,7 +302,49 @@ world:
     PVP_OVERWORLD: false
   # These settings/flags are hidden from users
   # Ops can toggle hiding in-game using SHIFT-LEFT-CLICK on flags in settings
-  hidden-flags: []
+  hidden-flags:
+  - ANVIL
+  - ENCHANTING
+  - FURNACE
+  - BUCKET
+  - HURT_MONSTERS
+  - TRADING
+  - RIDING
+  - BED
+  - BEACON
+  - CHORUS_FRUIT
+  - BREWING
+  - BREEDING
+  - BREAK_SPAWNERS
+  - COLLECT_LAVA
+  - COLLECT_WATER
+  - COMPOSTER
+  - DRAGON_EGG
+  - DYE
+  - EGGS
+  - FISH_SCOOPING
+  - ELYTRA
+  - HIVE
+  - HURT_ANIMALS
+  - HURT_VILLAGERS
+  - LEASH
+  - LECTERN
+  - MILKING
+  - SHEARING
+  - PRESSURE_PLATE
+  - POTION_THROWING
+  - NAME_TAG
+  - TNT_PRIMING
+  - CROP_TRAMPLE
+  - TURTLE_EGGS
+  - ANIMAL_NATURAL_SPAWN
+  - PVP_END
+  - LEAF_DECAY
+  - MONSTER_NATURAL_SPAWN
+  - PVP_NETHER
+  - PVP_OVERWORLD
+  - TNT_DAMAGE
+  - CLEAN_SUPER_FLAT
   # Visitor banned commands - Visitors to areas cannot use these commands in this world
   visitor-banned-commands: []
   # Falling banned commands - players cannot use these commands when falling
@@ -322,7 +366,7 @@ area:
   # Accessed via /is sethome <number> or /is go <number>
   max-homes: 5
   reset:
-    # How many resets a player is allowed (manage with /pkadmin reset add/remove/reset/set command)
+    # How many resets a player is allowed (manage with /bsbadmin reset add/remove/reset/set command)
     # Value of -1 means unlimited, 0 means hardcore - no resets.
     # Example, 2 resets means they get 2 resets or 3 areas lifetime
     reset-limit: -1
@@ -421,7 +465,7 @@ area:
     # 
     # Here are some examples of valid commands to execute:
     #    * "[SUDO] bbox version"
-    #    * "pkadmin deaths set [player] 0"
+    #    * "bsbadmin deaths set [player] 0"
     on-join: []
     # List of commands to run when a player leaves an area, resets his area or gets kicked from it.
     # These commands are run by the console, unless otherwise stated using the [SUDO] prefix,
@@ -432,7 +476,7 @@ area:
     # 
     # Here are some examples of valid commands to execute:
     #    * '[SUDO] bbox version'
-    #    * 'pkadmin deaths set [player] 0'
+    #    * 'bsbadmin deaths set [player] 0'
     # 
     # Note that player-executed commands might not work, as these commands can be run with said player being offline.
     on-leave: []
@@ -467,4 +511,3 @@ protection:
 do-not-edit-these-settings:
   # These settings should not be edited
   reset-epoch: 0
-

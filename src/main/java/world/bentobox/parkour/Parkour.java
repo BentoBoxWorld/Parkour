@@ -55,6 +55,7 @@ public class Parkour extends GameModeAddon implements Listener {
                 new TopCommand(getAddon(), this);
             }
         };
+
         adminCommand = new DefaultAdminCommand(this) {};
 
         // Register listeners
