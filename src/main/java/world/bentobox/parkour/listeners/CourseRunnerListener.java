@@ -152,6 +152,7 @@ public class CourseRunnerListener extends AbstractListener {
                     e.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
                     timers.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
                     checkpoints.put(user.getUniqueId(), e.getPlayer().getLocation());
+                    user.setGameMode(GameMode.SURVIVAL);
                 }
             } else if (metaEnd.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
                 if (timers.containsKey(e.getPlayer().getUniqueId())) {
@@ -174,6 +175,10 @@ public class CourseRunnerListener extends AbstractListener {
                     // Say rank
                     user.sendMessage("parkour.top.your-rank", TextVariables.NUMBER, String.valueOf(addon.getPm().getRank(island, e.getPlayer().getUniqueId())));
 
+                    // set creative
+                    if (addon.getIslands().userIsOnIsland(addon.getOverWorld(), user)) {
+                        user.setGameMode(GameMode.CREATIVE);
+                    }
                 }
             }
         }
