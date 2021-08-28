@@ -1,0 +1,366 @@
+# 
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "&a Start set!"
+  end-set: "&a End set!"
+  already-set: "&c Start and End already set! Break one to reset."
+  start-removed: "&b Start removed!"
+  end-removed: "&b End removed!"
+  resetting-start-end: "&e Reseting start and end points!"
+  start: "&b Parkour start!"
+  no-start-yet: "&c There is no start set up yet."
+  no-end-yet: "&c There is no end set up yet."
+  to-start: "&d To start, step on the gold pressure plate."
+  session-ended: "&c You parkour session ended."
+  end: "&a Parkour End!"
+  you-took: "&d You took [number] seconds!"
+  start-before-end: "&b You need to start before ending!"
+  checkpoint: "&e Checkpoint!"
+  checkpoint-set: "&a Checkpoint set!"
+  set-the-end: "&c Set the end plate"
+  general:
+    errors:
+      no-island: '&c You do not have a course!'
+      player-has-island: '&c Player already has a course!'
+      player-has-no-island: '&c That player has no course!'
+      already-have-island: '&c You already have a course!'
+      no-safe-location: '&c No safe location found in course!'
+      not-owner: '&c You are not the owner of your team!'
+  commands:
+    parkour:
+      help:
+        description: Start a parkour course or teleport to your course
+      go:
+        parameters: '[home number]'
+      sethome:
+        parameters: '[home number]'
+    island:
+      go:
+        parameters: '[home number]'
+        description: teleport you to your course
+        teleport: '&a Teleporting you to your course.'
+        teleported: '&a Teleported you to home &e #[number].'
+      help:
+        description: the main parkour command
+      create:
+        description: create an course, using optional blueprint (requires permission)
+        parameters: <blueprint>
+        too-many-islands: "&c There are too many courses in this world: there isn't
+          enough room for yours to be created."
+        cannot-create-island: '&c A spot could not be found in time, please try again...'
+        unable-create-island: '&c Your course could not be generated, please contact
+          an administrator.'
+        creating-island: '&a Finding a spot for your course...'
+        pasting:
+          estimated-time: '&a Estimated time: &b [number] &a seconds.'
+          blocks: '&a Building it block by block: &b [number] &a blocks in all...'
+          entities: '&a Filling it with entities: &b [number] &a entities in all...'
+          done: '&a Done! Your course is ready and waiting for you!'
+        pick: '&2 Pick a course'
+        unknown-blueprint: '&c That blueprint has not been loaded yet.'
+        on-first-login: '&a Welcome! We will start preparing your course in a few seconds.'
+        you-can-teleport-to-your-island: '&a You can teleport to your course when you
+          want.'
+      info:
+        description: display info about your course or the player's course
+        parameters: <player>
+      near:
+        description: show the name of neighboring courses around you
+        parameters: ''
+        the-following-islands: '&a The following courses are nearby:'
+        syntax: '&6 [direction]: &a [name]'
+        north: North
+        south: South
+        east: East
+        west: West
+        no-neighbors: '&c You have no immediate neighboring courses!'
+      reset:
+        description: restart your course and remove the old one
+        parameters: <blueprint>
+        none-left: '&c You have no more resets left!'
+        resets-left: '&c You have &b [number] &c resets left'
+        confirmation: |-
+          &c Are you sure you want to do this?
+          &c All course members will be kicked from the course, you will have to reinvite them afterwards.
+          &c There is no going back: once your current course is deleted, there will be &l no &r &c way to retrieve it later on.
+        kicked-from-island: '&c You are kicked from your course in [gamemode] because
+          the owner is resetting it.'
+      sethome:
+        description: set your home teleport point
+        must-be-on-your-island: '&c You must be on your course to set home!'
+        num-homes: '&c Homes can be 1 to [number].'
+        home-set: '&6 Your course home has been set to your current location.'
+        nether:
+          not-allowed: '&c You are not allowed to set your home in the Nether.'
+          confirmation: '&c Are you sure you want to set your home in the Nether?'
+        the-end:
+          not-allowed: '&c You are not allowed to set your home in the End.'
+          confirmation: '&c Are you sure you want to set your home in the End?'
+        parameters: '[home number]'
+      setname:
+        description: set a name for your course
+        name-too-short: '&c Too short. Minimum size is [number] characters.'
+        name-too-long: '&c Too long. Maximum size is [number] characters.'
+        name-already-exists: '&c There is already an course with that name!'
+        parameters: <name>
+        success: '&a Successfully set your course''s name to &b [name]&a .'
+      resetname:
+        description: reset your course name
+        success: '&a Successfully reset your course name.'
+      team:
+        description: manage your team
+        coop:
+          description: make a player coop rank on your course
+          parameters: <player>
+          cannot-coop-yourself: '&c You cannot coop yourself!'
+          already-has-rank: '&c Player already has a rank!'
+          you-are-a-coop-member: '&2 You were cooped by &b[name]&a.'
+          success: '&a You cooped &b [name]&a.'
+          name-has-invited-you: '&a [name] has invited you to join be a coop member
+            of their course.'
+        uncoop:
+          description: remove a coop rank from player
+          parameters: <player>
+          cannot-uncoop-yourself: '&c You cannot uncoop yourself!'
+          cannot-uncoop-member: '&c You cannot uncoop a team member!'
+          player-not-cooped: '&c Player is not cooped!'
+          you-are-no-longer-a-coop-member: '&c You are no longer a coop member of
+            [name]''s course.'
+          all-members-logged-off: '&c All course members logged off so you are no longer
+            a coop member of [name]''s course.'
+          success: '&b [name] &a is no longer a coop member of your course.'
+          is-full: '&c You cannot coop anyone else.'
+        trust:
+          description: give a player trusted rank on your course
+          parameters: <player>
+          trust-in-yourself: '&c Trust in yourself!'
+          name-has-invited-you: '&a [name] has invited you to join be a trusted member
+            of their course.'
+          player-already-trusted: '&c Player is already trusted!'
+          you-are-trusted: '&2 You are trusted by &b [name]&a !'
+          success: '&a You trusted &b [name]&a .'
+          is-full: '&c You cannot trust anyone else.'
+        invite:
+          description: invite a player to join your course
+          invitation-sent: '&a Invitation sent to &b[name]&a.'
+          removing-invite: '&c Removing invite.'
+          name-has-invited-you: '&a [name] has invited you to join their course.'
+          to-accept-or-reject: '&a Do /[label] team accept to accept, or /[label]
+            team reject to reject'
+          you-will-lose-your-island: '&c WARNING! You will lose your course if you accept!'
+          errors:
+            cannot-invite-self: '&c You cannot invite yourself!'
+            cooldown: '&c You cannot invite that person for another [number] seconds.'
+            island-is-full: '&c Your course is full, you can''t invite anyone else.'
+            none-invited-you: '&c No one invited you :c.'
+            you-already-are-in-team: '&c You are already on a team!'
+            already-on-team: '&c That player is already on a team!'
+            invalid-invite: '&c That invite is no longer valid, sorry.'
+            you-have-already-invited: '&c You have already invited that player!'
+          parameters: <player>
+          you-can-invite: '&a You can invite [number] more players.'
+          accept:
+            description: accept an invitation
+            you-joined-island: '&a You joined an course! Use &b/[label] team &a to see
+              the other members.'
+            name-joined-your-island: '&a [name] joined your course!'
+            confirmation: |-
+              &c Are you sure you want to accept this invite?
+              &c&l You will &n LOSE &r&c&l your current course!
+          reject:
+            description: reject an invitation
+            you-rejected-invite: '&a You rejected the invitation to join an course.'
+            name-rejected-your-invite: '&c [name] rejected your course invite!'
+          cancel:
+            description: cancel the pending invite to join your course
+        leave:
+          cannot-leave: '&c Owners cannot leave! Become a member first, or kick all
+            members.'
+          description: leave your course
+          left-your-island: '&c [name] &c left your course'
+          success: '&a You left this course.'
+        kick:
+          description: remove a member from your course
+          parameters: <player>
+          owner-kicked: '&c The owner kicked you from the course in [gamemode]!'
+          cannot-kick: '&c You cannot kick yourself!'
+          success: '&b [name] &a has been kicked from your course.'
+        demote:
+          description: demote a player on your course down a rank
+          parameters: <player>
+          errors:
+            cant-demote-yourself: '&c You can''t demote yourself!'
+          failure: '&c Player cannot be demoted any further!'
+          success: '&a Demoted [name] to [rank]'
+        promote:
+          description: promote a player on your course up a rank
+          parameters: <player>
+          failure: '&c Player cannot be promoted any further!'
+          success: '&a Promoted [name] to [rank]'
+        setowner:
+          description: transfer your course ownership to a member
+          errors:
+            cant-transfer-to-yourself: '&c You can''t transfer ownership to yourself!
+              &7 (&o Well, in fact, you could... But we don''t want you to. Because
+              it''s useless.&r &7 )'
+            target-is-not-member: '&c That player is not part of your course team!'
+          name-is-the-owner: '&a [name] is now the course owner!'
+          parameters: <player>
+          you-are-the-owner: '&a You are now the course owner!'
+      ban:
+        description: ban a player from your course
+        parameters: <player>
+        cannot-ban-yourself: '&c You cannot ban yourself!'
+        cannot-ban: '&c That player cannot be banned.'
+        cannot-ban-member: '&c Kick the team member first, then ban.'
+        cannot-ban-more-players: '&c You reached the ban limit, you cannot ban any
+          more players from your course.'
+        player-already-banned: '&c Player is already banned.'
+        player-banned: '&b [name]&c  is now banned from your course.'
+        owner-banned-you: '&b [name]&c  banned you from their course!'
+        you-are-banned: '&b You are banned from this course!'
+      unban:
+        description: unban a player from your course
+        parameters: <player>
+        cannot-unban-yourself: '&c You cannot unban yourself!'
+        player-not-banned: '&c Player is not banned.'
+        player-unbanned: '&b [name]&a  is now unbanned from your course.'
+        you-are-unbanned: '&b [name]&a  unbanned you from their course!'
+      banlist:
+        description: list banned players
+        noone: '&a No one is banned on this course.'
+        the-following: '&b The following players are banned:'
+        names: '&c [line]'
+        you-can-ban: '&b You can ban up to &e [number] &b more players.'
+      settings:
+        description: display course settings
+      language:
+        description: select language
+        parameters: '[language]'
+        not-available: '&c This language is not available.'
+        already-selected: '&c You are already using this language.'
+      expel:
+        description: expel a player from your course
+        parameters: <player>
+        cannot-expel-yourself: '&c You cannot expel yourself!'
+        cannot-expel: '&c That player cannot be expelled.'
+        cannot-expel-member: '&c You cannot expel a team member!'
+        not-on-island: '&c That player is not on your course!'
+        player-expelled-you: '&b [name]&c  expelled you from the course!'
+        success: '&a You expelled &b [name] &a from the course.'
+    admin:
+      team:
+        add:
+          name-has-island: '&c [name] has a course. Unregister or delete them first!'
+        setowner:
+          description: transfers course ownership to the player
+          already-owner: '&c Player is already the owner of this course!'
+      range:
+        description: Admin course range command
+        display:
+          description: Show/hide course range indicators
+          hint: |-
+            &c Red Barrier icons &f show the current protected range limit.
+            &7 Gray Particles &f show the max limit.
+            &a Green Particles &f show the default protected range if the protection range differs from it.
+        set:
+          description: Sets the course protected range
+        reset:
+          description: Resets the protected range to the world default
+      register:
+        parameters: <player>
+        description: register player to unowned course you are in
+        registered-island: '&a Registered player to course at [xyz].'
+        already-owned: '&c Area is already owned by another player!'
+        no-island-here: '&c There is no player course here. Confirm to make one.'
+        in-deletion: '&c This space is currently being regenerated. Try later.'
+      unregister:
+        description: unregister owner from a course, but keep course blocks as-is
+        unregistered-island: '&a Unregistered player from course at [xyz].'
+      info:
+        description: get info on where you are or on player
+        no-island: '&c You are not in a registered course right now...'
+        island-location: 'Area location: [xyz]'
+        island-coords: 'Area coordinates: [xz1] to [xz2]'
+        is-spawn: Area is a spawn island
+      setrange:
+        description: set the range of player's course
+        range-updated: Area range updated to [number]
+      tp:
+        description: teleport to a player's course
+      getrank:
+        description: get a player's rank in their course
+        rank-is: '&a Rank is [rank] in their course.'
+      setrank:
+        description: set a player's rank in their course
+      setspawn:
+        description: set a course as spawn for this world
+        already-spawn: '&c This course is already a spawn!'
+        no-island-here: '&c There is no registered course here.'
+        confirmation: '&c Are you sure you want to set this course as the spawn for this
+          world?'
+      delete:
+        description: deletes a player and regenerates their course
+        deleted-island: '&a Area at &e [xyz] &a has been successfully regenerated.'
+  protection:
+    flags:
+      ELYTRA:
+        description: Toggle use
+      ENDERMAN_GRIEFING:
+        description: |-
+          &a Endermen can remove
+          &a blocks
+      ENTER_EXIT_MESSAGES:
+        description: Display entry and exit messages
+        island: "[name]'s course"
+        name: Enter/Exit messages
+        now-entering: '&a Now entering &b [name]&a .'
+        now-entering-your-island: '&a Now entering your course.'
+        now-leaving: '&a Now leaving &b [name]&a .'
+        now-leaving-your-island: '&a Now leaving your course.'
+      GEO_LIMIT_MOBS:
+        description: |-
+          &a Remove mobs that go
+          &a outside protected
+          &a player space
+        name: '&e Limit mobs to player course'
+      ISLAND_RESPAWN:
+        description: |-
+          &a Players respawn
+          &a in their course
+        name: Area respawn
+      LOCK:
+        name: Lock player course
+      OFFLINE_REDSTONE:
+        description: "&a When disabled, redstone\n&a will not operate in courses\n&a\
+          \ where all members are offline.\n&a May help reduce lag.   "
+      PISTON_PUSH:
+        description: |-
+          &a Allow pistons to push
+          &a blocks outside a player's course
+      PVP_OVERWORLD:
+        description: |-
+          &c Enable/Disable PVP
+          &c in protected course.
+      REMOVE_MOBS:
+        description: |-
+          &a Remove monsters when
+          &a teleporting to a course
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          &a Prevent players from teleporting
+          &a if they are falling.
+        hint: '&c You cannot teleport while you are falling!'
+    locked: '&c This course is locked!'
+    protected: '&c Area protected: [description]'
+    panel:
+      PROTECTION:
+        title: '&6 Protection'
+        description: |-
+          &a Protection settings
+          &a for this course
+      SETTING:
+        description: |-
+          &a General settings
+          &a for this course
