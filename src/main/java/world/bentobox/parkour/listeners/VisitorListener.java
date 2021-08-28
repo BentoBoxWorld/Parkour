@@ -32,6 +32,7 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
 
 /**
+ * Handles the mechanics of the race.
  * @author tastybento
  *
  */
@@ -78,11 +79,13 @@ public class VisitorListener extends AbstractListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerDeath(PlayerDeathEvent e) {
+        // Game over
         clear(e.getEntity().getUniqueId());
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerQuit(PlayerQuitEvent e) {
+        // Game over
         clear(e.getPlayer().getUniqueId());
     }
 
@@ -98,6 +101,7 @@ public class VisitorListener extends AbstractListener {
             return;
         }
         if (e.getEntity() instanceof Player player) {
+            // Put player back to last checkpoint. Do not cancel event so that player takes some damage
             player.playEffect(EntityEffect.ENTITY_POOF);
             player.setVelocity(new Vector(0,0,0));
             player.setFallDistance(0);
@@ -105,6 +109,10 @@ public class VisitorListener extends AbstractListener {
         }
     }
 
+    /**
+     * Prevent players from issuing commands during a run
+     * @param e PlayerCommandPreprocessEvent
+     */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorCommand(PlayerCommandPreprocessEvent e) {
         if (!timers.containsKey(e.getPlayer().getUniqueId()) || !e.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
@@ -115,6 +123,10 @@ public class VisitorListener extends AbstractListener {
         e.setCancelled(true);
     }
 
+    /**
+     * Start or end the run
+     * @param e PlayerInteractEvent
+     */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onStartEndSet(PlayerInteractEvent e) {
         if (!e.getAction().equals(Action.PHYSICAL)) return;
@@ -143,16 +155,31 @@ public class VisitorListener extends AbstractListener {
                 }
             } else if (metaEnd.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
                 if (timers.containsKey(e.getPlayer().getUniqueId())) {
-                    double duration = (System.currentTimeMillis() - timers.get(e.getPlayer().getUniqueId())) / 1000D;
+
+                    long duration = (System.currentTimeMillis() - timers.get(e.getPlayer().getUniqueId()));
                     user.notify("parkour.end");
                     e.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
-                    user.notify("parkour.you-took", TextVariables.NUMBER, df2.format(duration));
+                    user.notify("parkour.you-took", TextVariables.NUMBER, AbstractListener.getDuration(user, duration));
                     clear(e.getPlayer().getUniqueId());
+
+                    // Comment on time
+                    long previous = addon.getPm().getTime(island, e.getPlayer().getUniqueId());
+                    if (duration < previous) {
+                        user.sendMessage("parkour.top.beat-previous-time");
+                    }
+                    // Say rank
+                    user.sendMessage("parkour.top.your-rank", TextVariables.NUMBER, String.valueOf(addon.getPm().getRank(island, e.getPlayer().getUniqueId())));
+                    // Store
+                    addon.getPm().addScore(island, user, duration);
                 }
             }
         }
     }
 
+    /**
+     * Handle checkpoints.
+     * @param e PlayerInteractEvent
+     */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onCheckpoint(PlayerInteractEvent e) {
         if (!e.getAction().equals(Action.PHYSICAL)) return;

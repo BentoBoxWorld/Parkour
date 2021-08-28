@@ -13,9 +13,9 @@ import world.bentobox.bentobox.api.commands.admin.DefaultAdminCommand;
 import world.bentobox.bentobox.api.commands.island.DefaultPlayerCommand;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
-import world.bentobox.parkour.commands.KitCommand;
+import world.bentobox.parkour.commands.TopCommand;
 import world.bentobox.parkour.generators.ChunkGeneratorWorld;
-import world.bentobox.parkour.listeners.MakeTrackListener;
+import world.bentobox.parkour.listeners.MakeCourseListener;
 import world.bentobox.parkour.listeners.VisitorListener;
 
 /**
@@ -31,6 +31,10 @@ public class Parkour extends GameModeAddon implements Listener {
     private Settings settings;
     private ChunkGenerator chunkGenerator;
     private Config<Settings> configObject = new Config<>(this, Settings.class);
+
+    // Manager
+    private ParkourManager pm;
+    private RankingsUI rankings;
 
     @Override
     public void onLoad() {
@@ -48,13 +52,13 @@ public class Parkour extends GameModeAddon implements Listener {
             public void setup()
             {
                 super.setup();
-                new KitCommand(getAddon(), this);
+                new TopCommand(getAddon(), this);
             }
         };
         adminCommand = new DefaultAdminCommand(this) {};
 
         // Register listeners
-        this.registerListener(new MakeTrackListener(this));
+        this.registerListener(new MakeCourseListener(this));
         this.registerListener(new VisitorListener(this));
     }
 
@@ -71,8 +75,12 @@ public class Parkour extends GameModeAddon implements Listener {
     }
 
     @Override
-    public void onEnable(){
-        // Register this
+    public void onEnable() {
+        // Managers
+        pm = new ParkourManager(this);
+        // GUI
+        rankings = new RankingsUI(this);
+        // Register listeners
         registerListener(this);
     }
 
@@ -183,6 +191,20 @@ public class Parkour extends GameModeAddon implements Listener {
         // Reload settings and save them. This will occur after all addons have loaded
         this.loadSettings();
         this.saveWorldSettings();
+    }
+
+    /**
+     * @return the pm
+     */
+    public ParkourManager getPm() {
+        return pm;
+    }
+
+    /**
+     * @return the rankings
+     */
+    public RankingsUI getRankings() {
+        return rankings;
     }
 
 }

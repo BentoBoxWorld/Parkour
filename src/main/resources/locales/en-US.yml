@@ -14,11 +14,26 @@ parkour:
   to-start: "&d To start, step on the gold pressure plate."
   session-ended: "&c You parkour session ended."
   end: "&a Parkour End!"
-  you-took: "&d You took [number] seconds!"
+  you-took: "&d You took [number]!"
   start-before-end: "&b You need to start before ending!"
   checkpoint: "&e Checkpoint!"
   checkpoint-set: "&a Checkpoint set!"
   set-the-end: "&c Set the end plate"
+  hours: "hours"
+  minutes: "minutes"
+  seconds: "seconds"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  top:
+    gui-title: "Top Ten Course Rankings"
+    name-rank: "&b [rank] - &d [name]"
+    description: "&e [number]"
+    your-rank: "&a Your rank: [number]"
+    beat-previous-time: "&d You beat your previous time!"
+  errors:
+    not-on-island: "&c You must be on an island to do that"
+  
   general:
     errors:
       no-island: '&c You do not have a course!'
@@ -35,6 +50,8 @@ parkour:
         parameters: '[home number]'
       sethome:
         parameters: '[home number]'
+      top:
+        description: "Show the top course rankings"
     island:
       go:
         parameters: '[home number]'

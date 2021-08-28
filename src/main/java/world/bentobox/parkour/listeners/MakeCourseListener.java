@@ -20,12 +20,12 @@ import world.bentobox.parkour.Parkour;
  * @author tastybento
  *
  */
-public class MakeTrackListener extends AbstractListener {
+public class MakeCourseListener extends AbstractListener {
 
     /**
      * @param addon
      */
-    public MakeTrackListener(Parkour addon) {
+    public MakeCourseListener(Parkour addon) {
         super(addon);
     }
 
