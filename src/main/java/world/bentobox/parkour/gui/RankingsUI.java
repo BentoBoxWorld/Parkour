@@ -1,4 +1,4 @@
-package world.bentobox.parkour;
+package world.bentobox.parkour.gui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,6 +11,7 @@ import world.bentobox.bentobox.api.panels.builders.PanelBuilder;
 import world.bentobox.bentobox.api.panels.builders.PanelItemBuilder;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
+import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.listeners.AbstractListener;
 
 /**
@@ -107,4 +108,5 @@ public class RankingsUI {
                 .description(description);
         return builder.build();
     }
+
 }

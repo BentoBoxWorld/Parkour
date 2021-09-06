@@ -10,10 +10,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import world.bentobox.bentobox.api.metadata.MetaDataValue;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
-import world.bentobox.bentobox.util.Util;
 import world.bentobox.parkour.Parkour;
 
 /**
@@ -22,6 +20,9 @@ import world.bentobox.parkour.Parkour;
  */
 public class MakeCourseListener extends AbstractListener {
 
+    private static final Object CHECKPOINT = Material.POLISHED_BLACKSTONE_PRESSURE_PLATE;
+    private static final Object START_END = Material.LIGHT_WEIGHTED_PRESSURE_PLATE;
+    private static final Object WARP_SPOT = Material.WARPED_PRESSURE_PLATE;
     /**
      * @param addon Parkour addon
      */
@@ -30,22 +31,41 @@ public class MakeCourseListener extends AbstractListener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onStartEndSet(BlockPlaceEvent e) {
-        if (!e.getBlock().getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE) || !addon.inWorld(e.getBlock().getLocation())) {
+    public void onWarpSet(BlockPlaceEvent e) {
+        if (!e.getBlock().getType().equals(WARP_SPOT) || !addon.inWorld(e.getBlock().getLocation())) {
             return;
         }
         Location l = e.getBlock().getLocation();
         User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
         if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
-            Optional<MetaDataValue> metaStart = island.getMetaData(START);
-            Optional<MetaDataValue> metaEnd = island.getMetaData(END);
-            if (metaStart.isEmpty()) {
+            Optional<Location> warpSpot = addon.getPm().getWarpSpot(island);
+            if (warpSpot.isEmpty()) {
+                user.notify("parkour.warp.set");
+                addon.getPm().setWarpSpot(island, l);
+            } else {
+                user.notify("parkour.warp.replaced");
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onStartEndSet(BlockPlaceEvent e) {
+        if (!e.getBlock().getType().equals(START_END) || !addon.inWorld(e.getBlock().getLocation())) {
+            return;
+        }
+        Location l = e.getBlock().getLocation();
+        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
+        if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
+            Island island = addon.getIslands().getProtectedIslandAt(l).get();
+            Optional<Location> start = addon.getPm().getStart(island);
+            Optional<Location> end = addon.getPm().getEnd(island);
+            if (start.isEmpty()) {
                 user.notify("parkour.start-set");
-                island.putMetaData(START, new MetaDataValue(Util.getStringLocation(e.getBlock().getLocation())));
-            } else if (metaEnd.isEmpty()) {
+                addon.getPm().setStart(island, l);
+            } else if (end.isEmpty()) {
                 user.notify("parkour.end-set");
-                island.putMetaData(END, new MetaDataValue(Util.getStringLocation(e.getBlock().getLocation())));
+                addon.getPm().setEnd(island, l);
             } else {
                 user.notify("parkour.already-set");
             }
@@ -54,7 +74,7 @@ public class MakeCourseListener extends AbstractListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onCheckPointPlaced(BlockPlaceEvent e) {
-        if (!e.getBlock().getType().equals(Material.POLISHED_BLACKSTONE_PRESSURE_PLATE) || !addon.inWorld(e.getBlock().getLocation())) {
+        if (!e.getBlock().getType().equals(CHECKPOINT) || !addon.inWorld(e.getBlock().getLocation())) {
             return;
         }
         Location l = e.getBlock().getLocation();
@@ -66,25 +86,31 @@ public class MakeCourseListener extends AbstractListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBreak(BlockBreakEvent e) {
-        if (!e.getBlock().getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE) || !addon.inWorld(e.getBlock().getLocation())) {
+        if ((!e.getBlock().getType().equals(START_END) && !e.getBlock().getType().equals(WARP_SPOT))
+                || !addon.inWorld(e.getBlock().getLocation())) {
             return;
         }
         Location l = e.getBlock().getLocation();
         User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
-        if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
+        if (addon.getIslands().getProtectedIslandAt(l).isPresent()
+                && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
-            Optional<MetaDataValue> metaStart = island.getMetaData(START);
-            Optional<MetaDataValue> metaEnd = island.getMetaData(END);
-            if (metaStart.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
+            Optional<Location> start = addon.getPm().getStart(island);
+            Optional<Location> end = addon.getPm().getEnd(island);
+            Optional<Location> warpSpot = addon.getPm().getWarpSpot(island);
+            if (start.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
                 user.notify("parkour.start-removed");
-                island.removeMetaData(START);
-            } else if (metaEnd.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
+                addon.getPm().setStart(island, null);
+            } else if (end.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
                 user.notify("parkour.end-removed");
-                island.removeMetaData(END);
+                addon.getPm().setEnd(island, null);
+            } else if (warpSpot.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
+                user.notify("parkour.warp.removed");
+                addon.getPm().setWarpSpot(island, null);
             } else {
-                island.removeMetaData(START);
+                addon.getPm().setStart(island, null);
                 user.notify("parkour.resetting-start-end");
-                island.removeMetaData(END);
+                addon.getPm().setEnd(island, null);
             }
         }
     }

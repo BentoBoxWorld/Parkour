@@ -13,10 +13,12 @@ import world.bentobox.bentobox.api.commands.admin.DefaultAdminCommand;
 import world.bentobox.bentobox.api.commands.island.DefaultPlayerCommand;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
+import world.bentobox.parkour.commands.CoursesCommand;
 import world.bentobox.parkour.commands.TopCommand;
 import world.bentobox.parkour.generators.ChunkGeneratorWorld;
-import world.bentobox.parkour.listeners.MakeCourseListener;
+import world.bentobox.parkour.gui.RankingsUI;
 import world.bentobox.parkour.listeners.CourseRunnerListener;
+import world.bentobox.parkour.listeners.MakeCourseListener;
 
 /**
  * Main Parkour class
@@ -53,6 +55,7 @@ public class Parkour extends GameModeAddon implements Listener {
             {
                 super.setup();
                 new TopCommand(getAddon(), this);
+                new CoursesCommand(getAddon(), this);
             }
         };
 

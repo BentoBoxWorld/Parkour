@@ -25,8 +25,12 @@ parkour:
   hours-short: "h"
   minutes-short: "m"
   seconds-short: "s"
+  courses:
+    description: "Pick one and try it!"
+    gui-title: "Parkour Courses"
+    head-description: "&b [runs] runs"
   top:
-    gui-title: "Top Ten Course Rankings"
+    gui-title: "Fastest Course Rankings"
     name-rank: "&b [rank] - &d [name]"
     description: "&e [number]"
     your-rank: "&a Your rank: [number]"
@@ -34,7 +38,11 @@ parkour:
     did-not-beat-previous-time: "&b You didn't beat your previous time!"
   errors:
     not-on-island: "&c You must be on an island to do that"
-  
+  warp:
+    set: "&d Warp spot set! Players can now see your course!"
+    replaced: "&e Warp spot set! Old spot deactivated!"
+    removed: "&c Warp spot removed. Players will not see your course."
+    warping: "&a Warping to the course!"
   general:
     errors:
       no-island: '&c You do not have a course!'

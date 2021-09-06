@@ -26,7 +26,6 @@ import org.bukkit.util.Vector;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
-import world.bentobox.bentobox.api.metadata.MetaDataValue;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
@@ -56,11 +55,11 @@ public class CourseRunnerListener extends AbstractListener {
             return;
         }
         Island island = e.getIsland();
-        Optional<MetaDataValue> metaStart = island.getMetaData(START);
-        Optional<MetaDataValue> metaEnd = island.getMetaData(END);
-        if (metaStart.isEmpty()) {
+        Optional<Location> start = addon.getPm().getStart(island);
+        Optional<Location> end = addon.getPm().getEnd(island);
+        if (start.isEmpty()) {
             user.notify("parkour.no-start-yet");
-        } else if (metaEnd.isEmpty()) {
+        } else if (end.isEmpty()) {
             user.notify("parkour.no-end-yet");
         } else if (!timers.containsKey(e.getPlayerUUID())){
             user.notify("parkour.to-start");
@@ -115,7 +114,8 @@ public class CourseRunnerListener extends AbstractListener {
      */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorCommand(PlayerCommandPreprocessEvent e) {
-        if (!timers.containsKey(e.getPlayer().getUniqueId()) || !e.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+        if (!timers.containsKey(e.getPlayer().getUniqueId()) || !e.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
+                || e.getPlayer().isOp()) {
             return;
         }
         User user = User.getInstance(e.getPlayer());
@@ -138,12 +138,13 @@ public class CourseRunnerListener extends AbstractListener {
         User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
         if (addon.getIslands().getProtectedIslandAt(l).isPresent()) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
-            Optional<MetaDataValue> metaStart = island.getMetaData(START);
-            Optional<MetaDataValue> metaEnd = island.getMetaData(END);
+
+            Optional<Location> start = addon.getPm().getStart(island);
+            Optional<Location> end = addon.getPm().getEnd(island);
 
             // Check if start and end is set
-            if (metaStart.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
-                if (metaEnd.isEmpty()) {
+            if (start.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
+                if (end.isEmpty()) {
                     user.sendMessage("parkour.set-the-end");
                     return;
                 }
@@ -154,7 +155,7 @@ public class CourseRunnerListener extends AbstractListener {
                     checkpoints.put(user.getUniqueId(), e.getPlayer().getLocation());
                     user.setGameMode(GameMode.SURVIVAL);
                 }
-            } else if (metaEnd.filter(mdv -> isLocEquals(l, mdv.asString())).isPresent()) {
+            } else if (end.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
                 if (timers.containsKey(e.getPlayer().getUniqueId())) {
 
                     long duration = (System.currentTimeMillis() - timers.get(e.getPlayer().getUniqueId()));
@@ -165,7 +166,7 @@ public class CourseRunnerListener extends AbstractListener {
 
                     // Comment on time
                     long previous = addon.getPm().getTime(island, e.getPlayer().getUniqueId());
-                    if (duration < previous) {
+                    if (duration < previous || previous == 0L) {
                         user.sendMessage("parkour.top.beat-previous-time");
                         // Store
                         addon.getPm().addScore(island, user, duration);
