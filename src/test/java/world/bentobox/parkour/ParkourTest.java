@@ -183,9 +183,10 @@ public class ParkourTest {
      */
     @After
     public void tearDown() throws Exception {
-        //new File("addon.jar").delete();
+        new File("addon.jar").delete();
         new File("config.yml").delete();
         deleteAll(new File("addons"));
+        deleteAll(new File("database"));
     }
 
     private void deleteAll(File file) throws IOException {
