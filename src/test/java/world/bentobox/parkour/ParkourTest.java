@@ -219,7 +219,7 @@ public class ParkourTest {
     public void testOnLoad() {
         addon.onLoad();
         // Check that config.yml file has been saved
-        File check = new File("addons/parkour","config.yml");
+        File check = new File("addons/Parkour","config.yml");
         assertTrue(check.exists());
         assertTrue(addon.getPlayerCommand().isPresent());
         assertTrue(addon.getAdminCommand().isPresent());
@@ -234,7 +234,7 @@ public class ParkourTest {
         addon.onEnable();
         addon.onReload();
         // Check that config.yml file has been saved
-        File check = new File("addons/parkour","config.yml");
+        File check = new File("addons/Parkour","config.yml");
         assertTrue(check.exists());
     }
 
