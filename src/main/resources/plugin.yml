@@ -1,0 +1,9 @@
+name: BentoBox-Parkour
+main: world.bentobox.parkour.ParkourPladdon
+version: ${project.version}${build.number}
+api-version: "1.20"
+
+authors: [tastybento]
+contributors: ["The BentoBoxWorld Community"]
+website: https://bentobox.world
+description: ${project.description}
