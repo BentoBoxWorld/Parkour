@@ -36,9 +36,8 @@ public class CoursesTab implements Tab {
 
     /**
      * Show a tab of settings
+     * @param addon - addon
      * @param user - user who is viewing the tab
-     * @param island - the island
-     * @param type - flag type
      */
     public CoursesTab(Parkour addon, User user) {
         super();

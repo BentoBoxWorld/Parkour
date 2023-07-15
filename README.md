@@ -1,4 +1,5 @@
 # Parkour Addon
+<img width="403" alt="parkour" src="https://github.com/BentoBoxWorld/Parkour/assets/4407265/10dcc201-9686-4b3a-b9c4-e5fd52b79b0d">
 
 ## Description
 The Parkour addon is a BentoBox addon for Minecraft that allows players to create and play parkour courses within the game. It provides a creative mode for course creation and a survival mode for course gameplay. The plugin features gold pressure plates as the starting and ending points of the courses. It tracks the time taken by players to complete the courses and maintains a scores for each course. Additionally, creators can place checkpoints along their courses to help players restart from the last checkpoint if they fall. The plugin also supports team gameplay, allowing players to form teams and collaborate on course creation using the same engine as BSkyBlock. Players can explore and compete in various courses using the `/courses` command.
