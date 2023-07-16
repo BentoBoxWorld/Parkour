@@ -1,8 +1,10 @@
 package world.bentobox.parkour.commands;
 
 import java.util.List;
+import java.util.Objects;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
+import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
@@ -19,6 +21,7 @@ public class RemoveWarpCommand extends CompositeCommand {
         this.setPermission("parkour.removewarp");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.removewarp.description");
+        setConfigurableRankCommand();
     }
 
     @Override
@@ -27,6 +30,12 @@ public class RemoveWarpCommand extends CompositeCommand {
         ParkourManager pm = ((Parkour)getAddon()).getPm();
         if (pm.getWarpSpot(island).isEmpty()) {
             user.sendMessage("parkour.errors.no-warp");
+            return false;
+        }
+        // Check rank to use command
+        int rank = Objects.requireNonNull(island).getRank(user);
+        if (rank < island.getRankCommand(getUsage())) {
+            user.sendMessage("general.errors.insufficient-rank", TextVariables.RANK, user.getTranslation(getPlugin().getRanksManager().getRank(rank)));
             return false;
         }
         return true;

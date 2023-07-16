@@ -1,8 +1,10 @@
 package world.bentobox.parkour.commands;
 
 import java.util.List;
+import java.util.Objects;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
+import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
@@ -21,12 +23,20 @@ public class SetWarpCommand extends CompositeCommand {
         this.setPermission("parkour.setwarp");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.setwarp.description");
+        setConfigurableRankCommand();
     }
 
     @Override
     public boolean canExecute(User user, String label, List<String> args) {
         if (!getIslands().userIsOnIsland(getWorld(), user)) {
             user.sendMessage("parkour.errors.not-on-island");
+            return false;
+        }
+        // Check rank to use command
+        Island island = getIslands().getIsland(getWorld(), user);
+        int rank = Objects.requireNonNull(island).getRank(user);
+        if (rank < island.getRankCommand(getUsage())) {
+            user.sendMessage("general.errors.insufficient-rank", TextVariables.RANK, user.getTranslation(getPlugin().getRanksManager().getRank(rank)));
             return false;
         }
         return true;
