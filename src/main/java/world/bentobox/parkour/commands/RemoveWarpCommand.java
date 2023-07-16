@@ -10,7 +10,7 @@ import world.bentobox.parkour.ParkourManager;
 
 public class RemoveWarpCommand extends CompositeCommand {
 
-    public RemoveWarpCommand(Parkour addon, CompositeCommand parent) {
+    public RemoveWarpCommand(CompositeCommand parent) {
         super(parent, "removewarp");
     }
 

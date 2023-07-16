@@ -12,7 +12,7 @@ public class TopCommand extends CompositeCommand {
 
     private Island island;
 
-    public TopCommand(Parkour addon, CompositeCommand parent) {
+    public TopCommand(CompositeCommand parent) {
         super(parent, "top");
     }
 

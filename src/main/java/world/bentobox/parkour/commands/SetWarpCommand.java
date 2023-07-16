@@ -12,7 +12,7 @@ public class SetWarpCommand extends CompositeCommand {
 
 
 
-    public SetWarpCommand(Parkour addon, CompositeCommand parent) {
+    public SetWarpCommand(CompositeCommand parent) {
         super(parent, "setwarp");
     }
 

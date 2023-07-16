@@ -14,7 +14,6 @@ import org.bukkit.util.Vector;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.panels.PanelItem;
 import world.bentobox.bentobox.api.panels.Tab;
 import world.bentobox.bentobox.api.panels.builders.PanelItemBuilder;
@@ -82,10 +81,8 @@ public class CoursesTab implements Tab {
         .sorted()
         .filter(hs -> Objects.nonNull(hs.getWarpSpot()))
         .forEach(hs -> {
-            BentoBox.getInstance().logDebug("course found");
             UUID owner = addon.getIslands().getIslandById(hs.getUniqueId()).map(Island::getOwner).orElse(null);
             if (owner != null) {
-                BentoBox.getInstance().logDebug("Adding head for " + owner);
                 heads.add(getHead(hs, owner));
             }
         });
@@ -127,9 +124,7 @@ public class CoursesTab implements Tab {
 
     @Override
     public Map<Integer, PanelItem> getTabIcons() {
-        Map<Integer, PanelItem> icons = new HashMap<>();
-
-        return icons;
+        return new HashMap<>();
     }
 
     /* (non-Javadoc)

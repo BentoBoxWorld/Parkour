@@ -57,10 +57,10 @@ public class Parkour extends GameModeAddon implements Listener {
             public void setup()
             {
                 super.setup();
-                new TopCommand(getAddon(), this);
-                new CoursesCommand(getAddon(), this);
-                new SetWarpCommand(getAddon(), this);
-                new RemoveWarpCommand(getAddon(), this);
+                new TopCommand(this);
+                new CoursesCommand(this);
+                new SetWarpCommand(this);
+                new RemoveWarpCommand(this);
             }
         };
 
