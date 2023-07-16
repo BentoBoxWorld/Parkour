@@ -26,16 +26,21 @@ public class RemoveWarpCommand extends CompositeCommand {
 
     @Override
     public boolean canExecute(User user, String label, List<String> args) {
-        Island island = getIslands().getIsland(getWorld(), user);
-        ParkourManager pm = ((Parkour)getAddon()).getPm();
-        if (pm.getWarpSpot(island).isEmpty()) {
-            user.sendMessage("parkour.errors.no-warp");
+        if (!args.isEmpty()) {
+            this.showHelp(this, user);
             return false;
         }
+        Island island = getIslands().getIsland(getWorld(), user);
         // Check rank to use command
         int rank = Objects.requireNonNull(island).getRank(user);
         if (rank < island.getRankCommand(getUsage())) {
             user.sendMessage("general.errors.insufficient-rank", TextVariables.RANK, user.getTranslation(getPlugin().getRanksManager().getRank(rank)));
+            return false;
+        }
+
+        ParkourManager pm = ((Parkour)getAddon()).getPm();
+        if (pm.getWarpSpot(island).isEmpty()) {
+            user.sendMessage("parkour.errors.no-warp");
             return false;
         }
         return true;

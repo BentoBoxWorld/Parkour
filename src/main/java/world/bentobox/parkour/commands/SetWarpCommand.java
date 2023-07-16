@@ -28,6 +28,10 @@ public class SetWarpCommand extends CompositeCommand {
 
     @Override
     public boolean canExecute(User user, String label, List<String> args) {
+        if (!args.isEmpty()) {
+            this.showHelp(this, user);
+            return false;
+        }
         if (!getIslands().userIsOnIsland(getWorld(), user)) {
             user.sendMessage("parkour.errors.not-on-island");
             return false;
