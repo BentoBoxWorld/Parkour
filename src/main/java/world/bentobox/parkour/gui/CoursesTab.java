@@ -124,9 +124,7 @@ public class CoursesTab implements Tab {
 
     @Override
     public Map<Integer, PanelItem> getTabIcons() {
-        Map<Integer, PanelItem> icons = new HashMap<>();
-
-        return icons;
+        return new HashMap<>();
     }
 
     /* (non-Javadoc)

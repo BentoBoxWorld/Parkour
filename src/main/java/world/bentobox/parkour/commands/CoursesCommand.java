@@ -5,12 +5,11 @@ import java.util.List;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.panels.builders.TabbedPanelBuilder;
 import world.bentobox.bentobox.api.user.User;
-import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.gui.CoursesTab;
 
 public class CoursesCommand extends CompositeCommand {
 
-    public CoursesCommand(Parkour addon, CompositeCommand parent) {
+    public CoursesCommand(CompositeCommand parent) {
         super(parent, "courses", "tracks");
     }
 

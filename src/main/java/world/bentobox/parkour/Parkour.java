@@ -2,9 +2,9 @@ package world.bentobox.parkour;
 
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.entity.SpawnCategory;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
+import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.Listener;
 import org.bukkit.generator.ChunkGenerator;
 import org.eclipse.jdt.annotation.Nullable;
@@ -15,6 +15,8 @@ import world.bentobox.bentobox.api.commands.island.DefaultPlayerCommand;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.parkour.commands.CoursesCommand;
+import world.bentobox.parkour.commands.RemoveWarpCommand;
+import world.bentobox.parkour.commands.SetWarpCommand;
 import world.bentobox.parkour.commands.TopCommand;
 import world.bentobox.parkour.generators.ChunkGeneratorWorld;
 import world.bentobox.parkour.gui.RankingsUI;
@@ -55,8 +57,10 @@ public class Parkour extends GameModeAddon implements Listener {
             public void setup()
             {
                 super.setup();
-                new TopCommand(getAddon(), this);
-                new CoursesCommand(getAddon(), this);
+                new TopCommand(this);
+                new CoursesCommand(this);
+                new SetWarpCommand(this);
+                new RemoveWarpCommand(this);
             }
         };
 
