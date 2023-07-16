@@ -8,87 +8,16 @@ repository: "BentoBoxWorld/Parkour"
 
 authors: tastybento
 
-permissions:    
-  parkour.island:
-   description: Allow island command usage
-   default: true
-  parkour.island.create:
-    description: Allow island creation
-    default: true
-  parkour.island.home:
-    description: Allow teleporting to player island
-    default: true
-  parkour.island.sethome:
-    description: Let the player use the sethome command
-    default: true
-  parkour.island.info:
-    description: Let the player check other players info
-    default: true
+permissions: 
+  # Non-command permissions
   parkour.island.lock:
-    description: Allows island locking
-    default: true
-  parkour.island.near:
-    description: Players can see nearby island names
-    default: true
-  parkour.island.expel:
-    description: Allows expelling of visitors
-    default: true
-  parkour.island.ban:
-    description: Allows banning of visitors
-    default: true
-  parkour.island.settings:
-    description: Player can see server settings
-    default: true
-  parkour.island.language:
-    description: Player can select a language
-    default: true
-  parkour.island.name:
-    description: Player can set the name of their island
-    default: true
-  parkour.island.spawn:
-    description: Player can use the island spawn command if spawn exists
-    default: true
-  parkour.island.reset:
-    description: Player can use the island reset or restart command
-    default: true  
-  parkour.island.team:
-    description: Let a player use team command
-    default: true
-  parkour.island.team.setowner:
-    description: Let a player change the team owner
-    default: true
-  parkour.island.team.invite:
-    description: Let a player invite others
-    default: true
-  parkour.island.team.reject:
-    description: Let a player reject invites
-    default: true
-  parkour.island.team.leave:
-    description: Let a player leave the team
-    default: true
-  parkour.island.team.kick:
-    description: Let a player kick team members
-    default: true
-  parkour.island.team.accept:
-    description: Let a player accept invitations
-    default: true
-  parkour.island.team.trust:
-    description: Let a player use team trust commands
-    default: true
-  parkour.island.team.coop:
-    description: Let a player use team coop commands
-    default: true
-  parkour.island.team.promote:
-    description: Let a player use promote commands
+    description: Allows course locking in settings
     default: true
   parkour.settings.*:
-    description: Allow use of settings on island
+    description: Allow use of settings on course
     default: true
-  parkour.mod.info:
-    description: Let a moderator see info on a player
-    default: op
   parkour.mod.clearreset:
-    description: Allow clearing of island reset limit
+    description: Allow clearing of course reset limit
     default: false
   parkour.mod.bypasscooldowns:
     description: Allow moderator to bypass cooldowns
@@ -97,66 +26,303 @@ permissions:
     description: Allow moderator to bypass delays
     default: op
   parkour.mod.bypassprotect:
-    description: Allow moderator to bypass island protection
+    description: Allow moderator to bypass course protection
     default: op
   parkour.mod.bypassexpel:
-    description: Allow moderator to bypass island expulsion
-    default: op
-  parkour.mod.switch:
-    description: Allows moderator to switch bypass protection on and off
+    description: Allow moderator to bypass course expulsion
     default: op
   parkour.mod.lock:
-    description: Locks or unlocks an island
+    description: Allows lock or unlock of an course
     default: op
   parkour.mod.bypasslock:
-    description: Bypasses an island lock
+    description: Bypasses an course lock
     default: op
   parkour.mod.bypassban:
-    description: Bypasses island ban
-    default: op  
-  parkour.mod.team:
-    description: Enables modification of teams via kick and add commands
-    default: false
-  parkour.admin.tp:
-    description: Allows teleport to an island
-    default: op    
-  parkour.admin.clearresetall:
-    description: Allow clearing of island reset limit of all players
+    description: Bypasses course ban
     default: op
-  parkour.admin.reload:
-    description: Reload the config.yml
+  parkour.mod.noburn: 
     default: op
-  parkour.admin.delete:
-    description: Let a player completely remove a player (including island)
-    default: op
-  parkour.admin.register:
-    description: Let a player register the nearest island to another player.
-    default: op
-  parkour.admin.unregister:
-    description: Removes a player from an island without deleting the island blocks.
-    default: op
-  parkour.admin.setspawn:
-    description: Allows use of spawn tools
-    default: op
-  parkour.admin.setrange:
-    description: Allows setting of island protection range
-    default: op
-  parkour.admin.settingsreset:
-    description: Resets all the islands to default protection settings
-    default: op
+    description: "Give mod acid protection"
   parkour.admin.noban:
-    description: Player cannot be banned from an island
+    description: Player cannot be banned from an course
     default: op
   parkour.admin.noexpel:
-    description: Player cannot be expelled from an island
+    description: Player cannot be expelled from an course
     default: op
-  parkour.admin.setlanguage:
-    description: Resets all player languages and sets the default language
+  # Command permissions
+  parkour.admin:
+    description: Allow use of '/pkadmin' command - admin command
+    default: op
+  parkour.admin.version:
+    description: Allow use of '/pkadmin version' command - display BentoBox and addons versions
+    default: op
+  parkour.admin.tp:
+    description: Allow use of '/pkadmin tp', '/pkadmin tpnether', '/pkadmin tpend' command - teleport to a player's course
     default: op
   parkour.admin.getrank:
-    description: Get a player's rank
+    description: Allow use of '/pkadmin getrank' command - get a player's rank in their course
     default: op
   parkour.admin.setrank:
-    description: Set a player's rank
+    description: Allow use of '/pkadmin setrank' command - set a player's rank in their course
     default: op
-    
+  parkour.mod.info:
+    description: Allow use of '/pkadmin info' command - get info on where you are or on player
+    default: op
+  parkour.mod.team:
+    description: Allow use of '/pkadmin team' command - manage teams
+    default: false
+  parkour.mod.team.add:
+    description: Allow use of '/pkadmin team add' command - add player to owner's team
+    default: op
+  parkour.mod.team.disband:
+    description: Allow use of '/pkadmin team disband' command - disband owner's team
+    default: op
+  parkour.mod.team.fix:
+    description: Allow use of '/pkadmin team fix' command - scans and fixes cross course membership in database
+    default: op
+  parkour.mod.team.kick:
+    description: Allow use of '/pkadmin team kick' command - kick a player from a team
+    default: op
+  parkour.mod.team.setowner:
+    description: Allow use of '/pkadmin team setowner' command - transfers course ownership to the player
+    default: op
+  parkour.mod.team.add:
+    description: Allow use of '/pkadmin add' command - add player to owner's team
+    default: op
+  parkour.mod.team.kick:
+    description: Allow use of '/pkadmin kick' command - kick a player from a team
+    default: op
+  parkour.mod.team.disband:
+    description: Allow use of '/pkadmin disband' command - disband owner's team
+    default: op
+  parkour.mod.team.setowner:
+    description: Allow use of '/pkadmin setowner' command - transfers course ownership to the player
+    default: op
+  parkour.admin.blueprint:
+    description: Allow use of '/pkadmin blueprint' command - manipulate blueprints
+    default: op
+  parkour.admin.blueprint.load:
+    description: Allow use of '/pkadmin blueprint load' command - load blueprint into the clipboard
+    default: op
+  parkour.admin.blueprint.paste:
+    description: Allow use of '/pkadmin blueprint paste' command - paste the clipboard to your location
+    default: op
+  parkour.admin.blueprint.origin:
+    description: Allow use of '/pkadmin blueprint origin' command - set the blueprint's origin to your position
+    default: op
+  parkour.admin.blueprint.copy:
+    description: Allow use of '/pkadmin blueprint copy' command - copy the clipboard set by pos1 and pos2 and optionally the air blocks
+    default: op
+  parkour.admin.blueprint.save:
+    description: Allow use of '/pkadmin blueprint save' command - save the copied clipboard
+    default: op
+  parkour.admin.blueprint.rename:
+    description: Allow use of '/pkadmin blueprint rename' command - rename a blueprint
+    default: op
+  parkour.admin.blueprint.delete:
+    description: Allow use of '/pkadmin blueprint delete' command - delete the blueprint
+    default: op
+  parkour.admin.blueprint.pos1:
+    description: Allow use of '/pkadmin blueprint pos1' command - set 1st corner of cuboid clipboard
+    default: op
+  parkour.admin.blueprint.pos2:
+    description: Allow use of '/pkadmin blueprint pos2' command - set 2nd corner of cuboid clipboard
+    default: op
+  parkour.admin.blueprint.list:
+    description: Allow use of '/pkadmin blueprint list' command - list available blueprints
+    default: op
+  parkour.admin.register:
+    description: Allow use of '/pkadmin register' command - register player to unowned course you are in
+    default: op
+  parkour.admin.unregister:
+    description: Allow use of '/pkadmin unregister' command - unregister owner from a course, but keep course blocks as-is
+    default: op
+  parkour.admin.range:
+    description: Allow use of '/pkadmin range' command - Admin course range command
+    default: op
+  parkour.admin.range.display:
+    description: Allow use of '/pkadmin range display' command - Show/hide course range indicators
+    default: op
+  parkour.admin.range.set:
+    description: Allow use of '/pkadmin range set' command - Sets the course protected range
+    default: op
+  parkour.admin.range.reset:
+    description: Allow use of '/pkadmin range reset' command - Resets the protected range to the world default
+    default: op
+  parkour.admin.range.add:
+    description: Allow use of '/pkadmin range add' command - increases the course protected range
+    default: op
+  parkour.admin.range.remove:
+    description: Allow use of '/pkadmin range remove' command - decreases the course protected range
+    default: op
+  parkour.admin.resets:
+    description: Allow use of '/pkadmin resets' command - edit player reset values
+    default: op
+  parkour.admin.resets.set:
+    description: Allow use of '/pkadmin resets set' command - sets how many times this player has reset his course
+    default: op
+  parkour.admin.resets.remove:
+    description: Allow use of '/pkadmin resets reset' command - sets the player's course reset count to 0
+    default: op
+  parkour.admin.resets.add:
+    description: Allow use of '/pkadmin resets add' command - adds this player's course reset count
+    default: op
+  parkour.admin.resets.remove:
+    description: Allow use of '/pkadmin resets remove' command - reduces the player's course reset count
+    default: op
+  parkour.admin.delete:
+    description: Allow use of '/pkadmin delete' command - deletes a player and regenerates their course
+    default: op
+  parkour.admin.why:
+    description: Allow use of '/pkadmin why' command - toggle console protection debug reporting
+    default: op
+  parkour.admin.deaths:
+    description: Allow use of '/pkadmin deaths' command - edit deaths of players
+    default: op
+  parkour.admin.deaths.reset:
+    description: Allow use of '/pkadmin deaths reset' command - resets deaths of the player
+    default: op
+  parkour.admin.deaths.set:
+    description: Allow use of '/pkadmin deaths set' command - sets deaths of the player
+    default: op
+  parkour.admin.deaths.add:
+    description: Allow use of '/pkadmin deaths add' command - adds deaths to the player
+    default: op
+  parkour.admin.deaths.remove:
+    description: Allow use of '/pkadmin deaths remove' command - removes deaths to the player
+    default: op
+  parkour.admin.reload:
+    description: Allow use of '/pkadmin reload' command - reload
+    default: op
+  parkour.admin.setspawn:
+    description: Allow use of '/pkadmin setspawn' command - set a course as spawn for this world
+    default: op
+  parkour.admin.setspawnpoint:
+    description: Allow use of '/pkadmin setspawnpoint' command - set current location as spawn point for this course
+    default: op
+  parkour.admin.resetflags:
+    description: Allow use of '/pkadmin resetflags' command - Reset all courses to default flag settings in config.yml
+    default: op
+  parkour.mod.switch:
+    description: Allow use of '/pkadmin switch' command - switch on/off protection bypass
+    default: op
+  parkour.admin.purge:
+    description: Allow use of '/pkadmin purge' command - purge courses abandoned for more than [days]
+    default: op
+  parkour.admin.purge.status:
+    description: Allow use of '/pkadmin purge status' command - displays the status of the purge
+    default: op
+  parkour.admin.purge.stop:
+    description: Allow use of '/pkadmin purge stop' command - stop a purge in progress
+    default: op
+  parkour.admin.purge.unowned:
+    description: Allow use of '/pkadmin purge unowned' command - purge unowned courses
+    default: op
+  parkour.admin.purge.protect:
+    description: Allow use of '/pkadmin purge protect' command - toggle course purge protection
+    default: op
+  parkour.admin.settings:
+    description: Allow use of '/pkadmin settings' command - open settings GUI or set settings
+    default: op
+  parkour.admin.setprotectionlocation:
+    description: Allow use of '/pkadmin setprotectionlocation' command - set current location or [x y z] as center of course's protection area
+    default: op
+  parkour.mod.deletehomes:
+    description: Allow use of '/pkadmin deletehomes' command - deletes all named homes from an course
+    default: op
+  parkour.mod.resetname:
+    description: Allow use of '/pkadmin resetname' command - reset player course name
+    default: op
+  parkour.island:
+    description: Allow use of '/parkour' command - the main parkour command
+    default: true
+  parkour.island.home:
+    description: Allow use of '/parkour go' command - teleport you to your course
+    default: true
+  parkour.island.spawn:
+    description: Allow use of '/parkour spawn' command - teleport you to the spawn
+    default: true
+  parkour.island.create:
+    description: Allow use of '/parkour create' command - create an course, using optional blueprint (requires permission)
+    default: true
+  parkour.island.reset:
+    description: Allow use of '/parkour reset' command - restart your course and remove the old one
+    default: true
+  parkour.island.info:
+    description: Allow use of '/parkour info' command - display info about your course or the player's course
+    default: true
+  parkour.island.settings:
+    description: Allow use of '/parkour settings' command - display course settings
+    default: true
+  parkour.island.name:
+    description: Allow use of '/parkour setname' command, '/parkour resetname' command - reset your course name
+    default: true
+  parkour.island.language:
+    description: Allow use of '/parkour language' command - select language
+    default: true
+  parkour.island.ban:
+    description: Allow use of '/parkour ban' command, '/parkour unban', '/parkour banlist' command - banned players
+    default: true
+  parkour.island.expel:
+    description: Allow use of '/parkour expel' command - expel a player from your course
+    default: true
+  parkour.island.near:
+    description: Allow use of '/parkour near' command - show the name of neighboring courses around you
+    default: true
+  parkour.island.team:
+    description: Allow use of '/parkour team' command - manage your team
+    default: true
+  parkour.island.team.invite:
+    description: Allow use of '/parkour team invite' command - invite a player to join your course
+    default: true
+  parkour.island.team.leave:
+    description: Allow use of '/parkour team leave' command - leave your course
+    default: true
+  parkour.island.team.setowner:
+    description: Allow use of '/parkour team setowner' command - transfer your course ownership to a member
+    default: true
+  parkour.island.team.kick:
+    description: Allow use of '/parkour team kick' command - remove a member from your course
+    default: true
+  parkour.island.team.accept:
+    description: Allow use of '/parkour team accept' command - accept an invitation
+    default: true
+  parkour.island.team.reject:
+    description: Allow use of '/parkour team reject' command - reject an invitation
+    default: true
+  parkour.island.team.coop:
+    description: Allow use of '/parkour team coop' command - make a player coop rank on your course
+    default: true
+  parkour.island.team.coop:
+    description: Allow use of '/parkour team uncoop' command - remove a coop rank from player
+    default: true
+  parkour.island.team.trust:
+    description: Allow use of '/parkour team trust', '/parkour team untrust' command - remove trusted player rank from player
+    default: true
+  parkour.island.team.promote:
+    description: Allow use of '/parkour team promote', '/parkour team demote' command - promote/demote a player on your course a rank
+    default: true
+  parkour.island.sethome:
+    description: Allow use of '/parkour sethome' command - set your home teleport point
+    default: true
+  parkour.island.deletehome:
+    description: Allow use of '/parkour deletehome' command - delete a home location
+    default: op
+  parkour.island.renamehome:
+    description: Allow use of '/parkour renamehome' command - rename a home location
+    default: op
+  parkour.island.homes:
+    description: Allow use of '/parkour homes' command - list your homes
+    default: op
+  parkour.parkour.top:
+    description: Allow use of '/parkour top' command - Show the top course rankings
+    default: op
+  parkour.parkour.courses:
+    description: Allow use of '/parkour courses' command - parkour.commands.parkour.courses.description
+    default: op
+  parkour.parkour.setwarp:
+    description: Allow use of '/parkour setwarp' command - sets the warp spot and makes your course public
+    default: op
+  parkour.parkour.removewarp:
+    description: Allow use of '/parkour removewarp' command - removes the warp spot and makes your course private
+    default: op   
