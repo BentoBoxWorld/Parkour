@@ -38,6 +38,7 @@ parkour:
     did-not-beat-previous-time: "&b You didn't beat your previous time!"
   errors:
     not-on-island: "&c You must be on an island to do that"
+    no-warp: "&c This course is already private"
   warp:
     set: "&d Warp spot set! Players can now see your course!"
     replaced: "&e Warp spot set! Old spot deactivated!"
@@ -53,6 +54,10 @@ parkour:
       not-owner: '&c You are not the owner of your team!'
   commands:
     parkour:
+      setwarp:
+        description: sets the warp spot and makes your course public 
+      removewarp:
+        description: removes the warp spot and makes your course private
       help:
         description: Start a parkour course or teleport to your course
       go:

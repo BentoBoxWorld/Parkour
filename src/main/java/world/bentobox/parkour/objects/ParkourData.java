@@ -16,7 +16,7 @@ import world.bentobox.bentobox.database.objects.Table;
  *
  */
 @Table(name = "Parkour")
-public class ParkourData implements DataObject, Comparable<Integer> {
+public class ParkourData implements DataObject, Comparable<ParkourData> {
 
     /**
      * uniqueId is the island's UUID
@@ -84,10 +84,6 @@ public class ParkourData implements DataObject, Comparable<Integer> {
         this.uniqueId = uniqueId;
     }
 
-    @Override
-    public int compareTo(Integer o) {
-        return Integer.compare(runCount, o);
-    }
 
     /**
      * @return the start
@@ -131,5 +127,9 @@ public class ParkourData implements DataObject, Comparable<Integer> {
         this.warpSpot = warpSpot;
     }
 
+    @Override
+    public int compareTo(ParkourData o) {
+        return Integer.compare(this.runCount, o.getRunCount());
+    }
 
 }
