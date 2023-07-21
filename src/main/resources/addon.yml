@@ -307,22 +307,22 @@ permissions:
     default: true
   parkour.island.deletehome:
     description: Allow use of '/parkour deletehome' command - delete a home location
-    default: op
+    default: true
   parkour.island.renamehome:
     description: Allow use of '/parkour renamehome' command - rename a home location
-    default: op
+    default: true
   parkour.island.homes:
     description: Allow use of '/parkour homes' command - list your homes
-    default: op
+    default: true
   parkour.parkour.top:
     description: Allow use of '/parkour top' command - Show the top course rankings
-    default: op
+    default: true
   parkour.parkour.courses:
     description: Allow use of '/parkour courses' command - parkour.commands.parkour.courses.description
-    default: op
+    default: true
   parkour.parkour.setwarp:
     description: Allow use of '/parkour setwarp' command - sets the warp spot and makes your course public
-    default: op
+    default: true
   parkour.parkour.removewarp:
     description: Allow use of '/parkour removewarp' command - removes the warp spot and makes your course private
-    default: op   
+    default: true   
