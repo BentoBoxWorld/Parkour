@@ -54,6 +54,11 @@ parkour:
       not-owner: '&c You are not the owner of your team!'
   commands:
     parkour:
+      courses:
+        description: show courses available to play and warp to
+      cleartop:
+        description: clear your course's top ten or remove a player's score from it
+        parameters: <player name>
       setwarp:
         description: sets the warp spot and makes your course public 
       removewarp:
