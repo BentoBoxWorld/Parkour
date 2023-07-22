@@ -15,7 +15,6 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.bentobox.util.Util;
 import world.bentobox.parkour.Parkour;
-import world.bentobox.parkour.ParkourManager;
 
 /**
  * Clears scores from the top ten
