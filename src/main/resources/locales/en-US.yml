@@ -39,11 +39,14 @@ parkour:
   errors:
     not-on-island: "&c You must be on an island to do that"
     no-warp: "&c This course is already private"
+    not-in-run: "&c You must currently be running a course to do that"
   warp:
     set: "&d Warp spot set! Players can now see your course!"
     replaced: "&e Warp spot set! Old spot deactivated!"
     removed: "&c Warp spot removed. Players will not see your course."
     warping: "&a Warping to the course!"
+  quit:
+    success: "&e You have now quit your run, and can run commands again"
   general:
     errors:
       no-island: '&c You do not have a course!'
@@ -71,6 +74,8 @@ parkour:
         parameters: '[home number]'
       top:
         description: "Show the top course rankings"
+      quit:
+        description: "Stop the timer on the current course"
     island:
       go:
         parameters: '[home number]'

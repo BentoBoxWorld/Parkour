@@ -121,6 +121,11 @@ public class CourseRunnerListener extends AbstractListener {
       }
     }
 
+    for (String alias : addon.getPlayerCommand().get().getAliases()) {
+      if (command.startsWith("/" + alias + " quit")) { // always allow using /<base command> quit
+          return;
+      }
+    }
 
     User user = User.getInstance(e.getPlayer());
     user.notify("protection.protected", TextVariables.DESCRIPTION,

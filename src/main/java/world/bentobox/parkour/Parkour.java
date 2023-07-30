@@ -16,6 +16,7 @@ import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.parkour.commands.ClearTopCommand;
 import world.bentobox.parkour.commands.CoursesCommand;
+import world.bentobox.parkour.commands.QuitCommand;
 import world.bentobox.parkour.commands.RemoveWarpCommand;
 import world.bentobox.parkour.commands.SetWarpCommand;
 import world.bentobox.parkour.commands.TopCommand;
@@ -66,6 +67,7 @@ public class Parkour extends GameModeAddon implements Listener {
                 new SetWarpCommand(this);
                 new RemoveWarpCommand(this);
                 new ClearTopCommand(this);
+                new QuitCommand(this);
             }
         };
 
