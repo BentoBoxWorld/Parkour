@@ -43,7 +43,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getFriendlyName()}.
+     * Test method for {@link Settings#getFriendlyName()}.
      */
     @Test
     public void testGetFriendlyName() {
@@ -51,7 +51,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getWorldName()}.
+     * Test method for {@link Settings#getWorldName()}.
      */
     @Test
     public void testGetWorldName() {
@@ -59,7 +59,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDifficulty()}.
+     * Test method for {@link Settings#getDifficulty()}.
      */
     @Test
     public void testGetDifficulty() {
@@ -67,7 +67,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandDistance()}.
+     * Test method for {@link Settings#getIslandDistance()}.
      */
     @Test
     public void testGetIslandDistance() {
@@ -75,7 +75,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandProtectionRange()}.
+     * Test method for {@link Settings#getIslandProtectionRange()}.
      */
     @Test
     public void testGetIslandProtectionRange() {
@@ -83,7 +83,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandStartX()}.
+     * Test method for {@link Settings#getIslandStartX()}.
      */
     @Test
     public void testGetIslandStartX() {
@@ -91,7 +91,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandStartZ()}.
+     * Test method for {@link Settings#getIslandStartZ()}.
      */
     @Test
     public void testGetIslandStartZ() {
@@ -99,7 +99,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandXOffset()}.
+     * Test method for {@link Settings#getIslandXOffset()}.
      */
     @Test
     public void testGetIslandXOffset() {
@@ -107,7 +107,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandZOffset()}.
+     * Test method for {@link Settings#getIslandZOffset()}.
      */
     @Test
     public void testGetIslandZOffset() {
@@ -115,7 +115,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIslandHeight()}.
+     * Test method for {@link Settings#getIslandHeight()}.
      */
     @Test
     public void testGetIslandHeight() {
@@ -123,7 +123,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isUseOwnGenerator()}.
+     * Test method for {@link Settings#isUseOwnGenerator()}.
      */
     @Test
     public void testIsUseOwnGenerator() {
@@ -131,7 +131,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getSeaHeight()}.
+     * Test method for {@link Settings#getSeaHeight()}.
      */
     @Test
     public void testGetSeaHeight() {
@@ -139,7 +139,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getMaxIslands()}.
+     * Test method for {@link Settings#getMaxIslands()}.
      */
     @Test
     public void testGetMaxIslands() {
@@ -147,7 +147,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultGameMode()}.
+     * Test method for {@link Settings#getDefaultGameMode()}.
      */
     @Test
     public void testGetDefaultGameMode() {
@@ -155,7 +155,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isNetherGenerate()}.
+     * Test method for {@link Settings#isNetherGenerate()}.
      */
     @Test
     public void testIsNetherGenerate() {
@@ -163,7 +163,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isNetherIslands()}.
+     * Test method for {@link Settings#isNetherIslands()}.
      */
     @Test
     public void testIsNetherIslands() {
@@ -171,7 +171,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isNetherRoof()}.
+     * Test method for {@link Settings#isNetherRoof()}.
      */
     @Test
     public void testIsNetherRoof() {
@@ -179,7 +179,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getNetherSpawnRadius()}.
+     * Test method for {@link Settings#getNetherSpawnRadius()}.
      */
     @Test
     public void testGetNetherSpawnRadius() {
@@ -187,7 +187,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isEndGenerate()}.
+     * Test method for {@link Settings#isEndGenerate()}.
      */
     @Test
     public void testIsEndGenerate() {
@@ -195,7 +195,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isEndIslands()}.
+     * Test method for {@link Settings#isEndIslands()}.
      */
     @Test
     public void testIsEndIslands() {
@@ -203,7 +203,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isDragonSpawn()}.
+     * Test method for {@link Settings#isDragonSpawn()}.
      */
     @Test
     public void testIsDragonSpawn() {
@@ -211,7 +211,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getRemoveMobsWhitelist()}.
+     * Test method for {@link Settings#getRemoveMobsWhitelist()}.
      */
     @Test
     public void testGetRemoveMobsWhitelist() {
@@ -220,7 +220,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getWorldFlags()}.
+     * Test method for {@link Settings#getWorldFlags()}.
      */
     @Test
     public void testGetWorldFlags() {
@@ -228,7 +228,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultIslandFlagNames()}.
+     * Test method for {@link Settings#getDefaultIslandFlagNames()}.
      */
     @Test
     public void testGetDefaultIslandFlagNames() {
@@ -236,7 +236,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultIslandSettingNames()}.
+     * Test method for {@link Settings#getDefaultIslandSettingNames()}.
      */
     @Test
     public void testGetDefaultIslandSettingNames() {
@@ -244,7 +244,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultIslandFlags()}.
+     * Test method for {@link Settings#getDefaultIslandFlags()}.
      */
     @Test
     public void testGetDefaultIslandFlags() {
@@ -252,7 +252,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultIslandSettings()}.
+     * Test method for {@link Settings#getDefaultIslandSettings()}.
      */
     @Test
     public void testGetDefaultIslandSettings() {
@@ -260,7 +260,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getHiddenFlags()}.
+     * Test method for {@link Settings#getHiddenFlags()}.
      */
     @Test
     public void testGetHiddenFlags() {
@@ -268,7 +268,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getVisitorBannedCommands()}.
+     * Test method for {@link Settings#getVisitorBannedCommands()}.
      */
     @Test
     public void testGetVisitorBannedCommands() {
@@ -276,7 +276,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getFallingBannedCommands()}.
+     * Test method for {@link Settings#getFallingBannedCommands()}.
      */
     @Test
     public void testGetFallingBannedCommands() {
@@ -284,7 +284,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getMaxTeamSize()}.
+     * Test method for {@link Settings#getMaxTeamSize()}.
      */
     @Test
     public void testGetMaxTeamSize() {
@@ -292,7 +292,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getMaxHomes()}.
+     * Test method for {@link Settings#getMaxHomes()}.
      */
     @Test
     public void testGetMaxHomes() {
@@ -300,7 +300,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getResetLimit()}.
+     * Test method for {@link Settings#getResetLimit()}.
      */
     @Test
     public void testGetResetLimit() {
@@ -308,7 +308,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isLeaversLoseReset()}.
+     * Test method for {@link Settings#isLeaversLoseReset()}.
      */
     @Test
     public void testIsLeaversLoseReset() {
@@ -316,7 +316,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isKickedKeepInventory()}.
+     * Test method for {@link Settings#isKickedKeepInventory()}.
      */
     @Test
     public void testIsKickedKeepInventory() {
@@ -324,7 +324,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isCreateIslandOnFirstLoginEnabled()}.
+     * Test method for {@link Settings#isCreateIslandOnFirstLoginEnabled()}.
      */
     @Test
     public void testIsCreateIslandOnFirstLoginEnabled() {
@@ -332,7 +332,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getCreateIslandOnFirstLoginDelay()}.
+     * Test method for {@link Settings#getCreateIslandOnFirstLoginDelay()}.
      */
     @Test
     public void testGetCreateIslandOnFirstLoginDelay() {
@@ -340,7 +340,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isCreateIslandOnFirstLoginAbortOnLogout()}.
+     * Test method for {@link Settings#isCreateIslandOnFirstLoginAbortOnLogout()}.
      */
     @Test
     public void testIsCreateIslandOnFirstLoginAbortOnLogout() {
@@ -348,7 +348,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnJoinResetMoney()}.
+     * Test method for {@link Settings#isOnJoinResetMoney()}.
      */
     @Test
     public void testIsOnJoinResetMoney() {
@@ -356,7 +356,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnJoinResetInventory()}.
+     * Test method for {@link Settings#isOnJoinResetInventory()}.
      */
     @Test
     public void testIsOnJoinResetInventory() {
@@ -364,7 +364,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnJoinResetEnderChest()}.
+     * Test method for {@link Settings#isOnJoinResetEnderChest()}.
      */
     @Test
     public void testIsOnJoinResetEnderChest() {
@@ -372,7 +372,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnLeaveResetMoney()}.
+     * Test method for {@link Settings#isOnLeaveResetMoney()}.
      */
     @Test
     public void testIsOnLeaveResetMoney() {
@@ -380,7 +380,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnLeaveResetInventory()}.
+     * Test method for {@link Settings#isOnLeaveResetInventory()}.
      */
     @Test
     public void testIsOnLeaveResetInventory() {
@@ -388,7 +388,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnLeaveResetEnderChest()}.
+     * Test method for {@link Settings#isOnLeaveResetEnderChest()}.
      */
     @Test
     public void testIsOnLeaveResetEnderChest() {
@@ -396,7 +396,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isDeathsCounted()}.
+     * Test method for {@link Settings#isDeathsCounted()}.
      */
     @Test
     public void testIsDeathsCounted() {
@@ -404,7 +404,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isAllowSetHomeInNether()}.
+     * Test method for {@link Settings#isAllowSetHomeInNether()}.
      */
     @Test
     public void testIsAllowSetHomeInNether() {
@@ -412,7 +412,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isAllowSetHomeInTheEnd()}.
+     * Test method for {@link Settings#isAllowSetHomeInTheEnd()}.
      */
     @Test
     public void testIsAllowSetHomeInTheEnd() {
@@ -420,7 +420,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isRequireConfirmationToSetHomeInNether()}.
+     * Test method for {@link Settings#isRequireConfirmationToSetHomeInNether()}.
      */
     @Test
     public void testIsRequireConfirmationToSetHomeInNether() {
@@ -428,7 +428,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isRequireConfirmationToSetHomeInTheEnd()}.
+     * Test method for {@link Settings#isRequireConfirmationToSetHomeInTheEnd()}.
      */
     @Test
     public void testIsRequireConfirmationToSetHomeInTheEnd() {
@@ -436,7 +436,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDeathsMax()}.
+     * Test method for {@link Settings#getDeathsMax()}.
      */
     @Test
     public void testGetDeathsMax() {
@@ -444,7 +444,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isTeamJoinDeathReset()}.
+     * Test method for {@link Settings#isTeamJoinDeathReset()}.
      */
     @Test
     public void testIsTeamJoinDeathReset() {
@@ -452,7 +452,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getGeoLimitSettings()}.
+     * Test method for {@link Settings#getGeoLimitSettings()}.
      */
     @Test
     public void testGetGeoLimitSettings() {
@@ -460,7 +460,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getIvSettings()}.
+     * Test method for {@link Settings#getIvSettings()}.
      */
     @Test
     public void testGetIvSettings() {
@@ -468,7 +468,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getResetEpoch()}.
+     * Test method for {@link Settings#getResetEpoch()}.
      */
     @Test
     public void testGetResetEpoch() {
@@ -476,7 +476,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setFriendlyName(java.lang.String)}.
+     * Test method for {@link Settings#setFriendlyName(java.lang.String)}.
      */
     @Test
     public void testSetFriendlyName() {
@@ -485,7 +485,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setWorldName(java.lang.String)}.
+     * Test method for {@link Settings#setWorldName(java.lang.String)}.
      */
     @Test
     public void testSetWorldName() {
@@ -494,7 +494,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDifficulty(org.bukkit.Difficulty)}.
+     * Test method for {@link Settings#setDifficulty(org.bukkit.Difficulty)}.
      */
     @Test
     public void testSetDifficulty() {
@@ -503,7 +503,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandDistance(int)}.
+     * Test method for {@link Settings#setIslandDistance(int)}.
      */
     @Test
     public void testSetIslandDistance() {
@@ -512,7 +512,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandProtectionRange(int)}.
+     * Test method for {@link Settings#setIslandProtectionRange(int)}.
      */
     @Test
     public void testSetIslandProtectionRange() {
@@ -521,7 +521,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandStartX(int)}.
+     * Test method for {@link Settings#setIslandStartX(int)}.
      */
     @Test
     public void testSetIslandStartX() {
@@ -530,7 +530,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandStartZ(int)}.
+     * Test method for {@link Settings#setIslandStartZ(int)}.
      */
     @Test
     public void testSetIslandStartZ() {
@@ -539,7 +539,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandXOffset(int)}.
+     * Test method for {@link Settings#setIslandXOffset(int)}.
      */
     @Test
     public void testSetIslandXOffset() {
@@ -548,7 +548,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandZOffset(int)}.
+     * Test method for {@link Settings#setIslandZOffset(int)}.
      */
     @Test
     public void testSetIslandZOffset() {
@@ -557,7 +557,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIslandHeight(int)}.
+     * Test method for {@link Settings#setIslandHeight(int)}.
      */
     @Test
     public void testSetIslandHeight() {
@@ -566,7 +566,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setUseOwnGenerator(boolean)}.
+     * Test method for {@link Settings#setUseOwnGenerator(boolean)}.
      */
     @Test
     public void testSetUseOwnGenerator() {
@@ -575,7 +575,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setSeaHeight(int)}.
+     * Test method for {@link Settings#setSeaHeight(int)}.
      */
     @Test
     public void testSetSeaHeight() {
@@ -584,7 +584,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setMaxIslands(int)}.
+     * Test method for {@link Settings#setMaxIslands(int)}.
      */
     @Test
     public void testSetMaxIslands() {
@@ -593,7 +593,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDefaultGameMode(org.bukkit.GameMode)}.
+     * Test method for {@link Settings#setDefaultGameMode(org.bukkit.GameMode)}.
      */
     @Test
     public void testSetDefaultGameMode() {
@@ -602,7 +602,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setNetherGenerate(boolean)}.
+     * Test method for {@link Settings#setNetherGenerate(boolean)}.
      */
     @Test
     public void testSetNetherGenerate() {
@@ -613,7 +613,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setNetherIslands(boolean)}.
+     * Test method for {@link Settings#setNetherIslands(boolean)}.
      */
     @Test
     public void testSetNetherIslands() {
@@ -624,7 +624,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setNetherRoof(boolean)}.
+     * Test method for {@link Settings#setNetherRoof(boolean)}.
      */
     @Test
     public void testSetNetherRoof() {
@@ -635,7 +635,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setNetherSpawnRadius(int)}.
+     * Test method for {@link Settings#setNetherSpawnRadius(int)}.
      */
     @Test
     public void testSetNetherSpawnRadius() {
@@ -644,7 +644,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setEndGenerate(boolean)}.
+     * Test method for {@link Settings#setEndGenerate(boolean)}.
      */
     @Test
     public void testSetEndGenerate() {
@@ -655,7 +655,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setEndIslands(boolean)}.
+     * Test method for {@link Settings#setEndIslands(boolean)}.
      */
     @Test
     public void testSetEndIslands() {
@@ -666,7 +666,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setRemoveMobsWhitelist(java.util.Set)}.
+     * Test method for {@link Settings#setRemoveMobsWhitelist(java.util.Set)}.
      */
     @Test
     public void testSetRemoveMobsWhitelist() {
@@ -675,7 +675,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setWorldFlags(java.util.Map)}.
+     * Test method for {@link Settings#setWorldFlags(java.util.Map)}.
      */
     @Test
     public void testSetWorldFlags() {
@@ -685,7 +685,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setHiddenFlags(java.util.List)}.
+     * Test method for {@link Settings#setHiddenFlags(java.util.List)}.
      */
     @Test
     public void testSetHiddenFlags() {
@@ -695,7 +695,18 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setVisitorBannedCommands(java.util.List)}.
+     * Test method for {@link Settings#setParkourAllowedCommands(java.util.List)}.
+     */
+    @Test
+    public void testSetParkourAllowedCommands() {
+        s.setParkourAllowedCommands(List.of("allowed"));
+        assertTrue(s.getParkourAllowedCommands().contains("allowed"));
+        assertFalse(s.getParkourAllowedCommands().contains("not-allowed"));
+    }
+
+
+    /**
+     * Test method for {@link Settings#setVisitorBannedCommands(java.util.List)}.
      */
     @Test
     public void testSetVisitorBannedCommands() {
@@ -705,7 +716,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setFallingBannedCommands(java.util.List)}.
+     * Test method for {@link Settings#setFallingBannedCommands(java.util.List)}.
      */
     @Test
     public void testSetFallingBannedCommands() {
@@ -715,7 +726,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setMaxTeamSize(int)}.
+     * Test method for {@link Settings#setMaxTeamSize(int)}.
      */
     @Test
     public void testSetMaxTeamSize() {
@@ -724,7 +735,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setMaxHomes(int)}.
+     * Test method for {@link Settings#setMaxHomes(int)}.
      */
     @Test
     public void testSetMaxHomes() {
@@ -733,7 +744,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setResetLimit(int)}.
+     * Test method for {@link Settings#setResetLimit(int)}.
      */
     @Test
     public void testSetResetLimit() {
@@ -742,7 +753,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setLeaversLoseReset(boolean)}.
+     * Test method for {@link Settings#setLeaversLoseReset(boolean)}.
      */
     @Test
     public void testSetLeaversLoseReset() {
@@ -753,7 +764,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setKickedKeepInventory(boolean)}.
+     * Test method for {@link Settings#setKickedKeepInventory(boolean)}.
      */
     @Test
     public void testSetKickedKeepInventory() {
@@ -764,7 +775,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinResetMoney(boolean)}.
+     * Test method for {@link Settings#setOnJoinResetMoney(boolean)}.
      */
     @Test
     public void testSetOnJoinResetMoney() {
@@ -775,7 +786,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinResetInventory(boolean)}.
+     * Test method for {@link Settings#setOnJoinResetInventory(boolean)}.
      */
     @Test
     public void testSetOnJoinResetInventory() {
@@ -786,7 +797,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinResetEnderChest(boolean)}.
+     * Test method for {@link Settings#setOnJoinResetEnderChest(boolean)}.
      */
     @Test
     public void testSetOnJoinResetEnderChest() {
@@ -797,7 +808,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveResetMoney(boolean)}.
+     * Test method for {@link Settings#setOnLeaveResetMoney(boolean)}.
      */
     @Test
     public void testSetOnLeaveResetMoney() {
@@ -808,7 +819,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveResetInventory(boolean)}.
+     * Test method for {@link Settings#setOnLeaveResetInventory(boolean)}.
      */
     @Test
     public void testSetOnLeaveResetInventory() {
@@ -819,7 +830,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveResetEnderChest(boolean)}.
+     * Test method for {@link Settings#setOnLeaveResetEnderChest(boolean)}.
      */
     @Test
     public void testSetOnLeaveResetEnderChest() {
@@ -830,7 +841,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setCreateIslandOnFirstLoginEnabled(boolean)}.
+     * Test method for {@link Settings#setCreateIslandOnFirstLoginEnabled(boolean)}.
      */
     @Test
     public void testSetCreateIslandOnFirstLoginEnabled() {
@@ -841,7 +852,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setCreateIslandOnFirstLoginDelay(int)}.
+     * Test method for {@link Settings#setCreateIslandOnFirstLoginDelay(int)}.
      */
     @Test
     public void testSetCreateIslandOnFirstLoginDelay() {
@@ -850,7 +861,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setCreateIslandOnFirstLoginAbortOnLogout(boolean)}.
+     * Test method for {@link Settings#setCreateIslandOnFirstLoginAbortOnLogout(boolean)}.
      */
     @Test
     public void testSetCreateIslandOnFirstLoginAbortOnLogout() {
@@ -861,7 +872,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDeathsCounted(boolean)}.
+     * Test method for {@link Settings#setDeathsCounted(boolean)}.
      */
     @Test
     public void testSetDeathsCounted() {
@@ -872,7 +883,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDeathsMax(int)}.
+     * Test method for {@link Settings#setDeathsMax(int)}.
      */
     @Test
     public void testSetDeathsMax() {
@@ -881,7 +892,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setTeamJoinDeathReset(boolean)}.
+     * Test method for {@link Settings#setTeamJoinDeathReset(boolean)}.
      */
     @Test
     public void testSetTeamJoinDeathReset() {
@@ -892,7 +903,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setGeoLimitSettings(java.util.List)}.
+     * Test method for {@link Settings#setGeoLimitSettings(java.util.List)}.
      */
     @Test
     public void testSetGeoLimitSettings() {
@@ -901,7 +912,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setIvSettings(java.util.List)}.
+     * Test method for {@link Settings#setIvSettings(java.util.List)}.
      */
     @Test
     public void testSetIvSettings() {
@@ -910,7 +921,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setAllowSetHomeInNether(boolean)}.
+     * Test method for {@link Settings#setAllowSetHomeInNether(boolean)}.
      */
     @Test
     public void testSetAllowSetHomeInNether() {
@@ -921,7 +932,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setAllowSetHomeInTheEnd(boolean)}.
+     * Test method for {@link Settings#setAllowSetHomeInTheEnd(boolean)}.
      */
     @Test
     public void testSetAllowSetHomeInTheEnd() {
@@ -932,7 +943,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setRequireConfirmationToSetHomeInNether(boolean)}.
+     * Test method for {@link Settings#setRequireConfirmationToSetHomeInNether(boolean)}.
      */
     @Test
     public void testSetRequireConfirmationToSetHomeInNether() {
@@ -943,7 +954,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setRequireConfirmationToSetHomeInTheEnd(boolean)}.
+     * Test method for {@link Settings#setRequireConfirmationToSetHomeInTheEnd(boolean)}.
      */
     @Test
     public void testSetRequireConfirmationToSetHomeInTheEnd() {
@@ -954,7 +965,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setResetEpoch(long)}.
+     * Test method for {@link Settings#setResetEpoch(long)}.
      */
     @Test
     public void testSetResetEpoch() {
@@ -963,7 +974,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getPermissionPrefix()}.
+     * Test method for {@link Settings#getPermissionPrefix()}.
      */
     @Test
     public void testGetPermissionPrefix() {
@@ -971,7 +982,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isWaterUnsafe()}.
+     * Test method for {@link Settings#isWaterUnsafe()}.
      */
     @Test
     public void testIsWaterUnsafe() {
@@ -979,7 +990,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultBiome()}.
+     * Test method for {@link Settings#getDefaultBiome()}.
      */
     @Test
     public void testGetDefaultBiome() {
@@ -987,7 +998,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDefaultBiome(org.bukkit.block.Biome)}.
+     * Test method for {@link Settings#setDefaultBiome(org.bukkit.block.Biome)}.
      */
     @Test
     public void testSetDefaultBiome() {
@@ -997,7 +1008,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getBanLimit()}.
+     * Test method for {@link Settings#getBanLimit()}.
      */
     @Test
     public void testGetBanLimit() {
@@ -1005,7 +1016,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setBanLimit(int)}.
+     * Test method for {@link Settings#setBanLimit(int)}.
      */
     @Test
     public void testSetBanLimit() {
@@ -1015,7 +1026,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getPlayerCommandAliases()}.
+     * Test method for {@link Settings#getPlayerCommandAliases()}.
      */
     @Test
     public void testGetPlayerCommandAliases() {
@@ -1023,7 +1034,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setPlayerCommandAliases(java.lang.String)}.
+     * Test method for {@link Settings#setPlayerCommandAliases(java.lang.String)}.
      */
     @Test
     public void testSetPlayerCommandAliases() {
@@ -1033,7 +1044,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getAdminCommandAliases()}.
+     * Test method for {@link Settings#getAdminCommandAliases()}.
      */
     @Test
     public void testGetAdminCommandAliases() {
@@ -1041,7 +1052,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setAdminCommandAliases(java.lang.String)}.
+     * Test method for {@link Settings#setAdminCommandAliases(java.lang.String)}.
      */
     @Test
     public void testSetAdminCommandAliases() {
@@ -1051,7 +1062,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isDeathsResetOnNewIsland()}.
+     * Test method for {@link Settings#isDeathsResetOnNewIsland()}.
      */
     @Test
     public void testIsDeathsResetOnNewIsland() {
@@ -1059,7 +1070,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDeathsResetOnNewIsland(boolean)}.
+     * Test method for {@link Settings#setDeathsResetOnNewIsland(boolean)}.
      */
     @Test
     public void testSetDeathsResetOnNewIsland() {
@@ -1070,7 +1081,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getOnJoinCommands()}.
+     * Test method for {@link Settings#getOnJoinCommands()}.
      */
     @Test
     public void testGetOnJoinCommands() {
@@ -1078,7 +1089,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinCommands(java.util.List)}.
+     * Test method for {@link Settings#setOnJoinCommands(java.util.List)}.
      */
     @Test
     public void testSetOnJoinCommands() {
@@ -1087,7 +1098,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getOnLeaveCommands()}.
+     * Test method for {@link Settings#getOnLeaveCommands()}.
      */
     @Test
     public void testGetOnLeaveCommands() {
@@ -1095,7 +1106,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveCommands(java.util.List)}.
+     * Test method for {@link Settings#setOnLeaveCommands(java.util.List)}.
      */
     @Test
     public void testSetOnLeaveCommands() {
@@ -1104,7 +1115,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getOnRespawnCommands()}.
+     * Test method for {@link Settings#getOnRespawnCommands()}.
      */
     @Test
     public void testGetOnRespawnCommands() {
@@ -1112,7 +1123,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnJoinResetHealth()}.
+     * Test method for {@link Settings#isOnJoinResetHealth()}.
      */
     @Test
     public void testIsOnJoinResetHealth() {
@@ -1120,7 +1131,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinResetHealth(boolean)}.
+     * Test method for {@link Settings#setOnJoinResetHealth(boolean)}.
      */
     @Test
     public void testSetOnJoinResetHealth() {
@@ -1131,7 +1142,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnJoinResetHunger()}.
+     * Test method for {@link Settings#isOnJoinResetHunger()}.
      */
     @Test
     public void testIsOnJoinResetHunger() {
@@ -1139,7 +1150,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinResetHunger(boolean)}.
+     * Test method for {@link Settings#setOnJoinResetHunger(boolean)}.
      */
     @Test
     public void testSetOnJoinResetHunger() {
@@ -1150,7 +1161,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnJoinResetXP()}.
+     * Test method for {@link Settings#isOnJoinResetXP()}.
      */
     @Test
     public void testIsOnJoinResetXP() {
@@ -1158,7 +1169,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnJoinResetXP(boolean)}.
+     * Test method for {@link Settings#setOnJoinResetXP(boolean)}.
      */
     @Test
     public void testSetOnJoinResetXP() {
@@ -1169,7 +1180,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnLeaveResetHealth()}.
+     * Test method for {@link Settings#isOnLeaveResetHealth()}.
      */
     @Test
     public void testIsOnLeaveResetHealth() {
@@ -1177,7 +1188,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveResetHealth(boolean)}.
+     * Test method for {@link Settings#setOnLeaveResetHealth(boolean)}.
      */
     @Test
     public void testSetOnLeaveResetHealth() {
@@ -1188,7 +1199,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnLeaveResetHunger()}.
+     * Test method for {@link Settings#isOnLeaveResetHunger()}.
      */
     @Test
     public void testIsOnLeaveResetHunger() {
@@ -1196,7 +1207,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveResetHunger(boolean)}.
+     * Test method for {@link Settings#setOnLeaveResetHunger(boolean)}.
      */
     @Test
     public void testSetOnLeaveResetHunger() {
@@ -1207,7 +1218,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isOnLeaveResetXP()}.
+     * Test method for {@link Settings#isOnLeaveResetXP()}.
      */
     @Test
     public void testIsOnLeaveResetXP() {
@@ -1215,7 +1226,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setOnLeaveResetXP(boolean)}.
+     * Test method for {@link Settings#setOnLeaveResetXP(boolean)}.
      */
     @Test
     public void testSetOnLeaveResetXP() {
@@ -1225,7 +1236,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isPasteMissingIslands()}.
+     * Test method for {@link Settings#isPasteMissingIslands()}.
      */
     @Test
     public void testIsPasteMissingIslands() {
@@ -1233,7 +1244,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setPasteMissingIslands(boolean)}.
+     * Test method for {@link Settings#setPasteMissingIslands(boolean)}.
      */
     @Test
     public void testSetPasteMissingIslands() {
@@ -1245,7 +1256,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isTeleportPlayerToIslandUponIslandCreation()}.
+     * Test method for {@link Settings#isTeleportPlayerToIslandUponIslandCreation()}.
      */
     @Test
     public void testIsTeleportPlayerToIslandUponIslandCreation() {
@@ -1253,7 +1264,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setTeleportPlayerToIslandUponIslandCreation(boolean)}.
+     * Test method for {@link Settings#setTeleportPlayerToIslandUponIslandCreation(boolean)}.
      */
     @Test
     public void testSetTeleportPlayerToIslandUponIslandCreation() {
@@ -1263,7 +1274,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getSpawnLimitMonsters()}.
+     * Test method for {@link Settings#getSpawnLimitMonsters()}.
      */
     @Test
     public void testGetSpawnLimitMonsters() {
@@ -1271,7 +1282,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setSpawnLimitMonsters(int)}.
+     * Test method for {@link Settings#setSpawnLimitMonsters(int)}.
      */
     @Test
     public void testSetSpawnLimitMonsters() {
@@ -1281,7 +1292,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getSpawnLimitAnimals()}.
+     * Test method for {@link Settings#getSpawnLimitAnimals()}.
      */
     @Test
     public void testGetSpawnLimitAnimals() {
@@ -1289,7 +1300,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setSpawnLimitAnimals(int)}.
+     * Test method for {@link Settings#setSpawnLimitAnimals(int)}.
      */
     @Test
     public void testSetSpawnLimitAnimals() {
@@ -1299,7 +1310,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getSpawnLimitWaterAnimals()}.
+     * Test method for {@link Settings#getSpawnLimitWaterAnimals()}.
      */
     @Test
     public void testGetSpawnLimitWaterAnimals() {
@@ -1307,7 +1318,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setSpawnLimitWaterAnimals(int)}.
+     * Test method for {@link Settings#setSpawnLimitWaterAnimals(int)}.
      */
     @Test
     public void testSetSpawnLimitWaterAnimals() {
@@ -1317,7 +1328,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getSpawnLimitAmbient()}.
+     * Test method for {@link Settings#getSpawnLimitAmbient()}.
      */
     @Test
     public void testGetSpawnLimitAmbient() {
@@ -1325,7 +1336,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setSpawnLimitAmbient(int)}.
+     * Test method for {@link Settings#setSpawnLimitAmbient(int)}.
      */
     @Test
     public void testSetSpawnLimitAmbient() {
@@ -1335,7 +1346,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getTicksPerAnimalSpawns()}.
+     * Test method for {@link Settings#getTicksPerAnimalSpawns()}.
      */
     @Test
     public void testGetTicksPerAnimalSpawns() {
@@ -1343,7 +1354,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setTicksPerAnimalSpawns(int)}.
+     * Test method for {@link Settings#setTicksPerAnimalSpawns(int)}.
      */
     @Test
     public void testSetTicksPerAnimalSpawns() {
@@ -1353,7 +1364,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getTicksPerMonsterSpawns()}.
+     * Test method for {@link Settings#getTicksPerMonsterSpawns()}.
      */
     @Test
     public void testGetTicksPerMonsterSpawns() {
@@ -1361,7 +1372,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setTicksPerMonsterSpawns(int)}.
+     * Test method for {@link Settings#setTicksPerMonsterSpawns(int)}.
      */
     @Test
     public void testSetTicksPerMonsterSpawns() {
@@ -1371,7 +1382,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getMaxCoopSize()}.
+     * Test method for {@link Settings#getMaxCoopSize()}.
      */
     @Test
     public void testGetMaxCoopSize() {
@@ -1379,7 +1390,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setMaxCoopSize(int)}.
+     * Test method for {@link Settings#setMaxCoopSize(int)}.
      */
     @Test
     public void testSetMaxCoopSize() {
@@ -1388,7 +1399,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getMaxTrustSize()}.
+     * Test method for {@link Settings#getMaxTrustSize()}.
      */
     @Test
     public void testGetMaxTrustSize() {
@@ -1396,7 +1407,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setMaxTrustSize(int)}.
+     * Test method for {@link Settings#setMaxTrustSize(int)}.
      */
     @Test
     public void testSetMaxTrustSize() {
@@ -1405,7 +1416,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultNewPlayerAction()}.
+     * Test method for {@link Settings#getDefaultNewPlayerAction()}.
      */
     @Test
     public void testGetDefaultNewPlayerAction() {
@@ -1413,7 +1424,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDefaultNewPlayerAction(java.lang.String)}.
+     * Test method for {@link Settings#setDefaultNewPlayerAction(java.lang.String)}.
      */
     @Test
     public void testSetDefaultNewPlayerAction() {
@@ -1422,7 +1433,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultPlayerAction()}.
+     * Test method for {@link Settings#getDefaultPlayerAction()}.
      */
     @Test
     public void testGetDefaultPlayerAction() {
@@ -1430,7 +1441,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDefaultPlayerAction(java.lang.String)}.
+     * Test method for {@link Settings#setDefaultPlayerAction(java.lang.String)}.
      */
     @Test
     public void testSetDefaultPlayerAction() {
@@ -1439,7 +1450,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getMobLimitSettings()}.
+     * Test method for {@link Settings#getMobLimitSettings()}.
      */
     @Test
     public void testGetMobLimitSettings() {
@@ -1447,7 +1458,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setMobLimitSettings(java.util.List)}.
+     * Test method for {@link Settings#setMobLimitSettings(java.util.List)}.
      */
     @Test
     public void testSetMobLimitSettings() {
@@ -1456,7 +1467,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultNetherBiome()}.
+     * Test method for {@link Settings#getDefaultNetherBiome()}.
      */
     @Test
     public void testGetDefaultNetherBiome() {
@@ -1464,7 +1475,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDefaultNetherBiome(org.bukkit.block.Biome)}.
+     * Test method for {@link Settings#setDefaultNetherBiome(org.bukkit.block.Biome)}.
      */
     @Test
     public void testSetDefaultNetherBiome() {
@@ -1474,7 +1485,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#getDefaultEndBiome()}.
+     * Test method for {@link Settings#getDefaultEndBiome()}.
      */
     @Test
     public void testGetDefaultEndBiome() {
@@ -1482,7 +1493,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#setDefaultEndBiome(org.bukkit.block.Biome)}.
+     * Test method for {@link Settings#setDefaultEndBiome(org.bukkit.block.Biome)}.
      */
     @Test
     public void testSetDefaultEndBiome() {
@@ -1492,7 +1503,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isMakeNetherPortals()}.
+     * Test method for {@link Settings#isMakeNetherPortals()}.
      */
     @Test
     public void testIsMakeNetherPortals() {
@@ -1500,7 +1511,7 @@ public class SettingsTest {
     }
 
     /**
-     * Test method for {@link world.bentobox.aoneblock.Settings#isMakeEndPortals()}.
+     * Test method for {@link Settings#isMakeEndPortals()}.
      */
     @Test
     public void testIsMakeEndPortals() {

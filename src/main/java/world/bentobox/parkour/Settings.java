@@ -229,6 +229,12 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.hidden-flags")
     private List<String> hiddenFlags = new ArrayList<>();
 
+    @ConfigComment("Allowed commands when running a parkour course - all others are banned")
+    @ConfigComment("Matched by prefix of command, including '/' - if config is '/parkour home',")
+    @ConfigComment("'/parkour home abc' is allowed, while '/parkour sethome' is not")
+    @ConfigEntry(path = "world.parkour-allowed-commands")
+    private List<String> parkourAllowedCommands = new ArrayList<>();
+
     @ConfigComment("Visitor banned commands - Visitors to areas cannot use these commands in this world")
     @ConfigEntry(path = "world.visitor-banned-commands")
     private List<String> visitorBannedCommands = new ArrayList<>();
@@ -684,6 +690,15 @@ public class Settings implements WorldSettings {
     }
 
     /**
+     * @return the parkourAllowedCommands
+     */
+    public List<String> getParkourAllowedCommands() {
+        return parkourAllowedCommands;
+    }
+
+
+
+    /**
      * @return the visitorBannedCommands
      */
     @Override
@@ -1086,6 +1101,15 @@ public class Settings implements WorldSettings {
     public void setHiddenFlags(List<String> hiddenFlags) {
         this.hiddenFlags = hiddenFlags;
     }
+
+    /**
+     * @param parkourAllowedCommands the parkourAllowedCommands to set
+     */
+    public void setParkourAllowedCommands(List<String> parkourAllowedCommands) {
+        this.parkourAllowedCommands = parkourAllowedCommands;
+    }
+
+
 
     /**
      * @param visitorBannedCommands the visitorBannedCommands to set

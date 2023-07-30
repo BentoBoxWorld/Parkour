@@ -115,9 +115,18 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorCommand(PlayerCommandPreprocessEvent e) {
         if (!timers.containsKey(e.getPlayer().getUniqueId()) || !e.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
-                || e.getPlayer().isOp()) {
+                || e.getPlayer().hasPermission("parkour.mod.bypasscommandban")) {
             return;
         }
+
+        String command = e.getMessage();
+        for (String parkourAllowedCommand : addon.getSettings().getParkourAllowedCommands()) {
+            if (command.startsWith(parkourAllowedCommand)) {
+                return;
+            }
+        }
+
+
         User user = User.getInstance(e.getPlayer());
         user.notify("protection.protected", TextVariables.DESCRIPTION, user.getTranslation("protection.command-is-banned"));
         e.setCancelled(true);
