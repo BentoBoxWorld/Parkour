@@ -31,6 +31,9 @@ permissions:
   parkour.mod.bypassexpel:
     description: Allow moderator to bypass course expulsion
     default: op
+  parkour.mod.bypasscommandban:
+    description: Allow moderator to bypass command ban while running a course
+    default: op
   parkour.mod.lock:
     description: Allows lock or unlock of an course
     default: op
