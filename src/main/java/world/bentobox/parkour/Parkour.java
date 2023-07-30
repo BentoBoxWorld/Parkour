@@ -42,6 +42,9 @@ public class Parkour extends GameModeAddon implements Listener {
     private ParkourManager pm;
     private RankingsUI rankings;
 
+
+    private ParkourRunManager parkourRunManager;
+
     @Override
     public void onLoad() {
         // Save the default config from config.yml
@@ -68,9 +71,12 @@ public class Parkour extends GameModeAddon implements Listener {
 
         adminCommand = new DefaultAdminCommand(this) {};
 
+        parkourRunManager = new ParkourRunManager(this);
+
         // Register listeners
         this.registerListener(new MakeCourseListener(this));
         this.registerListener(new CourseRunnerListener(this));
+
     }
 
     private boolean loadSettings() {
@@ -222,5 +228,10 @@ public class Parkour extends GameModeAddon implements Listener {
     public RankingsUI getRankings() {
         return rankings;
     }
+
+    public ParkourRunManager getParkourRunManager() {
+        return parkourRunManager;
+    }
+
 
 }
