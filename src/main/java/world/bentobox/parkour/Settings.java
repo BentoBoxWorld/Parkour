@@ -230,6 +230,8 @@ public class Settings implements WorldSettings {
     private List<String> hiddenFlags = new ArrayList<>();
 
     @ConfigComment("Allowed commands when running a parkour course - all others are banned")
+    @ConfigComment("Matched by prefix of command, including '/' - if config is '/parkour home',")
+    @ConfigComment("'/parkour home abc' is allowed, while '/parkour sethome' is not")
     @ConfigEntry(path = "world.parkour-allowed-commands")
     private List<String> parkourAllowedCommands = new ArrayList<>();
 
