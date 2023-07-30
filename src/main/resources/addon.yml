@@ -328,4 +328,7 @@ permissions:
     default: true
   parkour.parkour.removewarp:
     description: Allow use of '/parkour removewarp' command - removes the warp spot and makes your course private
-    default: true   
+    default: true
+  parkour.parkour.quit:
+    description: Allow use of '/parkour quit' command - stops the timer, allowing you to use other commands
+    default: true

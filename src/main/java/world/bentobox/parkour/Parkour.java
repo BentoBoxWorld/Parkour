@@ -16,6 +16,7 @@ import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.parkour.commands.ClearTopCommand;
 import world.bentobox.parkour.commands.CoursesCommand;
+import world.bentobox.parkour.commands.QuitCommand;
 import world.bentobox.parkour.commands.RemoveWarpCommand;
 import world.bentobox.parkour.commands.SetWarpCommand;
 import world.bentobox.parkour.commands.TopCommand;
@@ -42,6 +43,9 @@ public class Parkour extends GameModeAddon implements Listener {
     private ParkourManager pm;
     private RankingsUI rankings;
 
+
+    private ParkourRunManager parkourRunManager;
+
     @Override
     public void onLoad() {
         // Save the default config from config.yml
@@ -63,14 +67,18 @@ public class Parkour extends GameModeAddon implements Listener {
                 new SetWarpCommand(this);
                 new RemoveWarpCommand(this);
                 new ClearTopCommand(this);
+                new QuitCommand(this);
             }
         };
 
         adminCommand = new DefaultAdminCommand(this) {};
 
+        parkourRunManager = new ParkourRunManager(this);
+
         // Register listeners
         this.registerListener(new MakeCourseListener(this));
         this.registerListener(new CourseRunnerListener(this));
+
     }
 
     private boolean loadSettings() {
@@ -222,5 +230,10 @@ public class Parkour extends GameModeAddon implements Listener {
     public RankingsUI getRankings() {
         return rankings;
     }
+
+    public ParkourRunManager getParkourRunManager() {
+        return parkourRunManager;
+    }
+
 
 }
