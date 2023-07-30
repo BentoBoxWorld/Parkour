@@ -78,11 +78,11 @@ public class ClearTopCommand extends ConfirmableCommand {
 
     @Override
     public boolean execute(User user, String label, List<String> args) {
-        this.askConfirmation(user, () -> confirmed(user, label, args));
+        this.askConfirmation(user, () -> confirmed(user));
         return true;
     }
 
-    void confirmed(User user, String label, List<String> args) {
+    void confirmed(User user) {
         Island island = getIslands().getIsland(getWorld(), user);
         if (island != null && targetUUID == null) {
             addon.getPm().clearScores(island);
