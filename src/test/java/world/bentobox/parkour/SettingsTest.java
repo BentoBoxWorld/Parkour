@@ -700,8 +700,8 @@ public class SettingsTest {
     @Test
     public void testSetParkourAllowedCommands() {
         s.setParkourAllowedCommands(List.of("allowed"));
-        assertTrue(s.getVisitorBannedCommands().contains("allowed"));
-        assertFalse(s.getVisitorBannedCommands().contains("not-allowed"));
+        assertTrue(s.getParkourAllowedCommands().contains("allowed"));
+        assertFalse(s.getParkourAllowedCommands().contains("not-allowed"));
     }
 
 
