@@ -346,6 +346,9 @@ parkour:
         deleted-island: '&a Area at &e [xyz] &a has been successfully regenerated.'
   protection:
     flags:
+      PARKOUR_CREATIVE:
+        description: "toggles entering creative mode at end of course and entering the island"
+        name: "Creative Mode"
       ELYTRA:
         description: Toggle use
       ENDERMAN_GRIEFING:
