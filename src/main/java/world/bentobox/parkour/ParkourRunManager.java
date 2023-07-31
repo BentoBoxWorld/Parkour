@@ -7,27 +7,31 @@ import org.bukkit.Location;
 
 public class ParkourRunManager {
 
-  Parkour addon;
+    Parkour addon;
 
-  public ParkourRunManager(Parkour addon) {
-    this.addon = addon;
-  }
+    public ParkourRunManager(Parkour addon) {
+        this.addon = addon;
+    }
 
-  private final Map<UUID, Location> checkpoints = new HashMap<>();
-  private final Map<UUID, Long> timers = new HashMap<>();
+    private final Map<UUID, Location> checkpoints = new HashMap<>();
+    private final Map<UUID, Long> timers = new HashMap<>();
 
-  public Map<UUID, Location> getCheckpoints() {
-    return checkpoints;
-  }
+    public Map<UUID, Location> getCheckpoints() {
+        return checkpoints;
+    }
 
-  public Map<UUID, Long> getTimers() {
-    return timers;
-  }
+    public Map<UUID, Long> getTimers() {
+        return timers;
+    }
 
-  public void clear(UUID uuid) {
-    checkpoints.remove(uuid);
-    timers.remove(uuid);
-  }
+    /**
+     * Clears any current times or checkpoints
+     * @param uuid UUID of runner
+     */
+    public void clear(UUID uuid) {
+        checkpoints.remove(uuid);
+        timers.remove(uuid);
+    }
 
 
 }

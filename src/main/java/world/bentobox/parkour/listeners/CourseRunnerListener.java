@@ -1,6 +1,5 @@
 package world.bentobox.parkour.listeners;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,7 +20,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
 
-import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -47,6 +45,10 @@ public class CourseRunnerListener extends AbstractListener {
         this.parkourRunManager = addon.getParkourRunManager();
     }
 
+    /**
+     * Handle arriving visitors
+     * @param e IslandEnterEvent
+     */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorArrive(IslandEnterEvent e) {
         // Check if visitor
@@ -74,8 +76,7 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorLeave(IslandExitEvent e) {
         User user = User.getInstance(e.getPlayerUUID());
-        if (parkourRunManager.getCheckpoints().containsKey(e.getPlayerUUID()) && user != null
-                && user.isOnline()) {
+        if (parkourRunManager.getCheckpoints().containsKey(e.getPlayerUUID()) && user.isOnline()) {
             user.notify("parkour.session-ended");
         }
         parkourRunManager.clear(e.getPlayerUUID());
@@ -96,17 +97,16 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorFall(EntityDamageEvent e) {
         // Check if visitor
-        if (!e.getCause().equals(DamageCause.VOID) || !parkourRunManager.getTimers()
-                .containsKey(e.getEntity().getUniqueId())) {
+        if (!(e.getEntity() instanceof Player player) || !e.getCause().equals(DamageCause.VOID)
+                || !parkourRunManager.getTimers().containsKey(e.getEntity().getUniqueId())) {
             return;
         }
-        if (e.getEntity() instanceof Player player) {
-            // Put player back to last checkpoint. Do not cancel event so that player takes some damage
-            player.playEffect(EntityEffect.ENTITY_POOF);
-            player.setVelocity(new Vector(0, 0, 0));
-            player.setFallDistance(0);
-            player.teleport(parkourRunManager.getCheckpoints().get(player.getUniqueId()));
-        }
+        // Put player back to last checkpoint. Do not cancel event so that player takes some damage
+        player.playEffect(EntityEffect.ENTITY_POOF);
+        player.setVelocity(new Vector(0, 0, 0));
+        player.setFallDistance(0);
+        player.teleport(parkourRunManager.getCheckpoints().get(player.getUniqueId()));
+
     }
 
     /**
@@ -130,10 +130,7 @@ public class CourseRunnerListener extends AbstractListener {
         }
         // Always allow using /<base command> quit
         if (addon.getPlayerCommand().isPresent()) {
-            CompositeCommand cmd = addon.getPlayerCommand().get();
-            List<String> commands = cmd.getAliases();
-            commands.add(cmd.getLabel());
-            for (String alias : commands) {
+            for (String alias : addon.getPlayerCommand().get().getAliases()) {
                 if (command.startsWith("/" + alias + " quit")) {
                     return;
                 }
@@ -153,68 +150,70 @@ public class CourseRunnerListener extends AbstractListener {
      */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onStartEndSet(PlayerInteractEvent e) {
-        if (!e.getAction().equals(Action.PHYSICAL)) {
-            return;
-        }
-        if (e.getClickedBlock() == null
+        if (!e.getAction().equals(Action.PHYSICAL)
+                || e.getClickedBlock() == null
                 || !e.getClickedBlock().getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)
                 || !addon.inWorld(e.getPlayer().getLocation())) {
             return;
         }
 
         Location l = e.getClickedBlock().getLocation();
-        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
-        if (addon.getIslands().getProtectedIslandAt(l).isPresent()) {
-            Island island = addon.getIslands().getProtectedIslandAt(l).get();
-
+        User user = User.getInstance(e.getPlayer());
+        addon.getIslands().getProtectedIslandAt(l).ifPresent(island -> {
             Optional<Location> start = addon.getPm().getStart(island);
             Optional<Location> end = addon.getPm().getEnd(island);
 
             // Check if start and end is set
-            if (start.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
+            if (start.filter(startLoc -> isLocEquals(l, startLoc)).isPresent()) {
                 if (end.isEmpty()) {
                     user.sendMessage("parkour.set-the-end");
                     return;
                 }
                 if (!parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
-                    user.sendMessage("parkour.start");
-                    e.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
-                    parkourRunManager.getTimers()
-                    .put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
-                    parkourRunManager.getCheckpoints().put(user.getUniqueId(), e.getPlayer().getLocation());
-                    user.setGameMode(GameMode.SURVIVAL);
+                    parkourStart(user, l);
                 }
-            } else if (end.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
-                if (parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
-
-                    long duration = (System.currentTimeMillis() - parkourRunManager.getTimers()
-                            .get(e.getPlayer().getUniqueId()));
-                    user.notify("parkour.end");
-                    e.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
-                    user.notify("parkour.you-took", TextVariables.NUMBER,
-                            AbstractListener.getDuration(user, duration));
-                    parkourRunManager.clear(e.getPlayer().getUniqueId());
-
-                    // Comment on time
-                    long previous = addon.getPm().getTime(island, e.getPlayer().getUniqueId());
-                    if (duration < previous || previous == 0L) {
-                        user.sendMessage("parkour.top.beat-previous-time");
-                        // Store
-                        addon.getPm().addScore(island, user, duration);
-                    } else {
-                        user.sendMessage("parkour.top.did-not-beat-previous-time");
-                    }
-                    // Say rank
-                    user.sendMessage("parkour.top.your-rank", TextVariables.NUMBER,
-                            String.valueOf(addon.getPm().getRank(island, e.getPlayer().getUniqueId())));
-
-                    // set creative
-                    if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
-                        user.setGameMode(GameMode.CREATIVE);
-                    }
-                }
+            } else if (end.filter(mdv -> isLocEquals(l, mdv)).isPresent()
+                    && parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
+                parkourEnd(user, island, l);
             }
+        });
+    }
+
+    void parkourStart(User user, Location l) {
+        user.sendMessage("parkour.start");
+        user.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+        parkourRunManager.getTimers()
+        .put(user.getUniqueId(), System.currentTimeMillis());
+        parkourRunManager.getCheckpoints().put(user.getUniqueId(), user.getLocation());
+        user.setGameMode(GameMode.SURVIVAL);
+
+    }
+
+    void parkourEnd(User user, Island island, Location l) {
+        long duration = (System.currentTimeMillis() - parkourRunManager.getTimers().get(user.getUniqueId()));
+        user.notify("parkour.end");
+        user.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+        user.notify("parkour.you-took", TextVariables.NUMBER, getDuration(user, duration));
+        parkourRunManager.clear(user.getUniqueId());
+
+        // Comment on time
+        long previous = addon.getPm().getTime(island, user.getUniqueId());
+        if (duration < previous || previous == 0L) {
+            user.sendMessage("parkour.top.beat-previous-time");
+            // Store
+            addon.getPm().addScore(island, user, duration);
+        } else {
+            user.sendMessage("parkour.top.did-not-beat-previous-time");
         }
+        // Say rank
+        user.sendMessage("parkour.top.your-rank", TextVariables.NUMBER,
+                String.valueOf(addon.getPm().getRank(island, user.getUniqueId())));
+
+        // set creative
+        if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+            user.setGameMode(GameMode.CREATIVE);
+        }
+
     }
 
     /**
