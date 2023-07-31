@@ -1,5 +1,6 @@
 package world.bentobox.parkour;
 
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
@@ -14,6 +15,9 @@ import world.bentobox.bentobox.api.commands.admin.DefaultAdminCommand;
 import world.bentobox.bentobox.api.commands.island.DefaultPlayerCommand;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
+import world.bentobox.bentobox.api.flags.Flag;
+import world.bentobox.bentobox.api.flags.clicklisteners.CycleClick;
+import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.parkour.commands.ClearTopCommand;
 import world.bentobox.parkour.commands.CoursesCommand;
 import world.bentobox.parkour.commands.QuitCommand;
@@ -27,6 +31,7 @@ import world.bentobox.parkour.listeners.MakeCourseListener;
 
 /**
  * Main Parkour class
+ *
  * @author tastybento
  */
 public class Parkour extends GameModeAddon implements Listener {
@@ -43,6 +48,13 @@ public class Parkour extends GameModeAddon implements Listener {
     private ParkourManager pm;
     private RankingsUI rankings;
 
+    public final Flag CREATIVE_FLAG = new Flag.Builder("PARKOUR_CREATIVE", Material.LIGHT)
+            .addon(this)
+            .type(Flag.Type.PROTECTION)
+            .defaultRank(RanksManager.MEMBER_RANK)
+            .setGameMode(this)
+            .clickHandler(new CycleClick("PARKOUR_CREATIVE", RanksManager.COOP_RANK, RanksManager.OWNER_RANK)) // exclude visitor
+            .build();
 
     private ParkourRunManager parkourRunManager;
 
@@ -55,12 +67,9 @@ public class Parkour extends GameModeAddon implements Listener {
         // Chunk generator
         chunkGenerator = settings.isUseOwnGenerator() ? null : new ChunkGeneratorWorld(this);
         // Register commands
-        playerCommand = new DefaultPlayerCommand(this)
-
-        {
+        playerCommand = new DefaultPlayerCommand(this) {
             @Override
-            public void setup()
-            {
+            public void setup() {
                 super.setup();
                 new TopCommand(this);
                 new CoursesCommand(this);
@@ -71,9 +80,12 @@ public class Parkour extends GameModeAddon implements Listener {
             }
         };
 
-        adminCommand = new DefaultAdminCommand(this) {};
+        adminCommand = new DefaultAdminCommand(this) {
+        };
 
         parkourRunManager = new ParkourRunManager(this);
+
+        registerFlag(CREATIVE_FLAG);
 
         // Register listeners
         this.registerListener(new MakeCourseListener(this));
@@ -149,8 +161,9 @@ public class Parkour extends GameModeAddon implements Listener {
 
     /**
      * Gets a world or generates a new world if it does not exist
-     * @param worldName2 - the overworld name
-     * @param env - the environment
+     *
+     * @param worldName2      - the overworld name
+     * @param env             - the environment
      * @param chunkGenerator2 - the chunk generator. If <tt>null</tt> then the generator will not be specified
      * @return world loaded or generated
      */
