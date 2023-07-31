@@ -1,5 +1,6 @@
 package world.bentobox.parkour.listeners;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -127,7 +128,9 @@ public class CourseRunnerListener extends AbstractListener {
             }
         }
 
-        for (String alias : addon.getPlayerCommand().get().getAliases()) {
+        List<String> commands = addon.getPlayerCommand().get().getAliases();
+        commands.add(addon.getPlayerCommand().get().getLabel());
+        for (String alias : commands) {
             if (command.startsWith("/" + alias + " quit")) { // always allow using /<base command> quit
                 return;
             }
