@@ -1,6 +1,5 @@
 package world.bentobox.parkour.listeners;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import org.bukkit.Location;
@@ -20,9 +19,9 @@ import world.bentobox.parkour.Parkour;
  */
 public class MakeCourseListener extends AbstractListener {
 
-    private static final Object CHECKPOINT = Material.POLISHED_BLACKSTONE_PRESSURE_PLATE;
-    private static final Object START_END = Material.LIGHT_WEIGHTED_PRESSURE_PLATE;
-    private static final Object WARP_SPOT = Material.WARPED_PRESSURE_PLATE;
+    private static final Material CHECKPOINT = Material.POLISHED_BLACKSTONE_PRESSURE_PLATE;
+    private static final Material START_END = Material.LIGHT_WEIGHTED_PRESSURE_PLATE;
+    private static final Material WARP_SPOT = Material.WARPED_PRESSURE_PLATE;
     /**
      * @param addon Parkour addon
      */
@@ -36,7 +35,7 @@ public class MakeCourseListener extends AbstractListener {
             return;
         }
         Location l = e.getBlock().getLocation();
-        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
+        User user = User.getInstance(e.getPlayer());
         if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
             Optional<Location> warpSpot = addon.getPm().getWarpSpot(island);
@@ -55,7 +54,7 @@ public class MakeCourseListener extends AbstractListener {
             return;
         }
         Location l = e.getBlock().getLocation();
-        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
+        User user = User.getInstance(e.getPlayer());
         if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
             Optional<Location> start = addon.getPm().getStart(island);
@@ -78,7 +77,7 @@ public class MakeCourseListener extends AbstractListener {
             return;
         }
         Location l = e.getBlock().getLocation();
-        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
+        User user = User.getInstance(e.getPlayer());
         if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             user.notify("parkour.checkpoint-set");
         }
@@ -91,7 +90,7 @@ public class MakeCourseListener extends AbstractListener {
             return;
         }
         Location l = e.getBlock().getLocation();
-        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
+        User user = User.getInstance(e.getPlayer());
         if (addon.getIslands().getProtectedIslandAt(l).isPresent()
                 && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
