@@ -19,11 +19,10 @@ The Parkour addon is a BentoBox addon for Minecraft that allows players to creat
 To get started, use the `/pk` or `/parkour` command to access the parkour plugin. This will teleport players to an example parkour course and get them started. Admins can use blueprints to change the default course example or make additional ones.
 
 ### Course Creation
-1. Enter creative mode. Players will need permission to do this.
-2. Use creative mode tools to design your parkour course.
-3. Place gold pressure plates at the start and end points of the course.
-4. Optionally, add checkpoints throughout the course using blackstone pressure plates.
-5. Test your course to ensure it is playable and challenging.
+1. Use creative mode tools to design your parkour course.
+2. Place gold pressure plates at the start and end points of the course.
+3. Optionally, add checkpoints throughout the course using blackstone pressure plates.
+4. Test your course to ensure it is playable and challenging.
 
 ### Course Gameplay
 1. Locate the course you want to play using the `/pk courses` command, or play your own.
