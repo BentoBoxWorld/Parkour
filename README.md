@@ -34,7 +34,7 @@ To get started, use the `/pk` or `/parkour` command to access the parkour plugin
 ### Team Collaboration
 1. Form a team with other players using the team creation commands `pk team invite <player name>`.
 2. Collaborate with your team members to design and build parkour courses.
-3. When you want to make your course available go to the starting area and set a warp point for visitors using `/pk setwarp`
+3. When you want to make your course available go to the starting area and set a warp point for visitors using `/pk setwarp` or place a **warped pressure plate** where you want visitors to arrive
 4. Use the `/pk courses` command to view and play each other's courses.
 5. Compete within the team to achieve the best times on the courses.
 
@@ -42,8 +42,8 @@ To get started, use the `/pk` or `/parkour` command to access the parkour plugin
 - `/pk`: Main command to start a parkour course and teleport to the parkour world.
 - `/pk courses`: List all the tracks or courses available and teleport to them.
 - `/pk top`: Show the Top Ten.
-- `/pk setwarp`: Places the course in the courses menu and sets the warp position visitors will arrive at
-- `/pk removewarp`: Makes the course private and removes the visitor's warp
+- `/pk setwarp`: Places the course in the courses menu and sets the warp position visitors will arrive at. This can also be done by placing a **warped pressure plate**
+- `/pk removewarp`: Makes the course private and removes the visitor's warp. Or break the **warped pressure plate** if there is one.
 
 ## Permissions
 
