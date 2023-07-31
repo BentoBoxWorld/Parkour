@@ -41,7 +41,7 @@ public class ClearTopCommand extends ConfirmableCommand {
         this.setPermission("parkour.cleartop");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.cleartop.description");
-        this.setParametersHelp(".commands.parkour.cleartop.parameters");
+        this.setParametersHelp("parkour.commands.parkour.cleartop.parameters");
         setConfigurableRankCommand();
         this.setDefaultCommandRank(RanksManager.OWNER_RANK);
         addon = getAddon();
@@ -98,6 +98,7 @@ public class ClearTopCommand extends ConfirmableCommand {
     @Override
     public Optional<List<String>> tabComplete(User user, String label, List<String> args) {
         Island island = getIslands().getIsland(getWorld(), user);
+        if (island == null) return Optional.empty();
         return Optional.of(addon.getPm().getRankings(island, 10).keySet().stream().map(getAddon().getPlayers()::getName)
                 .filter(name -> !name.isBlank()).toList());
     }
