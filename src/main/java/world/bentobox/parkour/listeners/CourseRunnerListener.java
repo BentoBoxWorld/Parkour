@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
 
+import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -127,12 +128,15 @@ public class CourseRunnerListener extends AbstractListener {
                 return;
             }
         }
-
-        List<String> commands = addon.getPlayerCommand().get().getAliases();
-        commands.add(addon.getPlayerCommand().get().getLabel());
-        for (String alias : commands) {
-            if (command.startsWith("/" + alias + " quit")) { // always allow using /<base command> quit
-                return;
+        // Always allow using /<base command> quit
+        if (addon.getPlayerCommand().isPresent()) {
+            CompositeCommand cmd = addon.getPlayerCommand().get();
+            List<String> commands = cmd.getAliases();
+            commands.add(cmd.getLabel());
+            for (String alias : commands) {
+                if (command.startsWith("/" + alias + " quit")) {
+                    return;
+                }
             }
         }
 
@@ -176,7 +180,7 @@ public class CourseRunnerListener extends AbstractListener {
                     user.sendMessage("parkour.start");
                     e.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
                     parkourRunManager.getTimers()
-                            .put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
+                    .put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
                     parkourRunManager.getCheckpoints().put(user.getUniqueId(), e.getPlayer().getLocation());
                     user.setGameMode(GameMode.SURVIVAL);
                 }
