@@ -48,7 +48,6 @@ public class QuitCommand extends CompositeCommand {
 
     @Override
     public boolean execute(User user, String label, List<String> args) {
-
         ((Parkour)getAddon()).getParkourRunManager().clear(user.getUniqueId());
         user.sendMessage("parkour.quit.success");
         return true;

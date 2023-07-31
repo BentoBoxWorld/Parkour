@@ -1,9 +1,6 @@
 package world.bentobox.parkour.commands;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -13,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,8 +39,8 @@ import world.bentobox.bentobox.managers.LocalesManager;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
+import world.bentobox.parkour.ParkourRunManager;
 import world.bentobox.parkour.Settings;
-import world.bentobox.parkour.gui.RankingsUI;
 
 /**
  * @author tastybento
@@ -50,7 +48,7 @@ import world.bentobox.parkour.gui.RankingsUI;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Bukkit.class, BentoBox.class, User.class })
-public class TopCommandTest {
+public class QuitCommandTest {
     @Mock
     private BentoBox plugin;
     @Mock
@@ -73,12 +71,11 @@ public class TopCommandTest {
     @Mock
     private ParkourManager parkourManager;
 
-    private TopCommand cmd;
+    private QuitCommand cmd;
     @Mock
     private @NonNull Location location;
     @Mock
-    private RankingsUI rankings;
-
+    private ParkourRunManager prm;
     /**
      * @throws java.lang.Exception
      */
@@ -109,7 +106,8 @@ public class TopCommandTest {
         when(ac.getSubCommandAliases()).thenReturn(new HashMap<>());
         when(ac.getWorld()).thenReturn(world);
         when(ac.getAddon()).thenReturn(addon);
-        when(addon.getRankings()).thenReturn(rankings);
+        when(addon.getParkourRunManager()).thenReturn(prm);
+        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
 
         // Islands
         when(plugin.getIslands()).thenReturn(im);
@@ -140,65 +138,74 @@ public class TopCommandTest {
         when(plugin.getRanksManager()).thenReturn(rm);
 
         // DUT
-        cmd = new TopCommand(ac);
+        cmd = new QuitCommand(ac);
     }
 
     /**
-     * Test method for {@link world.bentobox.parkour.commands.TopCommand#TopCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#QuitCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
-    public void testTopCommand() {
+    public void testQuitCommand() {
         assertNotNull(cmd);
     }
 
     /**
-     * Test method for {@link world.bentobox.parkour.commands.TopCommand#setup()}.
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#setup()}.
      */
     @Test
     public void testSetup() {
-        assertEquals("parkour.top", cmd.getPermission());
-        assertEquals("parkour.commands.parkour.top.description", cmd.getDescription());
+        assertEquals("parkour.quit", cmd.getPermission());
+        assertEquals("parkour.commands.parkour.quit.description", cmd.getDescription());
         assertTrue(cmd.isOnlyPlayer());
     }
 
     /**
-     * Test method for {@link world.bentobox.parkour.commands.TopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteFailNotOnIsland() {
-        // Not on island
-        when(im.getIslandAt(location)).thenReturn(Optional.empty());
-        assertFalse(cmd.canExecute(user, "", List.of()));
-        verify(user).sendMessage("parkour.errors.not-on-island");
-    }
-
-
-    /**
-     * Test method for {@link world.bentobox.parkour.commands.TopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
-     */
-    @Test
-    public void testCanExecuteFailWrongWorld() {
+    public void testCanExecuteWrongWorld() {
         when(iwm.inWorld(world)).thenReturn(false);
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("general.errors.wrong-world");
     }
 
     /**
-     * Test method for {@link world.bentobox.parkour.commands.TopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecutePass() {
+    public void testCanExecuteNotOnIsland() {
+        // Not on island
+        when(im.getIslandAt(location)).thenReturn(Optional.empty());
+        assertFalse(cmd.canExecute(user, "", List.of()));
+        verify(user).sendMessage("parkour.errors.not-on-island");
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     */
+    @Test
+    public void testCanExecuteNotInRun() {
+        when(prm.getTimers()).thenReturn(Map.of());
+        assertFalse(cmd.canExecute(user, "", List.of()));
+        verify(user).sendMessage("parkour.errors.not-in-run");
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     */
+    @Test
+    public void testCanExecuteSuccess() {
         assertTrue(cmd.canExecute(user, "", List.of()));
     }
 
     /**
-     * Test method for {@link world.bentobox.parkour.commands.TopCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     * Test method for {@link world.bentobox.parkour.commands.QuitCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
     public void testExecuteUserStringListOfString() {
-        testCanExecutePass();
         assertTrue(cmd.execute(user, "", List.of()));
-        verify(rankings).getGUI(island, user);
+        verify(user).sendMessage("parkour.quit.success");
+        verify(prm).clear(uuid);
     }
 
 }
