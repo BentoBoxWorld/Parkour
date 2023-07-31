@@ -165,15 +165,18 @@ public class CourseRunnerListener extends AbstractListener {
 
             // Check if start and end is set
             if (start.filter(startLoc -> isLocEquals(l, startLoc)).isPresent()) {
+                // End is not set
                 if (end.isEmpty()) {
                     user.sendMessage("parkour.set-the-end");
                     return;
                 }
+                // Start the race!
                 if (!parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
                     parkourStart(user, l);
                 }
-            } else if (end.filter(mdv -> isLocEquals(l, mdv)).isPresent()
+            } else if (end.filter(endLoc -> isLocEquals(l, endLoc)).isPresent()
                     && parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
+                // End the race!
                 parkourEnd(user, island, l);
             }
         });
@@ -182,15 +185,14 @@ public class CourseRunnerListener extends AbstractListener {
     void parkourStart(User user, Location l) {
         user.sendMessage("parkour.start");
         user.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
-        parkourRunManager.getTimers()
-        .put(user.getUniqueId(), System.currentTimeMillis());
+        parkourRunManager.getTimers().put(user.getUniqueId(), System.currentTimeMillis());
         parkourRunManager.getCheckpoints().put(user.getUniqueId(), user.getLocation());
         user.setGameMode(GameMode.SURVIVAL);
 
     }
 
     void parkourEnd(User user, Island island, Location l) {
-        long duration = (System.currentTimeMillis() - parkourRunManager.getTimers().get(user.getUniqueId()));
+        long duration = (System.currentTimeMillis() - Objects.requireNonNull(parkourRunManager.getTimers().get(user.getUniqueId())));
         user.notify("parkour.end");
         user.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         user.notify("parkour.you-took", TextVariables.NUMBER, getDuration(user, duration));
@@ -223,21 +225,17 @@ public class CourseRunnerListener extends AbstractListener {
      */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onCheckpoint(PlayerInteractEvent e) {
-        if (!e.getAction().equals(Action.PHYSICAL)) {
-            return;
-        }
-        if (e.getClickedBlock() == null
+        if (!e.getAction().equals(Action.PHYSICAL) || e.getClickedBlock() == null
                 || !e.getClickedBlock().getType().equals(Material.POLISHED_BLACKSTONE_PRESSURE_PLATE)
-                || !addon.inWorld(e.getPlayer().getLocation()) || !parkourRunManager.getTimers()
-                .containsKey(e.getPlayer().getUniqueId())) {
+                || !addon.inWorld(e.getPlayer().getLocation())
+                || !parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
             return;
         }
         Location l = e.getClickedBlock().getLocation();
-        User user = Objects.requireNonNull(User.getInstance(e.getPlayer()));
-        Vector checkPoint = parkourRunManager.getCheckpoints().get(e.getPlayer().getUniqueId())
-                .toVector();
-        if (addon.getIslands().getProtectedIslandAt(l).isPresent() && !l.toVector()
-                .equals(checkPoint)) {
+        User user = User.getInstance(e.getPlayer());
+        Vector checkPoint = parkourRunManager.getCheckpoints().get(e.getPlayer().getUniqueId()).toVector();
+
+        if (addon.getIslands().getProtectedIslandAt(l).isPresent() && !l.toVector().equals(checkPoint)) {
             user.notify("parkour.checkpoint");
             e.getPlayer().playSound(l, Sound.BLOCK_BELL_USE, 1F, 1F);
             parkourRunManager.getCheckpoints().put(user.getUniqueId(), e.getPlayer().getLocation());

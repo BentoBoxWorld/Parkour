@@ -3,15 +3,17 @@ package world.bentobox.parkour.listeners;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,7 +23,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Server;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -39,7 +43,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -52,6 +55,7 @@ import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
+import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.Notifier;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
@@ -107,6 +111,10 @@ public class CourseRunnerListenerTest {
     private Server server;
     @Mock
     private CompositeCommand cc;
+    @Mock
+    private Block block;
+    @Mock
+    private User u;
 
     /**
      * @throws java.lang.Exception
@@ -129,10 +137,17 @@ public class CourseRunnerListenerTest {
         User.setPlugin(plugin);
         user = User.getInstance(player);
 
+        // Mock user u
+        when(u.getUniqueId()).thenReturn(uuid);
+        when(u.getPlayer()).thenReturn(player);
+        when(u.getTranslationOrNothing(anyString())).thenAnswer((Answer<String>) invocation -> invocation.getArgument(0, String.class));
+
         // Islands
         when(plugin.getIslands()).thenReturn(im);
+        when(addon.getIslands()).thenReturn(im);
         when(im.getIsland(world, user)).thenReturn(island);
         when(im.getIslandAt(location)).thenReturn(Optional.of(island));
+        when(im.getProtectedIslandAt(location)).thenReturn(Optional.of(island));
         when(im.hasIsland(world, user)).thenReturn(true);
         when(im.inTeam(world, uuid)).thenReturn(true);
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.OWNER_RANK);
@@ -160,11 +175,15 @@ public class CourseRunnerListenerTest {
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
         when(iwm.getPermissionPrefix(any())).thenReturn("parkour.");
-        when(iwm.inWorld(world)).thenReturn(true);
+        when(iwm.inWorld(world)).thenReturn(true); // Always in world
 
         // Settings
         Settings settings = new Settings();
         when(addon.getSettings()).thenReturn(settings);
+
+        // Location
+        when(location.getWorld()).thenReturn(world);
+        when(location.toVector()).thenReturn(new Vector(0,0,0));
 
         // Run Manager and ParkourManager
         when(addon.getParkourRunManager()).thenReturn(prm);
@@ -172,12 +191,15 @@ public class CourseRunnerListenerTest {
         when(addon.getPm()).thenReturn(parkourManager);
         when(parkourManager.getStart(island)).thenReturn(Optional.of(location));
         when(parkourManager.getEnd(island)).thenReturn(Optional.of(location));
-        when(prm.getTimers()).thenReturn(Map.of()); // No runners yet
+        when(prm.getTimers()).thenReturn(new HashMap<>()); // No runners yet
 
         // RanksManager
         RanksManager rm = new RanksManager();
         when(plugin.getRanksManager()).thenReturn(rm);
 
+        // Block
+        when(block.getType()).thenReturn(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
+        when(block.getLocation()).thenReturn(location);
         // DUT
         crl = new CourseRunnerListener(addon);
     }
@@ -372,21 +394,164 @@ public class CourseRunnerListenerTest {
     /**
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onStartEndSet(org.bukkit.event.player.PlayerInteractEvent)}.
      */
-    @Ignore("WIP")
     @Test
     public void testOnStartEndSet() {
-        Block block = mock(Block.class);
         PlayerInteractEvent e = new PlayerInteractEvent(player, Action.PHYSICAL, null, block, BlockFace.DOWN);
         crl.onStartEndSet(e);
+        verify(player).sendMessage("parkour.start");
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onStartEndSet(org.bukkit.event.player.PlayerInteractEvent)}.
+     */
+    @Test
+    public void testOnStartEndSetNoEnd() {
+        when(this.parkourManager.getEnd(island)).thenReturn(Optional.empty());
+        PlayerInteractEvent e = new PlayerInteractEvent(player, Action.PHYSICAL, null, block, BlockFace.DOWN);
+        crl.onStartEndSet(e);
+        verify(player).sendMessage("parkour.set-the-end");
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onStartEndSet(org.bukkit.event.player.PlayerInteractEvent)}.
+     */
+    @Test
+    public void testOnStartEndSetRaceOver() {
+        Map<UUID, Long> map = new HashMap<>();
+        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        when(prm.getTimers()).thenReturn(map);
+        Location l = mock(Location.class);
+        when(l.getWorld()).thenReturn(world);
+        when(l.getBlockX()).thenReturn(20);
+        when(this.parkourManager.getStart(island)).thenReturn(Optional.of(l));
+        PlayerInteractEvent e = new PlayerInteractEvent(player, Action.PHYSICAL, null, block, BlockFace.DOWN);
+        crl.onStartEndSet(e);
+        verify(player).playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourStart(User, Location)}.
+     */
+    @Test
+    public void testParkourStart() {
+
+        Map<UUID, Long> map = new HashMap<>();
+        when(prm.getTimers()).thenReturn(map);
+
+        Map<UUID, Location> map2 = new HashMap<>();
+        when(prm.getCheckpoints()).thenReturn(map2);
+
+        crl.parkourStart(u, location);
+        verify(u).sendMessage("parkour.start");
+        verify(player).playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+        verify(u).setGameMode(GameMode.SURVIVAL);
+
+        assertTrue(map.containsKey(uuid));
+        assertTrue(map2.containsKey(uuid));
+
+    }
+
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourEnd(User, Island, Location)}.
+     */
+    @Test
+    public void testParkourEnd() {
+        Map<UUID, Long> map = new HashMap<>();
+        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        when(prm.getTimers()).thenReturn(map);
+
+        crl.parkourEnd(u, island, location);
+        verify(u).notify("parkour.end");
+        verify(player).playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+        verify(u).notify(eq("parkour.you-took"), eq(TextVariables.NUMBER), contains("parkour.seconds"));
+        verify(u).sendMessage("parkour.top.beat-previous-time");
+        verify(parkourManager).addScore(eq(island), eq(u), anyLong());
+        verify(u).sendMessage("parkour.top.your-rank", TextVariables.NUMBER, "0");
+        verify(u).setGameMode(GameMode.CREATIVE);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourEnd(User, Island, Location)}.
+     */
+    @Test
+    public void testParkourEndLongerTime() {
+        when(this.parkourManager.getTime(island, uuid)).thenReturn(1L);
+
+        Map<UUID, Long> map = new HashMap<>();
+        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        when(prm.getTimers()).thenReturn(map);
+
+        crl.parkourEnd(u, island, location);
+        verify(u).sendMessage("parkour.top.did-not-beat-previous-time");
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourEnd(User, Island, Location)}.
+     */
+    @Test
+    public void testParkourEndNoCreative() {
+        when(island.getFlag(addon.CREATIVE_FLAG)).thenReturn(RanksManager.ADMIN_RANK);
+
+        Map<UUID, Long> map = new HashMap<>();
+        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        when(prm.getTimers()).thenReturn(map);
+
+        crl.parkourEnd(u, island, location);
+        verify(u, never()).setGameMode(GameMode.CREATIVE);
     }
 
     /**
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onCheckpoint(org.bukkit.event.player.PlayerInteractEvent)}.
      */
-    @Ignore("WIP")
     @Test
-    public void testOnCheckpoint() {
-        fail("Not yet implemented"); // TODO
+    public void testOnCheckpointNotPhysical() {
+        PlayerInteractEvent e = new PlayerInteractEvent(player, Action.LEFT_CLICK_AIR, null, block, BlockFace.DOWN);
+        crl.onCheckpoint(e);
+        verify(block, never()).getLocation();
     }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onCheckpoint(org.bukkit.event.player.PlayerInteractEvent)}.
+     */
+    @Test
+    public void testOnCheckpointInitialChecks() {
+        Map<UUID, Long> map = new HashMap<>();
+        when(prm.getTimers()).thenReturn(map);
+        Map<UUID, Location> map2 = new HashMap<>();
+        Location l = mock(Location.class);
+        when(l.toVector()).thenReturn(new Vector(100,0,20)); // Different to location
+        map2.put(uuid, l);
+        when(prm.getCheckpoints()).thenReturn(map2);
+
+
+        when(block.getType()).thenReturn(Material.STONE);
+
+        when(iwm.inWorld(location)).thenReturn(false);
+
+
+        PlayerInteractEvent e = new PlayerInteractEvent(player, Action.PHYSICAL, null, block, BlockFace.DOWN);
+        crl.onCheckpoint(e);
+        verify(block, never()).getLocation();
+
+        when(iwm.inWorld(location)).thenReturn(true);
+        crl.onCheckpoint(e);
+        verify(block, never()).getLocation();
+
+        when(block.getType()).thenReturn(Material.POLISHED_BLACKSTONE_PRESSURE_PLATE);
+        crl.onCheckpoint(e);
+        verify(block, never()).getLocation();
+
+        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        crl.onCheckpoint(e);
+        verify(block).getLocation();
+
+        // Checkpoint reached!
+        verify(player).playSound(location, Sound.BLOCK_BELL_USE, 1F, 1F);
+
+    }
+
+
+
 
 }
