@@ -10,6 +10,11 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
 
+/**
+ * Sets the warp point for visitors and makes the course public
+ * @author tastybento
+ *
+ */
 public class SetWarpCommand extends CompositeCommand {
 
     public SetWarpCommand(CompositeCommand parent) {

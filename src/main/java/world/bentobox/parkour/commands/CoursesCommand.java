@@ -7,6 +7,11 @@ import world.bentobox.bentobox.api.panels.builders.TabbedPanelBuilder;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.parkour.gui.CoursesTab;
 
+/**
+ * Shows what courses are available
+ * @author tastybento
+ *
+ */
 public class CoursesCommand extends CompositeCommand {
 
     public CoursesCommand(CompositeCommand parent) {

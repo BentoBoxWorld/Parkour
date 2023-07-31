@@ -80,7 +80,6 @@ public class SetWarpCommandTest {
     @Before
     public void setUp() throws Exception {
         // Set up plugin
-        BentoBox plugin = mock(BentoBox.class);
         Whitebox.setInternalState(BentoBox.class, "instance", plugin);
 
         // Command manager
@@ -121,7 +120,7 @@ public class SetWarpCommandTest {
 
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
-        when(iwm.getPermissionPrefix(any())).thenReturn("bskyblock.");
+        when(iwm.getPermissionPrefix(any())).thenReturn("parkour.");
 
         // Settings
         Settings settings = new Settings();

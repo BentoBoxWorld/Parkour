@@ -10,6 +10,11 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
 
+/**
+ * Removes the warp from the course and makes it private
+ * @author tastybento
+ *
+ */
 public class RemoveWarpCommand extends CompositeCommand {
 
     public RemoveWarpCommand(CompositeCommand parent) {
