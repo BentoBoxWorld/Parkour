@@ -12,8 +12,6 @@ import world.bentobox.parkour.ParkourManager;
 
 public class SetWarpCommand extends CompositeCommand {
 
-
-
     public SetWarpCommand(CompositeCommand parent) {
         super(parent, "setwarp");
     }
