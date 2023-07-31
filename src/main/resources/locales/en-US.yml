@@ -347,7 +347,10 @@ parkour:
   protection:
     flags:
       PARKOUR_CREATIVE:
-        description: "toggles entering creative mode at end of course and entering the island"
+        description: |
+          &a Toggles entering creative mode
+          &a at end of course and
+          &a entering the island
         name: "Creative Mode"
       ELYTRA:
         description: Toggle use
