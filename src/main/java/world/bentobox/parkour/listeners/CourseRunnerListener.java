@@ -56,7 +56,7 @@ public class CourseRunnerListener extends AbstractListener {
     public void onVisitorArrive(IslandEnterEvent e) {
         // Check if visitor
         User user = User.getInstance(e.getPlayerUUID());
-        if (user == null || !user.isOnline() || !addon.inWorld(e.getLocation())) {
+        if (user == null || !user.isOnline()) {
             return;
         }
         Island island = e.getIsland();
