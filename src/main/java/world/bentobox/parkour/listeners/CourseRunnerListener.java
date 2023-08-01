@@ -68,11 +68,11 @@ public class CourseRunnerListener extends AbstractListener {
             user.notify("parkour.no-end-yet");
         } else if (!parkourRunManager.getTimers().containsKey(e.getPlayerUUID())) {
             user.notify("parkour.to-start");
-            if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
-                user.setGameMode(GameMode.CREATIVE);
-            } else {
-                user.setGameMode(GameMode.SURVIVAL);
-            }
+        }
+        if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+            user.setGameMode(GameMode.CREATIVE);
+        } else {
+            user.setGameMode(GameMode.SURVIVAL);
         }
     }
 
