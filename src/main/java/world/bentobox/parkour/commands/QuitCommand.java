@@ -3,6 +3,8 @@ package world.bentobox.parkour.commands;
 import java.util.List;
 import java.util.Optional;
 
+import org.bukkit.GameMode;
+
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
@@ -49,6 +51,15 @@ public class QuitCommand extends CompositeCommand {
     @Override
     public boolean execute(User user, String label, List<String> args) {
         ((Parkour)getAddon()).getParkourRunManager().clear(user.getUniqueId());
+        Optional<Island> islandOptional = getAddon().getIslands().getIslandAt(user.getLocation());
+        islandOptional.ifPresent(island -> {
+            if (island.getFlag(((Parkour) getAddon()).CREATIVE_FLAG) <= island.getRank(user)) {
+            user.setGameMode(GameMode.CREATIVE);
+        } else {
+            user.setGameMode(GameMode.SURVIVAL);
+        }
+        });
+
         user.sendMessage("parkour.quit.success");
         return true;
     }
