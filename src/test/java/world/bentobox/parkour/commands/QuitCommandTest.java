@@ -110,6 +110,7 @@ public class QuitCommandTest {
         when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
 
         // Islands
+        when(addon.getIslands()).thenReturn(im);
         when(plugin.getIslands()).thenReturn(im);
         when(im.getIsland(world, user)).thenReturn(island);
         when(im.getIslandAt(location)).thenReturn(Optional.of(island));
@@ -205,6 +206,7 @@ public class QuitCommandTest {
     public void testExecuteUserStringListOfString() {
         assertTrue(cmd.execute(user, "", List.of()));
         verify(user).sendMessage("parkour.quit.success");
+
         verify(prm).clear(uuid);
     }
 
