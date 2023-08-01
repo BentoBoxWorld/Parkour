@@ -13,6 +13,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,7 +170,10 @@ public class CourseRunnerListenerTest {
         when(plugin.getPlaceholdersManager()).thenReturn(phm);
 
         // Command
-        when(cc.getAliases()).thenReturn(List.of("parkour","pk"));
+        List<String> al = new ArrayList<>();
+        al.add("parkour");
+        al.add("pk");
+        when(cc.getAliases()).thenReturn(al);
         when(addon.getPlayerCommand()).thenReturn(Optional.of(cc));
 
         // IWM
@@ -233,7 +237,9 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorArriveInRace() {
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
+        Map<UUID, Long> map = new HashMap<>();
+        map.put(uuid, 20L);
+        when(prm.getTimers()).thenReturn(map);
         IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
         crl.onVisitorArrive(e);
         verify(notifier, never()).notify(any(), eq("parkour.to-start"));
@@ -244,7 +250,9 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorLeave() {
-        when(prm.getCheckpoints()).thenReturn(Map.of(uuid, location));
+        Map<UUID, Location> map = new HashMap<>();
+        map.put(uuid, location);
+        when(prm.getCheckpoints()).thenReturn(map);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier).notify(any(), eq("parkour.session-ended"));
@@ -256,7 +264,9 @@ public class CourseRunnerListenerTest {
     @Test
     public void testOnVisitorLeaveOffline() {
         when(player.isOnline()).thenReturn(false);
-        when(prm.getCheckpoints()).thenReturn(Map.of(uuid, location));
+        Map<UUID, Location> map = new HashMap<>();
+        map.put(uuid, location);
+        when(prm.getCheckpoints()).thenReturn(map);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier, never()).notify(any(), eq("parkour.session-ended"));
@@ -267,7 +277,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorLeaveNotRuning() {
-        when(prm.getCheckpoints()).thenReturn(Map.of());
+        when(prm.getCheckpoints()).thenReturn(new HashMap<>());
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier, never()).notify(any(), eq("parkour.session-ended"));
@@ -278,7 +288,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnPlayerDeath() {
-        PlayerDeathEvent e = new PlayerDeathEvent(player, List.of(), 0, 0, 0, 0, "");
+        PlayerDeathEvent e = new PlayerDeathEvent(player, new ArrayList<>(), 0, 0, 0, 0, "");
         crl.onPlayerDeath(e);
         verify(prm).clear(uuid);
     }
@@ -298,8 +308,12 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFall() {
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
-        when(prm.getCheckpoints()).thenReturn(Map.of(uuid, location));
+        Map<UUID, Long> map2 = new HashMap<>();
+        map2.put(uuid, 20L);
+        when(prm.getTimers()).thenReturn(map2);
+        Map<UUID, Location> map = new HashMap<>();
+        map.put(uuid, location);
+        when(prm.getCheckpoints()).thenReturn(map);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
         crl.onVisitorFall(e);
         verify(player).playEffect(EntityEffect.ENTITY_POOF);
@@ -313,8 +327,13 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFallNotVoid() {
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
-        when(prm.getCheckpoints()).thenReturn(Map.of(uuid, location));
+        Map<UUID, Long> map2 = new HashMap<>();
+        map2.put(uuid, 20L);
+        when(prm.getTimers()).thenReturn(map2);
+        Map<UUID, Location> map = new HashMap<>();
+        map.put(uuid, location);
+        when(prm.getTimers()).thenReturn(map2);
+        when(prm.getCheckpoints()).thenReturn(map);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.BLOCK_EXPLOSION, 1D);
         crl.onVisitorFall(e);
         verify(player, never()).playEffect(EntityEffect.ENTITY_POOF);
@@ -328,7 +347,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFallNotRunning() {
-        when(prm.getTimers()).thenReturn(Map.of());
+        when(prm.getTimers()).thenReturn(new HashMap<>());
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
         crl.onVisitorFall(e);
         verify(player, never()).playEffect(EntityEffect.ENTITY_POOF);
@@ -353,7 +372,9 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommand() {
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
+        Map<UUID, Long> map2 = new HashMap<>();
+        map2.put(uuid, 20L);
+        when(prm.getTimers()).thenReturn(map2);
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/island");
         crl.onVisitorCommand(e);
         assertTrue(e.isCancelled());
@@ -374,7 +395,9 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommandQuitting() {
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
+        Map<UUID, Long> map2 = new HashMap<>();
+        map2.put(uuid, 20L);
+        when(prm.getTimers()).thenReturn(map2);
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/pk quit");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
@@ -385,7 +408,9 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommandQuittingParkour() {
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
+        Map<UUID, Long> map2 = new HashMap<>();
+        map2.put(uuid, 20L);
+        when(prm.getTimers()).thenReturn(map2);
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/parkour quit");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
