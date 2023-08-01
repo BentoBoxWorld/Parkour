@@ -119,7 +119,7 @@ public class CourseRunnerListener extends AbstractListener {
             case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED -> false;
             case COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
-        if (shouldStopRun) {
+        if (shouldStopRun && parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
             User user = User.getInstance(e.getPlayer().getUniqueId());
             if (parkourRunManager.getCheckpoints().containsKey(e.getPlayer().getUniqueId()) && user.isOnline()) {
                 user.notify("parkour.session-ended");
@@ -127,7 +127,7 @@ public class CourseRunnerListener extends AbstractListener {
             parkourRunManager.clear(e.getPlayer().getUniqueId());
         }
 
-        if (e.getTo() != null) {
+        if (e.getTo() != null && !parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
             Optional<Island> fromIsland = addon.getIslands().getIslandAt(e.getFrom());
             Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
 
