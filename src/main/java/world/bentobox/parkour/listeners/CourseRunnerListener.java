@@ -1,5 +1,6 @@
 package world.bentobox.parkour.listeners;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.util.Vector;
 
+import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -47,6 +49,7 @@ public class CourseRunnerListener extends AbstractListener {
 
     /**
      * Handle arriving visitors
+     *
      * @param e IslandEnterEvent
      */
     @EventHandler(priority = EventPriority.NORMAL)
@@ -130,7 +133,10 @@ public class CourseRunnerListener extends AbstractListener {
         }
         // Always allow using /<base command> quit
         if (addon.getPlayerCommand().isPresent()) {
-            for (String alias : addon.getPlayerCommand().get().getAliases()) {
+            CompositeCommand cmd = addon.getPlayerCommand().get();
+            List<String> commands = cmd.getAliases();
+            commands.add(cmd.getLabel());
+            for (String alias : commands) {
                 if (command.startsWith("/" + alias + " quit")) {
                     return;
                 }
