@@ -26,12 +26,14 @@ public class ParkourManager {
      * A cache of high scores. Key is island UUID
      */
     private final Map<String, ParkourData> cache;
+    private Parkour addon;
 
     /**
      * Handles storing a retrieval of score data for islands
      * @param addon Parkour addon
      */
     public ParkourManager(Parkour addon) {
+        this.addon = addon;
         // Get the BentoBox database
         // Set up the database handler to store and retrieve data
         // Note that these are saved by the BentoBox database
@@ -43,6 +45,9 @@ public class ParkourManager {
     }
 
     private ParkourData getIsland(Island island) {
+        if (!addon.inWorld(island.getWorld())) {
+            throw new IllegalArgumentException("Island is not in Parkour world: " + island.getWorld());
+        }
         return cache.computeIfAbsent(island.getUniqueId(), k -> getFromDb(island));
     }
 

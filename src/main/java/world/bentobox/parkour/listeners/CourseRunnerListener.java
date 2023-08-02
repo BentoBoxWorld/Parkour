@@ -57,10 +57,11 @@ public class CourseRunnerListener extends AbstractListener {
     public void onVisitorArrive(IslandEnterEvent e) {
         // Check if visitor
         User user = User.getInstance(e.getPlayerUUID());
-        if (user == null || !user.isOnline()) {
+        Island island = e.getIsland();
+        // Do not run following code unless player is online (still) and the island being entered is a Parkour island
+        if (!user.isOnline() || !addon.inWorld(island.getWorld())) {
             return;
         }
-        Island island = e.getIsland();
         Optional<Location> start = addon.getPm().getStart(island);
         Optional<Location> end = addon.getPm().getEnd(island);
         if (start.isEmpty()) {
@@ -79,6 +80,7 @@ public class CourseRunnerListener extends AbstractListener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorLeave(IslandExitEvent e) {
+        // If the user leaves any island, end and clear the session.
         User user = User.getInstance(e.getPlayerUUID());
         if (parkourRunManager.getCheckpoints().containsKey(e.getPlayerUUID()) && user.isOnline()) {
             user.notify("parkour.session-ended");
@@ -101,7 +103,9 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorFall(EntityDamageEvent e) {
         // Check if visitor
-        if (!(e.getEntity() instanceof Player player) || !e.getCause().equals(DamageCause.VOID)
+        if (!(e.getEntity() instanceof Player player)
+                || !addon.inWorld(player.getWorld())
+                || !e.getCause().equals(DamageCause.VOID)
                 || !parkourRunManager.getTimers().containsKey(e.getEntity().getUniqueId())) {
             return;
         }
@@ -116,8 +120,8 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         boolean shouldStopRun = switch (e.getCause()) {
-            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED -> false;
-            case COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN -> true;
+        case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED -> false;
+        case COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
         if (shouldStopRun && parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
             User user = User.getInstance(e.getPlayer().getUniqueId());
@@ -126,22 +130,27 @@ public class CourseRunnerListener extends AbstractListener {
             }
             parkourRunManager.clear(e.getPlayer().getUniqueId());
         }
+        // Check world - only apply flag actions to Parkour world and only if player is not actively running the course
+        if (e.getTo() == null // To can sometimes be null...
+                || !addon.inWorld(e.getTo())
+                || parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
+            return;
+        }
+        // Handle flag action for players who are not running
+        Optional<Island> fromIsland = addon.getIslands().getIslandAt(e.getFrom());
+        Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
 
-        if (e.getTo() != null && !parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
-            Optional<Island> fromIsland = addon.getIslands().getIslandAt(e.getFrom());
-            Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
-
-            if (fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
-                // same island teleport
-                Island island = fromIsland.get();
-                User user = User.getInstance(e.getPlayer());
-                if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
-                    user.setGameMode(GameMode.CREATIVE);
-                } else {
-                    user.setGameMode(GameMode.SURVIVAL);
-                }
+        if (fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
+            // same island teleport
+            Island island = fromIsland.get();
+            User user = User.getInstance(e.getPlayer());
+            if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+                user.setGameMode(GameMode.CREATIVE);
+            } else {
+                user.setGameMode(GameMode.SURVIVAL);
             }
         }
+
     }
 
 

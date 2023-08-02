@@ -10,13 +10,12 @@ import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,6 +38,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.util.Vector;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -100,7 +101,7 @@ public class CourseRunnerListenerTest {
     private CourseRunnerListener crl;
     @Mock
     private @NonNull Location location;
-    @Mock
+    // Not mock
     private ParkourRunManager prm;
     @Mock
     private Player player;
@@ -153,6 +154,7 @@ public class CourseRunnerListenerTest {
         when(im.inTeam(world, uuid)).thenReturn(true);
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.OWNER_RANK);
         when(island.getRank(user)).thenReturn(RanksManager.MEMBER_RANK);
+        when(island.getWorld()).thenReturn(world);
         when(im.userIsOnIsland(any(), any())).thenReturn(true);
 
         // Parkour Manager
@@ -190,12 +192,13 @@ public class CourseRunnerListenerTest {
         when(location.toVector()).thenReturn(new Vector(0,0,0));
 
         // Run Manager and ParkourManager
+        prm = new ParkourRunManager(addon);
         when(addon.getParkourRunManager()).thenReturn(prm);
         when(addon.inWorld(location)).thenReturn(true);
+        when(addon.inWorld(world)).thenReturn(true);
         when(addon.getPm()).thenReturn(parkourManager);
         when(parkourManager.getStart(island)).thenReturn(Optional.of(location));
         when(parkourManager.getEnd(island)).thenReturn(Optional.of(location));
-        when(prm.getTimers()).thenReturn(new HashMap<>()); // No runners yet
 
         // RanksManager
         RanksManager rm = new RanksManager();
@@ -236,10 +239,21 @@ public class CourseRunnerListenerTest {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorArrive(world.bentobox.bentobox.api.events.island.IslandEnterEvent)}.
      */
     @Test
+    public void testOnVisitorArriveOtherGame() {
+        when(addon.inWorld(world)).thenReturn(false);
+        IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
+        crl.onVisitorArrive(e);
+        verify(notifier, never()).notify(any(), eq("parkour.to-start"));
+        verify(player, never()).setGameMode(GameMode.CREATIVE);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorArrive(world.bentobox.bentobox.api.events.island.IslandEnterEvent)}.
+     */
+    @Test
     public void testOnVisitorArriveInRace() {
-        Map<UUID, Long> map = new HashMap<>();
-        map.put(uuid, 20L);
-        when(prm.getTimers()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.getCheckpoints().put(uuid, location);
         IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
         crl.onVisitorArrive(e);
         verify(notifier, never()).notify(any(), eq("parkour.to-start"));
@@ -250,9 +264,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorLeave() {
-        Map<UUID, Location> map = new HashMap<>();
-        map.put(uuid, location);
-        when(prm.getCheckpoints()).thenReturn(map);
+        prm.getCheckpoints().put(uuid, location);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier).notify(any(), eq("parkour.session-ended"));
@@ -264,9 +276,7 @@ public class CourseRunnerListenerTest {
     @Test
     public void testOnVisitorLeaveOffline() {
         when(player.isOnline()).thenReturn(false);
-        Map<UUID, Location> map = new HashMap<>();
-        map.put(uuid, location);
-        when(prm.getCheckpoints()).thenReturn(map);
+        prm.getCheckpoints().put(uuid, location);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier, never()).notify(any(), eq("parkour.session-ended"));
@@ -277,7 +287,6 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorLeaveNotRuning() {
-        when(prm.getCheckpoints()).thenReturn(new HashMap<>());
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier, never()).notify(any(), eq("parkour.session-ended"));
@@ -290,7 +299,8 @@ public class CourseRunnerListenerTest {
     public void testOnPlayerDeath() {
         PlayerDeathEvent e = new PlayerDeathEvent(player, new ArrayList<>(), 0, 0, 0, 0, "");
         crl.onPlayerDeath(e);
-        verify(prm).clear(uuid);
+        assertFalse(prm.getTimers().containsKey(uuid));
+        assertFalse(prm.getCheckpoints().containsKey(uuid));
     }
 
     /**
@@ -300,7 +310,8 @@ public class CourseRunnerListenerTest {
     public void testOnPlayerQuit() {
         PlayerQuitEvent e = new PlayerQuitEvent(player, "");
         crl.onPlayerQuit(e);
-        verify(prm).clear(uuid);
+        assertFalse(prm.getTimers().containsKey(uuid));
+        assertFalse(prm.getCheckpoints().containsKey(uuid));
     }
 
     /**
@@ -308,12 +319,8 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFall() {
-        Map<UUID, Long> map2 = new HashMap<>();
-        map2.put(uuid, 20L);
-        when(prm.getTimers()).thenReturn(map2);
-        Map<UUID, Location> map = new HashMap<>();
-        map.put(uuid, location);
-        when(prm.getCheckpoints()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.getCheckpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
         crl.onVisitorFall(e);
         verify(player).playEffect(EntityEffect.ENTITY_POOF);
@@ -327,13 +334,8 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFallNotVoid() {
-        Map<UUID, Long> map2 = new HashMap<>();
-        map2.put(uuid, 20L);
-        when(prm.getTimers()).thenReturn(map2);
-        Map<UUID, Location> map = new HashMap<>();
-        map.put(uuid, location);
-        when(prm.getTimers()).thenReturn(map2);
-        when(prm.getCheckpoints()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.getCheckpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.BLOCK_EXPLOSION, 1D);
         crl.onVisitorFall(e);
         verify(player, never()).playEffect(EntityEffect.ENTITY_POOF);
@@ -347,7 +349,6 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFallNotRunning() {
-        when(prm.getTimers()).thenReturn(new HashMap<>());
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
         crl.onVisitorFall(e);
         verify(player, never()).playEffect(EntityEffect.ENTITY_POOF);
@@ -372,9 +373,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommand() {
-        Map<UUID, Long> map2 = new HashMap<>();
-        map2.put(uuid, 20L);
-        when(prm.getTimers()).thenReturn(map2);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/island");
         crl.onVisitorCommand(e);
         assertTrue(e.isCancelled());
@@ -395,9 +394,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommandQuitting() {
-        Map<UUID, Long> map2 = new HashMap<>();
-        map2.put(uuid, 20L);
-        when(prm.getTimers()).thenReturn(map2);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/pk quit");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
@@ -408,9 +405,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommandQuittingParkour() {
-        Map<UUID, Long> map2 = new HashMap<>();
-        map2.put(uuid, 20L);
-        when(prm.getTimers()).thenReturn(map2);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/parkour quit");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
@@ -442,9 +437,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnStartEndSetRaceOver() {
-        Map<UUID, Long> map = new HashMap<>();
-        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        when(prm.getTimers()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         Location l = mock(Location.class);
         when(l.getWorld()).thenReturn(world);
         when(l.getBlockX()).thenReturn(20);
@@ -459,20 +452,13 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testParkourStart() {
-
-        Map<UUID, Long> map = new HashMap<>();
-        when(prm.getTimers()).thenReturn(map);
-
-        Map<UUID, Location> map2 = new HashMap<>();
-        when(prm.getCheckpoints()).thenReturn(map2);
-
         crl.parkourStart(u, location);
         verify(u).sendMessage("parkour.start");
         verify(player).playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         verify(u).setGameMode(GameMode.SURVIVAL);
 
-        assertTrue(map.containsKey(uuid));
-        assertTrue(map2.containsKey(uuid));
+        assertTrue(prm.getCheckpoints().containsKey(uuid));
+        assertTrue(prm.getTimers().containsKey(uuid));
 
     }
 
@@ -482,9 +468,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testParkourEnd() {
-        Map<UUID, Long> map = new HashMap<>();
-        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        when(prm.getTimers()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
         verify(u).notify("parkour.end");
@@ -503,9 +487,7 @@ public class CourseRunnerListenerTest {
     public void testParkourEndLongerTime() {
         when(this.parkourManager.getTime(island, uuid)).thenReturn(1L);
 
-        Map<UUID, Long> map = new HashMap<>();
-        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        when(prm.getTimers()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
         verify(u).sendMessage("parkour.top.did-not-beat-previous-time");
@@ -518,9 +500,7 @@ public class CourseRunnerListenerTest {
     public void testParkourEndNoCreative() {
         when(island.getFlag(addon.CREATIVE_FLAG)).thenReturn(RanksManager.ADMIN_RANK);
 
-        Map<UUID, Long> map = new HashMap<>();
-        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        when(prm.getTimers()).thenReturn(map);
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
         verify(u, never()).setGameMode(GameMode.CREATIVE);
@@ -541,14 +521,9 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnCheckpointInitialChecks() {
-        Map<UUID, Long> map = new HashMap<>();
-        when(prm.getTimers()).thenReturn(map);
-        Map<UUID, Location> map2 = new HashMap<>();
         Location l = mock(Location.class);
         when(l.toVector()).thenReturn(new Vector(100,0,20)); // Different to location
-        map2.put(uuid, l);
-        when(prm.getCheckpoints()).thenReturn(map2);
-
+        prm.getCheckpoints().put(uuid, l);
 
         when(block.getType()).thenReturn(Material.STONE);
 
@@ -567,7 +542,7 @@ public class CourseRunnerListenerTest {
         crl.onCheckpoint(e);
         verify(block, never()).getLocation();
 
-        map.put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         crl.onCheckpoint(e);
         verify(block).getLocation();
 
@@ -576,7 +551,89 @@ public class CourseRunnerListenerTest {
 
     }
 
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
+     */
+    @Test
+    public void testOnTeleport() {
+        // Player is running
+        for (TeleportCause cause : TeleportCause.values()) {
+            // Reset the maps
+            prm.getCheckpoints().clear();
+            prm.getTimers().clear();
+            prm.getCheckpoints().put(uuid, location);
+            prm.getTimers().put(uuid, 20L);
+            // Make the event
+            PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, location, cause);
+            // Fire event
+            crl.onTeleport(e);
+        }
+        // Should fire 7 times: COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN
+        verify(notifier, times(7)).notify(any(), eq("parkour.session-ended"));
+        verify(player, times(7)).setGameMode(GameMode.CREATIVE);
+        verify(player, never()).setGameMode(GameMode.SURVIVAL);
+    }
 
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
+     */
+    @Test
+    public void testOnTeleportNoFlagActionNullTo() {
+        // Make the event
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, null, TeleportCause.ENDER_PEARL);
+        // Fire event
+        crl.onTeleport(e);
+        verify(player, never()).setGameMode(GameMode.CREATIVE);
+        verify(player, never()).setGameMode(GameMode.SURVIVAL);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
+     */
+    @Test
+    public void testOnTeleportToNoFlagActionNotInParkourWorld() {
+        // Make the event
+        Location l = mock(Location.class);
+        when(l.getWorld()).thenReturn(mock(World.class));
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, l, TeleportCause.CHORUS_FRUIT);
+        // Fire event
+        crl.onTeleport(e);
+        verify(player, never()).setGameMode(GameMode.CREATIVE);
+        verify(player, never()).setGameMode(GameMode.SURVIVAL);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
+     */
+    @Test
+    public void testOnTeleportToNoFlagActionDifferentIsland() {
+        // Make the event
+        Location l = mock(Location.class);
+        when(l.getWorld()).thenReturn(world);
+        Island i = mock(Island.class);
+        when(im.getIslandAt(l)).thenReturn(Optional.of(i));
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, l, TeleportCause.CHORUS_FRUIT);
+        // Fire event
+        crl.onTeleport(e);
+        verify(player, never()).setGameMode(GameMode.CREATIVE);
+        verify(player, never()).setGameMode(GameMode.SURVIVAL);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
+     */
+    @Test
+    public void testOnTeleportToFlagActionVisitors() {
+        when(island.getFlag(any())).thenReturn(RanksManager.MEMBER_RANK);
+        when(island.getRank(any(User.class))).thenReturn(RanksManager.VISITOR_RANK);
+        // Make the event
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, location, TeleportCause.CHORUS_FRUIT);
+        // Fire event
+        crl.onTeleport(e);
+        verify(player, never()).setGameMode(GameMode.CREATIVE);
+        // Visitors should be set to survival when they teleport to the island.
+        verify(player).setGameMode(GameMode.SURVIVAL);
+    }
 
 
 }
