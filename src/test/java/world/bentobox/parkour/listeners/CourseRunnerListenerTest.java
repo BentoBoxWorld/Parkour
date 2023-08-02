@@ -15,6 +15,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -68,7 +69,7 @@ import world.bentobox.bentobox.managers.PlaceholdersManager;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
-import world.bentobox.parkour.ParkourRunManager;
+import world.bentobox.parkour.ParkourRunRecord;
 import world.bentobox.parkour.Settings;
 
 /**
@@ -102,7 +103,7 @@ public class CourseRunnerListenerTest {
     @Mock
     private @NonNull Location location;
     // Not mock
-    private ParkourRunManager prm;
+    private ParkourRunRecord prm;
     @Mock
     private Player player;
     @Mock
@@ -192,7 +193,7 @@ public class CourseRunnerListenerTest {
         when(location.toVector()).thenReturn(new Vector(0,0,0));
 
         // Run Manager and ParkourManager
-        prm = new ParkourRunManager(addon);
+        prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
         when(addon.getParkourRunManager()).thenReturn(prm);
         when(addon.inWorld(location)).thenReturn(true);
         when(addon.inWorld(world)).thenReturn(true);
@@ -252,8 +253,8 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorArriveInRace() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        prm.getCheckpoints().put(uuid, location);
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.checkpoints().put(uuid, location);
         IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
         crl.onVisitorArrive(e);
         verify(notifier, never()).notify(any(), eq("parkour.to-start"));
@@ -264,7 +265,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorLeave() {
-        prm.getCheckpoints().put(uuid, location);
+        prm.checkpoints().put(uuid, location);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier).notify(any(), eq("parkour.session-ended"));
@@ -276,7 +277,7 @@ public class CourseRunnerListenerTest {
     @Test
     public void testOnVisitorLeaveOffline() {
         when(player.isOnline()).thenReturn(false);
-        prm.getCheckpoints().put(uuid, location);
+        prm.checkpoints().put(uuid, location);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier, never()).notify(any(), eq("parkour.session-ended"));
@@ -299,8 +300,8 @@ public class CourseRunnerListenerTest {
     public void testOnPlayerDeath() {
         PlayerDeathEvent e = new PlayerDeathEvent(player, new ArrayList<>(), 0, 0, 0, 0, "");
         crl.onPlayerDeath(e);
-        assertFalse(prm.getTimers().containsKey(uuid));
-        assertFalse(prm.getCheckpoints().containsKey(uuid));
+        assertFalse(prm.timers().containsKey(uuid));
+        assertFalse(prm.checkpoints().containsKey(uuid));
     }
 
     /**
@@ -310,8 +311,8 @@ public class CourseRunnerListenerTest {
     public void testOnPlayerQuit() {
         PlayerQuitEvent e = new PlayerQuitEvent(player, "");
         crl.onPlayerQuit(e);
-        assertFalse(prm.getTimers().containsKey(uuid));
-        assertFalse(prm.getCheckpoints().containsKey(uuid));
+        assertFalse(prm.timers().containsKey(uuid));
+        assertFalse(prm.checkpoints().containsKey(uuid));
     }
 
     /**
@@ -319,8 +320,8 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFall() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        prm.getCheckpoints().put(uuid, location);
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
         crl.onVisitorFall(e);
         verify(player).playEffect(EntityEffect.ENTITY_POOF);
@@ -334,8 +335,8 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFallNotVoid() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
-        prm.getCheckpoints().put(uuid, location);
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.BLOCK_EXPLOSION, 1D);
         crl.onVisitorFall(e);
         verify(player, never()).playEffect(EntityEffect.ENTITY_POOF);
@@ -373,7 +374,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommand() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/island");
         crl.onVisitorCommand(e);
         assertTrue(e.isCancelled());
@@ -394,7 +395,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommandQuitting() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/pk quit");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
@@ -405,7 +406,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorCommandQuittingParkour() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(player, "/parkour quit");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
@@ -437,7 +438,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnStartEndSetRaceOver() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         Location l = mock(Location.class);
         when(l.getWorld()).thenReturn(world);
         when(l.getBlockX()).thenReturn(20);
@@ -457,8 +458,8 @@ public class CourseRunnerListenerTest {
         verify(player).playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         verify(u).setGameMode(GameMode.SURVIVAL);
 
-        assertTrue(prm.getCheckpoints().containsKey(uuid));
-        assertTrue(prm.getTimers().containsKey(uuid));
+        assertTrue(prm.checkpoints().containsKey(uuid));
+        assertTrue(prm.timers().containsKey(uuid));
 
     }
 
@@ -468,7 +469,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testParkourEnd() {
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
         verify(u).notify("parkour.end");
@@ -487,7 +488,7 @@ public class CourseRunnerListenerTest {
     public void testParkourEndLongerTime() {
         when(this.parkourManager.getTime(island, uuid)).thenReturn(1L);
 
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
         verify(u).sendMessage("parkour.top.did-not-beat-previous-time");
@@ -500,7 +501,7 @@ public class CourseRunnerListenerTest {
     public void testParkourEndNoCreative() {
         when(island.getFlag(addon.CREATIVE_FLAG)).thenReturn(RanksManager.ADMIN_RANK);
 
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
         verify(u, never()).setGameMode(GameMode.CREATIVE);
@@ -523,7 +524,7 @@ public class CourseRunnerListenerTest {
     public void testOnCheckpointInitialChecks() {
         Location l = mock(Location.class);
         when(l.toVector()).thenReturn(new Vector(100,0,20)); // Different to location
-        prm.getCheckpoints().put(uuid, l);
+        prm.checkpoints().put(uuid, l);
 
         when(block.getType()).thenReturn(Material.STONE);
 
@@ -542,7 +543,7 @@ public class CourseRunnerListenerTest {
         crl.onCheckpoint(e);
         verify(block, never()).getLocation();
 
-        prm.getTimers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+        prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         crl.onCheckpoint(e);
         verify(block).getLocation();
 
@@ -559,10 +560,10 @@ public class CourseRunnerListenerTest {
         // Player is running
         for (TeleportCause cause : TeleportCause.values()) {
             // Reset the maps
-            prm.getCheckpoints().clear();
-            prm.getTimers().clear();
-            prm.getCheckpoints().put(uuid, location);
-            prm.getTimers().put(uuid, 20L);
+            prm.checkpoints().clear();
+            prm.timers().clear();
+            prm.checkpoints().put(uuid, location);
+            prm.timers().put(uuid, 20L);
             // Make the event
             PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, location, cause);
             // Fire event

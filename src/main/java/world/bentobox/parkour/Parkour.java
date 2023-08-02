@@ -1,5 +1,7 @@
 package world.bentobox.parkour;
 
+import java.util.HashMap;
+
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -60,7 +62,7 @@ public class Parkour extends GameModeAddon implements Listener {
             .clickHandler(new CycleClick("PARKOUR_CREATIVE", RanksManager.COOP_RANK, RanksManager.OWNER_RANK)) // exclude visitor
             .build();
 
-    private ParkourRunManager parkourRunManager;
+    private ParkourRunRecord parkourRunManager;
 
     @Override
     public void onLoad() {
@@ -87,7 +89,7 @@ public class Parkour extends GameModeAddon implements Listener {
         adminCommand = new DefaultAdminCommand(this) {
         };
 
-        parkourRunManager = new ParkourRunManager(this);
+        parkourRunManager = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
 
         registerFlag(CREATIVE_FLAG);
 
@@ -248,7 +250,7 @@ public class Parkour extends GameModeAddon implements Listener {
         return rankings;
     }
 
-    public ParkourRunManager getParkourRunManager() {
+    public ParkourRunRecord getParkourRunManager() {
         return parkourRunManager;
     }
 

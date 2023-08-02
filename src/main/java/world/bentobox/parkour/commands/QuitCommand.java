@@ -39,7 +39,7 @@ public class QuitCommand extends CompositeCommand {
             return false;
         }
 
-        if (!((Parkour) getAddon()).getParkourRunManager().getTimers().containsKey(user.getUniqueId())) {
+        if (!((Parkour) getAddon()).getParkourRunManager().timers().containsKey(user.getUniqueId())) {
             user.sendMessage("parkour.errors.not-in-run");
             return false;
         }
@@ -54,10 +54,10 @@ public class QuitCommand extends CompositeCommand {
         Optional<Island> islandOptional = getAddon().getIslands().getIslandAt(user.getLocation());
         islandOptional.ifPresent(island -> {
             if (island.getFlag(((Parkour) getAddon()).CREATIVE_FLAG) <= island.getRank(user)) {
-            user.setGameMode(GameMode.CREATIVE);
-        } else {
-            user.setGameMode(GameMode.SURVIVAL);
-        }
+                user.setGameMode(GameMode.CREATIVE);
+            } else {
+                user.setGameMode(GameMode.SURVIVAL);
+            }
         });
 
         user.sendMessage("parkour.quit.success");

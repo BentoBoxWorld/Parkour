@@ -1,6 +1,9 @@
 package world.bentobox.parkour.commands;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -10,7 +13,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,7 +41,7 @@ import world.bentobox.bentobox.managers.LocalesManager;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
-import world.bentobox.parkour.ParkourRunManager;
+import world.bentobox.parkour.ParkourRunRecord;
 import world.bentobox.parkour.Settings;
 
 /**
@@ -74,8 +76,8 @@ public class QuitCommandTest {
     private QuitCommand cmd;
     @Mock
     private @NonNull Location location;
-    @Mock
-    private ParkourRunManager prm;
+    // No mock
+    private ParkourRunRecord prm;
     /**
      * @throws java.lang.Exception
      */
@@ -106,8 +108,10 @@ public class QuitCommandTest {
         when(ac.getSubCommandAliases()).thenReturn(new HashMap<>());
         when(ac.getWorld()).thenReturn(world);
         when(ac.getAddon()).thenReturn(addon);
+
+        prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
+        prm.timers().put(uuid, 20L);
         when(addon.getParkourRunManager()).thenReturn(prm);
-        when(prm.getTimers()).thenReturn(Map.of(uuid, 20L));
 
         // Islands
         when(addon.getIslands()).thenReturn(im);
@@ -186,7 +190,7 @@ public class QuitCommandTest {
      */
     @Test
     public void testCanExecuteNotInRun() {
-        when(prm.getTimers()).thenReturn(Map.of());
+        prm.timers().clear();
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("parkour.errors.not-in-run");
     }
@@ -206,8 +210,8 @@ public class QuitCommandTest {
     public void testExecuteUserStringListOfString() {
         assertTrue(cmd.execute(user, "", List.of()));
         verify(user).sendMessage("parkour.quit.success");
-
-        verify(prm).clear(uuid);
+        assertTrue(prm.timers().isEmpty());
+        assertTrue(prm.checkpoints().isEmpty());
     }
 
 }
