@@ -19,6 +19,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.util.Vector;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
@@ -56,7 +57,7 @@ public class CourseRunnerListener extends AbstractListener {
     public void onVisitorArrive(IslandEnterEvent e) {
         // Check if visitor
         User user = User.getInstance(e.getPlayerUUID());
-        if (user == null || !user.isOnline() || !addon.inWorld(e.getLocation())) {
+        if (user == null || !user.isOnline()) {
             return;
         }
         Island island = e.getIsland();
@@ -68,11 +69,11 @@ public class CourseRunnerListener extends AbstractListener {
             user.notify("parkour.no-end-yet");
         } else if (!parkourRunManager.getTimers().containsKey(e.getPlayerUUID())) {
             user.notify("parkour.to-start");
-            if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
-                user.setGameMode(GameMode.CREATIVE);
-            } else {
-                user.setGameMode(GameMode.SURVIVAL);
-            }
+        }
+        if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+            user.setGameMode(GameMode.CREATIVE);
+        } else {
+            user.setGameMode(GameMode.SURVIVAL);
         }
     }
 
@@ -111,6 +112,38 @@ public class CourseRunnerListener extends AbstractListener {
         player.teleport(parkourRunManager.getCheckpoints().get(player.getUniqueId()));
 
     }
+
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent e) {
+        boolean shouldStopRun = switch (e.getCause()) {
+            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED -> false;
+            case COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN -> true;
+        };
+        if (shouldStopRun && parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
+            User user = User.getInstance(e.getPlayer().getUniqueId());
+            if (parkourRunManager.getCheckpoints().containsKey(e.getPlayer().getUniqueId()) && user.isOnline()) {
+                user.notify("parkour.session-ended");
+            }
+            parkourRunManager.clear(e.getPlayer().getUniqueId());
+        }
+
+        if (e.getTo() != null && !parkourRunManager.getTimers().containsKey(e.getPlayer().getUniqueId())) {
+            Optional<Island> fromIsland = addon.getIslands().getIslandAt(e.getFrom());
+            Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
+
+            if (fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
+                // same island teleport
+                Island island = fromIsland.get();
+                User user = User.getInstance(e.getPlayer());
+                if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+                    user.setGameMode(GameMode.CREATIVE);
+                } else {
+                    user.setGameMode(GameMode.SURVIVAL);
+                }
+            }
+        }
+    }
+
 
     /**
      * Prevent players from issuing commands during a run
