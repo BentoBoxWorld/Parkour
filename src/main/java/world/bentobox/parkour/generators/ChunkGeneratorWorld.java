@@ -24,6 +24,7 @@ public class ChunkGeneratorWorld extends ChunkGenerator {
     }
 
 
+    @SuppressWarnings("deprecation")
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomeGrid) {
         return createChunkData(world);
