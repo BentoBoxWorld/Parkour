@@ -38,10 +38,19 @@ public class MakeCourseListener extends AbstractListener {
         User user = User.getInstance(e.getPlayer());
         if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
-            Optional<Location> warpSpot = addon.getPm().getWarpSpot(island);
+            Optional<Location> start = addon.getParkourManager().getStart(island);
+            Optional<Location> end = addon.getParkourManager().getEnd(island);
+            if (start.isEmpty()) {
+                user.notify("parkour.no-start-yet");
+                return;
+            } else if (end.isEmpty()) {
+                user.notify("parkour.no-end-yet");
+                return;
+            }
+            Optional<Location> warpSpot = addon.getParkourManager().getWarpSpot(island);
             if (warpSpot.isEmpty()) {
                 user.notify("parkour.warp.set");
-                addon.getPm().setWarpSpot(island, l);
+                addon.getParkourManager().setWarpSpot(island, l);
             } else {
                 user.notify("parkour.warp.replaced");
             }
@@ -57,14 +66,14 @@ public class MakeCourseListener extends AbstractListener {
         User user = User.getInstance(e.getPlayer());
         if (addon.getIslands().getProtectedIslandAt(l).isPresent() && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
-            Optional<Location> start = addon.getPm().getStart(island);
-            Optional<Location> end = addon.getPm().getEnd(island);
+            Optional<Location> start = addon.getParkourManager().getStart(island);
+            Optional<Location> end = addon.getParkourManager().getEnd(island);
             if (start.isEmpty()) {
                 user.notify("parkour.start-set");
-                addon.getPm().setStart(island, l);
+                addon.getParkourManager().setStart(island, l);
             } else if (end.isEmpty()) {
                 user.notify("parkour.end-set");
-                addon.getPm().setEnd(island, l);
+                addon.getParkourManager().setEnd(island, l);
             } else {
                 user.notify("parkour.already-set");
             }
@@ -94,22 +103,22 @@ public class MakeCourseListener extends AbstractListener {
         if (addon.getIslands().getProtectedIslandAt(l).isPresent()
                 && addon.getIslands().userIsOnIsland(e.getBlock().getWorld(), user)) {
             Island island = addon.getIslands().getProtectedIslandAt(l).get();
-            Optional<Location> start = addon.getPm().getStart(island);
-            Optional<Location> end = addon.getPm().getEnd(island);
-            Optional<Location> warpSpot = addon.getPm().getWarpSpot(island);
+            Optional<Location> start = addon.getParkourManager().getStart(island);
+            Optional<Location> end = addon.getParkourManager().getEnd(island);
+            Optional<Location> warpSpot = addon.getParkourManager().getWarpSpot(island);
             if (start.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
                 user.notify("parkour.start-removed");
-                addon.getPm().setStart(island, null);
+                addon.getParkourManager().setStart(island, null);
             } else if (end.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
                 user.notify("parkour.end-removed");
-                addon.getPm().setEnd(island, null);
+                addon.getParkourManager().setEnd(island, null);
             } else if (warpSpot.filter(mdv -> isLocEquals(l, mdv)).isPresent()) {
                 user.notify("parkour.warp.removed");
-                addon.getPm().setWarpSpot(island, null);
-            } else {
-                addon.getPm().setStart(island, null);
+                addon.getParkourManager().setWarpSpot(island, null);
+            } else if (!e.getBlock().getType().equals(WARP_SPOT)) {
+                addon.getParkourManager().setStart(island, null);
                 user.notify("parkour.resetting-start-end");
-                addon.getPm().setEnd(island, null);
+                addon.getParkourManager().setEnd(island, null);
             }
         }
     }
