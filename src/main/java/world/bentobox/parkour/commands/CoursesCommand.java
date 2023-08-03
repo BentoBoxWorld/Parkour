@@ -20,7 +20,7 @@ public class CoursesCommand extends CompositeCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.courses");
+        this.setPermission("courses");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.courses.description");
     }

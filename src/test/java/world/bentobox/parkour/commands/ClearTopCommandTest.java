@@ -143,7 +143,7 @@ public class ClearTopCommandTest {
         // Parkour Manager
         // No warp spot
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
-        when(addon.getPm()).thenReturn(parkourManager);
+        when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
@@ -182,7 +182,7 @@ public class ClearTopCommandTest {
      */
     @Test
     public void testSetup() {
-        assertEquals("parkour.cleartop", cmd.getPermission());
+        assertEquals("cleartop", cmd.getPermission());
         assertEquals("parkour.commands.parkour.cleartop.description", cmd.getDescription());
         assertEquals("parkour.commands.parkour.cleartop.parameters", cmd.getParameters());
         assertTrue(cmd.isConfigurableRankCommand());

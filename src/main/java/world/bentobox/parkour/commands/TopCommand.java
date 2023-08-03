@@ -23,7 +23,7 @@ public class TopCommand extends CompositeCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.top");
+        this.setPermission("top");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.top.description");
     }

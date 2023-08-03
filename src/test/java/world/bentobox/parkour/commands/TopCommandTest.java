@@ -124,7 +124,7 @@ public class TopCommandTest {
         // Parkour Manager
         // No warp spot
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
-        when(addon.getPm()).thenReturn(parkourManager);
+        when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
@@ -156,7 +156,7 @@ public class TopCommandTest {
      */
     @Test
     public void testSetup() {
-        assertEquals("parkour.top", cmd.getPermission());
+        assertEquals("top", cmd.getPermission());
         assertEquals("parkour.commands.parkour.top.description", cmd.getDescription());
         assertTrue(cmd.isOnlyPlayer());
     }

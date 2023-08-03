@@ -22,7 +22,7 @@ public class QuitCommand extends CompositeCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.quit");
+        this.setPermission("quit");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.quit.description");
     }

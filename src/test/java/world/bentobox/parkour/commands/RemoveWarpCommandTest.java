@@ -114,7 +114,7 @@ public class RemoveWarpCommandTest {
         // Parkour Manager
         // Warp spot available by default
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.of(mock(Location.class)));
-        when(addon.getPm()).thenReturn(parkourManager);
+        when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
@@ -145,7 +145,7 @@ public class RemoveWarpCommandTest {
      */
     @Test
     public void testSetup() {
-        assertEquals("parkour.removewarp", cmd.getPermission());
+        assertEquals("removewarp", cmd.getPermission());
         assertEquals("parkour.commands.parkour.removewarp.description", cmd.getDescription());
         assertTrue(cmd.isConfigurableRankCommand());
         assertTrue(cmd.isOnlyPlayer());

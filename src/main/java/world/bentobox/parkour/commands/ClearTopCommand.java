@@ -38,7 +38,7 @@ public class ClearTopCommand extends ConfirmableCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.cleartop");
+        this.setPermission("cleartop");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.cleartop.description");
         this.setParametersHelp("parkour.commands.parkour.cleartop.parameters");
@@ -85,9 +85,9 @@ public class ClearTopCommand extends ConfirmableCommand {
     void confirmed(User user) {
         Island island = getIslands().getIsland(getWorld(), user);
         if (island != null && targetUUID == null) {
-            addon.getPm().clearScores(island);
+            addon.getParkourManager().clearScores(island);
         } else if (island != null && targetUUID != null) {
-            addon.getPm().removeScore(island, User.getInstance(targetUUID));
+            addon.getParkourManager().removeScore(island, User.getInstance(targetUUID));
         } else {
             user.sendMessage("general.errors.no-island");
             return;
@@ -99,7 +99,7 @@ public class ClearTopCommand extends ConfirmableCommand {
     public Optional<List<String>> tabComplete(User user, String label, List<String> args) {
         Island island = getIslands().getIsland(getWorld(), user);
         if (island == null) return Optional.empty();
-        return Optional.of(addon.getPm().getRankings(island, 10).keySet().stream().map(getAddon().getPlayers()::getName)
+        return Optional.of(addon.getParkourManager().getRankings(island, 10).keySet().stream().map(getAddon().getPlayers()::getName)
                 .filter(name -> !name.isBlank()).toList());
     }
 

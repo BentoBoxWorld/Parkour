@@ -127,7 +127,7 @@ public class QuitCommandTest {
         // Parkour Manager
         // No warp spot
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
-        when(addon.getPm()).thenReturn(parkourManager);
+        when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
@@ -159,7 +159,7 @@ public class QuitCommandTest {
      */
     @Test
     public void testSetup() {
-        assertEquals("parkour.quit", cmd.getPermission());
+        assertEquals("quit", cmd.getPermission());
         assertEquals("parkour.commands.parkour.quit.description", cmd.getDescription());
         assertTrue(cmd.isOnlyPlayer());
     }
