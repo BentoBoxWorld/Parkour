@@ -53,7 +53,7 @@ public class QuitCommand extends CompositeCommand {
         ((Parkour)getAddon()).getParkourRunManager().clear(user.getUniqueId());
         Optional<Island> islandOptional = getAddon().getIslands().getIslandAt(user.getLocation());
         islandOptional.ifPresent(island -> {
-            if (island.getFlag(((Parkour) getAddon()).CREATIVE_FLAG) <= island.getRank(user)) {
+            if (island.getFlag(((Parkour) getAddon()).PARKOUR_CREATIVE) <= island.getRank(user)) {
                 user.setGameMode(GameMode.CREATIVE);
             } else {
                 user.setGameMode(GameMode.SURVIVAL);

@@ -55,7 +55,7 @@ public class Parkour extends GameModeAddon implements Listener {
      * Parkour flag that sets which ranks should enter creative mode at the end of the course and
      * when entering the island. Visitors never have creative enabled.
      */
-    public final Flag CREATIVE_FLAG = new Flag.Builder("PARKOUR_CREATIVE", Material.LIGHT)
+    public final Flag PARKOUR_CREATIVE = new Flag.Builder("PARKOUR_CREATIVE", Material.LIGHT)
             .addon(this)
             .type(Flag.Type.PROTECTION)
             .defaultRank(RanksManager.MEMBER_RANK)
@@ -93,7 +93,7 @@ public class Parkour extends GameModeAddon implements Listener {
 
         parkourRunManager = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
 
-        registerFlag(CREATIVE_FLAG);
+        registerFlag(PARKOUR_CREATIVE);
 
         // Register listeners
         this.registerListener(new MakeCourseListener(this));

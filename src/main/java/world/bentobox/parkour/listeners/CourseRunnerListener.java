@@ -71,7 +71,7 @@ public class CourseRunnerListener extends AbstractListener {
         } else if (!parkourRunManager.timers().containsKey(e.getPlayerUUID())) {
             user.notify("parkour.to-start");
         }
-        if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
             user.setGameMode(GameMode.CREATIVE);
         } else {
             user.setGameMode(GameMode.SURVIVAL);
@@ -144,7 +144,7 @@ public class CourseRunnerListener extends AbstractListener {
             // same island teleport
             Island island = fromIsland.get();
             User user = User.getInstance(e.getPlayer());
-            if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
                 user.setGameMode(GameMode.CREATIVE);
             } else {
                 user.setGameMode(GameMode.SURVIVAL);
@@ -260,7 +260,7 @@ public class CourseRunnerListener extends AbstractListener {
                 String.valueOf(addon.getParkourManager().getRank(island, user.getUniqueId())));
 
         // set creative
-        if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {
+        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
             user.setGameMode(GameMode.CREATIVE);
         }
 

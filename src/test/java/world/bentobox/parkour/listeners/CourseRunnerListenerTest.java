@@ -499,7 +499,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testParkourEndNoCreative() {
-        when(island.getFlag(addon.CREATIVE_FLAG)).thenReturn(RanksManager.ADMIN_RANK);
+        when(island.getFlag(addon.PARKOUR_CREATIVE)).thenReturn(RanksManager.ADMIN_RANK);
 
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
