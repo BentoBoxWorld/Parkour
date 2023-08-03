@@ -317,18 +317,21 @@ permissions:
   parkour.island.homes:
     description: Allow use of '/parkour homes' command - list your homes
     default: true
-  parkour.parkour.top:
+  parkour.top:
     description: Allow use of '/parkour top' command - Show the top course rankings
     default: true
-  parkour.parkour.courses:
+  parkour.courses:
     description: Allow use of '/parkour courses' command - parkour.commands.parkour.courses.description
     default: true
-  parkour.parkour.setwarp:
+  parkour.setwarp:
     description: Allow use of '/parkour setwarp' command - sets the warp spot and makes your course public
     default: true
-  parkour.parkour.removewarp:
+  parkour.warp:
+    description: Allow use of '/parkour warp' command - warps to a course
+    default: true
+  parkour.removewarp:
     description: Allow use of '/parkour removewarp' command - removes the warp spot and makes your course private
     default: true
-  parkour.parkour.quit:
+  parkour.quit:
     description: Allow use of '/parkour quit' command - stops the timer, allowing you to use other commands
     default: true
