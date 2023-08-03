@@ -24,7 +24,7 @@ hs_err_pid*
 /target/
 /.classpath
 /.project
-/.DS_Store
+.DS_Store
 /parkour.iml
 /.idea/
 /.settings/
