@@ -77,7 +77,7 @@ public class CoursesTab implements Tab {
         // Create the list
         List<PanelItem> heads = new ArrayList<>();
         // Sort the courses by runs
-        addon.getPm().getParkourData().stream()
+        addon.getParkourManager().getParkourData().stream()
         .sorted()
         .filter(hs -> Objects.nonNull(hs.getWarpSpot()))
         .forEach(hs -> {

@@ -55,7 +55,7 @@ public class RankingsUI {
         // Top Ten
         int i = 0;
         boolean inTopTen = false;
-        for (Entry<UUID, Long> m : addon.getPm().getRankings(island, 10).entrySet()) {
+        for (Entry<UUID, Long> m : addon.getParkourManager().getRankings(island, 10).entrySet()) {
             PanelItem h = getHead((i+1), m.getValue(), m.getKey(), user);
             panel.item(SLOTS[i], h);
             // If this is also the asking player
@@ -78,9 +78,9 @@ public class RankingsUI {
     }
 
     private void addSelf(Island island, User user, PanelBuilder panel) {
-        long time = addon.getPm().getTime(island, user.getUniqueId());
+        long time = addon.getParkourManager().getTime(island, user.getUniqueId());
         if (time > 0) {
-            PanelItem head = getHead(addon.getPm().getRank(island, user.getUniqueId()), time, user.getUniqueId(), user);
+            PanelItem head = getHead(addon.getParkourManager().getRank(island, user.getUniqueId()), time, user.getUniqueId(), user);
             panel.item(49, head);
         }
 

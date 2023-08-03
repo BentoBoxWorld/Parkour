@@ -161,7 +161,7 @@ public class CourseRunnerListenerTest {
         // Parkour Manager
         // No warp spot
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
-        when(addon.getPm()).thenReturn(parkourManager);
+        when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // Notifier
         when(plugin.getNotifier()).thenReturn(notifier);
@@ -197,7 +197,7 @@ public class CourseRunnerListenerTest {
         when(addon.getParkourRunManager()).thenReturn(prm);
         when(addon.inWorld(location)).thenReturn(true);
         when(addon.inWorld(world)).thenReturn(true);
-        when(addon.getPm()).thenReturn(parkourManager);
+        when(addon.getParkourManager()).thenReturn(parkourManager);
         when(parkourManager.getStart(island)).thenReturn(Optional.of(location));
         when(parkourManager.getEnd(island)).thenReturn(Optional.of(location));
 

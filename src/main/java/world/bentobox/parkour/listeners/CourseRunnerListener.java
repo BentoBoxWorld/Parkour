@@ -62,8 +62,8 @@ public class CourseRunnerListener extends AbstractListener {
         if (!user.isOnline() || !addon.inWorld(island.getWorld())) {
             return;
         }
-        Optional<Location> start = addon.getPm().getStart(island);
-        Optional<Location> end = addon.getPm().getEnd(island);
+        Optional<Location> start = addon.getParkourManager().getStart(island);
+        Optional<Location> end = addon.getParkourManager().getEnd(island);
         if (start.isEmpty()) {
             user.notify("parkour.no-start-yet");
         } else if (end.isEmpty()) {
@@ -208,8 +208,8 @@ public class CourseRunnerListener extends AbstractListener {
         Location l = e.getClickedBlock().getLocation();
         User user = User.getInstance(e.getPlayer());
         addon.getIslands().getProtectedIslandAt(l).ifPresent(island -> {
-            Optional<Location> start = addon.getPm().getStart(island);
-            Optional<Location> end = addon.getPm().getEnd(island);
+            Optional<Location> start = addon.getParkourManager().getStart(island);
+            Optional<Location> end = addon.getParkourManager().getEnd(island);
 
             // Check if start and end is set
             if (start.filter(startLoc -> isLocEquals(l, startLoc)).isPresent()) {
@@ -247,17 +247,17 @@ public class CourseRunnerListener extends AbstractListener {
         parkourRunManager.clear(user.getUniqueId());
 
         // Comment on time
-        long previous = addon.getPm().getTime(island, user.getUniqueId());
+        long previous = addon.getParkourManager().getTime(island, user.getUniqueId());
         if (duration < previous || previous == 0L) {
             user.sendMessage("parkour.top.beat-previous-time");
             // Store
-            addon.getPm().addScore(island, user, duration);
+            addon.getParkourManager().addScore(island, user, duration);
         } else {
             user.sendMessage("parkour.top.did-not-beat-previous-time");
         }
         // Say rank
         user.sendMessage("parkour.top.your-rank", TextVariables.NUMBER,
-                String.valueOf(addon.getPm().getRank(island, user.getUniqueId())));
+                String.valueOf(addon.getParkourManager().getRank(island, user.getUniqueId())));
 
         // set creative
         if (island.getFlag(addon.CREATIVE_FLAG) <= island.getRank(user)) {

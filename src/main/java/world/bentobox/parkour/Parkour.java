@@ -26,6 +26,7 @@ import world.bentobox.parkour.commands.QuitCommand;
 import world.bentobox.parkour.commands.RemoveWarpCommand;
 import world.bentobox.parkour.commands.SetWarpCommand;
 import world.bentobox.parkour.commands.TopCommand;
+import world.bentobox.parkour.commands.WarpCommand;
 import world.bentobox.parkour.generators.ChunkGeneratorWorld;
 import world.bentobox.parkour.gui.RankingsUI;
 import world.bentobox.parkour.listeners.CourseRunnerListener;
@@ -80,6 +81,7 @@ public class Parkour extends GameModeAddon implements Listener {
                 new TopCommand(this);
                 new CoursesCommand(this);
                 new SetWarpCommand(this);
+                new WarpCommand(this);
                 new RemoveWarpCommand(this);
                 new ClearTopCommand(this);
                 new QuitCommand(this);
@@ -239,7 +241,7 @@ public class Parkour extends GameModeAddon implements Listener {
     /**
      * @return the pm
      */
-    public ParkourManager getPm() {
+    public ParkourManager getParkourManager() {
         return pm;
     }
 
