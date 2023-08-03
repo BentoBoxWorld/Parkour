@@ -2,6 +2,7 @@ package world.bentobox.parkour;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -172,5 +173,22 @@ public class ParkourManager {
         getIsland(island).setWarpSpot(location);
         // Save every time right now
         saveIsland(island);
+    }
+
+    /**
+     * Get a map of warps to courses
+     * @return map with the key being the name of the island owner and value being the warp location
+     */
+    public Map<String, Location> getWarps() {
+        Map<String, Location> map = new HashMap<>();
+        for (ParkourData pd : getParkourData()) {
+            if (pd.getWarpSpot() == null) continue;
+            UUID owner = addon.getIslands().getIslandById(pd.getUniqueId()).map(Island::getOwner).orElse(null);
+            if (owner != null) {
+                String name = addon.getPlayers().getName(owner);
+                map.put(name, pd.getWarpSpot());
+            }
+        }
+        return map;
     }
 }
