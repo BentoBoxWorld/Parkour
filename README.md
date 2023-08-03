@@ -23,6 +23,7 @@ To get started, use the `/pk` or `/parkour` command to access the parkour plugin
 2. Place gold pressure plates at the start and end points of the course.
 3. Optionally, add checkpoints throughout the course using blackstone pressure plates.
 4. Test your course to ensure it is playable and challenging.
+5. Once it's ready, make your course public by making a warp to it by placing a warped pressure plate or using the `/pk setwarp` command
 
 ### Course Gameplay
 1. Locate the course you want to play using the `/pk courses` command, or play your own.
@@ -43,6 +44,8 @@ To get started, use the `/pk` or `/parkour` command to access the parkour plugin
 - `/pk courses`: List all the tracks or courses available and teleport to them.
 - `/pk top`: Show the Top Ten.
 - `/pk setwarp`: Places the course in the courses menu and sets the warp position visitors will arrive at. This can also be done by placing a **warped pressure plate**
+- `/pk warp <course owner's name>`: warp to a course
+- `/pk warp`: warp to the start of the course you are on
 - `/pk removewarp`: Makes the course private and removes the visitor's warp. Or break the **warped pressure plate** if there is one.
 
 ## Permissions
