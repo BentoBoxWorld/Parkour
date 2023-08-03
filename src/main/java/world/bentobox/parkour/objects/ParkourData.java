@@ -12,6 +12,7 @@ import world.bentobox.bentobox.database.objects.DataObject;
 import world.bentobox.bentobox.database.objects.Table;
 
 /**
+ * uniqueId is the island's UUID
  * @author tastybento
  *
  */
