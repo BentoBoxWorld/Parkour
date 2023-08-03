@@ -111,7 +111,7 @@ public class QuitCommandTest {
 
         prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
         prm.timers().put(uuid, 20L);
-        when(addon.getParkourRunManager()).thenReturn(prm);
+        when(addon.getParkourRunRecord()).thenReturn(prm);
 
         // Islands
         when(addon.getIslands()).thenReturn(im);

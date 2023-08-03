@@ -63,7 +63,7 @@ public class Parkour extends GameModeAddon implements Listener {
             .clickHandler(new CycleClick("PARKOUR_CREATIVE", RanksManager.COOP_RANK, RanksManager.OWNER_RANK)) // exclude visitor
             .build();
 
-    private ParkourRunRecord parkourRunManager;
+    private ParkourRunRecord parkourRunRecord;
 
     @Override
     public void onLoad() {
@@ -91,7 +91,7 @@ public class Parkour extends GameModeAddon implements Listener {
         adminCommand = new DefaultAdminCommand(this) {
         };
 
-        parkourRunManager = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
+        parkourRunRecord = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
 
         registerFlag(PARKOUR_CREATIVE);
 
@@ -239,21 +239,24 @@ public class Parkour extends GameModeAddon implements Listener {
     }
 
     /**
-     * @return the pm
+     * @return the ParkourManager
      */
     public ParkourManager getParkourManager() {
         return pm;
     }
 
     /**
-     * @return the rankings
+     * @return the RankingsUI
      */
     public RankingsUI getRankings() {
         return rankings;
     }
 
-    public ParkourRunRecord getParkourRunManager() {
-        return parkourRunManager;
+    /**
+     * @return the ParkourRunRecord
+     */
+    public ParkourRunRecord getParkourRunRecord() {
+        return parkourRunRecord;
     }
 
 

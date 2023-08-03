@@ -39,7 +39,7 @@ public class QuitCommand extends CompositeCommand {
             return false;
         }
 
-        if (!((Parkour) getAddon()).getParkourRunManager().timers().containsKey(user.getUniqueId())) {
+        if (!((Parkour) getAddon()).getParkourRunRecord().timers().containsKey(user.getUniqueId())) {
             user.sendMessage("parkour.errors.not-in-run");
             return false;
         }
@@ -50,7 +50,7 @@ public class QuitCommand extends CompositeCommand {
 
     @Override
     public boolean execute(User user, String label, List<String> args) {
-        ((Parkour)getAddon()).getParkourRunManager().clear(user.getUniqueId());
+        ((Parkour)getAddon()).getParkourRunRecord().clear(user.getUniqueId());
         Optional<Island> islandOptional = getAddon().getIslands().getIslandAt(user.getLocation());
         islandOptional.ifPresent(island -> {
             if (island.getFlag(((Parkour) getAddon()).PARKOUR_CREATIVE) <= island.getRank(user)) {

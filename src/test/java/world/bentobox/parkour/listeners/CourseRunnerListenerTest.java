@@ -194,7 +194,7 @@ public class CourseRunnerListenerTest {
 
         // Run Manager and ParkourManager
         prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
-        when(addon.getParkourRunManager()).thenReturn(prm);
+        when(addon.getParkourRunRecord()).thenReturn(prm);
         when(addon.inWorld(location)).thenReturn(true);
         when(addon.inWorld(world)).thenReturn(true);
         when(addon.getParkourManager()).thenReturn(parkourManager);

@@ -45,7 +45,7 @@ public class CourseRunnerListener extends AbstractListener {
      */
     public CourseRunnerListener(Parkour addon) {
         super(addon);
-        this.parkourRunManager = addon.getParkourRunManager();
+        this.parkourRunManager = addon.getParkourRunRecord();
     }
 
     /**
