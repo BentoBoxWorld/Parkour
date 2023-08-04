@@ -87,7 +87,16 @@ public class WarpCommand extends CompositeCommand {
 
     @Override
     public Optional<List<String>> tabComplete(User user, String alias, List<String> args) {
-        return Optional.of(new ArrayList<>(((Parkour)getAddon()).getParkourManager().getWarps().keySet()));
+        ArrayList<String> options = new ArrayList<>(((Parkour)getAddon()).getParkourManager().getWarps().keySet());
+        if (options.size() < 10) {
+            return Optional.of(options);
+        }
+        // List is too long; require at least the first letter
+        String lastArg = !args.isEmpty() ? args.get(args.size()-1) : "";
+        if (args.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(Util.tabLimit(options, lastArg));
     }
 
 }
