@@ -116,10 +116,10 @@ public class ParkourManager {
     }
 
     /**
-     * Get the rank of the player for this island
+     * Get the rank of the player for this island. If a
      * @param island island
      * @param uuid player UUID
-     * @return rank placing - note - placing of 1 means top ranked
+     * @return rank placing - 1 means top ranked.
      */
     public int getRank(Island island, UUID uuid) {
         Stream<Entry<UUID, Long>> stream = getIsland(island).getRankings().entrySet().stream()
@@ -145,30 +145,60 @@ public class ParkourManager {
         return cache.values();
     }
 
+    /**
+     * Get the end plate position for the course
+     * @param island island
+     * @return position or optional empty
+     */
     public Optional<Location> getStart(Island island) {
         return Optional.ofNullable(getIsland(island).getStart());
     }
 
+    /**
+     * Get the end plate position for the course
+     * @param island island
+     * @return position or optional empty
+     */
     public Optional<Location> getEnd(Island island) {
         return Optional.ofNullable(getIsland(island).getEnd());
     }
 
+    /**
+     * Get the warp spot for island
+     * @param island island
+     * @return warp spot or optional empty
+     */
     public Optional<Location> getWarpSpot(Island island) {
         return Optional.ofNullable(getIsland(island).getWarpSpot());
     }
 
+    /**
+     * Set the start plate position for island
+     * @param island island
+     * @param location position
+     */
     public void setStart(Island island, Location location) {
         getIsland(island).setStart(location);
         // Save every time right now
         saveIsland(island);
     }
 
+    /**
+     * Set the end plate position for island
+     * @param island island
+     * @param location position
+     */
     public void setEnd(Island island, Location location) {
         getIsland(island).setEnd(location);
         // Save every time right now
         saveIsland(island);
     }
 
+    /**
+     * Set the warp spot for island
+     * @param island island
+     * @param location warp spot
+     */
     public void setWarpSpot(Island island, Location location) {
         getIsland(island).setWarpSpot(location);
         // Save every time right now
