@@ -2,6 +2,7 @@ package world.bentobox.parkour;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,12 +27,14 @@ public class ParkourManager {
      * A cache of high scores. Key is island UUID
      */
     private final Map<String, ParkourData> cache;
+    private Parkour addon;
 
     /**
      * Handles storing a retrieval of score data for islands
      * @param addon Parkour addon
      */
     public ParkourManager(Parkour addon) {
+        this.addon = addon;
         // Get the BentoBox database
         // Set up the database handler to store and retrieve data
         // Note that these are saved by the BentoBox database
@@ -43,6 +46,9 @@ public class ParkourManager {
     }
 
     private ParkourData getIsland(Island island) {
+        if (!addon.inWorld(island.getWorld())) {
+            throw new IllegalArgumentException("Island is not in Parkour world: " + island.getWorld());
+        }
         return cache.computeIfAbsent(island.getUniqueId(), k -> getFromDb(island));
     }
 
@@ -110,10 +116,10 @@ public class ParkourManager {
     }
 
     /**
-     * Get the rank of the player for this island
+     * Get the rank of the player for this island. If a
      * @param island island
      * @param uuid player UUID
-     * @return rank placing - note - placing of 1 means top ranked
+     * @return rank placing - 1 means top ranked.
      */
     public int getRank(Island island, UUID uuid) {
         Stream<Entry<UUID, Long>> stream = getIsland(island).getRankings().entrySet().stream()
@@ -139,33 +145,80 @@ public class ParkourManager {
         return cache.values();
     }
 
+    /**
+     * Get the end plate position for the course
+     * @param island island
+     * @return position or optional empty
+     */
     public Optional<Location> getStart(Island island) {
         return Optional.ofNullable(getIsland(island).getStart());
     }
 
+    /**
+     * Get the end plate position for the course
+     * @param island island
+     * @return position or optional empty
+     */
     public Optional<Location> getEnd(Island island) {
         return Optional.ofNullable(getIsland(island).getEnd());
     }
 
+    /**
+     * Get the warp spot for island
+     * @param island island
+     * @return warp spot or optional empty
+     */
     public Optional<Location> getWarpSpot(Island island) {
         return Optional.ofNullable(getIsland(island).getWarpSpot());
     }
 
+    /**
+     * Set the start plate position for island
+     * @param island island
+     * @param location position
+     */
     public void setStart(Island island, Location location) {
         getIsland(island).setStart(location);
         // Save every time right now
         saveIsland(island);
     }
 
+    /**
+     * Set the end plate position for island
+     * @param island island
+     * @param location position
+     */
     public void setEnd(Island island, Location location) {
         getIsland(island).setEnd(location);
         // Save every time right now
         saveIsland(island);
     }
 
+    /**
+     * Set the warp spot for island
+     * @param island island
+     * @param location warp spot
+     */
     public void setWarpSpot(Island island, Location location) {
         getIsland(island).setWarpSpot(location);
         // Save every time right now
         saveIsland(island);
+    }
+
+    /**
+     * Get a map of warps to courses
+     * @return map with the key being the name of the island owner and value being the warp location
+     */
+    public Map<String, Location> getWarps() {
+        Map<String, Location> map = new HashMap<>();
+        for (ParkourData pd : getParkourData()) {
+            if (pd.getWarpSpot() == null) continue;
+            UUID owner = addon.getIslands().getIslandById(pd.getUniqueId()).map(Island::getOwner).orElse(null);
+            if (owner != null) {
+                String name = addon.getPlayers().getName(owner);
+                map.put(name, pd.getWarpSpot());
+            }
+        }
+        return map;
     }
 }

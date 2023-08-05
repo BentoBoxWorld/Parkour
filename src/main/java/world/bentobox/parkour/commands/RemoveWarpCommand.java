@@ -10,6 +10,11 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
 
+/**
+ * Removes the warp from the course and makes it private
+ * @author tastybento
+ *
+ */
 public class RemoveWarpCommand extends CompositeCommand {
 
     public RemoveWarpCommand(CompositeCommand parent) {
@@ -18,7 +23,7 @@ public class RemoveWarpCommand extends CompositeCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.removewarp");
+        this.setPermission("removewarp");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.removewarp.description");
         setConfigurableRankCommand();
@@ -38,7 +43,7 @@ public class RemoveWarpCommand extends CompositeCommand {
             return false;
         }
 
-        ParkourManager pm = ((Parkour)getAddon()).getPm();
+        ParkourManager pm = ((Parkour)getAddon()).getParkourManager();
         if (pm.getWarpSpot(island).isEmpty()) {
             user.sendMessage("parkour.errors.no-warp");
             return false;
@@ -48,7 +53,7 @@ public class RemoveWarpCommand extends CompositeCommand {
 
     @Override
     public boolean execute(User user, String label, List<String> args) {
-        ParkourManager pm = ((Parkour)getAddon()).getPm();
+        ParkourManager pm = ((Parkour)getAddon()).getParkourManager();
         Island island = getIslands().getIsland(getWorld(), user);
         user.sendMessage("parkour.warp.removed");
         pm.setWarpSpot(island, null);

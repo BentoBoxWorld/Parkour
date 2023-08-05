@@ -19,11 +19,11 @@ The Parkour addon is a BentoBox addon for Minecraft that allows players to creat
 To get started, use the `/pk` or `/parkour` command to access the parkour plugin. This will teleport players to an example parkour course and get them started. Admins can use blueprints to change the default course example or make additional ones.
 
 ### Course Creation
-1. Enter creative mode. Players will need permission to do this.
-2. Use creative mode tools to design your parkour course.
-3. Place gold pressure plates at the start and end points of the course.
-4. Optionally, add checkpoints throughout the course using blackstone pressure plates.
-5. Test your course to ensure it is playable and challenging.
+1. Use creative mode tools to design your parkour course.
+2. Place gold pressure plates at the start and end points of the course.
+3. Optionally, add checkpoints throughout the course using blackstone pressure plates.
+4. Test your course to ensure it is playable and challenging.
+5. Once it's ready, make your course public by making a warp to it by placing a warped pressure plate or using the `/pk setwarp` command
 
 ### Course Gameplay
 1. Locate the course you want to play using the `/pk courses` command, or play your own.
@@ -35,7 +35,7 @@ To get started, use the `/pk` or `/parkour` command to access the parkour plugin
 ### Team Collaboration
 1. Form a team with other players using the team creation commands `pk team invite <player name>`.
 2. Collaborate with your team members to design and build parkour courses.
-3. When you want to make your course available go to the starting area and set a warp point for visitors using `/pk setwarp`
+3. When you want to make your course available go to the starting area and set a warp point for visitors using `/pk setwarp` or place a **warped pressure plate** where you want visitors to arrive
 4. Use the `/pk courses` command to view and play each other's courses.
 5. Compete within the team to achieve the best times on the courses.
 
@@ -43,8 +43,10 @@ To get started, use the `/pk` or `/parkour` command to access the parkour plugin
 - `/pk`: Main command to start a parkour course and teleport to the parkour world.
 - `/pk courses`: List all the tracks or courses available and teleport to them.
 - `/pk top`: Show the Top Ten.
-- `/pk setwarp`: Places the course in the courses menu and sets the warp position visitors will arrive at
-- `/pk removewarp`: Makes the course private and removes the visitor's warp
+- `/pk setwarp`: Places the course in the courses menu and sets the warp position visitors will arrive at. This can also be done by placing a **warped pressure plate**
+- `/pk warp <course owner's name>`: warp to a course
+- `/pk warp`: warp to the start of the course you are on
+- `/pk removewarp`: Makes the course private and removes the visitor's warp. Or break the **warped pressure plate** if there is one.
 
 ## Permissions
 

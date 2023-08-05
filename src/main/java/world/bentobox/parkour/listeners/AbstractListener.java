@@ -20,15 +20,27 @@ public abstract class AbstractListener implements Listener {
     /**
      * @param addon Parkour addon
      */
-    public AbstractListener(Parkour addon) {
+    protected AbstractListener(Parkour addon) {
         this.addon = addon;
 
     }
 
+    /**
+     * Compares two Locations
+     * @param l1 location 1
+     * @param l2 location 2
+     * @return returns true if the worlds and block values are the same
+     */
     protected boolean isLocEquals(Location l1, Location l2) {
         return l1.getWorld().equals(l2.getWorld()) && l1.getBlockX() == l2.getBlockX() && l1.getBlockY() == l2.getBlockY() && l1.getBlockZ() == l2.getBlockZ();
     }
 
+    /**
+     * Returns a string describing the time taken by this user
+     * @param user user
+     * @param time time take in milliseconds
+     * @return description
+     */
     public static String getDuration(User user, long time) {
         double dur = time/1000D;
         String timeDescription = DF2.format(dur) + " " + user.getTranslationOrNothing("parkour.seconds");

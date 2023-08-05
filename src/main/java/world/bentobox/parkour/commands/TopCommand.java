@@ -8,6 +8,11 @@ import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.parkour.Parkour;
 
+/**
+ * Top ten command. Show a Top Ten GUI for the course.
+ * @author tastybento
+ *
+ */
 public class TopCommand extends CompositeCommand {
 
     private Island island;
@@ -18,7 +23,7 @@ public class TopCommand extends CompositeCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.top");
+        this.setPermission("top");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.top.description");
     }

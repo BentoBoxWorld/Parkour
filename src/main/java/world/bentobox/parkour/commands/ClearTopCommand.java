@@ -38,10 +38,10 @@ public class ClearTopCommand extends ConfirmableCommand {
 
     @Override
     public void setup() {
-        this.setPermission("parkour.cleartop");
+        this.setPermission("cleartop");
         setOnlyPlayer(true);
         setDescription("parkour.commands.parkour.cleartop.description");
-        this.setParametersHelp(".commands.parkour.cleartop.parameters");
+        this.setParametersHelp("parkour.commands.parkour.cleartop.parameters");
         setConfigurableRankCommand();
         this.setDefaultCommandRank(RanksManager.OWNER_RANK);
         addon = getAddon();
@@ -78,27 +78,32 @@ public class ClearTopCommand extends ConfirmableCommand {
 
     @Override
     public boolean execute(User user, String label, List<String> args) {
-        this.askConfirmation(user, () -> confirmed(user, label, args));
+        this.askConfirmation(user, () -> confirmed(user));
         return true;
     }
 
-    void confirmed(User user, String label, List<String> args) {
+    void confirmed(User user) {
         Island island = getIslands().getIsland(getWorld(), user);
-        if (island != null && targetUUID == null) {
-            addon.getPm().clearScores(island);
-        } else if (island != null && targetUUID != null) {
-            addon.getPm().removeScore(island, User.getInstance(targetUUID));
-        } else {
+        if (island == null) {
             user.sendMessage("general.errors.no-island");
-            return;
+        } else {
+            // Island is not null
+            if (targetUUID != null) {
+                // Remove just this target's score
+                addon.getParkourManager().removeScore(island, User.getInstance(targetUUID));
+            } else {
+                // Remove all scores
+                addon.getParkourManager().clearScores(island);
+            }
+            user.sendMessage("general.success");
         }
-        user.sendMessage("general.success");
     }
 
     @Override
     public Optional<List<String>> tabComplete(User user, String label, List<String> args) {
         Island island = getIslands().getIsland(getWorld(), user);
-        return Optional.of(addon.getPm().getRankings(island, 10).keySet().stream().map(getAddon().getPlayers()::getName)
+        if (island == null) return Optional.empty();
+        return Optional.of(addon.getParkourManager().getRankings(island, 10).keySet().stream().map(getAddon().getPlayers()::getName)
                 .filter(name -> !name.isBlank()).toList());
     }
 

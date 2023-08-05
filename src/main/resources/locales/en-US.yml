@@ -37,13 +37,18 @@ parkour:
     beat-previous-time: "&d You beat your previous time!"
     did-not-beat-previous-time: "&b You didn't beat your previous time!"
   errors:
-    not-on-island: "&c You must be on an island to do that"
+    not-on-island: "&c You must be on an parkour course to do that"
     no-warp: "&c This course is already private"
+    not-in-run: "&c You must currently be running a course to do that"
   warp:
     set: "&d Warp spot set! Players can now see your course!"
     replaced: "&e Warp spot set! Old spot deactivated!"
     removed: "&c Warp spot removed. Players will not see your course."
     warping: "&a Warping to the course!"
+    no-warp: "&c There is no warp set for this course!"
+    unknown-course: "&c Unknown course!"
+  quit:
+    success: "&e You have now quit your run, and can run commands again"
   general:
     errors:
       no-island: '&c You do not have a course!'
@@ -61,6 +66,9 @@ parkour:
         parameters: <player name>
       setwarp:
         description: sets the warp spot and makes your course public 
+      warp:
+        description: Warp to a course by name or to the start if you are on one
+        parameters:  <course name>
       removewarp:
         description: removes the warp spot and makes your course private
       help:
@@ -71,6 +79,8 @@ parkour:
         parameters: '[home number]'
       top:
         description: "Show the top course rankings"
+      quit:
+        description: "Stop the timer on the current course"
     island:
       go:
         parameters: '[home number]'
@@ -341,6 +351,12 @@ parkour:
         deleted-island: '&a Area at &e [xyz] &a has been successfully regenerated.'
   protection:
     flags:
+      PARKOUR_CREATIVE:
+        description: |
+          &a Toggles entering creative mode
+          &a at end of course and
+          &a entering the island
+        name: "Parkour Creative Mode"
       ELYTRA:
         description: Toggle use
       ENDERMAN_GRIEFING:

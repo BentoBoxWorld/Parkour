@@ -45,6 +45,7 @@ import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.Settings;
 
 /**
+ * Set warp command testd
  * @author tastybento
  *
  */
@@ -73,6 +74,8 @@ public class SetWarpCommandTest {
     private SetWarpCommand cmd;
     @Mock
     private ParkourManager parkourManager;
+    @Mock
+    private Location location;
 
     /**
      * @throws java.lang.Exception
@@ -80,7 +83,6 @@ public class SetWarpCommandTest {
     @Before
     public void setUp() throws Exception {
         // Set up plugin
-        BentoBox plugin = mock(BentoBox.class);
         Whitebox.setInternalState(BentoBox.class, "instance", plugin);
 
         // Command manager
@@ -117,11 +119,14 @@ public class SetWarpCommandTest {
         // Parkour Manager
         // No warp spot
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
-        when(addon.getPm()).thenReturn(parkourManager);
+        // Start and end plates are set
+        when(parkourManager.getStart(island)).thenReturn(Optional.of(location));
+        when(parkourManager.getEnd(island)).thenReturn(Optional.of(location));
+        when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // IWM
         when(plugin.getIWM()).thenReturn(iwm);
-        when(iwm.getPermissionPrefix(any())).thenReturn("bskyblock.");
+        when(iwm.getPermissionPrefix(any())).thenReturn("parkour.");
 
         // Settings
         Settings settings = new Settings();
@@ -148,7 +153,7 @@ public class SetWarpCommandTest {
      */
     @Test
     public void testSetup() {
-        assertEquals("parkour.setwarp", cmd.getPermission());
+        assertEquals("setwarp", cmd.getPermission());
         assertEquals("parkour.commands.parkour.setwarp.description", cmd.getDescription());
         assertTrue(cmd.isConfigurableRankCommand());
         assertTrue(cmd.isOnlyPlayer());
@@ -184,6 +189,24 @@ public class SetWarpCommandTest {
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, RanksManager.MEMBER_RANK_REF);
 
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.commands.SetWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
+     */
+    @Test
+    public void testCanExecuteNoStartEndPlates() {
+        // Has rank
+        when(island.getRankCommand(anyString())).thenReturn(RanksManager.MEMBER_RANK);
+        // No start plate
+        when(parkourManager.getStart(island)).thenReturn(Optional.empty());
+        assertFalse(cmd.canExecute(user, "", List.of()));
+        verify(user).notify("parkour.no-start-yet");
+        // Start, but no end plate
+        when(parkourManager.getStart(island)).thenReturn(Optional.of(location));
+        when(parkourManager.getEnd(island)).thenReturn(Optional.empty());
+        assertFalse(cmd.canExecute(user, "", List.of()));
+        verify(user).notify("parkour.no-end-yet");
     }
 
     /**
