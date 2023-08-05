@@ -84,15 +84,19 @@ public class ClearTopCommand extends ConfirmableCommand {
 
     void confirmed(User user) {
         Island island = getIslands().getIsland(getWorld(), user);
-        if (island != null && targetUUID == null) {
-            addon.getParkourManager().clearScores(island);
-        } else if (island != null && targetUUID != null) {
-            addon.getParkourManager().removeScore(island, User.getInstance(targetUUID));
-        } else {
+        if (island == null) {
             user.sendMessage("general.errors.no-island");
-            return;
+        } else {
+            // Island is not null
+            if (targetUUID != null) {
+                // Remove just this target's score
+                addon.getParkourManager().removeScore(island, User.getInstance(targetUUID));
+            } else {
+                // Remove all scores
+                addon.getParkourManager().clearScores(island);
+            }
+            user.sendMessage("general.success");
         }
-        user.sendMessage("general.success");
     }
 
     @Override

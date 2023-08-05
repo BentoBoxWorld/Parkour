@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -121,7 +120,7 @@ public class ParkourManagerTest {
         when(location.getWorld()).thenReturn(world);
         when(location.clone()).thenReturn(location);
         island.setCenter(location);
-        when(im.getIsland(eq(world), eq(user))).thenReturn(island);
+        when(im.getIsland(world, user)).thenReturn(island);
 
         when(im.getIslandById(anyString())).thenReturn(Optional.of(island));
 
@@ -181,7 +180,7 @@ public class ParkourManagerTest {
         parkourManager.addScore(island, user, 10L);
         Map<UUID, Long> ranks = parkourManager.getRankings(island, 10L);
         assertEquals(1, ranks.size());
-        assertTrue(ranks.get(uuid) == 10L);
+        assertEquals(Long.valueOf(10), ranks.get(uuid));
     }
 
     /**

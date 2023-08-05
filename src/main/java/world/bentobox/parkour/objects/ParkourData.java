@@ -12,7 +12,8 @@ import world.bentobox.bentobox.database.objects.DataObject;
 import world.bentobox.bentobox.database.objects.Table;
 
 /**
- * uniqueId is the island's UUID
+ * uniqueId is the island's UUID.
+ * Note: this class has a natural ordering that is inconsistent with equals. It is based on runCount.
  * @author tastybento
  *
  */
@@ -128,9 +129,15 @@ public class ParkourData implements DataObject, Comparable<ParkourData> {
         this.warpSpot = warpSpot;
     }
 
+    /**
+     * Sort based on runCount. Other classes may have the same runCount but that does not
+     * mean they are equal to each other, except in terms of runCount.
+     */
     @Override
     public int compareTo(ParkourData o) {
         return Integer.compare(this.runCount, o.getRunCount());
     }
+
+
 
 }

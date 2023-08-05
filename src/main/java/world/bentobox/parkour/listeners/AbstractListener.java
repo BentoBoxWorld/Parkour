@@ -20,7 +20,7 @@ public abstract class AbstractListener implements Listener {
     /**
      * @param addon Parkour addon
      */
-    public AbstractListener(Parkour addon) {
+    protected AbstractListener(Parkour addon) {
         this.addon = addon;
 
     }
