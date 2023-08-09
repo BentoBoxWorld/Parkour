@@ -142,7 +142,6 @@ public class WarpCommandTest {
 
         // Location
         when(location.clone()).thenReturn(location);
-        when(location.add(any(Vector.class))).thenReturn(location);
 
         // Settings
         Settings settings = new Settings();
@@ -267,7 +266,6 @@ public class WarpCommandTest {
         verify(user).sendMessage("parkour.warp.warping");
         // Teleport user
         verify(p, times(2)).playSound(location, Sound.ENTITY_BAT_TAKEOFF, 1F, 1F);
-        verify(location).add(any(Vector.class));
         PowerMockito.verifyStatic(Util.class);
         Util.teleportAsync(p, location, TeleportCause.COMMAND);
 
