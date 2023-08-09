@@ -16,6 +16,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -71,11 +72,40 @@ public class CourseRunnerListener extends AbstractListener {
         } else if (!parkourRunManager.timers().containsKey(e.getPlayerUUID())) {
             user.notify("parkour.to-start");
         }
-        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-            user.setGameMode(GameMode.CREATIVE);
-        } else {
-            user.setGameMode(GameMode.SURVIVAL);
+
+        if (addon.inWorld(user.getLocation())) {
+            // only affect gamemode if they are currently in the parkour world
+            // cross world teleportation is handled in onPlayerChangeWorld
+            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
+                user.setGameMode(GameMode.CREATIVE);
+            } else {
+                user.setGameMode(GameMode.SURVIVAL);
+            }
         }
+
+
+    }
+
+    @EventHandler
+    public void onPlayerChangeWorld(PlayerChangedWorldEvent event) {
+        User user = User.getInstance(event.getPlayer());
+        Location currentLocation = user.getLocation();
+        if (!addon.inWorld(currentLocation)) {
+            return;
+        }
+        // Check if player is in a parkour course
+        Optional<Island> course = addon.getIslandsManager().getIslandAt(currentLocation);
+        if (course.isEmpty()) {
+            return;
+        }
+
+        course.ifPresent(island -> {
+            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
+                user.setGameMode(GameMode.CREATIVE);
+            } else {
+                user.setGameMode(GameMode.SURVIVAL);
+            }
+        });
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
