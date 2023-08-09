@@ -1,19 +1,5 @@
 package world.bentobox.parkour.listeners;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.contains;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,12 +58,15 @@ import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.ParkourRunRecord;
 import world.bentobox.parkour.Settings;
 
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
 /**
  * @author tastybento
- *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Bukkit.class, BentoBox.class, User.class })
+@PrepareForTest({Bukkit.class, BentoBox.class, User.class})
 public class CourseRunnerListenerTest {
 
     @Mock
@@ -190,7 +179,9 @@ public class CourseRunnerListenerTest {
 
         // Location
         when(location.getWorld()).thenReturn(world);
-        when(location.toVector()).thenReturn(new Vector(0,0,0));
+        when(location.toVector()).thenReturn(new Vector(0, 0, 0));
+        when(location.clone()).thenReturn(location);
+        when(location.add(0.5, 0, 0.5)).thenReturn(location);
 
         // Run Manager and ParkourManager
         prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>(), new ArrayList<>());
@@ -523,7 +514,7 @@ public class CourseRunnerListenerTest {
     @Test
     public void testOnCheckpointInitialChecks() {
         Location l = mock(Location.class);
-        when(l.toVector()).thenReturn(new Vector(100,0,20)); // Different to location
+        when(l.toVector()).thenReturn(new Vector(100, 0, 20)); // Different to location
         prm.checkpoints().put(uuid, l);
 
         when(block.getType()).thenReturn(Material.STONE);
