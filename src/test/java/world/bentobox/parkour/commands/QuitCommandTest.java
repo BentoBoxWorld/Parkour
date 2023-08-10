@@ -11,6 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -109,7 +110,7 @@ public class QuitCommandTest {
         when(ac.getWorld()).thenReturn(world);
         when(ac.getAddon()).thenReturn(addon);
 
-        prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
+        prm = new ParkourRunRecord(new HashMap<>(), new HashMap<>(), new ArrayList<>());
         prm.timers().put(uuid, 20L);
         when(addon.getParkourRunRecord()).thenReturn(prm);
 
