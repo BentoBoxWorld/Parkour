@@ -29,6 +29,7 @@ import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
+import world.bentobox.bentobox.util.Util;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourRunRecord;
 
@@ -117,9 +118,8 @@ public class CourseRunnerListener extends AbstractListener {
         Location checkpointLocation = parkourRunManager.checkpoints().get(player.getUniqueId());
         checkpointLocation = checkpointLocation.clone().add(0.5, 0, 0.5);
         parkourRunManager.currentlyTeleporting().add(player.getUniqueId());
-        player.teleport(checkpointLocation);
-        parkourRunManager.currentlyTeleporting().remove(player.getUniqueId());
-
+        Util.teleportAsync(player, checkpointLocation, PlayerTeleportEvent.TeleportCause.PLUGIN)
+                .thenAccept(b -> parkourRunManager.currentlyTeleporting().remove(player.getUniqueId()));
     }
 
     @EventHandler
