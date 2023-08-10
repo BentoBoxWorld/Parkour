@@ -1,5 +1,6 @@
 package world.bentobox.parkour;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Material;
@@ -91,7 +92,7 @@ public class Parkour extends GameModeAddon implements Listener {
         adminCommand = new DefaultAdminCommand(this) {
         };
 
-        parkourRunRecord = new ParkourRunRecord(new HashMap<>(), new HashMap<>());
+        parkourRunRecord = new ParkourRunRecord(new HashMap<>(), new HashMap<>(), new ArrayList<>());
 
         registerFlag(PARKOUR_CREATIVE);
 

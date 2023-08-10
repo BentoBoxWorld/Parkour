@@ -50,10 +50,11 @@ public class MakeCourseListener extends AbstractListener {
             Optional<Location> warpSpot = addon.getParkourManager().getWarpSpot(island);
             if (warpSpot.isEmpty()) {
                 user.notify("parkour.warp.set");
-                addon.getParkourManager().setWarpSpot(island, l);
             } else {
                 user.notify("parkour.warp.replaced");
             }
+            // shift from block to player location
+            addon.getParkourManager().setWarpSpot(island, l.add(0.5,0,0.5));
         }
     }
 
