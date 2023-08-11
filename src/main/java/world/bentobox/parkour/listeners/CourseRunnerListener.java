@@ -17,6 +17,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -73,10 +74,40 @@ public class CourseRunnerListener extends AbstractListener {
         } else if (!parkourRunManager.timers().containsKey(e.getPlayerUUID())) {
             user.notify("parkour.to-start");
         }
-        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-            user.setGameMode(GameMode.CREATIVE);
-        } else {
-            user.setGameMode(GameMode.SURVIVAL);
+
+        // the location that the player teleports from
+        Location fromLocation = user.getLocation();
+
+        if (addon.inWorld(fromLocation)) {
+            // if the player is staying in a parkour managed world they can have their gamemode changed
+            // this occurs when their island changes, so wont risk affecting players that are currently running
+            // since exit would trigger first
+            // cross (unmanaged) world teleportation is handled in onPlayerChangeWorld
+
+            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
+                user.setGameMode(GameMode.CREATIVE);
+            } else {
+                user.setGameMode(GameMode.SURVIVAL);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerChangeWorld(PlayerChangedWorldEvent event) {
+        User user = User.getInstance(event.getPlayer());
+        Location currentLocation = user.getLocation();
+        boolean fromParkour = addon.inWorld(event.getFrom());
+        boolean toParkour = addon.inWorld(currentLocation);
+
+        if (toParkour && !fromParkour) {
+            // switching from non-parkour world to parkour world
+            addon.getIslandsManager().getIslandAt(currentLocation).ifPresent(island -> {
+                if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
+                    user.setGameMode(GameMode.CREATIVE);
+                } else {
+                    user.setGameMode(GameMode.SURVIVAL);
+                }
+            });
         }
     }
 
@@ -93,6 +124,10 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerDeath(PlayerDeathEvent e) {
         // Game over
+        User user = User.getInstance(e.getEntity().getUniqueId());
+        if (parkourRunManager.checkpoints().containsKey(e.getEntity().getUniqueId()) && user.isOnline()) {
+            user.notify("parkour.session-ended");
+        }
         parkourRunManager.clear(e.getEntity().getUniqueId());
     }
 
@@ -125,8 +160,8 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         boolean shouldStopRun = switch (e.getCause()) {
-            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED -> false;
-            case COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN -> true;
+        case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
+        case COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
         UUID playerUUID = e.getPlayer().getUniqueId();
         if (!parkourRunManager.currentlyTeleporting().contains(playerUUID) && shouldStopRun && parkourRunManager.timers().containsKey(playerUUID)) {
@@ -146,7 +181,11 @@ public class CourseRunnerListener extends AbstractListener {
         Optional<Island> fromIsland = addon.getIslands().getIslandAt(e.getFrom());
         Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
 
-        if (fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
+        boolean shouldAlterGamemode = switch (e.getCause()) {
+            case COMMAND, PLUGIN, UNKNOWN -> true;
+            default -> false;
+        };
+        if (shouldAlterGamemode && fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
             // same island teleport
             Island island = fromIsland.get();
             User user = User.getInstance(e.getPlayer());
