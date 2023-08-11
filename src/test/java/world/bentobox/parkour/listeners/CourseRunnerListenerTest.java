@@ -36,6 +36,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.stubbing.Answer;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
@@ -53,6 +54,7 @@ import world.bentobox.bentobox.managers.IslandsManager;
 import world.bentobox.bentobox.managers.LocalesManager;
 import world.bentobox.bentobox.managers.PlaceholdersManager;
 import world.bentobox.bentobox.managers.RanksManager;
+import world.bentobox.bentobox.util.Util;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.ParkourRunRecord;
@@ -66,7 +68,7 @@ import static org.mockito.Mockito.*;
  * @author tastybento
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Bukkit.class, BentoBox.class, User.class})
+@PrepareForTest({Bukkit.class, BentoBox.class, User.class, Util.class})
 public class CourseRunnerListenerTest {
 
     @Mock
@@ -199,6 +201,7 @@ public class CourseRunnerListenerTest {
         // Block
         when(block.getType()).thenReturn(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
         when(block.getLocation()).thenReturn(location);
+
         // DUT
         crl = new CourseRunnerListener(addon);
     }
@@ -311,6 +314,7 @@ public class CourseRunnerListenerTest {
      */
     @Test
     public void testOnVisitorFall() {
+        PowerMockito.mockStatic(Util.class, RETURNS_MOCKS);
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
@@ -318,7 +322,8 @@ public class CourseRunnerListenerTest {
         verify(player).playEffect(EntityEffect.ENTITY_POOF);
         verify(player).setVelocity(new Vector(0, 0, 0));
         verify(player).setFallDistance(0);
-        verify(player).teleport(location);
+        PowerMockito.verifyStatic(Util.class);
+        Util.teleportAsync(player, location, PlayerTeleportEvent.TeleportCause.PLUGIN);
     }
 
     /**
@@ -560,9 +565,10 @@ public class CourseRunnerListenerTest {
             // Fire event
             crl.onTeleport(e);
         }
-        // Should fire 7 times: COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN
-        verify(notifier, times(7)).notify(any(), eq("parkour.session-ended"));
-        verify(player, times(7)).setGameMode(GameMode.CREATIVE);
+        // Should fire 5 times: COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN
+        verify(notifier, times(5)).notify(any(), eq("parkour.session-ended"));
+        // Should happen just 3 times: COMMAND, PLUGIN, UNKNOWN
+        verify(player, times(3)).setGameMode(GameMode.CREATIVE);
         verify(player, never()).setGameMode(GameMode.SURVIVAL);
     }
 
@@ -587,7 +593,7 @@ public class CourseRunnerListenerTest {
         // Make the event
         Location l = mock(Location.class);
         when(l.getWorld()).thenReturn(mock(World.class));
-        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, l, TeleportCause.CHORUS_FRUIT);
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, l, TeleportCause.PLUGIN);
         // Fire event
         crl.onTeleport(e);
         verify(player, never()).setGameMode(GameMode.CREATIVE);
@@ -604,7 +610,7 @@ public class CourseRunnerListenerTest {
         when(l.getWorld()).thenReturn(world);
         Island i = mock(Island.class);
         when(im.getIslandAt(l)).thenReturn(Optional.of(i));
-        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, l, TeleportCause.CHORUS_FRUIT);
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, l, TeleportCause.PLUGIN);
         // Fire event
         crl.onTeleport(e);
         verify(player, never()).setGameMode(GameMode.CREATIVE);
@@ -618,13 +624,31 @@ public class CourseRunnerListenerTest {
     public void testOnTeleportToFlagActionVisitors() {
         when(island.getFlag(any())).thenReturn(RanksManager.MEMBER_RANK);
         when(island.getRank(any(User.class))).thenReturn(RanksManager.VISITOR_RANK);
+
         // Make the event
-        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, location, TeleportCause.CHORUS_FRUIT);
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, location, TeleportCause.PLUGIN);
         // Fire event
         crl.onTeleport(e);
         verify(player, never()).setGameMode(GameMode.CREATIVE);
         // Visitors should be set to survival when they teleport to the island.
         verify(player).setGameMode(GameMode.SURVIVAL);
+    }
+
+    /**
+     * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
+     */
+    @Test
+    public void testOnTeleportToFlagActionVisitorsChorusFruit() {
+        when(island.getFlag(any())).thenReturn(RanksManager.MEMBER_RANK);
+        when(island.getRank(any(User.class))).thenReturn(RanksManager.VISITOR_RANK);
+
+        // Make the event
+        PlayerTeleportEvent e = new PlayerTeleportEvent(player, location, location, TeleportCause.CHORUS_FRUIT);
+        // Fire event
+        crl.onTeleport(e);
+        // Never alter the game mode
+        verify(player, never()).setGameMode(GameMode.CREATIVE);
+        verify(player, never()).setGameMode(GameMode.SURVIVAL);
     }
 
 

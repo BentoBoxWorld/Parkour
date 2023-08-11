@@ -154,7 +154,7 @@ public class CourseRunnerListener extends AbstractListener {
         checkpointLocation = checkpointLocation.clone().add(0.5, 0, 0.5);
         parkourRunManager.currentlyTeleporting().add(player.getUniqueId());
         Util.teleportAsync(player, checkpointLocation, PlayerTeleportEvent.TeleportCause.PLUGIN)
-                .thenAccept(b -> parkourRunManager.currentlyTeleporting().remove(player.getUniqueId()));
+        .thenAccept(b -> parkourRunManager.currentlyTeleporting().remove(player.getUniqueId()));
     }
 
     @EventHandler
@@ -182,8 +182,8 @@ public class CourseRunnerListener extends AbstractListener {
         Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
 
         boolean shouldAlterGamemode = switch (e.getCause()) {
-            case COMMAND, PLUGIN, UNKNOWN -> true;
-            default -> false;
+        case COMMAND, PLUGIN, UNKNOWN -> true;
+        default -> false;
         };
         if (shouldAlterGamemode && fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
             // same island teleport
