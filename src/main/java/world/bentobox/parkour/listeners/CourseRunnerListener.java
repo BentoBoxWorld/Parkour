@@ -5,11 +5,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,6 +22,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.util.Vector;
@@ -84,32 +87,53 @@ public class CourseRunnerListener extends AbstractListener {
             // since exit would trigger first
             // cross (unmanaged) world teleportation is handled in onPlayerChangeWorld
 
-            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-                user.setGameMode(GameMode.CREATIVE);
-            } else {
-                user.setGameMode(GameMode.SURVIVAL);
-            }
+            updateGamemode(island, user);
         }
     }
 
     @EventHandler
     public void onPlayerChangeWorld(PlayerChangedWorldEvent event) {
         User user = User.getInstance(event.getPlayer());
-        Location currentLocation = user.getLocation();
         boolean fromParkour = addon.inWorld(event.getFrom());
-        boolean toParkour = addon.inWorld(currentLocation);
+        World newWorld = user.getWorld();
+        boolean toParkour = addon.inWorld(newWorld);
 
         if (toParkour && !fromParkour) {
             // switching from non-parkour world to parkour world
-            addon.getIslandsManager().getIslandAt(currentLocation).ifPresent(island -> {
-                if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-                    user.setGameMode(GameMode.CREATIVE);
-                } else {
-                    user.setGameMode(GameMode.SURVIVAL);
+            Bukkit.getServer().getScheduler().runTaskLater(addon.getPlugin(), () -> {
+                Location currentLocation = user.getLocation();
+
+                // world has changed in the 2 ticks delay, dont set gamemode
+                if (currentLocation.getWorld() != newWorld) {
+                    return;
                 }
-            });
+
+                addon.getIslandsManager().getIslandAt(currentLocation).ifPresent(island -> updateGamemode(island, user));
+            }, 2); // 2 ticks since multiverse overrides gamemode after 1 tick
         }
     }
+
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        User user = User.getInstance(event.getPlayer());
+        World world = user.getWorld();
+        if (!addon.inWorld(world)) {
+            return;
+        }
+
+        Bukkit.getServer().getScheduler().runTaskLater(addon.getPlugin(), () -> {
+            Location currentLocation = user.getLocation();
+
+            // world has changed in the 2 ticks delay, dont set gamemode
+            if (currentLocation.getWorld() != world) {
+                return;
+            }
+
+            addon.getIslandsManager().getIslandAt(currentLocation).ifPresent(island -> updateGamemode(island, user));
+        }, 2);
+    }
+
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorLeave(IslandExitEvent e) {
@@ -154,14 +178,14 @@ public class CourseRunnerListener extends AbstractListener {
         checkpointLocation = checkpointLocation.clone().add(0.5, 0, 0.5);
         parkourRunManager.currentlyTeleporting().add(player.getUniqueId());
         Util.teleportAsync(player, checkpointLocation, PlayerTeleportEvent.TeleportCause.PLUGIN)
-        .thenAccept(b -> parkourRunManager.currentlyTeleporting().remove(player.getUniqueId()));
+                .thenAccept(b -> parkourRunManager.currentlyTeleporting().remove(player.getUniqueId()));
     }
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         boolean shouldStopRun = switch (e.getCause()) {
-        case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
-        case COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN -> true;
+            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
+            case COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
         UUID playerUUID = e.getPlayer().getUniqueId();
         if (!parkourRunManager.currentlyTeleporting().contains(playerUUID) && shouldStopRun && parkourRunManager.timers().containsKey(playerUUID)) {
@@ -182,20 +206,22 @@ public class CourseRunnerListener extends AbstractListener {
         Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
 
         boolean shouldAlterGamemode = switch (e.getCause()) {
-        case COMMAND, PLUGIN, UNKNOWN -> true;
-        default -> false;
+            case COMMAND, PLUGIN, UNKNOWN -> true;
+            default -> false;
         };
         if (shouldAlterGamemode && fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
             // same island teleport
-            Island island = fromIsland.get();
             User user = User.getInstance(e.getPlayer());
-            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-                user.setGameMode(GameMode.CREATIVE);
-            } else {
-                user.setGameMode(GameMode.SURVIVAL);
-            }
+            updateGamemode(fromIsland.get(), user);
         }
+    }
 
+    private void updateGamemode(Island island, User user) {
+        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
+            user.setGameMode(GameMode.CREATIVE);
+        } else {
+            user.setGameMode(GameMode.SURVIVAL);
+        }
     }
 
 
