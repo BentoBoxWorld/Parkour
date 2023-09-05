@@ -217,6 +217,10 @@ public class CourseRunnerListener extends AbstractListener {
     }
 
     private void updateGamemode(Island island, User user) {
+        if (user.hasPermission("parkour.mod.bypassgamemodechange")) {
+            return;
+        }
+
         if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
             user.setGameMode(GameMode.CREATIVE);
         } else {
