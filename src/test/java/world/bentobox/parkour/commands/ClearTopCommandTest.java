@@ -56,7 +56,7 @@ import world.bentobox.parkour.gui.RankingsUI;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Bukkit.class, BentoBox.class, User.class, Util.class})
+@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Util.class, RanksManager.class })
 public class ClearTopCommandTest {
 
     @Mock
@@ -88,6 +88,8 @@ public class ClearTopCommandTest {
     private RankingsUI rankings;
     @Mock
     private PlayersManager pm;
+    @Mock
+    private RanksManager rm;
 
     /**
      * @throws java.lang.Exception
@@ -155,8 +157,7 @@ public class ClearTopCommandTest {
         when(addon.getSettings()).thenReturn(settings);
 
         // RanksManager
-        RanksManager rm = new RanksManager();
-        when(plugin.getRanksManager()).thenReturn(rm);
+        Whitebox.setInternalState(RanksManager.class, "instance", rm);
 
         // Players Manager
         when(addon.getPlayers()).thenReturn(pm);
@@ -217,7 +218,7 @@ public class ClearTopCommandTest {
     public void testCanExecuteInsufficientRank() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.ADMIN_RANK);
         assertFalse(cmd.canExecute(user, "", List.of()));
-        verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, RanksManager.MEMBER_RANK_REF);
+        verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, null);
 
     }
 

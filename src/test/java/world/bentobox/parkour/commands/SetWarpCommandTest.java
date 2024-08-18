@@ -24,7 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -43,6 +45,7 @@ import world.bentobox.parkour.Settings;
  *
  */
 @RunWith(PowerMockRunner.class)
+@PrepareForTest(RanksManager.class)
 public class SetWarpCommandTest extends AbstractParkourTest {
 	@Mock
 	private LocalesManager lm;
@@ -56,6 +59,8 @@ public class SetWarpCommandTest extends AbstractParkourTest {
 	private Location location;
 	@Mock
 	private CompositeCommand ac;
+    @Mock
+    private RanksManager rm;
 
 	/**
 	 * @throws java.lang.Exception
@@ -112,8 +117,8 @@ public class SetWarpCommandTest extends AbstractParkourTest {
 		when(addon.getSettings()).thenReturn(settings);
 
 		// RanksManager
-		RanksManager rm = new RanksManager();
-		when(plugin.getRanksManager()).thenReturn(rm);
+        Whitebox.setInternalState(RanksManager.class, "instance", rm);
+        when(rm.getRank(any())).thenReturn("ranks.member");
 
 		// DUT
 		cmd = new SetWarpCommand(ac);

@@ -55,7 +55,8 @@ import world.bentobox.bentobox.util.Util;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Config.class, DatabaseSetup.class, Util.class })
+@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Config.class, DatabaseSetup.class, Util.class,
+        RanksManager.class })
 public abstract class AbstractParkourTest {
 
 	@Mock
@@ -76,6 +77,8 @@ public abstract class AbstractParkourTest {
 	protected IslandWorldManager iwm;
 	@Mock
 	protected Parkour addon;
+    @Mock
+    private RanksManager rm;
 	protected static AbstractDatabaseHandler<Object> h;
 
 	@SuppressWarnings("unchecked")
@@ -170,9 +173,8 @@ public abstract class AbstractParkourTest {
 		when(fm.getFlags()).thenReturn(Collections.emptyList());
 
 		// RanksManager
-		RanksManager rm = new RanksManager();
-		when(plugin.getRanksManager()).thenReturn(rm);
-
+        Whitebox.setInternalState(RanksManager.class, "instance", rm);
+        when(rm.getRank(any())).thenReturn("ranks.member");
 	}
 
 }
