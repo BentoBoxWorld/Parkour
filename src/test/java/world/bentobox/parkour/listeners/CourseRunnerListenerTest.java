@@ -30,6 +30,8 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.damage.DamageSource;
+import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -281,7 +283,8 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 	 */
 	@Test
 	public void testOnPlayerDeath() {
-		PlayerDeathEvent e = new PlayerDeathEvent(player, new ArrayList<>(), 0, 0, 0, 0, "");
+        PlayerDeathEvent e = new PlayerDeathEvent(player, DamageSource.builder(DamageType.ARROW).build(),
+                new ArrayList<>(), 0, 0, 0, 0, null);
 		crl.onPlayerDeath(e);
 		assertFalse(prm.timers().containsKey(uuid));
 		assertFalse(prm.checkpoints().containsKey(uuid));
@@ -308,7 +311,7 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 		PowerMockito.mockStatic(Util.class, RETURNS_MOCKS);
 		prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 		prm.checkpoints().put(uuid, location);
-		EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, 1D);
+        EntityDamageEvent e = new EntityDamageEvent(player, null, null, null);
 		crl.onVisitorFall(e);
 		verify(player).playEffect(EntityEffect.ENTITY_POOF);
 		verify(player).setVelocity(new Vector(0, 0, 0));

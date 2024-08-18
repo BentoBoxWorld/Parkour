@@ -138,6 +138,15 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.max-areas")
     private int maxIslands = -1;
 
+    @ConfigComment("The number of concurrent areas a player can have")
+    @ConfigComment("A value of 0 will use the BentoBox config.yml default")
+    @ConfigEntry(path = "world.concurrent-area")
+    private int concurrentIslands = 0;
+
+    @ConfigComment("Disallow team members from having their own area.")
+    @ConfigEntry(path = "world.disallow-team-member-areas")
+    private boolean disallowTeamMemberIslands = true;
+
     @ConfigComment("The default game mode for this world. Players will be set to this mode when they create")
     @ConfigComment("a new area for example. Options are SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR")
     @ConfigEntry(path = "world.default-game-mode")
@@ -1720,5 +1729,34 @@ public class Settings implements WorldSettings {
      */
     public void setDefaultEndBiome(Biome defaultEndBiome) {
         this.defaultEndBiome = defaultEndBiome;
+    }
+
+    /**
+     * @return the concurrentIslands
+     */
+    @Override
+    public int getConcurrentIslands() {
+        return concurrentIslands;
+    }
+
+    /**
+     * @param concurrentIslands the concurrentIslands to set
+     */
+    public void setConcurrentIslands(int concurrentIslands) {
+        this.concurrentIslands = concurrentIslands;
+    }
+
+    /**
+     * @return the disallowTeamMemberIslands
+     */
+    public boolean isDisallowTeamMemberIslands() {
+        return disallowTeamMemberIslands;
+    }
+
+    /**
+     * @param disallowTeamMemberIslands the disallowTeamMemberIslands to set
+     */
+    public void setDisallowTeamMemberIslands(boolean disallowTeamMemberIslands) {
+        this.disallowTeamMemberIslands = disallowTeamMemberIslands;
     }
 }

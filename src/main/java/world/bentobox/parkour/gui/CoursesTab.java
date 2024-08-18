@@ -83,10 +83,11 @@ public class CoursesTab implements Tab {
                 .sorted()
                 .filter(hs -> Objects.nonNull(hs.getWarpSpot()))
                 .forEach(hs -> {
-                    UUID owner = addon.getIslands().getIslandById(hs.getUniqueId()).map(Island::getOwner).orElse(null);
-                    if (owner != null) {
-                        heads.add(getHead(hs, owner));
-                    }
+                    addon.getIslands().getIslandById(hs.getUniqueId()).ifPresent(is -> {
+                        if (is.getOwner() != null) {
+                            heads.add(getHead(hs, is));
+                        }
+                    });
                 });
         return heads;
     }
@@ -95,18 +96,18 @@ public class CoursesTab implements Tab {
      * Get the head panel item
      *
      * @param pd         - parkour data
-     * @param playerUUID - the UUID of the owner
+     * @param is.getOwner() - the UUID of the owner
      * @return PanelItem
      */
-    private PanelItem getHead(ParkourData pd, UUID playerUUID) {
-        final String name = addon.getPlayers().getName(playerUUID);
+    private PanelItem getHead(ParkourData pd, Island is) {
+        final String name = addon.getPlayers().getName(is.getOwner());
         List<String> description = new ArrayList<>();
         if (pd.getRunCount() > 0) {
             description.add(user.getTranslation("parkour.courses.head-description", "[name]", name, "[runs]", String.valueOf(pd.getRunCount())));
         }
-        if (addon.getIslands().inTeam(addon.getOverWorld(), playerUUID)) {
+        if (addon.getIslands().inTeam(addon.getOverWorld(), is.getOwner())) {
             List<String> memberList = new ArrayList<>();
-            for (UUID members : addon.getIslands().getMembers(addon.getOverWorld(), playerUUID)) {
+            for (UUID members : is.getMemberSet()) {
                 memberList.add(ChatColor.AQUA + addon.getPlayers().getName(members));
             }
             description.addAll(memberList);
