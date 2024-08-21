@@ -14,6 +14,7 @@ import org.bukkit.entity.EntityType;
 
 import com.google.common.base.Enums;
 
+import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.configuration.ConfigComment;
 import world.bentobox.bentobox.api.configuration.ConfigEntry;
 import world.bentobox.bentobox.api.configuration.StoreAt;
@@ -1736,6 +1737,9 @@ public class Settings implements WorldSettings {
      */
     @Override
     public int getConcurrentIslands() {
+        if (concurrentIslands <= 0) {
+            return BentoBox.getInstance().getSettings().getIslandNumber();
+        }
         return concurrentIslands;
     }
 
