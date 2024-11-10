@@ -55,8 +55,7 @@ import world.bentobox.bentobox.util.Util;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Config.class, DatabaseSetup.class, Util.class,
-        RanksManager.class })
+@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Config.class, DatabaseSetup.class, Util.class })
 public abstract class AbstractParkourTest {
 
 	@Mock
@@ -172,9 +171,6 @@ public abstract class AbstractParkourTest {
 		when(plugin.getFlagsManager()).thenReturn(fm);
 		when(fm.getFlags()).thenReturn(Collections.emptyList());
 
-		// RanksManager
-        Whitebox.setInternalState(RanksManager.class, "instance", rm);
-        when(rm.getRank(any())).thenReturn("ranks.member");
 	}
 
 }

@@ -26,7 +26,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.localization.TextVariables;
@@ -115,10 +114,6 @@ public class SetWarpCommandTest extends AbstractParkourTest {
 		// Settings
 		Settings settings = new Settings();
 		when(addon.getSettings()).thenReturn(settings);
-
-		// RanksManager
-        Whitebox.setInternalState(RanksManager.class, "instance", rm);
-        when(rm.getRank(any())).thenReturn("ranks.member");
 
 		// DUT
 		cmd = new SetWarpCommand(ac);
