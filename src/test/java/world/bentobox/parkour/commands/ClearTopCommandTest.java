@@ -2,6 +2,7 @@ package world.bentobox.parkour.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -24,6 +25,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +52,7 @@ import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.Settings;
 import world.bentobox.parkour.gui.RankingsUI;
+import world.bentobox.parkour.mocks.ServerMocks;
 
 /**
  * @author tastybento
@@ -96,6 +99,7 @@ public class ClearTopCommandTest {
      */
     @Before
     public void setUp() throws Exception {
+        ServerMocks.newServer();
         // Set up plugin
         Whitebox.setInternalState(BentoBox.class, "instance", plugin);
         world.bentobox.bentobox.Settings s = new world.bentobox.bentobox.Settings();
@@ -166,18 +170,22 @@ public class ClearTopCommandTest {
         // DUT
         cmd = new ClearTopCommand(ac);
     }
+
+    @After
+    public void tearDown() {
+        ServerMocks.unsetBukkitServer();
+        User.clearUsers();
+        Mockito.framework().clearInlineMocks();
+    }
+
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#ClearTopCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
     public void testClearTopCommand() {
-        assertNonNull(cmd);
+        assertNotNull(cmd);
     }
 
-    private void assertNonNull(ClearTopCommand cmd2) {
-        // TODO Auto-generated method stub
-
-    }
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#setup()}.
      */

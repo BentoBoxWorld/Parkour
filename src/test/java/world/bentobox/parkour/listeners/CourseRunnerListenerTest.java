@@ -1,5 +1,6 @@
 package world.bentobox.parkour.listeners;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +10,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_MOCKS;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -32,6 +34,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Player.Spigot;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -46,11 +49,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import net.md_5.bungee.api.chat.TextComponent;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
@@ -100,6 +105,8 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 	private Block block;
 	@Mock
 	private User u;
+    @Mock
+    private Spigot spigot;
 
 	/**
 	 * @throws java.lang.Exception
@@ -118,6 +125,7 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 		when(player.hasPermission(anyString())).thenReturn(false);
 		when(player.getGameMode()).thenReturn(GameMode.SURVIVAL);
 		when(player.getServer()).thenReturn(server);
+        when(player.spigot()).thenReturn(spigot);
 		User.setPlugin(plugin);
 		user = User.getInstance(player);
 
@@ -414,7 +422,7 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 	public void testOnStartEndSet() {
 		PlayerInteractEvent e = new PlayerInteractEvent(player, Action.PHYSICAL, null, block, BlockFace.DOWN);
 		crl.onStartEndSet(e);
-		verify(player).sendMessage("parkour.start");
+        checkSpigotMessage("parkour.start");
 	}
 
 	/**
@@ -425,7 +433,7 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
         when(this.parkourManager.getEnd(island)).thenReturn(Optional.empty());
         PlayerInteractEvent e = new PlayerInteractEvent(player, Action.PHYSICAL, null, block, BlockFace.DOWN);
         crl.onStartEndSet(e);
-        verify(player).sendMessage("parkour.set-the-end");
+        checkSpigotMessage("parkour.set-the-end");
     }
 
 	/**
@@ -655,6 +663,34 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
         // Never alter the game mode
         verify(player, never()).setGameMode(GameMode.CREATIVE);
         verify(player, never()).setGameMode(GameMode.SURVIVAL);
+    }
+
+    /**
+     * Check that spigot sent the message
+     * @param message - message to check
+     */
+    public void checkSpigotMessage(String expectedMessage) {
+        checkSpigotMessage(expectedMessage, 1);
+    }
+
+    public void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
+        // Capture the argument passed to spigot().sendMessage(...) if messages are sent
+        ArgumentCaptor<TextComponent> captor = ArgumentCaptor.forClass(TextComponent.class);
+
+        // Verify that sendMessage() was called at least 0 times (capture any sent messages)
+        verify(spigot, atLeast(0)).sendMessage(captor.capture());
+
+        // Get all captured TextComponents
+        List<TextComponent> capturedMessages = captor.getAllValues();
+
+        // Count the number of occurrences of the expectedMessage in the captured messages
+        long actualOccurrences = capturedMessages.stream().map(component -> component.toLegacyText()) // Convert each TextComponent to plain text
+                .filter(messageText -> messageText.contains(expectedMessage)) // Check if the message contains the expected text
+                .count(); // Count how many times the expected message appears
+
+        // Assert that the number of occurrences matches the expectedOccurrences
+        assertEquals("Expected message occurrence mismatch: " + expectedMessage, expectedOccurrences,
+                actualOccurrences);
     }
 
 }

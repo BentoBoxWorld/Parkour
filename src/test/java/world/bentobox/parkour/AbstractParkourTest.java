@@ -49,6 +49,7 @@ import world.bentobox.bentobox.managers.IslandsManager;
 import world.bentobox.bentobox.managers.PlaceholdersManager;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.bentobox.util.Util;
+import world.bentobox.parkour.mocks.ServerMocks;
 
 /**
  * @author tastybento
@@ -96,6 +97,7 @@ public abstract class AbstractParkourTest {
 
 	@After
 	public void tearDown() throws IOException {
+        ServerMocks.unsetBukkitServer();
 		User.clearUsers();
 		Mockito.framework().clearInlineMocks();
 		deleteAll(new File("database"));
@@ -117,6 +119,7 @@ public abstract class AbstractParkourTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+        Server server = ServerMocks.newServer();
 		// Set up plugin
 		Whitebox.setInternalState(BentoBox.class, "instance", plugin);
 		when(plugin.getLogger()).thenReturn(Logger.getAnonymousLogger());
@@ -158,7 +161,6 @@ public abstract class AbstractParkourTest {
 
 		// Server
 		PowerMockito.mockStatic(Bukkit.class, Mockito.RETURNS_MOCKS);
-		Server server = mock(Server.class);
 		when(Bukkit.getServer()).thenReturn(server);
 		when(Bukkit.getLogger()).thenReturn(Logger.getAnonymousLogger());
 		when(Bukkit.getPluginManager()).thenReturn(mock(PluginManager.class));
