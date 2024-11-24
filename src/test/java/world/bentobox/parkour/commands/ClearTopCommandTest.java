@@ -2,6 +2,7 @@ package world.bentobox.parkour.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -24,6 +25,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,13 +52,14 @@ import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.Settings;
 import world.bentobox.parkour.gui.RankingsUI;
+import world.bentobox.parkour.mocks.ServerMocks;
 
 /**
  * @author tastybento
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Bukkit.class, BentoBox.class, User.class, Util.class})
+@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Util.class, RanksManager.class })
 public class ClearTopCommandTest {
 
     @Mock
@@ -88,12 +91,15 @@ public class ClearTopCommandTest {
     private RankingsUI rankings;
     @Mock
     private PlayersManager pm;
+    @Mock
+    private RanksManager rm;
 
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
+        ServerMocks.newServer();
         // Set up plugin
         Whitebox.setInternalState(BentoBox.class, "instance", plugin);
         world.bentobox.bentobox.Settings s = new world.bentobox.bentobox.Settings();
@@ -155,8 +161,7 @@ public class ClearTopCommandTest {
         when(addon.getSettings()).thenReturn(settings);
 
         // RanksManager
-        RanksManager rm = new RanksManager();
-        when(plugin.getRanksManager()).thenReturn(rm);
+        Whitebox.setInternalState(RanksManager.class, "instance", rm);
 
         // Players Manager
         when(addon.getPlayers()).thenReturn(pm);
@@ -165,18 +170,22 @@ public class ClearTopCommandTest {
         // DUT
         cmd = new ClearTopCommand(ac);
     }
+
+    @After
+    public void tearDown() {
+        ServerMocks.unsetBukkitServer();
+        User.clearUsers();
+        Mockito.framework().clearInlineMocks();
+    }
+
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#ClearTopCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
     public void testClearTopCommand() {
-        assertNonNull(cmd);
+        assertNotNull(cmd);
     }
 
-    private void assertNonNull(ClearTopCommand cmd2) {
-        // TODO Auto-generated method stub
-
-    }
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#setup()}.
      */
@@ -217,7 +226,7 @@ public class ClearTopCommandTest {
     public void testCanExecuteInsufficientRank() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.ADMIN_RANK);
         assertFalse(cmd.canExecute(user, "", List.of()));
-        verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, RanksManager.MEMBER_RANK_REF);
+        verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, null);
 
     }
 

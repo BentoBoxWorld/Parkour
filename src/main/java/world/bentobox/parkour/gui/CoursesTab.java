@@ -10,7 +10,6 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.util.Vector;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -25,9 +24,9 @@ import world.bentobox.parkour.objects.ParkourData;
 
 /**
  * Implements a {@link Tab} that shows course rankings
+ *
  * @author tastybento
  * @since 1.0.0
- *
  */
 public class CoursesTab implements Tab {
 
@@ -36,8 +35,9 @@ public class CoursesTab implements Tab {
 
     /**
      * Show a tab of settings
+     *
      * @param addon - addon
-     * @param user - user who is viewing the tab
+     * @param user  - user who is viewing the tab
      */
     public CoursesTab(Parkour addon, User user) {
         super();
@@ -47,6 +47,7 @@ public class CoursesTab implements Tab {
 
     /**
      * Get the icon for this tab
+     *
      * @return panel item
      */
     @Override
@@ -69,6 +70,7 @@ public class CoursesTab implements Tab {
 
     /**
      * Get all the flags as panel items
+     *
      * @return list of all the panel items for this flag type
      */
     @Override
@@ -78,32 +80,34 @@ public class CoursesTab implements Tab {
         List<PanelItem> heads = new ArrayList<>();
         // Sort the courses by runs
         addon.getParkourManager().getParkourData().stream()
-        .sorted()
-        .filter(hs -> Objects.nonNull(hs.getWarpSpot()))
-        .forEach(hs -> {
-            UUID owner = addon.getIslands().getIslandById(hs.getUniqueId()).map(Island::getOwner).orElse(null);
-            if (owner != null) {
-                heads.add(getHead(hs, owner));
-            }
-        });
+                .sorted()
+                .filter(hs -> Objects.nonNull(hs.getWarpSpot()))
+                .forEach(hs -> {
+                    addon.getIslands().getIslandById(hs.getUniqueId()).ifPresent(is -> {
+                        if (is.getOwner() != null) {
+                            heads.add(getHead(hs, is));
+                        }
+                    });
+                });
         return heads;
     }
 
     /**
      * Get the head panel item
-     * @param pd - parkour data
-     * @param playerUUID - the UUID of the owner
+     *
+     * @param pd         - parkour data
+     * @param is.getOwner() - the UUID of the owner
      * @return PanelItem
      */
-    private PanelItem getHead(ParkourData pd, UUID playerUUID) {
-        final String name = addon.getPlayers().getName(playerUUID);
+    private PanelItem getHead(ParkourData pd, Island is) {
+        final String name = addon.getPlayers().getName(is.getOwner());
         List<String> description = new ArrayList<>();
         if (pd.getRunCount() > 0) {
             description.add(user.getTranslation("parkour.courses.head-description", "[name]", name, "[runs]", String.valueOf(pd.getRunCount())));
         }
-        if (addon.getIslands().inTeam(addon.getOverWorld(), playerUUID)) {
+        if (addon.getIslands().inTeam(addon.getOverWorld(), is.getOwner())) {
             List<String> memberList = new ArrayList<>();
-            for (UUID members : addon.getIslands().getMembers(addon.getOverWorld(), playerUUID)) {
+            for (UUID members : is.getMemberSet()) {
                 memberList.add(ChatColor.AQUA + addon.getPlayers().getName(members));
             }
             description.addAll(memberList);
@@ -115,7 +119,7 @@ public class CoursesTab implements Tab {
                 .clickHandler((panel, user, clickType, slot) -> {
                     user.sendMessage("parkour.warp.warping");
                     // Teleport user
-                    Util.teleportAsync(user.getPlayer(), pd.getWarpSpot().clone().add(new Vector(0.5, 1, 0.5)), TeleportCause.COMMAND);
+                    Util.teleportAsync(user.getPlayer(), pd.getWarpSpot(), TeleportCause.COMMAND);
                     return true;
                 })
                 .description(description);

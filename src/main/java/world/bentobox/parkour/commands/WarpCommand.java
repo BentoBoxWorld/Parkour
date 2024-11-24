@@ -19,8 +19,8 @@ import world.bentobox.parkour.ParkourManager;
 
 /**
  * Warps to a
- * @author tastybento
  *
+ * @author tastybento
  */
 public class WarpCommand extends CompositeCommand {
 
@@ -48,7 +48,7 @@ public class WarpCommand extends CompositeCommand {
         }
         if (args.isEmpty()) {
             Optional<Island> island = getIslands().getIslandAt(user.getLocation());
-            if (island.isEmpty() || !((Parkour)getAddon()).inWorld(user.getWorld())) {
+            if (island.isEmpty() || !((Parkour) getAddon()).inWorld(user.getWorld())) {
                 user.sendMessage("parkour.errors.not-on-island");
                 this.showHelp(this, user);
                 return false;
@@ -81,18 +81,18 @@ public class WarpCommand extends CompositeCommand {
         // Teleport user
         user.getPlayer().playSound(user.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1F, 1F);
         user.getPlayer().playSound(warpSpot, Sound.ENTITY_BAT_TAKEOFF, 1F, 1F);
-        Util.teleportAsync(user.getPlayer(), warpSpot.clone().add(new Vector(0.5, 0.5, 0.5)), TeleportCause.COMMAND);
+        Util.teleportAsync(user.getPlayer(), warpSpot, TeleportCause.COMMAND);
         return true;
     }
 
     @Override
     public Optional<List<String>> tabComplete(User user, String alias, List<String> args) {
-        ArrayList<String> options = new ArrayList<>(((Parkour)getAddon()).getParkourManager().getWarps().keySet());
+        ArrayList<String> options = new ArrayList<>(((Parkour) getAddon()).getParkourManager().getWarps().keySet());
         if (options.size() < 10) {
             return Optional.of(options);
         }
         // List is too long; require at least the first letter
-        String lastArg = !args.isEmpty() ? args.get(args.size()-1) : "";
+        String lastArg = !args.isEmpty() ? args.get(args.size() - 1) : "";
         if (args.isEmpty()) {
             return Optional.empty();
         }

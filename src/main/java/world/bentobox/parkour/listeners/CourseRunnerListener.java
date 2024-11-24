@@ -3,12 +3,15 @@ package world.bentobox.parkour.listeners;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,8 +19,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.util.Vector;
@@ -28,6 +33,7 @@ import world.bentobox.bentobox.api.events.island.IslandExitEvent;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
+import world.bentobox.bentobox.util.Util;
 import world.bentobox.parkour.Parkour;
 import world.bentobox.parkour.ParkourRunRecord;
 
@@ -71,12 +77,63 @@ public class CourseRunnerListener extends AbstractListener {
         } else if (!parkourRunManager.timers().containsKey(e.getPlayerUUID())) {
             user.notify("parkour.to-start");
         }
-        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-            user.setGameMode(GameMode.CREATIVE);
-        } else {
-            user.setGameMode(GameMode.SURVIVAL);
+
+        // the location that the player teleports from
+        Location fromLocation = user.getLocation();
+
+        if (addon.inWorld(fromLocation)) {
+            // if the player is staying in a parkour managed world they can have their gamemode changed
+            // this occurs when their island changes, so wont risk affecting players that are currently running
+            // since exit would trigger first
+            // cross (unmanaged) world teleportation is handled in onPlayerChangeWorld
+
+            updateGamemode(island, user);
         }
     }
+
+    @EventHandler
+    public void onPlayerChangeWorld(PlayerChangedWorldEvent event) {
+        User user = User.getInstance(event.getPlayer());
+        boolean fromParkour = addon.inWorld(event.getFrom());
+        World newWorld = user.getWorld();
+        boolean toParkour = addon.inWorld(newWorld);
+
+        if (toParkour && !fromParkour) {
+            // switching from non-parkour world to parkour world
+            Bukkit.getServer().getScheduler().runTaskLater(addon.getPlugin(), () -> {
+                Location currentLocation = user.getLocation();
+
+                // world has changed in the 2 ticks delay, dont set gamemode
+                if (currentLocation.getWorld() != newWorld) {
+                    return;
+                }
+
+                addon.getIslandsManager().getIslandAt(currentLocation).ifPresent(island -> updateGamemode(island, user));
+            }, 2); // 2 ticks since multiverse overrides gamemode after 1 tick
+        }
+    }
+
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        User user = User.getInstance(event.getPlayer());
+        World world = user.getWorld();
+        if (!addon.inWorld(world)) {
+            return;
+        }
+
+        Bukkit.getServer().getScheduler().runTaskLater(addon.getPlugin(), () -> {
+            Location currentLocation = user.getLocation();
+
+            // world has changed in the 2 ticks delay, dont set gamemode
+            if (currentLocation.getWorld() != world) {
+                return;
+            }
+
+            addon.getIslandsManager().getIslandAt(currentLocation).ifPresent(island -> updateGamemode(island, user));
+        }, 2);
+    }
+
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVisitorLeave(IslandExitEvent e) {
@@ -91,6 +148,10 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerDeath(PlayerDeathEvent e) {
         // Game over
+        User user = User.getInstance(e.getEntity().getUniqueId());
+        if (parkourRunManager.checkpoints().containsKey(e.getEntity().getUniqueId()) && user.isOnline()) {
+            user.notify("parkour.session-ended");
+        }
         parkourRunManager.clear(e.getEntity().getUniqueId());
     }
 
@@ -113,44 +174,58 @@ public class CourseRunnerListener extends AbstractListener {
         player.playEffect(EntityEffect.ENTITY_POOF);
         player.setVelocity(new Vector(0, 0, 0));
         player.setFallDistance(0);
-        player.teleport(parkourRunManager.checkpoints().get(player.getUniqueId()));
-
+        Location checkpointLocation = parkourRunManager.checkpoints().get(player.getUniqueId());
+        checkpointLocation = checkpointLocation.clone().add(0.5, 0, 0.5);
+        parkourRunManager.currentlyTeleporting().add(player.getUniqueId());
+        Util.teleportAsync(player, checkpointLocation, PlayerTeleportEvent.TeleportCause.PLUGIN)
+                .thenAccept(b -> parkourRunManager.currentlyTeleporting().remove(player.getUniqueId()));
     }
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         boolean shouldStopRun = switch (e.getCause()) {
-        case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED -> false;
-        case COMMAND, PLUGIN, NETHER_PORTAL, END_PORTAL, SPECTATE, END_GATEWAY, UNKNOWN -> true;
+            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
+            case COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
-        if (shouldStopRun && parkourRunManager.timers().containsKey(e.getPlayer().getUniqueId())) {
-            User user = User.getInstance(e.getPlayer().getUniqueId());
-            if (parkourRunManager.checkpoints().containsKey(e.getPlayer().getUniqueId()) && user.isOnline()) {
+        UUID playerUUID = e.getPlayer().getUniqueId();
+        if (!parkourRunManager.currentlyTeleporting().contains(playerUUID) && shouldStopRun && parkourRunManager.timers().containsKey(playerUUID)) {
+            User user = User.getInstance(playerUUID);
+            if (parkourRunManager.checkpoints().containsKey(playerUUID) && user.isOnline()) {
                 user.notify("parkour.session-ended");
             }
-            parkourRunManager.clear(e.getPlayer().getUniqueId());
+            parkourRunManager.clear(playerUUID);
         }
         // Check world - only apply flag actions to Parkour world and only if player is not actively running the course
         if (e.getTo() == null // To can sometimes be null...
                 || !addon.inWorld(e.getTo())
-                || parkourRunManager.timers().containsKey(e.getPlayer().getUniqueId())) {
+                || parkourRunManager.timers().containsKey(playerUUID)) {
             return;
         }
         // Handle flag action for players who are not running
         Optional<Island> fromIsland = addon.getIslands().getIslandAt(e.getFrom());
         Optional<Island> toIsland = addon.getIslands().getIslandAt(e.getTo());
 
-        if (fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
+        boolean shouldAlterGamemode = switch (e.getCause()) {
+            case COMMAND, PLUGIN, UNKNOWN -> true;
+            default -> false;
+        };
+        if (shouldAlterGamemode && fromIsland.isPresent() && toIsland.isPresent() && fromIsland.get().equals(toIsland.get())) {
             // same island teleport
-            Island island = fromIsland.get();
             User user = User.getInstance(e.getPlayer());
-            if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
-                user.setGameMode(GameMode.CREATIVE);
-            } else {
-                user.setGameMode(GameMode.SURVIVAL);
-            }
+            updateGamemode(fromIsland.get(), user);
+        }
+    }
+
+    private void updateGamemode(Island island, User user) {
+        if (user.hasPermission("parkour.mod.bypassgamemodechange")) {
+            return;
         }
 
+        if (island.getFlag(addon.PARKOUR_CREATIVE) <= island.getRank(user)) {
+            user.setGameMode(GameMode.CREATIVE);
+        } else {
+            user.setGameMode(GameMode.SURVIVAL);
+        }
     }
 
 
@@ -205,14 +280,14 @@ public class CourseRunnerListener extends AbstractListener {
             return;
         }
 
-        Location l = e.getClickedBlock().getLocation();
+        Location blockLocation = e.getClickedBlock().getLocation();
         User user = User.getInstance(e.getPlayer());
-        addon.getIslands().getProtectedIslandAt(l).ifPresent(island -> {
+        addon.getIslands().getProtectedIslandAt(blockLocation).ifPresent(island -> {
             Optional<Location> start = addon.getParkourManager().getStart(island);
             Optional<Location> end = addon.getParkourManager().getEnd(island);
 
             // Check if start and end is set
-            if (start.filter(startLoc -> isLocEquals(l, startLoc)).isPresent()) {
+            if (start.filter(startLoc -> isLocEquals(blockLocation, startLoc)).isPresent()) {
                 // End is not set
                 if (end.isEmpty()) {
                     user.sendMessage("parkour.set-the-end");
@@ -220,29 +295,29 @@ public class CourseRunnerListener extends AbstractListener {
                 }
                 // Start the race!
                 if (!parkourRunManager.timers().containsKey(e.getPlayer().getUniqueId())) {
-                    parkourStart(user, l);
+                    parkourStart(user, blockLocation);
                 }
-            } else if (end.filter(endLoc -> isLocEquals(l, endLoc)).isPresent()
+            } else if (end.filter(endLoc -> isLocEquals(blockLocation, endLoc)).isPresent()
                     && parkourRunManager.timers().containsKey(e.getPlayer().getUniqueId())) {
                 // End the race!
-                parkourEnd(user, island, l);
+                parkourEnd(user, island, blockLocation);
             }
         });
     }
 
-    void parkourStart(User user, Location l) {
+    void parkourStart(User user, Location blockLocation) {
         user.sendMessage("parkour.start");
-        user.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+        user.getPlayer().playSound(blockLocation, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         parkourRunManager.timers().put(user.getUniqueId(), System.currentTimeMillis());
-        parkourRunManager.checkpoints().put(user.getUniqueId(), user.getLocation());
+        parkourRunManager.checkpoints().put(user.getUniqueId(), blockLocation);
         user.setGameMode(GameMode.SURVIVAL);
 
     }
 
-    void parkourEnd(User user, Island island, Location l) {
+    void parkourEnd(User user, Island island, Location blockLocation) {
         long duration = (System.currentTimeMillis() - Objects.requireNonNull(parkourRunManager.timers().get(user.getUniqueId())));
         user.notify("parkour.end");
-        user.getPlayer().playSound(l, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
+        user.getPlayer().playSound(blockLocation, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
         user.notify("parkour.you-took", TextVariables.NUMBER, getDuration(user, duration));
         parkourRunManager.clear(user.getUniqueId());
 
@@ -279,14 +354,18 @@ public class CourseRunnerListener extends AbstractListener {
                 || !parkourRunManager.timers().containsKey(e.getPlayer().getUniqueId())) {
             return;
         }
-        Location l = e.getClickedBlock().getLocation();
-        User user = User.getInstance(e.getPlayer());
-        Vector checkPoint = parkourRunManager.checkpoints().get(e.getPlayer().getUniqueId()).toVector();
-
-        if (addon.getIslands().getProtectedIslandAt(l).isPresent() && !l.toVector().equals(checkPoint)) {
-            user.notify("parkour.checkpoint");
-            e.getPlayer().playSound(l, Sound.BLOCK_BELL_USE, 1F, 1F);
-            parkourRunManager.checkpoints().put(user.getUniqueId(), e.getPlayer().getLocation());
+        Location newCheckpointBlockLocation = e.getClickedBlock().getLocation();
+        if (addon.getIslands().getProtectedIslandAt(newCheckpointBlockLocation).isPresent()) {
+            // pressure plate should be a checkpoint
+            Location currentCheckpointBlockLocation = parkourRunManager.checkpoints().get(e.getPlayer().getUniqueId());
+            if (!isLocEquals(newCheckpointBlockLocation, currentCheckpointBlockLocation)) {
+                // new location is different
+                User user = User.getInstance(e.getPlayer());
+                user.sendMessage("parkour.checkpoint");
+                e.getPlayer().playSound(newCheckpointBlockLocation, Sound.BLOCK_BELL_USE, 1F, 1F);
+                parkourRunManager.checkpoints().put(user.getUniqueId(), newCheckpointBlockLocation);
+            }
         }
     }
+
 }

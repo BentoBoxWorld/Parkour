@@ -1,7 +1,7 @@
 name: Parkour
 main: world.bentobox.parkour.Parkour
 version: ${version}${build.number}
-api-version: 1.24
+api-version: 2.7.1
 metrics: true
 icon: "POLISHED_BLACKSTONE_PRESSURE_PLATE"
 repository: "BentoBoxWorld/Parkour"
@@ -40,6 +40,9 @@ permissions:
   parkour.mod.bypasslock:
     description: Bypasses an course lock
     default: op
+  parkour.mod.bypassgamemodechange:
+    description: Bypasses the changing of your gamemode when entering your island.
+    default: false
   parkour.mod.bypassban:
     description: Bypasses course ban
     default: op
@@ -88,18 +91,6 @@ permissions:
     default: op
   parkour.mod.team.setowner:
     description: Allow use of '/pkadmin team setowner' command - transfers course ownership to the player
-    default: op
-  parkour.mod.team.add:
-    description: Allow use of '/pkadmin add' command - add player to owner's team
-    default: op
-  parkour.mod.team.kick:
-    description: Allow use of '/pkadmin kick' command - kick a player from a team
-    default: op
-  parkour.mod.team.disband:
-    description: Allow use of '/pkadmin disband' command - disband owner's team
-    default: op
-  parkour.mod.team.setowner:
-    description: Allow use of '/pkadmin setowner' command - transfers course ownership to the player
     default: op
   parkour.admin.blueprint:
     description: Allow use of '/pkadmin blueprint' command - manipulate blueprints
@@ -169,9 +160,6 @@ permissions:
     default: op
   parkour.admin.resets.add:
     description: Allow use of '/pkadmin resets add' command - adds this player's course reset count
-    default: op
-  parkour.admin.resets.remove:
-    description: Allow use of '/pkadmin resets remove' command - reduces the player's course reset count
     default: op
   parkour.admin.delete:
     description: Allow use of '/pkadmin delete' command - deletes a player and regenerates their course
@@ -295,9 +283,6 @@ permissions:
     default: true
   parkour.island.team.coop:
     description: Allow use of '/parkour team coop' command - make a player coop rank on your course
-    default: true
-  parkour.island.team.coop:
-    description: Allow use of '/parkour team uncoop' command - remove a coop rank from player
     default: true
   parkour.island.team.trust:
     description: Allow use of '/parkour team trust', '/parkour team untrust' command - remove trusted player rank from player

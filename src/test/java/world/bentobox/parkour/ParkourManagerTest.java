@@ -47,6 +47,7 @@ import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.managers.IslandsManager;
 import world.bentobox.bentobox.managers.PlayersManager;
 import world.bentobox.bentobox.util.Util;
+import world.bentobox.parkour.mocks.ServerMocks;
 import world.bentobox.parkour.objects.ParkourData;
 
 /**
@@ -99,6 +100,8 @@ public class ParkourManagerTest {
 
     @Before
     public void setUp() {
+        ServerMocks.newServer();
+
         when(addon.getPlugin()).thenReturn(plugin);
         // Set up plugin
         Whitebox.setInternalState(BentoBox.class, "instance", plugin);
@@ -150,6 +153,7 @@ public class ParkourManagerTest {
      */
     @After
     public void tearDown() throws Exception {
+        ServerMocks.unsetBukkitServer();
         deleteAll(new File("database"));
         User.clearUsers();
         Mockito.framework().clearInlineMocks();
