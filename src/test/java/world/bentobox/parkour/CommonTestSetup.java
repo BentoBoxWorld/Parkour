@@ -42,6 +42,7 @@ import world.bentobox.bentobox.api.user.Notifier;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.database.objects.Players;
+import world.bentobox.bentobox.managers.AddonsManager;
 import world.bentobox.bentobox.managers.BlueprintsManager;
 import world.bentobox.bentobox.managers.FlagsManager;
 import world.bentobox.bentobox.managers.HooksManager;
@@ -50,6 +51,7 @@ import world.bentobox.bentobox.managers.IslandsManager;
 import world.bentobox.bentobox.managers.LocalesManager;
 import world.bentobox.bentobox.managers.PlaceholdersManager;
 import world.bentobox.bentobox.managers.PlayersManager;
+import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.bentobox.util.Util;
 
 /**
@@ -98,6 +100,10 @@ public abstract class CommonTestSetup {
     protected LocalesManager lm;
     @Mock
     protected PlaceholdersManager phm;
+    @Mock
+    protected AddonsManager am;
+    @Mock
+    protected Parkour addon;
 
     protected ServerMock server;
     protected MockedStatic<Bukkit> mockedBukkit;
@@ -201,6 +207,32 @@ public abstract class CommonTestSetup {
 
         // BlueprintsManager
         when(plugin.getBlueprintsManager()).thenReturn(bm);
+
+        // Common island / world / player defaults used across command and listener tests
+        when(im.getIslandAt(any())).thenReturn(Optional.of(island));
+        when(im.getIsland(any(World.class), any(User.class))).thenReturn(island);
+        when(im.hasIsland(any(World.class), any(UUID.class))).thenReturn(true);
+        when(im.inTeam(any(World.class), any(UUID.class))).thenReturn(true);
+        when(im.userIsOnIsland(any(), any())).thenReturn(true);
+        when(island.getWorld()).thenReturn(world);
+        when(island.getRank(any(UUID.class))).thenReturn(RanksManager.MEMBER_RANK);
+        when(island.getRank(any(User.class))).thenReturn(RanksManager.MEMBER_RANK);
+        when(island.getRankCommand(anyString())).thenReturn(RanksManager.OWNER_RANK);
+        when(iwm.getPermissionPrefix(any())).thenReturn("parkour.");
+        when(mockPlayer.isOnline()).thenReturn(true);
+        when(location.add(0.5, 0, 0.5)).thenReturn(location);
+        when(lm.get(anyString())).thenAnswer((Answer<String>) invocation -> invocation.getArgument(0, String.class));
+        when(phm.replacePlaceholders(any(), anyString())).thenAnswer((Answer<String>) invocation -> invocation.getArgument(1, String.class));
+
+        // Managers used by command registration / flags
+        when(plugin.getFlagsManager()).thenReturn(fm);
+        when(fm.getFlags()).thenReturn(java.util.Collections.emptyList());
+        when(plugin.getAddonsManager()).thenReturn(am);
+
+        // Addon defaults (individual tests may re-stub getSettings/getParkourManager/etc.)
+        when(addon.getPlugin()).thenReturn(plugin);
+        when(addon.getSettings()).thenReturn(new Settings());
+        when(addon.getIslands()).thenReturn(im);
     }
 
     @AfterEach
