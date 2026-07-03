@@ -36,7 +36,7 @@ import world.bentobox.parkour.Settings;
 /**
  * @author tastybento
  */
-public class QuitCommandTest extends CommonTestSetup {
+class QuitCommandTest extends CommonTestSetup {
     @Mock
     private CompositeCommand ac;
     @Mock
@@ -111,7 +111,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.QuitCommand#QuitCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
-    public void testQuitCommand() {
+    void testQuitCommand() {
         assertNotNull(cmd);
     }
 
@@ -119,7 +119,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.QuitCommand#setup()}.
      */
     @Test
-    public void testSetup() {
+    void testSetup() {
         assertEquals("quit", cmd.getPermission());
         assertEquals("parkour.commands.parkour.quit.description", cmd.getDescription());
         assertTrue(cmd.isOnlyPlayer());
@@ -129,7 +129,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteWrongWorld() {
+    void testCanExecuteWrongWorld() {
         when(iwm.inWorld(world)).thenReturn(false);
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("general.errors.wrong-world");
@@ -139,7 +139,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNotOnIsland() {
+    void testCanExecuteNotOnIsland() {
         // Not on island
         when(im.getIslandAt(loc)).thenReturn(Optional.empty());
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -151,7 +151,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNotInRun() {
+    void testCanExecuteNotInRun() {
         prm.timers().clear();
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("parkour.errors.not-in-run");
@@ -162,7 +162,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.QuitCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteSuccess() {
+    void testCanExecuteSuccess() {
         assertTrue(cmd.canExecute(user, "", List.of()));
     }
 
@@ -171,7 +171,7 @@ public class QuitCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.QuitCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testExecuteUserStringListOfString() {
+    void testExecuteUserStringListOfString() {
         assertTrue(cmd.execute(user, "", List.of()));
         verify(user).sendMessage("parkour.quit.success");
         assertTrue(prm.timers().isEmpty());

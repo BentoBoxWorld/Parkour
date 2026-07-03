@@ -38,7 +38,7 @@ import world.bentobox.parkour.Settings;
  * @author tastybento
  *
  */
-public class SetWarpCommandTest extends CommonTestSetup {
+class SetWarpCommandTest extends CommonTestSetup {
 	private SetWarpCommand cmd;
 	@Mock
 	private ParkourManager parkourManager;
@@ -108,7 +108,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.SetWarpCommand#SetWarpCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
 	 */
 	@Test
-	public void testSetWarpCommand() {
+	void testSetWarpCommand() {
 		assertNotNull(cmd);
 	}
 
@@ -117,7 +117,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.SetWarpCommand#setup()}.
 	 */
 	@Test
-	public void testSetup() {
+	void testSetup() {
 		assertEquals("setwarp", cmd.getPermission());
 		assertEquals("parkour.commands.parkour.setwarp.description", cmd.getDescription());
 		assertTrue(cmd.isConfigurableRankCommand());
@@ -129,7 +129,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.SetWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteFailHelp() {
+	void testCanExecuteFailHelp() {
 		// Help
 		assertFalse(cmd.canExecute(user, "", List.of("something")));
 		verify(user).sendMessage("commands.help.header", "[label]", "Parkour");
@@ -139,7 +139,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.SetWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteFailNoIsland() {
+    void testCanExecuteFailNoIsland() {
         // Not on island
         when(im.userIsOnIsland(any(), any())).thenReturn(false);
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -151,7 +151,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.SetWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteFailNoRank() {
+	void testCanExecuteFailNoRank() {
 		// Insufficient rank
 		assertFalse(cmd.canExecute(user, "", List.of()));
 		verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, RanksManager.MEMBER_RANK_REF);
@@ -162,7 +162,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.SetWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoStartEndPlates() {
+    void testCanExecuteNoStartEndPlates() {
         // Has rank
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.MEMBER_RANK);
         // No start plate
@@ -180,7 +180,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.SetWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecutePass() {
+    void testCanExecutePass() {
         // Has rank
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.MEMBER_RANK);
         assertTrue(cmd.canExecute(user, "", List.of()));
@@ -192,7 +192,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.SetWarpCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testExecuteUserStringListOfString() {
+	void testExecuteUserStringListOfString() {
 		assertTrue(cmd.execute(user, "", List.of()));
 		verify(user).sendMessage("parkour.warp.set");
 		verify(parkourManager).setWarpSpot(island, null);
@@ -203,7 +203,7 @@ public class SetWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.SetWarpCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testExecuteUserStringListOfStringWarpReplace() {
+    void testExecuteUserStringListOfStringWarpReplace() {
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.of(mock(Location.class)));
         assertTrue(cmd.execute(user, "", List.of()));
         verify(user).sendMessage("parkour.warp.replaced");

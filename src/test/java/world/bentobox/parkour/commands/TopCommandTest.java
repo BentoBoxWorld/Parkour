@@ -34,7 +34,7 @@ import world.bentobox.parkour.gui.RankingsUI;
 /**
  * @author tastybento
  */
-public class TopCommandTest extends CommonTestSetup {
+class TopCommandTest extends CommonTestSetup {
     @Mock
     private CompositeCommand ac;
     @Mock
@@ -105,7 +105,7 @@ public class TopCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.TopCommand#TopCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
-    public void testTopCommand() {
+    void testTopCommand() {
         assertNotNull(cmd);
     }
 
@@ -113,7 +113,7 @@ public class TopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.TopCommand#setup()}.
      */
     @Test
-    public void testSetup() {
+    void testSetup() {
         assertEquals("top", cmd.getPermission());
         assertEquals("parkour.commands.parkour.top.description", cmd.getDescription());
         assertTrue(cmd.isOnlyPlayer());
@@ -123,7 +123,7 @@ public class TopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.TopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteFailNotOnIsland() {
+    void testCanExecuteFailNotOnIsland() {
         // Not on island
         when(im.getIslandAt(loc)).thenReturn(Optional.empty());
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -134,7 +134,7 @@ public class TopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.TopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteFailWrongWorld() {
+    void testCanExecuteFailWrongWorld() {
         when(iwm.inWorld(world)).thenReturn(false);
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("general.errors.wrong-world");
@@ -145,7 +145,7 @@ public class TopCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.TopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecutePass() {
+    void testCanExecutePass() {
         assertTrue(cmd.canExecute(user, "", List.of()));
     }
 
@@ -154,7 +154,7 @@ public class TopCommandTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.commands.TopCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testExecuteUserStringListOfString() {
+    void testExecuteUserStringListOfString() {
         testCanExecutePass();
         assertTrue(cmd.execute(user, "", List.of()));
         verify(rankings).getGUI(island, user);

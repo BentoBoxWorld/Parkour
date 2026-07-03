@@ -43,7 +43,7 @@ import world.bentobox.parkour.gui.RankingsUI;
 /**
  * @author tastybento
  */
-public class ClearTopCommandTest extends CommonTestSetup {
+class ClearTopCommandTest extends CommonTestSetup {
 
     @Mock
     private CompositeCommand ac;
@@ -136,7 +136,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#ClearTopCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
-    public void testClearTopCommand() {
+    void testClearTopCommand() {
         assertNotNull(cmd);
     }
 
@@ -144,7 +144,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#setup()}.
      */
     @Test
-    public void testSetup() {
+    void testSetup() {
         assertEquals("cleartop", cmd.getPermission());
         assertEquals("parkour.commands.parkour.cleartop.description", cmd.getDescription());
         assertEquals("parkour.commands.parkour.cleartop.parameters", cmd.getParameters());
@@ -156,7 +156,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteShowHelp() {
+    void testCanExecuteShowHelp() {
         assertFalse(cmd.canExecute(user, "", List.of("too", "many", "args")));
         verify(user).sendMessage("commands.help.header", "[label]", "Parkour");
     }
@@ -165,7 +165,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoIsland() {
+    void testCanExecuteNoIsland() {
         when(im.hasIsland(world, user)).thenReturn(false);
         when(im.inTeam(world, uuid)).thenReturn(false);
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -176,7 +176,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteInsufficientRank() {
+    void testCanExecuteInsufficientRank() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.ADMIN_RANK);
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, null);
@@ -186,7 +186,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteUnknownPlayer() {
+    void testCanExecuteUnknownPlayer() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.VISITOR_RANK);
         assertFalse(cmd.canExecute(user, "", List.of("lspvicky")));
         verify(user).sendMessage("general.errors.unknown-player", TextVariables.NAME, "lspvicky");
@@ -196,7 +196,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecute() {
+    void testCanExecute() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.VISITOR_RANK);
         assertTrue(cmd.canExecute(user, "", List.of("tastybento")));
         assertTrue(cmd.canExecute(user, "", List.of()));
@@ -206,7 +206,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testExecuteUserStringListOfString() {
+    void testExecuteUserStringListOfString() {
         assertTrue(cmd.execute(user, "", List.of("tastybento")));
         verify(user).sendMessage("commands.confirmation.confirm", "[seconds]", "10");
     }
@@ -215,7 +215,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#confirmed(world.bentobox.bentobox.api.user.User)}.
      */
     @Test
-    public void testConfirmed() {
+    void testConfirmed() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.VISITOR_RANK);
         assertTrue(cmd.canExecute(user, "", List.of("tastybento")));
         cmd.confirmed(user);
@@ -229,7 +229,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#confirmed(world.bentobox.bentobox.api.user.User)}.
      */
     @Test
-    public void testConfirmedNoIsland() {
+    void testConfirmedNoIsland() {
         when(im.getIsland(world, user)).thenReturn(null);
         cmd.confirmed(user);
         verify(user).sendMessage("general.errors.no-island");
@@ -239,7 +239,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testTabCompleteUserStringListOfStringSuccess() {
+    void testTabCompleteUserStringListOfStringSuccess() {
         Map<UUID, Long> map = Map.of(uuid, 20L);
         when(parkourManager.getRankings(island, 10)).thenReturn(map);
         Optional<List<String>> opList = cmd.tabComplete(user, "", List.of(""));
@@ -251,7 +251,7 @@ public class ClearTopCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testTabCompleteUserStringListOfStringNotOnIsland() {
+    void testTabCompleteUserStringListOfStringNotOnIsland() {
         when(im.getIsland(world, user)).thenReturn(null);
         Optional<List<String>> opList = cmd.tabComplete(user, "", List.of(""));
         assertTrue(opList.isEmpty());

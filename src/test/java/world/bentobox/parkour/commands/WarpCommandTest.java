@@ -40,7 +40,7 @@ import world.bentobox.parkour.Settings;
  * @author tastybento
  *
  */
-public class WarpCommandTest extends CommonTestSetup {
+class WarpCommandTest extends CommonTestSetup {
 
 	@Mock
 	private CompositeCommand ac;
@@ -122,7 +122,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#WarpCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
 	 */
 	@Test
-	public void testWarpCommand() {
+	void testWarpCommand() {
 		assertNotNull(cmd);
 	}
 
@@ -130,7 +130,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * Test method for {@link world.bentobox.parkour.commands.WarpCommand#setup()}.
 	 */
 	@Test
-	public void testSetup() {
+	void testSetup() {
 		assertEquals("warp", cmd.getPermission());
 		assertEquals("parkour.commands.parkour.warp.description", cmd.getDescription());
 		assertEquals("parkour.commands.parkour.warp.parameters", cmd.getParameters());
@@ -143,7 +143,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteHelp() {
+	void testCanExecuteHelp() {
 		assertFalse(cmd.canExecute(user, "", List.of("more", "than", "one")));
 		verify(user).sendMessage("commands.help.header", "[label]", "Parkour");
 	}
@@ -153,7 +153,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteNoArgNotOnParkourIsland() {
+	void testCanExecuteNoArgNotOnParkourIsland() {
 		// Not on any island
 		when(im.getIslandAt(location)).thenReturn(Optional.empty());
 		assertFalse(cmd.canExecute(user, "", List.of()));
@@ -169,7 +169,7 @@ public class WarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoArgOnIslandNoWarp() {
+    void testCanExecuteNoArgOnIslandNoWarp() {
         when(im.getIslandAt(location)).thenReturn(Optional.of(island));
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -181,7 +181,7 @@ public class WarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoArgSuccess() {
+    void testCanExecuteNoArgSuccess() {
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.of(location));
         when(im.getIslandAt(location)).thenReturn(Optional.of(island));
         assertTrue(cmd.canExecute(user, "", List.of()));
@@ -192,7 +192,7 @@ public class WarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteArgNoWarps() {
+    void testCanExecuteArgNoWarps() {
         when(parkourManager.getWarps()).thenReturn(new HashMap<>());
         assertFalse(cmd.canExecute(user, "", List.of("tastybento")));
         verify(user).sendMessage("parkour.warp.unknown-course");
@@ -202,7 +202,7 @@ public class WarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteArgDifferentPlayer() {
+    void testCanExecuteArgDifferentPlayer() {
         when(parkourManager.getWarps()).thenReturn(Map.of("Bill", location));
         assertFalse(cmd.canExecute(user, "", List.of("tastybento")));
         verify(user).sendMessage("parkour.warp.unknown-course");
@@ -212,7 +212,7 @@ public class WarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteArgMixedCase() {
+    void testCanExecuteArgMixedCase() {
         when(parkourManager.getWarps()).thenReturn(Map.of("tAsTyBeNtO", location));
         assertTrue(cmd.canExecute(user, "", List.of("tastybento")));
         verify(user, never()).sendMessage(any());
@@ -223,7 +223,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testExecuteUserStringListOfString() {
+	void testExecuteUserStringListOfString() {
 		// Set warpspot
 		testCanExecuteArgMixedCase();
 		// Run test
@@ -240,7 +240,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testTabCompleteUserStringListOfString() {
+	void testTabCompleteUserStringListOfString() {
 		assertTrue(cmd.tabComplete(user, "", List.of("ta")).get().isEmpty());
 		when(parkourManager.getWarps()).thenReturn(Map.of("tAsTyBeNtO", location));
 		List<String> list = cmd.tabComplete(user, "", List.of("ta")).get();
@@ -252,7 +252,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testTabCompleteUserStringListOfStringEmpty() {
+	void testTabCompleteUserStringListOfStringEmpty() {
 		assertTrue(cmd.tabComplete(user, "", List.of()).get().isEmpty());
 		when(parkourManager.getWarps()).thenReturn(Map.of("tAsTyBeNtO", location));
 		List<String> list = cmd.tabComplete(user, "", List.of("ta")).get();
@@ -264,7 +264,7 @@ public class WarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testTabCompleteUserStringListOfString10OptionsEmpty() {
+	void testTabCompleteUserStringListOfString10OptionsEmpty() {
 		assertTrue(cmd.tabComplete(user, "", List.of("ta")).get().isEmpty());
 		Map<String, Location> map = new HashMap<>();
 		map.put("tAsTyBeNtO1", location);

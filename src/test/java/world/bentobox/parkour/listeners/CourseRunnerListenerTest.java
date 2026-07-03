@@ -30,6 +30,7 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Player.Spigot;
@@ -66,7 +67,7 @@ import world.bentobox.parkour.Settings;
 /**
  * @author tastybento
  */
-public class CourseRunnerListenerTest extends CommonTestSetup {
+class CourseRunnerListenerTest extends CommonTestSetup {
     @Mock
     private ParkourManager parkourManager;
 
@@ -108,7 +109,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
         when(u.getUniqueId()).thenReturn(uuid);
         when(u.getPlayer()).thenReturn(mockPlayer);
         when(u.getTranslationOrNothing(anyString()))
-                .thenAnswer((invocation) -> invocation.getArgument(0, String.class));
+                .thenAnswer(invocation -> invocation.getArgument(0, String.class));
 
         // Islands
         when(plugin.getIslands()).thenReturn(im);
@@ -169,7 +170,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#CourseRunnerListener(world.bentobox.parkour.Parkour)}.
      */
     @Test
-    public void testCourseRunnerListener() {
+    void testCourseRunnerListener() {
         assertNotNull(crl);
     }
 
@@ -178,7 +179,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorArrive(world.bentobox.bentobox.api.events.island.IslandEnterEvent)}.
      */
     @Test
-    public void testOnVisitorArrive() {
+    void testOnVisitorArrive() {
         IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
         crl.onVisitorArrive(e);
         verify(notifier).notify(any(), eq("parkour.to-start"));
@@ -189,7 +190,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorArrive(world.bentobox.bentobox.api.events.island.IslandEnterEvent)}.
      */
     @Test
-    public void testOnVisitorArriveOtherGame() {
+    void testOnVisitorArriveOtherGame() {
         when(addon.inWorld(world)).thenReturn(false);
         IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
         crl.onVisitorArrive(e);
@@ -202,7 +203,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorArrive(world.bentobox.bentobox.api.events.island.IslandEnterEvent)}.
      */
     @Test
-    public void testOnVisitorArriveInRace() {
+    void testOnVisitorArriveInRace() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         prm.checkpoints().put(uuid, location);
         IslandEnterEvent e = new IslandEnterEvent(island, uuid, false, location, island, null);
@@ -215,7 +216,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorLeave(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
-    public void testOnVisitorLeave() {
+    void testOnVisitorLeave() {
         prm.checkpoints().put(uuid, location);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
@@ -226,7 +227,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorLeave(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
-    public void testOnVisitorLeaveOffline() {
+    void testOnVisitorLeaveOffline() {
         when(mockPlayer.isOnline()).thenReturn(false);
         prm.checkpoints().put(uuid, location);
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
@@ -239,7 +240,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorLeave(world.bentobox.bentobox.api.events.island.IslandExitEvent)}.
      */
     @Test
-    public void testOnVisitorLeaveNotRuning() {
+    void testOnVisitorLeaveNotRuning() {
         IslandExitEvent e = new IslandExitEvent(island, uuid, false, location, island, null);
         crl.onVisitorLeave(e);
         verify(notifier, never()).notify(any(), eq("parkour.session-ended"));
@@ -250,8 +251,9 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onPlayerDeath(org.bukkit.event.entity.PlayerDeathEvent)}.
      */
     @Test
-    public void testOnPlayerDeath() {
-        PlayerDeathEvent e = new PlayerDeathEvent(mockPlayer, null, null, 0, 0, 0, 0, null);
+    void testOnPlayerDeath() {
+        PlayerDeathEvent e = new PlayerDeathEvent(mockPlayer, mock(DamageSource.class), List.of(), 0,
+                net.kyori.adventure.text.Component.empty(), false);
         crl.onPlayerDeath(e);
         assertFalse(prm.timers().containsKey(uuid));
         assertFalse(prm.checkpoints().containsKey(uuid));
@@ -262,8 +264,8 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onPlayerQuit(org.bukkit.event.player.PlayerQuitEvent)}.
      */
     @Test
-    public void testOnPlayerQuit() {
-        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, "");
+    void testOnPlayerQuit() {
+        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty());
         crl.onPlayerQuit(e);
         assertFalse(prm.timers().containsKey(uuid));
         assertFalse(prm.checkpoints().containsKey(uuid));
@@ -274,7 +276,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorFall(org.bukkit.event.entity.EntityDamageEvent)}.
      */
     @Test
-    public void testOnVisitorFall() {
+    void testOnVisitorFall() {
         // Stub the static method using mockedUtil
         mockedUtil.when(() -> Util.teleportAsync(any(), any(), any())).thenReturn(java.util.concurrent.CompletableFuture.completedFuture(true));
 
@@ -296,7 +298,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorFall(org.bukkit.event.entity.EntityDamageEvent)}.
      */
     @Test
-    public void testOnVisitorFallPreventVoidDeathDisabled() {
+    void testOnVisitorFallPreventVoidDeathDisabled() {
         // Stub the static method using mockedUtil
         mockedUtil.when(() -> Util.teleportAsync(any(), any(), any())).thenReturn(java.util.concurrent.CompletableFuture.completedFuture(true));
 
@@ -319,7 +321,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorFall(org.bukkit.event.entity.EntityDamageEvent)}.
      */
     @Test
-    public void testOnVisitorFallNotVoid() {
+    void testOnVisitorFallNotVoid() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(mockPlayer, DamageCause.BLOCK_EXPLOSION, null, 0);
@@ -335,7 +337,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorFall(org.bukkit.event.entity.EntityDamageEvent)}.
      */
     @Test
-    public void testOnVisitorFallNotRunning() {
+    void testOnVisitorFallNotRunning() {
         EntityDamageEvent e = new EntityDamageEvent(mockPlayer, DamageCause.VOID, null, 1D);
         crl.onVisitorFall(e);
         verify(mockPlayer, never()).playEffect(EntityEffect.ENTITY_POOF);
@@ -349,7 +351,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorFall(org.bukkit.event.entity.EntityDamageEvent)}.
      */
     @Test
-    public void testOnVisitorFallNotPlayer() {
+    void testOnVisitorFallNotPlayer() {
         Creeper creeper = mock(Creeper.class);
         EntityDamageEvent e = new EntityDamageEvent(creeper, DamageCause.VOID, null, 1D);
         crl.onVisitorFall(e);
@@ -361,7 +363,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorCommand(org.bukkit.event.player.PlayerCommandPreprocessEvent)}.
      */
     @Test
-    public void testOnVisitorCommand() {
+    void testOnVisitorCommand() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(mockPlayer, "/island");
         crl.onVisitorCommand(e);
@@ -373,7 +375,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorCommand(org.bukkit.event.player.PlayerCommandPreprocessEvent)}.
      */
     @Test
-    public void testOnVisitorCommandNotRunning() {
+    void testOnVisitorCommandNotRunning() {
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(mockPlayer, "/island");
         crl.onVisitorCommand(e);
         assertFalse(e.isCancelled());
@@ -384,7 +386,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorCommand(org.bukkit.event.player.PlayerCommandPreprocessEvent)}.
      */
     @Test
-    public void testOnVisitorCommandQuitting() {
+    void testOnVisitorCommandQuitting() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(mockPlayer, "/pk quit");
         crl.onVisitorCommand(e);
@@ -396,7 +398,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorCommand(org.bukkit.event.player.PlayerCommandPreprocessEvent)}.
      */
     @Test
-    public void testOnVisitorCommandQuittingParkour() {
+    void testOnVisitorCommandQuittingParkour() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         PlayerCommandPreprocessEvent e = new PlayerCommandPreprocessEvent(mockPlayer, "/parkour quit");
         crl.onVisitorCommand(e);
@@ -408,7 +410,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onStartEndSet(org.bukkit.event.player.PlayerInteractEvent)}.
      */
     @Test
-    public void testOnStartEndSet() {
+    void testOnStartEndSet() {
         PlayerInteractEvent e = new PlayerInteractEvent(mockPlayer, Action.PHYSICAL, null, block, BlockFace.DOWN);
         crl.onStartEndSet(e);
         checkSpigotMessage("parkour.start");
@@ -418,7 +420,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onStartEndSet(org.bukkit.event.player.PlayerInteractEvent)}.
      */
     @Test
-    public void testOnStartEndSetNoEnd() {
+    void testOnStartEndSetNoEnd() {
         when(this.parkourManager.getEnd(island)).thenReturn(Optional.empty());
         PlayerInteractEvent e = new PlayerInteractEvent(mockPlayer, Action.PHYSICAL, null, block, BlockFace.DOWN);
         crl.onStartEndSet(e);
@@ -430,7 +432,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onStartEndSet(org.bukkit.event.player.PlayerInteractEvent)}.
      */
     @Test
-    public void testOnStartEndSetRaceOver() {
+    void testOnStartEndSetRaceOver() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
         Location l = mock(Location.class);
         when(l.getWorld()).thenReturn(world);
@@ -446,7 +448,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourStart(User, Location)}.
      */
     @Test
-    public void testParkourStart() {
+    void testParkourStart() {
         crl.parkourStart(u, location);
         verify(u).sendMessage("parkour.start");
         verify(mockPlayer).playSound(location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1F, 1F);
@@ -462,7 +464,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourEnd(User, Island, Location)}.
      */
     @Test
-    public void testParkourEnd() {
+    void testParkourEnd() {
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
 
         crl.parkourEnd(u, island, location);
@@ -479,7 +481,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourEnd(User, Island, Location)}.
      */
     @Test
-    public void testParkourEndLongerTime() {
+    void testParkourEndLongerTime() {
         when(this.parkourManager.getTime(island, uuid)).thenReturn(1L);
 
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
@@ -492,7 +494,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#parkourEnd(User, Island, Location)}.
      */
     @Test
-    public void testParkourEndNoCreative() {
+    void testParkourEndNoCreative() {
         when(island.getFlag(addon.PARKOUR_CREATIVE)).thenReturn(RanksManager.ADMIN_RANK);
 
         prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
@@ -506,7 +508,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onCheckpoint(org.bukkit.event.player.PlayerInteractEvent)}.
      */
     @Test
-    public void testOnCheckpointNotPhysical() {
+    void testOnCheckpointNotPhysical() {
         PlayerInteractEvent e = new PlayerInteractEvent(mockPlayer, Action.LEFT_CLICK_AIR, null, block, BlockFace.DOWN);
         crl.onCheckpoint(e);
         verify(block, never()).getLocation();
@@ -517,7 +519,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onCheckpoint(org.bukkit.event.player.PlayerInteractEvent)}.
      */
     @Test
-    public void testOnCheckpointInitialChecks() {
+    void testOnCheckpointInitialChecks() {
         Location l = mock(Location.class);
         when(l.toVector()).thenReturn(new Vector(100, 0, 20)); // Different to location
         prm.checkpoints().put(uuid, l);
@@ -552,7 +554,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
      */
     @Test
-    public void testOnTeleport() {
+    void testOnTeleport() {
         // Player is running
         for (TeleportCause cause : TeleportCause.values()) {
             // Reset the maps
@@ -577,7 +579,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
      */
     @Test
-    public void testOnTeleportNoFlagActionNullTo() {
+    void testOnTeleportNoFlagActionNullTo() {
         // Make the event
         PlayerTeleportEvent e = new PlayerTeleportEvent(mockPlayer, location, null, TeleportCause.ENDER_PEARL);
         // Fire event
@@ -591,7 +593,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
      */
     @Test
-    public void testOnTeleportToNoFlagActionNotInParkourWorld() {
+    void testOnTeleportToNoFlagActionNotInParkourWorld() {
         // Make the event
         Location l = mock(Location.class);
         when(l.getWorld()).thenReturn(mock(World.class));
@@ -607,7 +609,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
      */
     @Test
-    public void testOnTeleportToNoFlagActionDifferentIsland() {
+    void testOnTeleportToNoFlagActionDifferentIsland() {
         // Make the event
         Location l = mock(Location.class);
         when(l.getWorld()).thenReturn(world);
@@ -624,7 +626,7 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
      */
     @Test
-    public void testOnTeleportToFlagActionVisitors() {
+    void testOnTeleportToFlagActionVisitors() {
         when(island.getFlag(any())).thenReturn(RanksManager.MEMBER_RANK);
         when(island.getRank(any(User.class))).thenReturn(RanksManager.VISITOR_RANK);
 
@@ -641,12 +643,12 @@ public class CourseRunnerListenerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.listeners.CourseRunnerListener#onTeleport(org.bukkit.event.player.PlayerTeleportEvent)}.
      */
     @Test
-    public void testOnTeleportToFlagActionVisitorsChorusFruit() {
+    void testOnTeleportToFlagActionVisitorsChorusFruit() {
         when(island.getFlag(any())).thenReturn(RanksManager.MEMBER_RANK);
         when(island.getRank(any(User.class))).thenReturn(RanksManager.VISITOR_RANK);
 
         // Make the event
-        PlayerTeleportEvent e = new PlayerTeleportEvent(mockPlayer, location, location, TeleportCause.CHORUS_FRUIT);
+        PlayerTeleportEvent e = new PlayerTeleportEvent(mockPlayer, location, location, TeleportCause.CONSUMABLE_EFFECT);
         // Fire event
         crl.onTeleport(e);
         // Never alter the game mode

@@ -36,7 +36,7 @@ import world.bentobox.parkour.Settings;
  * @author tastybento
  *
  */
-public class RemoveWarpCommandTest extends CommonTestSetup {
+class RemoveWarpCommandTest extends CommonTestSetup {
 	@Mock
 	private CompositeCommand ac;
 	private RemoveWarpCommand cmd;
@@ -103,7 +103,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.RemoveWarpCommand#RemoveWarpCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
 	 */
 	@Test
-	public void testRemoveWarpCommand() {
+	void testRemoveWarpCommand() {
 		assertNotNull(cmd);
 	}
 
@@ -112,7 +112,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.RemoveWarpCommand#setup()}.
 	 */
 	@Test
-	public void testSetup() {
+	void testSetup() {
 		assertEquals("removewarp", cmd.getPermission());
 		assertEquals("parkour.commands.parkour.removewarp.description", cmd.getDescription());
 		assertTrue(cmd.isConfigurableRankCommand());
@@ -124,7 +124,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.RemoveWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteFailHelp() {
+	void testCanExecuteFailHelp() {
 		// Help
 		assertFalse(cmd.canExecute(user, "", List.of("something")));
 		verify(user).sendMessage("commands.help.header", "[label]", "Parkour");
@@ -135,7 +135,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.RemoveWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteFailNoRank() {
+	void testCanExecuteFailNoRank() {
 		// Insufficient rank
 		assertFalse(cmd.canExecute(user, "", List.of()));
 		verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, RanksManager.MEMBER_RANK_REF);
@@ -146,7 +146,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.RemoveWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteFailNoWarpSpot() {
+    void testCanExecuteFailNoWarpSpot() {
         // Has rank
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.MEMBER_RANK);
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
@@ -159,7 +159,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.RemoveWarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecutePass() {
+    void testCanExecutePass() {
         // Has rank
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.MEMBER_RANK);
         assertTrue(cmd.canExecute(user, "", List.of()));
@@ -171,7 +171,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
 	 * {@link world.bentobox.parkour.commands.RemoveWarpCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testExecuteUserStringListOfString() {
+	void testExecuteUserStringListOfString() {
 		assertTrue(cmd.execute(user, "", List.of()));
 		verify(user).sendMessage("parkour.warp.removed");
 		verify(parkourManager).setWarpSpot(island, null);
@@ -182,7 +182,7 @@ public class RemoveWarpCommandTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.commands.RemoveWarpCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testExecuteUserStringListOfStringWarpRemove() {
+    void testExecuteUserStringListOfStringWarpRemove() {
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.of(mock(Location.class)));
         assertTrue(cmd.execute(user, "", List.of()));
         verify(user).sendMessage("parkour.warp.removed");
