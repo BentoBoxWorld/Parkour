@@ -170,7 +170,12 @@ public class CourseRunnerListener extends AbstractListener {
                 || !parkourRunManager.timers().containsKey(e.getEntity().getUniqueId())) {
             return;
         }
-        // Put player back to last checkpoint. Do not cancel event so that player takes some damage
+        // If enabled, prevent the player from dying in the void - just send them back unharmed
+        if (addon.getSettings().isPreventVoidDeath()) {
+            e.setCancelled(true);
+        }
+        // Put player back to last checkpoint (or the course start if no checkpoint reached yet).
+        // If the event is not cancelled the player still takes some damage.
         player.playEffect(EntityEffect.ENTITY_POOF);
         player.setVelocity(new Vector(0, 0, 0));
         player.setFallDistance(0);

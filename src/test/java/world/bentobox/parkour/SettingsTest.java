@@ -1531,4 +1531,21 @@ public class SettingsTest {
         assertFalse(s.isMakeEndPortals());
     }
 
+    /**
+     * Test method for {@link Settings#isPreventVoidDeath()}.
+     */
+    @Test
+    public void testIsPreventVoidDeath() {
+        assertTrue(s.isPreventVoidDeath());
+    }
+
+    /**
+     * Test method for {@link Settings#setPreventVoidDeath(boolean)}.
+     */
+    @Test
+    public void testSetPreventVoidDeath() {
+        s.setPreventVoidDeath(false);
+        assertFalse(s.isPreventVoidDeath());
+    }
+
 }
