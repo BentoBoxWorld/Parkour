@@ -55,6 +55,14 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "parkour.command.default-action")
     private String defaultPlayerAction = "go";
 
+    @ConfigComment("Prevent players from dying when they fall into the void while running a course.")
+    @ConfigComment("If true, players who drop into the void are not killed. Instead their velocity is")
+    @ConfigComment("set to zero and they are teleported back to their last checkpoint, or to the course")
+    @ConfigComment("start if they have not reached a checkpoint yet.")
+    @ConfigComment("If false, players take void damage and can die, ending their run.")
+    @ConfigEntry(path = "parkour.prevent-void-death")
+    private boolean preventVoidDeath = true;
+
     /*      WORLD       */
     @ConfigComment("Friendly name for this world. Used in admin commands. Must be a single word")
     @ConfigEntry(path = "world.friendly-name")
@@ -1687,6 +1695,20 @@ public class Settings implements WorldSettings {
      */
     public void setDefaultPlayerAction(String defaultPlayerAction) {
         this.defaultPlayerAction = defaultPlayerAction;
+    }
+
+    /**
+     * @return whether players are prevented from dying when they fall into the void during a run
+     */
+    public boolean isPreventVoidDeath() {
+        return preventVoidDeath;
+    }
+
+    /**
+     * @param preventVoidDeath the preventVoidDeath to set
+     */
+    public void setPreventVoidDeath(boolean preventVoidDeath) {
+        this.preventVoidDeath = preventVoidDeath;
     }
 
     /**

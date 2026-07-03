@@ -107,6 +107,7 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 	private User u;
     @Mock
     private Spigot spigot;
+	private Settings settings;
 
 	/**
 	 * @throws java.lang.Exception
@@ -176,7 +177,7 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 		when(iwm.inWorld(world)).thenReturn(true); // Always in world
 
 		// Settings
-		Settings settings = new Settings();
+		settings = new Settings();
 		when(addon.getSettings()).thenReturn(settings);
 
 		// Location
@@ -318,6 +319,29 @@ public class CourseRunnerListenerTest extends AbstractParkourTest {
 		prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, null, 0);
 		crl.onVisitorFall(e);
+		// prevent-void-death defaults to true, so the player is saved from dying
+		assertTrue(e.isCancelled());
+		verify(player).playEffect(EntityEffect.ENTITY_POOF);
+		verify(player).setVelocity(new Vector(0, 0, 0));
+		verify(player).setFallDistance(0);
+		PowerMockito.verifyStatic(Util.class);
+		Util.teleportAsync(player, location, PlayerTeleportEvent.TeleportCause.PLUGIN);
+	}
+
+	/**
+	 * Test method for
+	 * {@link world.bentobox.parkour.listeners.CourseRunnerListener#onVisitorFall(org.bukkit.event.entity.EntityDamageEvent)}.
+	 */
+	@Test
+	public void testOnVisitorFallPreventVoidDeathDisabled() {
+		PowerMockito.mockStatic(Util.class, RETURNS_MOCKS);
+		settings.setPreventVoidDeath(false);
+		prm.timers().put(uuid, System.currentTimeMillis() - 20000); // ~ 20 seconds ago
+		prm.checkpoints().put(uuid, location);
+        EntityDamageEvent e = new EntityDamageEvent(player, DamageCause.VOID, null, 0);
+		crl.onVisitorFall(e);
+		// prevent-void-death is off, so the player still takes damage (event not cancelled)
+		assertFalse(e.isCancelled());
 		verify(player).playEffect(EntityEffect.ENTITY_POOF);
 		verify(player).setVelocity(new Vector(0, 0, 0));
 		verify(player).setFallDistance(0);
