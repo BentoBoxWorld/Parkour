@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>スタートが設定されました!</green>"
+  end-set: "<green>ゴールが設定されました!</green>"
+  already-set: "<red>スタートとゴールはすでに設定されています!リセットするには1つを壊してください。</red>"
+  start-removed: "<aqua>スタートが削除されました!</aqua>"
+  end-removed: "<aqua>ゴールが削除されました!</aqua>"
+  resetting-start-end: "<yellow>スタートとゴールをリセットしています!</yellow>"
+  start: "<aqua>パルクールスタート!</aqua>"
+  no-start-yet: "<red>まだスタートが設定されていません。</red>"
+  no-end-yet: "<red>まだゴールが設定されていません。</red>"
+  to-start: "<light_purple>開始するには、金の圧力板の上に立ってください。</light_purple>"
+  session-ended: "<red>あなたのパルクールセッションが終了しました。</red>"
+  end: "<green>パルクールゴール!</green>"
+  you-took: "<light_purple>あなたは[number]かかりました!</light_purple>"
+  start-before-end: "<aqua>終了する前にスタートする必要があります!</aqua>"
+  checkpoint: "<yellow>チェックポイント!</yellow>"
+  checkpoint-set: "<green>チェックポイントが設定されました!</green>"
+  set-the-end: "<red>ゴール板を設定してください</red>"
+  hours: "時間"
+  minutes: "分"
+  seconds: "秒"
+  hours-short: "時"
+  minutes-short: "分"
+  seconds-short: "秒"
+  courses:
+    description: "1つ選んでやってみてください!"
+    gui-title: "パルクールコース"
+    head-description: "<aqua>[runs]回の実行</aqua>"
+  top:
+    gui-title: "最速コースランキング"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>あなたのランク: [number]</green>"
+    beat-previous-time: "<light_purple>あなたは前の記録を更新しました!</light_purple>"
+    did-not-beat-previous-time: "<aqua>あなたは前の記録を更新できませんでした!</aqua>"
+  errors:
+    not-on-island: "<red>パルクールコースを実行するにはコースの上にいる必要があります</red>"
+    no-warp: "<red>このコースは既にプライベートです</red>"
+    not-in-run: "<red>コースを実行するには現在コースを走行中である必要があります</red>"
+  warp:
+    set: "<light_purple>ワープ地点が設定されました!プレイヤーはあなたのコースを見ることができるようになりました!</light_purple>"
+    replaced: "<yellow>ワープ地点が設定されました!古い地点は無効になりました!</yellow>"
+    removed: "<red>ワープ地点が削除されました。プレイヤーはあなたのコースを見ることができません。</red>"
+    warping: "<green>コースにワープしています!</green>"
+    no-warp: "<red>このコースに対してワープが設定されていません!</red>"
+    unknown-course: "<red>不明なコースです!</red>"
+  quit:
+    success: "<yellow>実行を中止し、コマンドを実行できるようになりました</yellow>"
+  general:
+    errors:
+      no-island: '<red>あなたはコースを持っていません!</red>'
+      player-has-island: '<red>プレイヤーは既にコースを持っています!</red>'
+      player-has-no-island: '<red>そのプレイヤーはコースを持っていません!</red>'
+      already-have-island: '<red>あなたは既にコースを持っています!</red>'
+      no-safe-location: '<red>コースで安全な場所が見つかりません!</red>'
+      not-owner: '<red>あなたはあなたのチームの所有者ではありません!</red>'
+  commands:
+    parkour:
+      courses:
+        description: プレイ可能で利用可能なコースを表示する
+      cleartop:
+        description: あなたのコースのトップテンをクリアするか、プレイヤーのスコアを削除する
+        parameters: <プレイヤー名>
+      setwarp:
+        description: ワープ地点を設定し、あなたのコースを公開します
+      warp:
+        description: コース名でコースにワープするか、コース上にいる場合はスタートにワープします
+        parameters: <コース名>
+      removewarp:
+        description: ワープ地点を削除し、あなたのコースをプライベートにします
+      help:
+        description: パルクールコースを開始するか、あなたのコースにテレポートします
+      go:
+        parameters: '[ホーム番号]'
+      sethome:
+        parameters: '[ホーム番号]'
+      top:
+        description: "トップコースランキングを表示する"
+      quit:
+        description: "現在のコースでタイマーを停止する"
+    island:
+      go:
+        parameters: '[ホーム番号]'
+        description: あなたのコースにテレポートします
+        teleport: '<green>あなたのコースにテレポートしています。</green>'
+        teleported: '<green>ホーム</green><yellow>#[number]にテレポートしました。</yellow>'
+      help:
+        description: メインパルクールコマンド
+      create:
+        description: オプションのブループリントを使用してコースを作成します(権限が必要)
+        parameters: <ブループリント>
+        too-many-islands: "<red>この世界にはコースが多すぎます:あなたのコースを作成する余地がありません。</red>"
+        cannot-create-island: '<red>時間内にスポットが見つかりませんでした。もう一度試してください...</red>'
+        unable-create-island: '<red>あなたのコースを生成できませんでした。管理者に連絡してください。</red>'
+        creating-island: '<green>あなたのコースのスポットを探しています...</green>'
+        pasting:
+          estimated-time: '<green>推定時間: </green><aqua>[number] </aqua><green>秒。</green>'
+          blocks: '<green>ブロックごとにビルドしています: </green><aqua>[number] </aqua><green>すべてのブロック...</green>'
+          entities: '<green>エンティティで満たしています: </green><aqua>[number] </aqua><green>すべてのエンティティ...</green>'
+          done: '<green>完了!あなたのコースの準備ができました!</green>'
+        pick: '<dark_green>コースを選択</dark_green>'
+        unknown-blueprint: '<red>そのブループリントはまだロードされていません。</red>'
+        on-first-login: '<green>ようこそ!数秒後にあなたのコースの準備を開始します。</green>'
+        you-can-teleport-to-your-island: '<green>好きなときにあなたのコースにテレポートできます。</green>'
+      info:
+        description: あなたのコースまたはプレイヤーのコースに関する情報を表示します
+        parameters: <プレイヤー>
+      near:
+        description: あなたの周りの隣接するコースの名前を表示する
+        parameters: ''
+        the-following-islands: '<green>以下のコースが近くにあります:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: 北
+        south: 南
+        east: 東
+        west: 西
+        no-neighbors: '<red>近くに隣接するコースがありません!</red>'
+      reset:
+        description: あなたのコースを再始動し、古いコースを削除します
+        parameters: <ブループリント>
+        none-left: '<red>もうリセットはありません!</red>'
+        resets-left: '<red>あなたは</red><aqua>[number] </aqua><red>回リセットが残っています</red>'
+        confirmation: |-
+          <red>本当にこれをしたいですか?
+          </red><red>すべてのコースメンバーはコースからキックされ、後で再度招待する必要があります。
+          </red><red>戻る方法がありません:現在のコースが削除されると、後で<bold>取得する</bold></red><red>方法がありません。</red>
+        kicked-from-island: '<red>オーナーがリセットしているため、[gamemode]のコースからキックされました。</red>'
+      sethome:
+        description: ホームテレポートポイントを設定します
+        must-be-on-your-island: '<red>ホームを設定するにはあなたのコース上にいる必要があります!</red>'
+        num-homes: '<red>ホームは1から[number]までできます。</red>'
+        home-set: '<gold>あなたのコースホームは現在の場所に設定されました。</gold>'
+        nether:
+          not-allowed: '<red>ネザーでホームを設定することはできません。</red>'
+          confirmation: '<red>本当にネザーでホームを設定しますか?</red>'
+        the-end:
+          not-allowed: '<red>終わりの地でホームを設定することはできません。</red>'
+          confirmation: '<red>本当に終わりの地でホームを設定しますか?</red>'
+        parameters: '[ホーム番号]'
+      setname:
+        description: あなたのコースに名前を設定します
+        name-too-short: '<red>短すぎます。最小サイズは[number]文字です。</red>'
+        name-too-long: '<red>長すぎます。最大サイズは[number]文字です。</red>'
+        name-already-exists: '<red>その名前のコースはすでに存在します!</red>'
+        parameters: <名前>
+        success: '<green>あなたのコースの名前を</green><aqua>[name]</aqua><green>に正常に設定しました。</green>'
+      resetname:
+        description: あなたのコース名をリセットします
+        success: '<green>あなたのコース名を正常にリセットしました。</green>'
+      team:
+        description: あなたのチームを管理する
+        coop:
+          description: プレイヤーをあなたのコースのクープランクにする
+          parameters: <プレイヤー>
+          cannot-coop-yourself: '<red>自分自身をクープすることはできません!</red>'
+          already-has-rank: '<red>プレイヤーは既にランクを持っています!</red>'
+          you-are-a-coop-member: '<dark_green>あなたは</dark_green><aqua>[name]</aqua><green>によってクープされました。</green>'
+          success: '<green>あなたは</green><aqua>[name]</aqua><green>をクープしました。</green>'
+          name-has-invited-you: '<green>[name]はあなたをあなたのコースのクープメンバーに参加するよう招待しました。</green>'
+        uncoop:
+          description: プレイヤーからクープランクを削除する
+          parameters: <プレイヤー>
+          cannot-uncoop-yourself: '<red>自分自身をクープ解除することはできません!</red>'
+          cannot-uncoop-member: '<red>チームメンバーをクープ解除することはできません!</red>'
+          player-not-cooped: '<red>プレイヤーはクープされていません!</red>'
+          you-are-no-longer-a-coop-member: '<red>あなたは[name]のコースのクープメンバーではなくなりました。</red>'
+          all-members-logged-off: '<red>すべてのコースメンバーがログオフしたため、あなたは[name]のコースのクープメンバーではなくなりました。</red>'
+          success: '<aqua>[name] </aqua><green>はもはやあなたのコースのクープメンバーではありません。</green>'
+          is-full: '<red>他の誰かをクープすることはできません。</red>'
+        trust:
+          description: プレイヤーにあなたのコースで信頼できるランクを与えます
+          parameters: <プレイヤー>
+          trust-in-yourself: '<red>自分自身を信頼してください!</red>'
+          name-has-invited-you: '<green>[name]はあなたをあなたのコースの信頼できるメンバーに参加するよう招待しました。</green>'
+          player-already-trusted: '<red>プレイヤーは既に信頼されています!</red>'
+          you-are-trusted: '<dark_green>あなたは</dark_green><aqua>[name]</aqua><green>から信頼されています!</green>'
+          success: '<green>あなたは</green><aqua>[name]</aqua><green>を信頼しました。</green>'
+          is-full: '<red>他の誰かを信頼することはできません。</red>'
+        invite:
+          description: プレイヤーをあなたのコースに招待します
+          invitation-sent: '<green>招待が送信されました</green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>招待を削除中。</red>'
+          name-has-invited-you: '<green>[name]はあなたをあなたのコースに参加するよう招待しました。</green>'
+          to-accept-or-reject: '<green>受け入れるには/[label] team acceptを実行してください。拒否するには/[label] team rejectを実行してください</green>'
+          you-will-lose-your-island: '<red>警告!受け入れるとあなたのコースが失われます!</red>'
+          errors:
+            cannot-invite-self: '<red>自分自身を招待することはできません!</red>'
+            cooldown: '<red>あと[number]秒その人を招待することはできません。</red>'
+            island-is-full: '<red>あなたのコースはいっぱいです。他の誰かも招待できません。</red>'
+            none-invited-you: '<red>誰もあなたを招待しませんでした:c。</red>'
+            you-already-are-in-team: '<red>あなたは既にチームに参加しています!</red>'
+            already-on-team: '<red>そのプレイヤーは既にチームに参加しています!</red>'
+            invalid-invite: '<red>その招待は無効になりました。申し訳ありません。</red>'
+            you-have-already-invited: '<red>あなたは既にそのプレイヤーを招待しました!</red>'
+          parameters: <プレイヤー>
+          you-can-invite: '<green>あと[number]人のプレイヤーを招待できます。</green>'
+          accept:
+            description: 招待を受け入れます
+            you-joined-island: '<green>あなたはコースに参加しました!使用</green><aqua>/[label] team </aqua><green>他のメンバーを見る。</green>'
+            name-joined-your-island: '<green>[name]はあなたのコースに参加しました!</green>'
+            confirmation: |-
+              <red>この招待を受け入れたいですか?
+              </red><red><bold>あなたは<underlined>失う</underlined></bold></red><red><bold>あなたの現在のコースを失う!</bold></red>
+          reject:
+            description: 招待を拒否します
+            you-rejected-invite: '<green>あなたはコースに参加する招待を拒否しました。</green>'
+            name-rejected-your-invite: '<red>[name]はあなたのコース招待を拒否しました!</red>'
+          cancel:
+            description: あなたのコースに参加するための保留中の招待をキャンセルします
+        leave:
+          cannot-leave: '<red>所有者は退出できません!まずメンバーになるか、すべてのメンバーをキックしてください。</red>'
+          description: あなたのコースを離れる
+          left-your-island: '<red>[name] </red><red>あなたのコースを離れました</red>'
+          success: '<green>このコースを離れました。</green>'
+        kick:
+          description: あなたのコースからメンバーを削除します
+          parameters: <プレイヤー>
+          owner-kicked: '<red>オーナーが[gamemode]のコースからあなたをキックしました!</red>'
+          cannot-kick: '<red>自分自身をキックすることはできません!</red>'
+          success: '<aqua>[name] </aqua><green>はあなたのコースからキックされました。</green>'
+        demote:
+          description: あなたのコースでプレイヤーをランクダウンします
+          parameters: <プレイヤー>
+          errors:
+            cant-demote-yourself: '<red>自分自身をランクダウンすることはできません!</red>'
+          failure: '<red>プレイヤーはこれ以上ランクダウンできません!</red>'
+          success: '<green>[name]を[rank]にランクダウンしました</green>'
+        promote:
+          description: あなたのコースでプレイヤーをランクアップします
+          parameters: <プレイヤー>
+          failure: '<red>プレイヤーはこれ以上ランクアップできません!</red>'
+          success: '<green>[name]を[rank]にランクアップしました</green>'
+        setowner:
+          description: あなたのコース所有権をメンバーに転送します
+          errors:
+            cant-transfer-to-yourself: '<red>自分自身に所有権を転送することはできません!</red><gray>(<italic>実はできるのですが...しないでください。それは無駄です。</italic></gray><gray>)</gray>'
+            target-is-not-member: '<red>そのプレイヤーはあなたのコースチームの一部ではありません!</red>'
+          name-is-the-owner: '<green>[name]はコースの所有者です!</green>'
+          parameters: <プレイヤー>
+          you-are-the-owner: '<green>あなたはコースの所有者です!</green>'
+      ban:
+        description: プレイヤーをあなたのコースから禁止します
+        parameters: <プレイヤー>
+        cannot-ban-yourself: '<red>自分自身を禁止することはできません!</red>'
+        cannot-ban: '<red>そのプレイヤーを禁止することはできません。</red>'
+        cannot-ban-member: '<red>まずチームメンバーをキックしてから禁止してください。</red>'
+        cannot-ban-more-players: '<red>禁止制限に達しました。あなたのコースから他のプレイヤーを禁止することはできません。</red>'
+        player-already-banned: '<red>プレイヤーは既に禁止されています。</red>'
+        player-banned: '<aqua>[name]</aqua><red>はあなたのコースから禁止されました。</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>があなたをあなたのコースから禁止しました!</red>'
+        you-are-banned: '<aqua>このコースから禁止されています!</aqua>'
+      unban:
+        description: プレイヤーをあなたのコースから禁止解除します
+        parameters: <プレイヤー>
+        cannot-unban-yourself: '<red>自分自身を禁止解除することはできません!</red>'
+        player-not-banned: '<red>プレイヤーは禁止されていません。</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>はあなたのコースから禁止解除されました。</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>があなたをあなたのコースから禁止解除しました!</green>'
+      banlist:
+        description: 禁止されたプレイヤーをリストします
+        noone: '<green>このコースで禁止されたプレイヤーはいません。</green>'
+        the-following: '<aqua>以下のプレイヤーが禁止されています:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>最大</aqua><yellow>[number] </yellow><aqua>人のプレイヤーを禁止できます。</aqua>'
+      settings:
+        description: コース設定を表示する
+      language:
+        description: 言語を選択する
+        parameters: '[言語]'
+        not-available: '<red>この言語は利用できません。</red>'
+        already-selected: '<red>あなたは既にこの言語を使用しています。</red>'
+      expel:
+        description: プレイヤーをあなたのコースから追放します
+        parameters: <プレイヤー>
+        cannot-expel-yourself: '<red>自分自身を追放することはできません!</red>'
+        cannot-expel: '<red>そのプレイヤーを追放することはできません。</red>'
+        cannot-expel-member: '<red>チームメンバーを追放することはできません!</red>'
+        not-on-island: '<red>そのプレイヤーはあなたのコース上にいません!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>があなたをコースから追放しました!</red>'
+        success: '<green>あなたは</green><aqua>[name] </aqua><green>をコースから追放しました。</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name]はコースを持っています。まず登録解除または削除してください!</red>'
+        setowner:
+          description: プレイヤーにコース所有権を転送します
+          already-owner: '<red>プレイヤーは既にこのコースの所有者です!</red>'
+      range:
+        description: 管理者コースレンジコマンド
+        display:
+          description: コースレンジインジケーターを表示/非表示
+          hint: |-
+            <red>赤いバリアアイコン</red><white>は現在の保護範囲制限を表示します。
+            </white><gray>グレーパーティクル</gray><white>は最大制限を表示します。
+            </white><green>グリーンパーティクル</green><white>は、保護範囲がデフォルトと異なる場合、デフォルトの保護範囲を表示します。</white>
+        set:
+          description: コース保護範囲を設定します
+        reset:
+          description: 保護範囲をワールドのデフォルトにリセットします
+      register:
+        parameters: <プレイヤー>
+        description: 登録されていないコースにプレイヤーを登録します
+        registered-island: '<green>[xyz]のコースにプレイヤーを登録しました。</green>'
+        already-owned: '<red>エリアは別のプレイヤーによって既に所有されています!</red>'
+        no-island-here: '<red>ここにプレイヤーコースがありません。1つを確認してください。</red>'
+        in-deletion: '<red>このスペースは現在再生成中です。後で試してください。</red>'
+      unregister:
+        description: 所有者をコースから登録解除しますが、コースブロックはそのままにしておきます
+        unregistered-island: '<green>[xyz]のコースからプレイヤーを登録解除しました。</green>'
+      info:
+        description: あなたがいる場所またはプレイヤーに関する情報を取得します
+        no-island: '<red>現在登録されているコースにいません...</red>'
+        island-location: 'エリアの位置: [xyz]'
+        island-coords: 'エリア座標: [xz1]から[xz2]'
+        is-spawn: エリアはスポーン島です
+      setrange:
+        description: プレイヤーのコースの範囲を設定します
+        range-updated: エリア範囲を[number]に更新しました
+      tp:
+        description: プレイヤーのコースにテレポートします
+      getrank:
+        description: プレイヤーのコースでのランクを取得します
+        rank-is: '<green>ランクはコースで[rank]です。</green>'
+      setrank:
+        description: プレイヤーのコースでのランクを設定します
+      setspawn:
+        description: コースをこの世界のスポーンとして設定します
+        already-spawn: '<red>このコースは既にスポーンです!</red>'
+        no-island-here: '<red>ここに登録されているコースがありません。</red>'
+        confirmation: '<red>本当にこのコースをこの世界のスポーンとして設定しますか?</red>'
+      delete:
+        description: プレイヤーを削除し、彼らのコースを再生成します
+        deleted-island: '<green>[xyz]のエリアは正常に再生成されました。</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>クリエイティブモードへの進入を切り替えます
+          </green><green>コースの終了時
+          </green><green>および島への進入
+          </green>
+        name: "パルクールクリエイティブモード"
+      ELYTRA:
+        description: 使用を切り替える
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>エンダーマンはブロックを削除できます
+          </green><green></green>
+      ENTER_EXIT_MESSAGES:
+        description: 入出メッセージを表示する
+        island: "[name]のコース"
+        name: 出入メッセージ
+        now-entering: '<green>今</green><aqua>[name]</aqua><green>に進入しています。</green>'
+        now-entering-your-island: '<green>あなたのコースに進入しています。</green>'
+        now-leaving: '<green>今</green><aqua>[name]</aqua><green>を離れています。</green>'
+        now-leaving-your-island: '<green>あなたのコースを離れています。</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>保護の外に出たモブを削除
+          </green><green>プレイヤースペース
+          </green>
+        name: '<yellow>モブをプレイヤーコースに制限</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>プレイヤーはコースで再スポーンします
+          </green>
+        name: エリアの再スポーン
+      LOCK:
+        name: プレイヤーコースをロック
+      OFFLINE_REDSTONE:
+        description: "<green>無効にされた場合、レッドストーンは </green><green>すべてのメンバーがオフラインのコースでは動作しません。 </green><green>ラグを減らすかもしれません。   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>ピストンがプレイヤーのコース外のブロックを押すことを許可します
+          </green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>PVPを有効/無効にする
+          </red><red>保護コースで。</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>コースにテレポートするときにモンスターを削除します
+          </green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>プレイヤーがテレポートするのを防ぎます
+          </green><green>落下している場合。</green>
+        hint: '<red>落下中はテレポートできません!</red>'
+    locked: '<red>このコースはロックされています!</red>'
+    protected: '<red>保護エリア: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>保護</gold>'
+        description: |-
+          <green>保護設定
+          </green><green>このコース用</green>
+      SETTING:
+        description: |-
+          <green>一般的な設定
+          </green><green>このコース用</green>

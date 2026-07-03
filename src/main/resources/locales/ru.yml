@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Начало установлено!</green>"
+  end-set: "<green>Конец установлен!</green>"
+  already-set: "<red>Начало и конец уже установлены! Разрушьте один, чтобы сбросить.</red>"
+  start-removed: "<aqua>Начало удалено!</aqua>"
+  end-removed: "<aqua>Конец удален!</aqua>"
+  resetting-start-end: "<yellow>Сброс начальной и конечной точек!</yellow>"
+  start: "<aqua>Паркур начинается!</aqua>"
+  no-start-yet: "<red>Начало еще не установлено.</red>"
+  no-end-yet: "<red>Конец еще не установлен.</red>"
+  to-start: "<light_purple>Чтобы начать, встаньте на золотую прижимную пластину.</light_purple>"
+  session-ended: "<red>Ваша сессия паркура завершена.</red>"
+  end: "<green>Паркур закончен!</green>"
+  you-took: "<light_purple>Вы взяли [number]!</light_purple>"
+  start-before-end: "<aqua>Вам нужно начать перед завершением!</aqua>"
+  checkpoint: "<yellow>Контрольная точка!</yellow>"
+  checkpoint-set: "<green>Контрольная точка установлена!</green>"
+  set-the-end: "<red>Установите конечную пластину</red>"
+  hours: "часы"
+  minutes: "минуты"
+  seconds: "секунды"
+  hours-short: "ч"
+  minutes-short: "м"
+  seconds-short: "с"
+  courses:
+    description: "Выберите один и попробуйте!"
+    gui-title: "Паркур Курсы"
+    head-description: "<aqua>[runs] запусков</aqua>"
+  top:
+    gui-title: "Рейтинг Самых Быстрых Курсов"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Ваш рейтинг: [number]</green>"
+    beat-previous-time: "<light_purple>Вы побили свой предыдущий рекорд!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Вы не побили свой предыдущий рекорд!</aqua>"
+  errors:
+    not-on-island: "<red>Вы должны быть на паркур курсе, чтобы это сделать</red>"
+    no-warp: "<red>Этот курс уже приватный</red>"
+    not-in-run: "<red>Вы должны запустить курс, чтобы это сделать</red>"
+  warp:
+    set: "<light_purple>Точка варпа установлена! Игроки смогут видеть ваш курс!</light_purple>"
+    replaced: "<yellow>Точка варпа установлена! Старая точка деактивирована!</yellow>"
+    removed: "<red>Точка варпа удалена. Игроки не смогут видеть ваш курс.</red>"
+    warping: "<green>Варпление на курс!</green>"
+    no-warp: "<red>Для этого курса варп не установлен!</red>"
+    unknown-course: "<red>Неизвестный курс!</red>"
+  quit:
+    success: "<yellow>Вы вышли из запуска и можете использовать команды снова</yellow>"
+  general:
+    errors:
+      no-island: '<red>У вас нет курса!</red>'
+      player-has-island: '<red>У игрока уже есть курс!</red>'
+      player-has-no-island: '<red>У этого игрока нет курса!</red>'
+      already-have-island: '<red>У вас уже есть курс!</red>'
+      no-safe-location: '<red>Безопасное место в курсе не найдено!</red>'
+      not-owner: '<red>Вы не владелец вашей команды!</red>'
+  commands:
+    parkour:
+      courses:
+        description: показать доступные курсы для игры и варпа
+      cleartop:
+        description: очистить топ десять вашего курса или удалить очки игрока из него
+        parameters: <имя игрока>
+      setwarp:
+        description: установить точку варпа и сделать ваш курс публичным
+      warp:
+        description: Варп на курс по имени или на начало, если вы на одном
+        parameters: <имя курса>
+      removewarp:
+        description: удалить точку варпа и сделать ваш курс приватным
+      help:
+        description: Запустить паркур курс или телепортироваться на ваш курс
+      go:
+        parameters: '[номер дома]'
+      sethome:
+        parameters: '[номер дома]'
+      top:
+        description: "Показать рейтинг курсов"
+      quit:
+        description: "Остановить таймер на текущем курсе"
+    island:
+      go:
+        parameters: '[номер дома]'
+        description: телепортировать вас на ваш курс
+        teleport: '<green>Телепортирование вас на ваш курс.</green>'
+        teleported: '<green>Телепортирован вас на дом </green><yellow>#[number].</yellow>'
+      help:
+        description: основная команда паркур
+      create:
+        description: создать курс, используя дополнительный чертеж (требуется разрешение)
+        parameters: <чертеж>
+        too-many-islands: "<red>В этом мире слишком много курсов: нет места для вашего создания.</red>"
+        cannot-create-island: '<red>Место не найдено в отведенное время, пожалуйста, попробуйте еще раз...</red>'
+        unable-create-island: '<red>Ваш курс не смог быть создан, пожалуйста, свяжитесь с администратором.</red>'
+        creating-island: '<green>Поиск места для вашего курса...</green>'
+        pasting:
+          estimated-time: '<green>Расчетное время: </green><aqua>[number] </aqua><green>секунд.</green>'
+          blocks: '<green>Строим блок за блоком: </green><aqua>[number] </aqua><green>всего блоков...</green>'
+          entities: '<green>Заполняем сущностями: </green><aqua>[number] </aqua><green>всего сущностей...</green>'
+          done: '<green>Готово! Ваш курс готов и ждет вас!</green>'
+        pick: '<dark_green>Выберите курс</dark_green>'
+        unknown-blueprint: '<red>Этот чертеж еще не загружен.</red>'
+        on-first-login: '<green>Добро пожаловать! Мы начнем подготавливать ваш курс через несколько секунд.</green>'
+        you-can-teleport-to-your-island: '<green>Вы можете телепортироваться на ваш курс когда захотите.</green>'
+      info:
+        description: отобразить информацию о вашем курсе или курсе игрока
+        parameters: <игрок>
+      near:
+        description: показать имя соседних курсов вокруг вас
+        parameters: ''
+        the-following-islands: '<green>Следующие курсы расположены неподалеку:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Север
+        south: Юг
+        east: Восток
+        west: Запад
+        no-neighbors: '<red>У вас нет соседних курсов!</red>'
+      reset:
+        description: перезапустить ваш курс и удалить старый
+        parameters: <чертеж>
+        none-left: '<red>У вас больше нет перезапусков!</red>'
+        resets-left: '<red>У вас осталось </red><aqua>[number] </aqua><red>перезапусков</red>'
+        confirmation: |-
+          <red>Вы уверены, что хотите это сделать?
+          </red><red>Все члены курса будут выброшены, вам придется пригласить их снова.
+          </red><red>Нет пути назад: как только ваш текущий курс удален, не будет <bold>никакого </bold></red> <red>способа восстановить его позже.</red>
+        kicked-from-island: '<red>Вы выброшены с курса в [gamemode], потому что владелец его перезапускает.</red>'
+      sethome:
+        description: установить точку телепортации дома
+        must-be-on-your-island: '<red>Вы должны быть на вашем курсе, чтобы установить дом!</red>'
+        num-homes: '<red>Дома могут быть от 1 до [number].</red>'
+        home-set: '<gold>Ваш дом на курсе был установлен на вашем текущем расположении.</gold>'
+        nether:
+          not-allowed: '<red>Вам не разрешено устанавливать дом в Нижнем мире.</red>'
+          confirmation: '<red>Вы уверены, что хотите установить дом в Нижнем мире?</red>'
+        the-end:
+          not-allowed: '<red>Вам не разрешено устанавливать дом в Энде.</red>'
+          confirmation: '<red>Вы уверены, что хотите установить дом в Энде?</red>'
+        parameters: '[номер дома]'
+      setname:
+        description: установить имя для вашего курса
+        name-too-short: '<red>Слишком короткое. Минимальный размер [number] символов.</red>'
+        name-too-long: '<red>Слишком длинное. Максимальный размер [number] символов.</red>'
+        name-already-exists: '<red>Уже есть курс с таким именем!</red>'
+        parameters: <имя>
+        success: '<green>Успешно установлено имя вашего курса на </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: сбросить имя вашего курса
+        success: '<green>Успешно сброшено имя вашего курса.</green>'
+      team:
+        description: управлять вашей командой
+        coop:
+          description: сделать игрока рангом кооп на вашем курсе
+          parameters: <игрок>
+          cannot-coop-yourself: '<red>Вы не можете кооперировать себя!</red>'
+          already-has-rank: '<red>Игрок уже имеет ранг!</red>'
+          you-are-a-coop-member: '<dark_green>Вы были скооперированы </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Вы скооперировали </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] приглашает вас присоединиться как член кооп вашего курса.</green>'
+        uncoop:
+          description: удалить ранг кооп от игрока
+          parameters: <игрок>
+          cannot-uncoop-yourself: '<red>Вы не можете раскооперировать себя!</red>'
+          cannot-uncoop-member: '<red>Вы не можете раскооперировать члена команды!</red>'
+          player-not-cooped: '<red>Игрок не скооперирован!</red>'
+          you-are-no-longer-a-coop-member: '<red>Вы больше не член кооп [name]''s курса.</red>'
+          all-members-logged-off: '<red>Все члены курса вышли, поэтому вы больше не член кооп [name]''s курса.</red>'
+          success: '<aqua>[name] </aqua><green>больше не член кооп вашего курса.</green>'
+          is-full: '<red>Вы не можете кооперировать кого-то еще.</red>'
+        trust:
+          description: дать игроку доверенный ранг на вашем курсе
+          parameters: <игрок>
+          trust-in-yourself: '<red>Верьте в себя!</red>'
+          name-has-invited-you: '<green>[name] приглашает вас присоединиться как доверенный член вашего курса.</green>'
+          player-already-trusted: '<red>Игрок уже доверен!</red>'
+          you-are-trusted: '<dark_green>Вы доверены </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Вы доверили </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Вы не можете доверить кому-то еще.</red>'
+        invite:
+          description: пригласить игрока присоединиться к вашему курсу
+          invitation-sent: '<green>Приглашение отправлено </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Удаление приглашения.</red>'
+          name-has-invited-you: '<green>[name] приглашает вас присоединиться к их курсу.</green>'
+          to-accept-or-reject: '<green>Введите /[label] team accept чтобы принять, или /[label] team reject чтобы отклонить</green>'
+          you-will-lose-your-island: '<red>ВНИМАНИЕ! Вы потеряете ваш курс если примете!</red>'
+          errors:
+            cannot-invite-self: '<red>Вы не можете пригласить себя!</red>'
+            cooldown: '<red>Вы не можете пригласить этого человека еще [number] секунд.</red>'
+            island-is-full: '<red>Ваш курс полон, вы не можете пригласить кого-то еще.</red>'
+            none-invited-you: '<red>Вас никто не пригласил :c.</red>'
+            you-already-are-in-team: '<red>Вы уже в команде!</red>'
+            already-on-team: '<red>Этот игрок уже в команде!</red>'
+            invalid-invite: '<red>Это приглашение больше не действительно, извините.</red>'
+            you-have-already-invited: '<red>Вы уже пригласили этого игрока!</red>'
+          parameters: <игрок>
+          you-can-invite: '<green>Вы можете пригласить еще [number] игроков.</green>'
+          accept:
+            description: принять приглашение
+            you-joined-island: '<green>Вы присоединились к курсу! Используйте </green><aqua>/[label] team </aqua><green>чтобы увидеть других членов.</green>'
+            name-joined-your-island: '<green>[name] присоединился к вашему курсу!</green>'
+            confirmation: |-
+              <red>Вы уверены, что хотите принять это приглашение?
+              </red><red><bold>Вы <underlined>ПОТЕРЯЕТЕ </underlined></bold></red><red><bold>ваш текущий курс!</bold></red>
+          reject:
+            description: отклонить приглашение
+            you-rejected-invite: '<green>Вы отклонили приглашение присоединиться к курсу.</green>'
+            name-rejected-your-invite: '<red>[name] отклонил ваше приглашение курса!</red>'
+          cancel:
+            description: отменить ожидающее приглашение присоединиться к вашему курсу
+        leave:
+          cannot-leave: '<red>Владельцы не могут уходить! Сначала станьте членом, или выгоните всех членов.</red>'
+          description: оставить ваш курс
+          left-your-island: '<red>[name] </red><red>оставил ваш курс</red>'
+          success: '<green>Вы оставили этот курс.</green>'
+        kick:
+          description: удалить члена с вашего курса
+          parameters: <игрок>
+          owner-kicked: '<red>Владелец выгнал вас с курса в [gamemode]!</red>'
+          cannot-kick: '<red>Вы не можете выгнать себя!</red>'
+          success: '<aqua>[name] </aqua><green>был выгнан с вашего курса.</green>'
+        demote:
+          description: понизить ранг игрока на вашем курсе
+          parameters: <игрок>
+          errors:
+            cant-demote-yourself: '<red>Вы не можете понизить себя!</red>'
+          failure: '<red>Игрок не может быть понижен дальше!</red>'
+          success: '<green>Понижен [name] на [rank]</green>'
+        promote:
+          description: повысить ранг игрока на вашем курсе
+          parameters: <игрок>
+          failure: '<red>Игрок не может быть повышен дальше!</red>'
+          success: '<green>Повышен [name] на [rank]</green>'
+        setowner:
+          description: передать владение вашим курсом члену
+          errors:
+            cant-transfer-to-yourself: '<red>Вы не можете передать владение себе! </red><gray>(<italic> Ну, на самом деле, вы могли бы... Но мы этого не хотим. Потому что это бесполезно.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Этот игрок не часть вашей команды курса!</red>'
+          name-is-the-owner: '<green>[name] теперь владелец курса!</green>'
+          parameters: <игрок>
+          you-are-the-owner: '<green>Вы теперь владелец курса!</green>'
+      ban:
+        description: забанить игрока с вашего курса
+        parameters: <игрок>
+        cannot-ban-yourself: '<red>Вы не можете забанить себя!</red>'
+        cannot-ban: '<red>Этого игрока нельзя забанить.</red>'
+        cannot-ban-member: '<red>Сначала выгоните члена команды, потом банте.</red>'
+        cannot-ban-more-players: '<red>Вы достигли лимита банов, вы не можете забанить больше игроков с вашего курса.</red>'
+        player-already-banned: '<red>Игрок уже забанен.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  теперь забанен с вашего курса.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  забанил вас с их курса!</red>'
+        you-are-banned: '<aqua>Вы забанены с этого курса!</aqua>'
+      unban:
+        description: разбанить игрока с вашего курса
+        parameters: <игрок>
+        cannot-unban-yourself: '<red>Вы не можете разбанить себя!</red>'
+        player-not-banned: '<red>Игрок не забанен.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  теперь разбанен с вашего курса.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  разбанил вас с их курса!</green>'
+      banlist:
+        description: список забаненных игроков
+        noone: '<green>Никто не забанен на этом курсе.</green>'
+        the-following: '<aqua>Следующие игроки забанены:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Вы можете забанить еще </aqua><yellow>[number] </yellow><aqua>игроков.</aqua>'
+      settings:
+        description: отобразить настройки курса
+      language:
+        description: выбрать язык
+        parameters: '[язык]'
+        not-available: '<red>Этот язык недоступен.</red>'
+        already-selected: '<red>Вы уже выбрали этот язык.</red>'
+      expel:
+        description: выгнать игрока с вашего курса
+        parameters: <игрок>
+        cannot-expel-yourself: '<red>Вы не можете выгнать себя!</red>'
+        cannot-expel: '<red>Этого игрока нельзя выгнать.</red>'
+        cannot-expel-member: '<red>Вы не можете выгнать члена команды!</red>'
+        not-on-island: '<red>Этого игрока нет на вашем курсе!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  выгнал вас с курса!</red>'
+        success: '<green>Вы выгнали </green><aqua>[name] </aqua><green>с курса.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] имеет курс. Разрегистрируйте или удалите сначала!</red>'
+        setowner:
+          description: передает владение курсом игроку
+          already-owner: '<red>Игрок уже владелец этого курса!</red>'
+      range:
+        description: Команда диапазона курса администратора
+        display:
+          description: Показать/скрыть индикаторы диапазона курса
+          hint: |-
+            <red>Красные иконки барьера </red><white>показывают текущий предел защиты курса.
+            </white><gray>Серые частицы </gray><white>показывают максимальный предел.
+            </white><green>Зеленые частицы </green><white>показывают стандартный диапазон защиты, если диапазон защиты отличается от него.</white>
+        set:
+          description: Установить защищаемый диапазон курса
+        reset:
+          description: Сбросить диапазон защиты курса к мировому значению по умолчанию
+      register:
+        parameters: <игрок>
+        description: зарегистрировать игрока на курсе без владельца, на котором вы находитесь
+        registered-island: '<green>Зарегистрирован игрок на курсе в [xyz].</green>'
+        already-owned: '<red>Область уже принадлежит другому игроку!</red>'
+        no-island-here: '<red>Здесь нет курса. Подтвердите, чтобы создать один.</red>'
+        in-deletion: '<red>Это пространство в данный момент регенерируется. Попробуйте позже.</red>'
+      unregister:
+        description: отменить регистрацию владельца из курса, но сохранить блоки курса
+        unregistered-island: '<green>Отменена регистрация игрока с курса в [xyz].</green>'
+      info:
+        description: получить информацию о том, где вы находитесь или на чьем курсе
+        no-island: '<red>Вы не находитесь на зарегистрированном курсе прямо сейчас...</red>'
+        island-location: 'Расположение области: [xyz]'
+        island-coords: 'Координаты области: [xz1] к [xz2]'
+        is-spawn: Область - это курс спавна
+      setrange:
+        description: установить диапазон курса игрока
+        range-updated: Диапазон области обновлен на [number]
+      tp:
+        description: телепортироваться на курс игрока
+      getrank:
+        description: получить ранг игрока на их курсе
+        rank-is: '<green>Ранг [rank] на их курсе.</green>'
+      setrank:
+        description: установить ранг игрока на их курсе
+      setspawn:
+        description: установить курс как спавн для этого мира
+        already-spawn: '<red>Этот курс уже спавн!</red>'
+        no-island-here: '<red>Здесь нет зарегистрированного курса.</red>'
+        confirmation: '<red>Вы уверены, что хотите установить этот курс как спавн для этого мира?</red>'
+      delete:
+        description: удаляет игрока и регенерирует их курс
+        deleted-island: '<green>Область в </green><yellow>[xyz] </yellow><green>была успешно перегенерирована.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Переключает вход в творческий режим
+          </green><green>в конце курса и
+          </green><green>входа в курс
+          </green>
+        name: "Режим творческого паркура"
+      ELYTRA:
+        description: Переключить использование
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Эндермены могут удалять
+          </green><green>блоки</green>
+      ENTER_EXIT_MESSAGES:
+        description: Отобразить сообщения входа и выхода
+        island: "курс [name]"
+        name: Сообщения входа/выхода
+        now-entering: '<green>Входу в </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Входу на ваш курс.</green>'
+        now-leaving: '<green>Выходу из </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Выходу с вашего курса.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Удалить мобов которые выходят
+          </green><green>за защищенную
+          </green><green>область курса</green>
+        name: '<yellow>Ограничить мобов до курса игрока</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Игроки возрождаются
+          </green><green>на своем курсе</green>
+        name: Возрождение области
+      LOCK:
+        name: Заблокировать курс игрока
+      OFFLINE_REDSTONE:
+        description: "<green>Когда отключено, красный камень\n</green><green>не будет работать на курсах\n</green><green>где все члены офлайн.\n</green><green>Может помочь уменьшить лаг.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Позволить поршням толкать
+          </green><green>блоки вне курса игрока</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Включить/Отключить PVP
+          </red><red>на защищаемом курсе.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Удалить монстров при
+          </green><green>телепортации на курс</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Предотвратить телепортацию игроков
+          </green><green>если они падают.</green>
+        hint: '<red>Вы не можете телепортироваться пока падаете!</red>'
+    locked: '<red>Этот курс заблокирован!</red>'
+    protected: '<red>Область защищена: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Защита</gold>'
+        description: |-
+          <green>Настройки защиты
+          </green><green>для этого курса</green>
+      SETTING:
+        description: |-
+          <green>Общие настройки
+          </green><green>для этого курса</green>

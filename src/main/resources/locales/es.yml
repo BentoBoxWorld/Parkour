@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>¡Punto de inicio establecido!</green>"
+  end-set: "<green>¡Punto final establecido!</green>"
+  already-set: "<red>¡Inicio y fin ya están establecidos! Rompe uno para reiniciar.</red>"
+  start-removed: "<aqua>¡Punto de inicio removido!</aqua>"
+  end-removed: "<aqua>¡Punto final removido!</aqua>"
+  resetting-start-end: "<yellow>¡Reiniciando puntos de inicio y fin!</yellow>"
+  start: "<aqua>¡Comienzo del parkour!</aqua>"
+  no-start-yet: "<red>Aún no hay un punto de inicio establecido.</red>"
+  no-end-yet: "<red>Aún no hay un punto final establecido.</red>"
+  to-start: "<light_purple>Para comenzar, camina sobre la placa de presión dorada.</light_purple>"
+  session-ended: "<red>Tu sesión de parkour ha terminado.</red>"
+  end: "<green>¡Fin del parkour!</green>"
+  you-took: "<light_purple>¡Te tomó [number]!</light_purple>"
+  start-before-end: "<aqua>¡Necesitas comenzar antes de terminar!</aqua>"
+  checkpoint: "<yellow>¡Punto de control!</yellow>"
+  checkpoint-set: "<green>¡Punto de control establecido!</green>"
+  set-the-end: "<red>Establecer el punto final</red>"
+  hours: "horas"
+  minutes: "minutos"
+  seconds: "segundos"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "¡Elige uno e intenta!"
+    gui-title: "Cursos de Parkour"
+    head-description: "<aqua>[runs] intentos</aqua>"
+  top:
+    gui-title: "Clasificación de Cursos Más Rápidos"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Tu rango: [number]</green>"
+    beat-previous-time: "<light_purple>¡Superaste tu tiempo anterior!</light_purple>"
+    did-not-beat-previous-time: "<aqua>¡No superaste tu tiempo anterior!</aqua>"
+  errors:
+    not-on-island: "<red>Debes estar en un curso de parkour para hacer esto</red>"
+    no-warp: "<red>Este curso ya es privado</red>"
+    not-in-run: "<red>Debes estar ejecutando un curso actualmente para hacer esto</red>"
+  warp:
+    set: "<light_purple>¡Punto de teletransporte establecido! ¡Los jugadores ahora pueden ver tu curso!</light_purple>"
+    replaced: "<yellow>¡Punto de teletransporte establecido! ¡Punto antiguo desactivado!</yellow>"
+    removed: "<red>Punto de teletransporte removido. Los jugadores no verán tu curso.</red>"
+    warping: "<green>¡Teletransporte al curso!</green>"
+    no-warp: "<red>¡No hay un punto de teletransporte establecido para este curso!</red>"
+    unknown-course: "<red>¡Curso desconocido!</red>"
+  quit:
+    success: "<yellow>Has abandonado tu sesión y puedes volver a usar comandos</yellow>"
+  general:
+    errors:
+      no-island: '<red>¡No tienes un curso!</red>'
+      player-has-island: '<red>¡Ese jugador ya tiene un curso!</red>'
+      player-has-no-island: '<red>¡Ese jugador no tiene un curso!</red>'
+      already-have-island: '<red>¡Ya tienes un curso!</red>'
+      no-safe-location: '<red>¡No se encontró un lugar seguro en el curso!</red>'
+      not-owner: '<red>¡No eres el propietario de tu equipo!</red>'
+  commands:
+    parkour:
+      courses:
+        description: mostrar cursos disponibles para jugar y teletransportarse
+      cleartop:
+        description: borra los diez mejores de tu curso o elimina la puntuación de un jugador
+        parameters: <nombre del jugador>
+      setwarp:
+        description: establece el punto de teletransporte y hace tu curso público
+      warp:
+        description: Teletransportarse a un curso por nombre o al inicio si estás en uno
+        parameters: <nombre del curso>
+      removewarp:
+        description: elimina el punto de teletransporte y hace tu curso privado
+      help:
+        description: Inicia un curso de parkour o teletransportate a tu curso
+      go:
+        parameters: '[número de hogar]'
+      sethome:
+        parameters: '[número de hogar]'
+      top:
+        description: "Mostrar la clasificación de los mejores cursos"
+      quit:
+        description: "Detener el temporizador del curso actual"
+    island:
+      go:
+        parameters: '[número de hogar]'
+        description: teletransportarte a tu curso
+        teleport: '<green>Teletransportándote a tu curso.</green>'
+        teleported: '<green>Teletransportado a hogar </green><yellow>#[number].</yellow>'
+      help:
+        description: el comando principal del parkour
+      create:
+        description: crear un curso, usando un plano opcional (requiere permiso)
+        parameters: <plano>
+        too-many-islands: "<red>Hay demasiados cursos en este mundo: no hay suficiente espacio para crear el tuyo.</red>"
+        cannot-create-island: '<red>No se pudo encontrar un lugar a tiempo, intenta de nuevo...</red>'
+        unable-create-island: '<red>No se pudo generar tu curso, contacta a un administrador.</red>'
+        creating-island: '<green>Encontrando un lugar para tu curso...</green>'
+        pasting:
+          estimated-time: '<green>Tiempo estimado: </green><aqua>[number] </aqua><green>segundos.</green>'
+          blocks: '<green>Construyendo bloque por bloque: </green><aqua>[number] </aqua><green>bloques en total...</green>'
+          entities: '<green>Llenando con entidades: </green><aqua>[number] </aqua><green>entidades en total...</green>'
+          done: '<green>¡Hecho! ¡Tu curso está listo y te espera!</green>'
+        pick: '<dark_green>Elige un curso</dark_green>'
+        unknown-blueprint: '<red>Ese plano aún no ha sido cargado.</red>'
+        on-first-login: '<green>¡Bienvenido! Comenzaremos a preparar tu curso en unos segundos.</green>'
+        you-can-teleport-to-your-island: '<green>Puedes teletransportarte a tu curso cuando lo desees.</green>'
+      info:
+        description: mostrar información sobre tu curso o el del jugador
+        parameters: <jugador>
+      near:
+        description: mostrar el nombre de los cursos vecinos a tu alrededor
+        parameters: ''
+        the-following-islands: '<green>Los siguientes cursos están cerca:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Norte
+        south: Sur
+        east: Este
+        west: Oeste
+        no-neighbors: '<red>¡No hay cursos vecinos inmediatos!</red>'
+      reset:
+        description: reiniciar tu curso y eliminar el antiguo
+        parameters: <plano>
+        none-left: '<red>¡No te quedan más reinicios!</red>'
+        resets-left: '<red>Aún te quedan </red><aqua>[number] </aqua><red>reinicios</red>'
+        confirmation: |-
+          <red>¿Estás seguro de que quieres hacer esto?
+          </red><red>Todos los miembros del curso serán expulsados, tendrás que reinvitarlos después.
+          </red><red>No hay vuelta atrás: una vez que se elimine tu curso actual, no habrá <bold>forma </bold></red> <red>de recuperarlo más tarde.</red>
+        kicked-from-island: '<red>Has sido expulsado de tu curso en [gamemode] porque el propietario lo está reiniciando.</red>'
+      sethome:
+        description: establecer tu punto de teletransporte a casa
+        must-be-on-your-island: '<red>¡Debes estar en tu curso para establecer un hogar!</red>'
+        num-homes: '<red>Los hogares pueden ser de 1 a [number].</red>'
+        home-set: '<gold>El hogar de tu curso ha sido establecido en tu ubicación actual.</gold>'
+        nether:
+          not-allowed: '<red>No estás permitido establecer tu hogar en el Nether.</red>'
+          confirmation: '<red>¿Estás seguro de querer establecer tu hogar en el Nether?</red>'
+        the-end:
+          not-allowed: '<red>No estás permitido establecer tu hogar en el End.</red>'
+          confirmation: '<red>¿Estás seguro de querer establecer tu hogar en el End?</red>'
+        parameters: '[número de hogar]'
+      setname:
+        description: establecer un nombre para tu curso
+        name-too-short: '<red>Demasiado corto. El tamaño mínimo es de [number] caracteres.</red>'
+        name-too-long: '<red>Demasiado largo. El tamaño máximo es de [number] caracteres.</red>'
+        name-already-exists: '<red>¡Ya existe un curso con ese nombre!</red>'
+        parameters: <nombre>
+        success: '<green>El nombre de tu curso ha sido establecido a </green><aqua>[name]</aqua><green>.</green>'
+      resetname:
+        description: reiniciar el nombre de tu curso
+        success: '<green>El nombre de tu curso ha sido reiniciado exitosamente.</green>'
+      team:
+        description: gestiona tu equipo
+        coop:
+          description: hacer que un jugador sea miembro coop de tu curso
+          parameters: <jugador>
+          cannot-coop-yourself: '<red>¡No puedes hacerte coop a ti mismo!</red>'
+          already-has-rank: '<red>¡El jugador ya tiene un rango!</red>'
+          you-are-a-coop-member: '<dark_green>Has sido hecho coop por </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Has hecho </green><aqua>[name]</aqua><green> coop.</green>'
+          name-has-invited-you: '<green>[name] te ha invitado a unirte como miembro coop de su curso.</green>'
+        uncoop:
+          description: eliminar el rango coop de un jugador
+          parameters: <jugador>
+          cannot-uncoop-yourself: '<red>¡No puedes quitarte el rango coop!</red>'
+          cannot-uncoop-member: '<red>¡No puedes quitar el rango coop a un miembro del equipo!</red>'
+          player-not-cooped: '<red>¡El jugador no es coop!</red>'
+          you-are-no-longer-a-coop-member: '<red>Ya no eres miembro coop del curso de [name].</red>'
+          all-members-logged-off: '<red>Todos los miembros del curso se han desconectado, por lo que ya no eres miembro coop del curso de [name].</red>'
+          success: '<aqua>[name] </aqua><green>ya no es miembro coop de tu curso.</green>'
+          is-full: '<red>No puedes hacer coop a nadie más.</red>'
+        trust:
+          description: dar a un jugador un rango de confianza en tu curso
+          parameters: <jugador>
+          trust-in-yourself: '<red>¡Confía en ti mismo!</red>'
+          name-has-invited-you: '<green>[name] te ha invitado a unirte como miembro de confianza de su curso.</green>'
+          player-already-trusted: '<red>¡El jugador ya es de confianza!</red>'
+          you-are-trusted: '<dark_green>Has sido confiado por </dark_green><aqua>[name]</aqua><green>!</green>'
+          success: '<green>Has confiado en </green><aqua>[name]</aqua><green>.</green>'
+          is-full: '<red>No puedes confiar en nadie más.</red>'
+        invite:
+          description: invitar a un jugador a unirse a tu curso
+          invitation-sent: '<green>Invitación enviada a </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Eliminando invitación.</red>'
+          name-has-invited-you: '<green>[name] te ha invitado a unirte a su curso.</green>'
+          to-accept-or-reject: '<green>Haz /[label] team accept para aceptar, o /[label] team reject para rechazar</green>'
+          you-will-lose-your-island: '<red>¡ADVERTENCIA! ¡Perderás tu curso si aceptas!</red>'
+          errors:
+            cannot-invite-self: '<red>¡No puedes invitarte a ti mismo!</red>'
+            cooldown: '<red>No puedes invitar a esa persona durante otros [number] segundos.</red>'
+            island-is-full: '<red>Tu curso está lleno, no puedes invitar a nadie más.</red>'
+            none-invited-you: '<red>Nadie te ha invitado :c.</red>'
+            you-already-are-in-team: '<red>¡Ya estás en un equipo!</red>'
+            already-on-team: '<red>¡Ese jugador ya está en un equipo!</red>'
+            invalid-invite: '<red>Esa invitación ya no es válida, lo siento.</red>'
+            you-have-already-invited: '<red>¡Ya has invitado a ese jugador!</red>'
+          parameters: <jugador>
+          you-can-invite: '<green>Puedes invitar a [number] jugadores más.</green>'
+          accept:
+            description: aceptar una invitación
+            you-joined-island: '<green>¡Te uniste a un curso! Usa </green><aqua>/[label] team </aqua><green>para ver a los otros miembros.</green>'
+            name-joined-your-island: '<green>¡[name] se unió a tu curso!</green>'
+            confirmation: |-
+              <red>¿Estás seguro de que quieres aceptar esta invitación?
+              </red><red><bold>¡PERDERÁS </bold></red><red><bold>tu curso actual!</bold></red>
+          reject:
+            description: rechazar una invitación
+            you-rejected-invite: '<green>Has rechazado la invitación a unirte a un curso.</green>'
+            name-rejected-your-invite: '<red>¡[name] rechazó tu invitación!</red>'
+          cancel:
+            description: cancelar la invitación pendiente
+        leave:
+          cannot-leave: '<red>¡Los propietarios no pueden irse! Primero conviértete en miembro, o expulsa a todos los miembros.</red>'
+          description: dejar tu curso
+          left-your-island: '<red>[name] </red><red>ha dejado tu curso</red>'
+          success: '<green>Has dejado este curso.</green>'
+        kick:
+          description: eliminar un miembro de tu curso
+          parameters: <jugador>
+          owner-kicked: '<red>¡El propietario te ha expulsado del curso en [gamemode]!</red>'
+          cannot-kick: '<red>¡No puedes expulsarte a ti mismo!</red>'
+          success: '<aqua>[name] </aqua><green>ha sido expulsado de tu curso.</green>'
+        demote:
+          description: degradar a un jugador en tu curso
+          parameters: <jugador>
+          errors:
+            cant-demote-yourself: '<red>¡No puedes degradarte a ti mismo!</red>'
+          failure: '<red>¡El jugador no puede ser degradado más!</red>'
+          success: '<green>Has degradado a [name] a [rank]</green>'
+        promote:
+          description: promover a un jugador en tu curso
+          parameters: <jugador>
+          failure: '<red>¡El jugador no puede ser promovido más!</red>'
+          success: '<green>Has promovido a [name] a [rank]</green>'
+        setowner:
+          description: transferir la propiedad de tu curso a un miembro
+          errors:
+            cant-transfer-to-yourself: '<red>¡No puedes transferirte la propiedad a ti mismo! </red><gray>(<italic> Bueno, en realidad podrías... Pero no queremos que lo hagas. Porque es inútil.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>¡Ese jugador no es parte de tu equipo!</red>'
+          name-is-the-owner: '<green>¡[name] es ahora el propietario del curso!</green>'
+          parameters: <jugador>
+          you-are-the-owner: '<green>¡Ahora eres el propietario del curso!</green>'
+      ban:
+        description: banear a un jugador de tu curso
+        parameters: <jugador>
+        cannot-ban-yourself: '<red>¡No puedes banearte a ti mismo!</red>'
+        cannot-ban: '<red>Ese jugador no puede ser baneado.</red>'
+        cannot-ban-member: '<red>Expulsa primero al miembro del equipo, luego banéalo.</red>'
+        cannot-ban-more-players: '<red>Has alcanzado el límite de baneo, no puedes banear a más jugadores de tu curso.</red>'
+        player-already-banned: '<red>El jugador ya está baneado.</red>'
+        player-banned: '<aqua>[name]</aqua><red> ahora está baneado de tu curso.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red> ¡te ha baneado de su curso!</red>'
+        you-are-banned: '<aqua>¡Estás baneado de este curso!</aqua>'
+      unban:
+        description: desbanear a un jugador de tu curso
+        parameters: <jugador>
+        cannot-unban-yourself: '<red>¡No puedes desbanearte a ti mismo!</red>'
+        player-not-banned: '<red>El jugador no está baneado.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green> ya no está baneado de tu curso.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green> ¡te ha desbaneado de su curso!</green>'
+      banlist:
+        description: listar jugadores baneados
+        noone: '<green>Nadie está baneado de este curso.</green>'
+        the-following: '<aqua>Los siguientes jugadores están baneados:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Puedes banear hasta </aqua><yellow>[number] </yellow><aqua>jugadores más.</aqua>'
+      settings:
+        description: mostrar la configuración del curso
+      language:
+        description: seleccionar idioma
+        parameters: '[idioma]'
+        not-available: '<red>Este idioma no está disponible.</red>'
+        already-selected: '<red>Ya estás usando este idioma.</red>'
+      expel:
+        description: expulsar a un jugador de tu curso
+        parameters: <jugador>
+        cannot-expel-yourself: '<red>¡No puedes expulsarte a ti mismo!</red>'
+        cannot-expel: '<red>Ese jugador no puede ser expulsado.</red>'
+        cannot-expel-member: '<red>¡No puedes expulsar a un miembro del equipo!</red>'
+        not-on-island: '<red>¡Ese jugador no está en tu curso!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red> ¡te ha expulsado del curso!</red>'
+        success: '<green>Has expulsado a </green><aqua>[name] </aqua><green>del curso.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] tiene un curso. ¡Anula el registro o elimínalo primero!</red>'
+        setowner:
+          description: transfiere la propiedad del curso al jugador
+          already-owner: '<red>¡El jugador ya es el propietario de este curso!</red>'
+      range:
+        description: Comando admin de rango del curso
+        display:
+          description: Mostrar/ocultar indicadores de rango del curso
+          hint: |-
+            <red>Los iconos Red Barrier </red><white>muestran el límite actual del rango protegido.
+            </white><gray>Las partículas grises </gray><white>muestran el límite máximo.
+            </white><green>Las partículas verdes </green><white>muestran el rango protegido predeterminado si el rango de protección difiere.</white>
+        set:
+          description: Establece el rango protegido del curso
+        reset:
+          description: Reinicia el rango protegido al valor predeterminado del mundo
+      register:
+        parameters: <jugador>
+        description: registrar jugador en el curso sin propietario en el que te encuentras
+        registered-island: '<green>Jugador registrado en el curso en [xyz].</green>'
+        already-owned: '<red>¡El área ya es propiedad de otro jugador!</red>'
+        no-island-here: '<red>No hay un curso aquí. Confirma para crear uno.</red>'
+        in-deletion: '<red>Este espacio está siendo eliminado actualmente. Intenta más tarde.</red>'
+      unregister:
+        description: anular el registro del propietario de un curso, pero mantener los bloques
+        unregistered-island: '<green>Jugador sin registrar del curso en [xyz].</green>'
+      info:
+        description: obtener información sobre dónde te encuentras o sobre el jugador
+        no-island: '<red>No estás en un curso registrado en este momento...</red>'
+        island-location: 'Ubicación del área: [xyz]'
+        island-coords: 'Coordenadas del área: [xz1] a [xz2]'
+        is-spawn: El área es un curso de spawn
+      setrange:
+        description: establecer el rango del curso del jugador
+        range-updated: Rango del área actualizado a [number]
+      tp:
+        description: teletransportarse al curso de un jugador
+      getrank:
+        description: obtener el rango de un jugador en su curso
+        rank-is: '<green>El rango es [rank] en su curso.</green>'
+      setrank:
+        description: establecer el rango de un jugador en su curso
+      setspawn:
+        description: establecer un curso como spawn para este mundo
+        already-spawn: '<red>¡Este curso ya es un spawn!</red>'
+        no-island-here: '<red>No hay un curso registrado aquí.</red>'
+        confirmation: '<red>¿Estás seguro de que quieres establecer este curso como spawn para este mundo?</red>'
+      delete:
+        description: elimina un jugador y regenera su curso
+        deleted-island: '<green>Área en </green><yellow>[xyz] </yellow><green>ha sido regenerada exitosamente.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Activa/desactiva el modo creativo
+          </green><green>al final del curso y
+          </green><green>entrando en el curso
+          </green>
+        name: "Modo Creativo Parkour"
+      ELYTRA:
+        description: Activar/desactivar el uso
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Los Enderman pueden remover
+          </green><green>bloques</green>
+      ENTER_EXIT_MESSAGES:
+        description: Mostrar mensajes de entrada y salida
+        island: "Curso de [name]"
+        name: Mensajes de entrada/salida
+        now-entering: '<green>Ahora entrando a </green><aqua>[name]</aqua><green>.</green>'
+        now-entering-your-island: '<green>Ahora entrando a tu curso.</green>'
+        now-leaving: '<green>Ahora saliendo de </green><aqua>[name]</aqua><green>.</green>'
+        now-leaving-your-island: '<green>Ahora saliendo de tu curso.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Eliminar criaturas que salgan
+          </green><green>del espacio protegido
+          </green><green>del jugador</green>
+        name: '<yellow>Limitar criaturas al curso del jugador</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Los jugadores reaparecen
+          </green><green>en su curso</green>
+        name: Reaparición del curso
+      LOCK:
+        name: Bloquear el curso del jugador
+      OFFLINE_REDSTONE:
+        description: "<green>Cuando está deshabilitado, la redstone\n</green><green>no funcionará en cursos\n</green><green>donde todos los miembros están sin conexión.\n</green><green>Puede ayudar a reducir el lag.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Permitir que los pistones empujen
+          </green><green>bloques fuera del curso de un jugador</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Habilitar/deshabilitar PVP
+          </red><red>en el curso protegido.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Eliminar monstruos cuando
+          </green><green>se teletransportan a un curso</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Prevenir que los jugadores se teletransporten
+          </green><green>si están cayendo.</green>
+        hint: '<red>¡No puedes teletransportarte mientras caes!</red>'
+    locked: '<red>¡Este curso está bloqueado!</red>'
+    protected: '<red>Área protegida: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Protección</gold>'
+        description: |-
+          <green>Configuración de protección
+          </green><green>para este curso</green>
+      SETTING:
+        description: |-
+          <green>Configuración general
+          </green><green>para este curso</green>

@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>起點已設定!</green>"
+  end-set: "<green>終點已設定!</green>"
+  already-set: "<red>起點同終點已經設定!打破其中一個嚟重置。</red>"
+  start-removed: "<aqua>起點已移除!</aqua>"
+  end-removed: "<aqua>終點已移除!</aqua>"
+  resetting-start-end: "<yellow>正在重置起點同終點!</yellow>"
+  start: "<aqua>跑酷開始!</aqua>"
+  no-start-yet: "<red>仲未設定起點。</red>"
+  no-end-yet: "<red>仲未設定終點。</red>"
+  to-start: "<light_purple>要開始,請踩喺金色壓力板上。</light_purple>"
+  session-ended: "<red>你嘅跑酷遊戲已結束。</red>"
+  end: "<green>跑酷完成!</green>"
+  you-took: "<light_purple>你用咗 [number]!</light_purple>"
+  start-before-end: "<aqua>你需要喺完成前先開始!</aqua>"
+  checkpoint: "<yellow>檢查點!</yellow>"
+  checkpoint-set: "<green>檢查點已設定!</green>"
+  set-the-end: "<red>設定終點板</red>"
+  hours: "小時"
+  minutes: "分鐘"
+  seconds: "秒"
+  hours-short: "時"
+  minutes-short: "分"
+  seconds-short: "秒"
+  courses:
+    description: "選擇一個嚟試試!"
+    gui-title: "跑酷課程"
+    head-description: "<aqua>[runs] 次運行</aqua>"
+  top:
+    gui-title: "最快課程排名"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>你嘅排名: [number]</green>"
+    beat-previous-time: "<light_purple>你打敗咗之前嘅紀錄!</light_purple>"
+    did-not-beat-previous-time: "<aqua>你冇打敗之前嘅紀錄!</aqua>"
+  errors:
+    not-on-island: "<red>你必須喺跑酷課程上先至可以咁做</red>"
+    no-warp: "<red>呢個課程已經係私密嘅</red>"
+    not-in-run: "<red>你必須正在運行課程先至可以咁做</red>"
+  warp:
+    set: "<light_purple>傳送點已設定!玩家依家可以睇到你嘅課程!</light_purple>"
+    replaced: "<yellow>傳送點已設定!舊傳送點已停用!</yellow>"
+    removed: "<red>傳送點已移除。玩家將睇唔到你嘅課程。</red>"
+    warping: "<green>正在傳送到課程!</green>"
+    no-warp: "<red>呢個課程冇設定傳送點!</red>"
+    unknown-course: "<red>未知課程!</red>"
+  quit:
+    success: "<yellow>你已退出運行,依家可以執行命令</yellow>"
+  general:
+    errors:
+      no-island: '<red>你冇課程!</red>'
+      player-has-island: '<red>玩家已經有課程咗!</red>'
+      player-has-no-island: '<red>個玩家冇課程!</red>'
+      already-have-island: '<red>你已經有課程咗!</red>'
+      no-safe-location: '<red>喺課程到搵唔到安全位置!</red>'
+      not-owner: '<red>你唔係你嘅隊伍嘅擁有者!</red>'
+  commands:
+    parkour:
+      courses:
+        description: 顯示可玩同可傳送嘅課程
+      cleartop:
+        description: 清除你嘅課程前十或由當中刪除玩家嘅分數
+        parameters: <玩家名>
+      setwarp:
+        description: 設定傳送點並公開你嘅課程
+      warp:
+        description: 按名稱傳送到課程,或者如果你喺課程上就傳送到開始
+        parameters: <課程名>
+      removewarp:
+        description: 移除傳送點並私密化你嘅課程
+      help:
+        description: 開始跑酷課程或傳送到你嘅課程
+      go:
+        parameters: '[主頁號碼]'
+      sethome:
+        parameters: '[主頁號碼]'
+      top:
+        description: "顯示頂級課程排名"
+      quit:
+        description: "停止當前課程上嘅計時器"
+    island:
+      go:
+        parameters: '[主頁號碼]'
+        description: 傳送你到你嘅課程
+        teleport: '<green>正在傳送你到你嘅課程。</green>'
+        teleported: '<green>已傳送你到主頁</green><yellow>#[number]。</yellow>'
+      help:
+        description: 主要跑酷命令
+      create:
+        description: 用可選嘅藍圖建立課程(需要權限)
+        parameters: <藍圖>
+        too-many-islands: "<red>呢個世界入面嘅課程太多:冇足夠空間嚟建立你嘅課程。</red>"
+        cannot-create-island: '<red>喺時間內搵唔到位置,請重試...</red>'
+        unable-create-island: '<red>無法生成你嘅課程,請聯絡管理員。</red>'
+        creating-island: '<green>正在搵你嘅課程位置...</green>'
+        pasting:
+          estimated-time: '<green>預計時間: </green><aqua>[number] </aqua><green>秒。</green>'
+          blocks: '<green>按塊構建: </green><aqua>[number] </aqua><green>所有塊...</green>'
+          entities: '<green>用實體填充: </green><aqua>[number] </aqua><green>所有實體...</green>'
+          done: '<green>完成!你嘅課程已準備好!</green>'
+        pick: '<dark_green>選擇課程</dark_green>'
+        unknown-blueprint: '<red>個藍圖仲未加載。</red>'
+        on-first-login: '<green>歡迎!我哋将喺幾秒後開始準備你嘅課程。</green>'
+        you-can-teleport-to-your-island: '<green>你可以隨時傳送到你嘅課程。</green>'
+      info:
+        description: 顯示關於你嘅課程或玩家課程嘅資訊
+        parameters: <玩家>
+      near:
+        description: 顯示你周圍相鄰課程嘅名稱
+        parameters: ''
+        the-following-islands: '<green>下列課程比較靠近:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: 北
+        south: 南
+        east: 東
+        west: 西
+        no-neighbors: '<red>你冇相鄰嘅課程!</red>'
+      reset:
+        description: 重啟你嘅課程並刪除舊課程
+        parameters: <藍圖>
+        none-left: '<red>你冇重置機會咗!</red>'
+        resets-left: '<red>你有</red><aqua>[number] </aqua><red>次重置剩餘</red>'
+        confirmation: |-
+          <red>你確定要咁做嗎?
+          </red><red>所有課程成員將被踢出課程,之後需要重新邀請。
+          </red><red>冇回頭路:一旦刪除你嘅當前課程,就<bold>無法</bold></red><red>稍後恢復。</red>
+        kicked-from-island: '<red>因為擁有者正在重置,你被踢出 [gamemode] 中嘅課程。</red>'
+      sethome:
+        description: 設定你嘅主頁傳送點
+        must-be-on-your-island: '<red>你必須喺你嘅課程上先至可以設定主頁!</red>'
+        num-homes: '<red>主頁可以係 1 到 [number]。</red>'
+        home-set: '<gold>你嘅課程主頁已設定到你嘅當前位置。</gold>'
+        nether:
+          not-allowed: '<red>你唔被允許喺下界設定主頁。</red>'
+          confirmation: '<red>你確定要喺下界設定主頁嗎?</red>'
+        the-end:
+          not-allowed: '<red>你唔被允許喺末地設定主頁。</red>'
+          confirmation: '<red>你確定要喺末地設定主頁嗎?</red>'
+        parameters: '[主頁號碼]'
+      setname:
+        description: 為你嘅課程設定一個名稱
+        name-too-short: '<red>太短咗。最小大小係 [number] 個字符。</red>'
+        name-too-long: '<red>太長咗。最大大小係 [number] 個字符。</red>'
+        name-already-exists: '<red>已經有一個具有該名稱嘅課程!</red>'
+        parameters: <名稱>
+        success: '<green>成功將你嘅課程名稱設定為</green><aqua>[name]</aqua><green>。</green>'
+      resetname:
+        description: 重置你嘅課程名稱
+        success: '<green>成功重置你嘅課程名稱。</green>'
+      team:
+        description: 管理你嘅隊伍
+        coop:
+          description: 喺你嘅課程上畀予玩家合作排名
+          parameters: <玩家>
+          cannot-coop-yourself: '<red>你唔可以同自己合作!</red>'
+          already-has-rank: '<red>玩家已經有排名咗!</red>'
+          you-are-a-coop-member: '<dark_green>你已被</dark_green><aqua>[name]</aqua><green>合作。</green>'
+          success: '<green>你已合作</green><aqua>[name]</aqua><green>。</green>'
+          name-has-invited-you: '<green>[name] 邀請你成為佢哋課程嘅合作成員。</green>'
+        uncoop:
+          description: 從玩家移除合作排名
+          parameters: <玩家>
+          cannot-uncoop-yourself: '<red>你唔可以取消自己嘅合作!</red>'
+          cannot-uncoop-member: '<red>你唔可以取消隊員嘅合作!</red>'
+          player-not-cooped: '<red>玩家未被合作!</red>'
+          you-are-no-longer-a-coop-member: '<red>你唔再係 [name] 課程嘅合作成員。</red>'
+          all-members-logged-off: '<red>所有課程成員都離線咗,所以你唔再係 [name] 課程嘅合作成員。</red>'
+          success: '<aqua>[name] </aqua><green>唔再係你課程嘅合作成員。</green>'
+          is-full: '<red>你唔可以同任何人合作咗。</red>'
+        trust:
+          description: 畀予玩家喺你嘅課程上嘅受信排名
+          parameters: <玩家>
+          trust-in-yourself: '<red>相信自己!</red>'
+          name-has-invited-you: '<green>[name] 邀請你成為佢哋課程嘅受信成員。</green>'
+          player-already-trusted: '<red>玩家已經受信咗!</red>'
+          you-are-trusted: '<dark_green>你受</dark_green><aqua>[name]</aqua><green>信任!</green>'
+          success: '<green>你已信任</green><aqua>[name]</aqua><green>。</green>'
+          is-full: '<red>你唔可以再信任任何人咗。</red>'
+        invite:
+          description: 邀請玩家加入你嘅課程
+          invitation-sent: '<green>邀請已發送至</green><aqua>[name]</aqua><green>。</green>'
+          removing-invite: '<red>正在移除邀請。</red>'
+          name-has-invited-you: '<green>[name] 邀請你加入佢哋嘅課程。</green>'
+          to-accept-or-reject: '<green>要接受,請執行 /[label] team accept,或要拒絕請執行 /[label] team reject</green>'
+          you-will-lose-your-island: '<red>警告!如果接受,你會失去你嘅課程!</red>'
+          errors:
+            cannot-invite-self: '<red>你唔可以邀請自己!</red>'
+            cooldown: '<red>你唔可以喺 [number] 秒內再次邀請個玩家。</red>'
+            island-is-full: '<red>你嘅課程滿咗,你唔可以邀請任何其他人。</red>'
+            none-invited-you: '<red>冇人邀請你 :c。</red>'
+            you-already-are-in-team: '<red>你已喺一個隊伍中!</red>'
+            already-on-team: '<red>個玩家已喺一個隊伍中!</red>'
+            invalid-invite: '<red>個邀請唔再有效,抱歉。</red>'
+            you-have-already-invited: '<red>你已經邀請咗個玩家!</red>'
+          parameters: <玩家>
+          you-can-invite: '<green>你仲可以邀請 [number] 名玩家。</green>'
+          accept:
+            description: 接受邀請
+            you-joined-island: '<green>你加入咗課程!使用</green><aqua>/[label] team </aqua><green>睇其他成員。</green>'
+            name-joined-your-island: '<green>[name] 加入咗你嘅課程!</green>'
+            confirmation: |-
+              <red>你確定要接受呢個邀請嗎?
+              </red><red><bold>你會 <underlined>失去</underlined></bold></red><red><bold>你當前嘅課程!</bold></red>
+          reject:
+            description: 拒絕邀請
+            you-rejected-invite: '<green>你拒絕咗加入課程嘅邀請。</green>'
+            name-rejected-your-invite: '<red>[name] 拒絕咗你嘅課程邀請!</red>'
+          cancel:
+            description: 取消加入你課程嘅待處理邀請
+        leave:
+          cannot-leave: '<red>擁有者唔可以離開!先成為成員,或踢出所有成員。</red>'
+          description: 離開你嘅課程
+          left-your-island: '<red>[name] </red><red>離開咗你嘅課程</red>'
+          success: '<green>你離開咗呢個課程。</green>'
+        kick:
+          description: 從你嘅課程中移除成員
+          parameters: <玩家>
+          owner-kicked: '<red>擁有者將你從 [gamemode] 中嘅課程踢出!</red>'
+          cannot-kick: '<red>你唔可以踢自己!</red>'
+          success: '<aqua>[name] </aqua><green>已從你嘅課程中踢出。</green>'
+        demote:
+          description: 喺你嘅課程上降級玩家
+          parameters: <玩家>
+          errors:
+            cant-demote-yourself: '<red>你唔可以降級自己!</red>'
+          failure: '<red>玩家唔可以再被降級咗!</red>'
+          success: '<green>已將 [name] 降級至 [rank]</green>'
+        promote:
+          description: 喺你嘅課程上提升玩家
+          parameters: <玩家>
+          failure: '<red>玩家唔可以再被提升咗!</red>'
+          success: '<green>已將 [name] 提升至 [rank]</green>'
+        setowner:
+          description: 將你嘅課程所有權轉移畀成員
+          errors:
+            cant-transfer-to-yourself: '<red>你唔可以將所有權轉移畀自己!</red><gray>(<italic>實際上你可以...但我哋唔想畀你咁做。因為佢冇用。</italic></gray><gray>)</gray>'
+            target-is-not-member: '<red>個玩家唔係你嘅課程隊伍嘅一部分!</red>'
+          name-is-the-owner: '<green>[name] 依家係課程擁有者!</green>'
+          parameters: <玩家>
+          you-are-the-owner: '<green>你依家係課程擁有者!</green>'
+      ban:
+        description: 禁止玩家進入你嘅課程
+        parameters: <玩家>
+        cannot-ban-yourself: '<red>你唔可以禁止自己!</red>'
+        cannot-ban: '<red>個玩家唔可以被禁止。</red>'
+        cannot-ban-member: '<red>先踢出隊員,然後禁止。</red>'
+        cannot-ban-more-players: '<red>你已達到禁止限制,唔可以再從你嘅課程中禁止任何玩家。</red>'
+        player-already-banned: '<red>玩家已被禁止。</red>'
+        player-banned: '<aqua>[name]</aqua><red>已被禁止進入你嘅課程。</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>已將你禁止進入佢哋嘅課程!</red>'
+        you-are-banned: '<aqua>你被禁止進入呢個課程!</aqua>'
+      unban:
+        description: 取消禁止玩家進入你嘅課程
+        parameters: <玩家>
+        cannot-unban-yourself: '<red>你唔可以取消禁止自己!</red>'
+        player-not-banned: '<red>玩家未被禁止。</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>已取消禁止進入你嘅課程。</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>已取消禁止你進入佢哋嘅課程!</green>'
+      banlist:
+        description: 列出被禁止嘅玩家
+        noone: '<green>呢個課程上冇被禁止嘅玩家。</green>'
+        the-following: '<aqua>下列玩家被禁止:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>你仲可以禁止</aqua><yellow>[number] </yellow><aqua>名玩家。</aqua>'
+      settings:
+        description: 顯示課程設定
+      language:
+        description: 選擇語言
+        parameters: '[語言]'
+        not-available: '<red>呢個語言唔可用。</red>'
+        already-selected: '<red>你已經喺使用呢個語言。</red>'
+      expel:
+        description: 從你嘅課程中驅逐玩家
+        parameters: <玩家>
+        cannot-expel-yourself: '<red>你唔可以驅逐自己!</red>'
+        cannot-expel: '<red>個玩家唔可以被驅逐。</red>'
+        cannot-expel-member: '<red>你唔可以驅逐隊員!</red>'
+        not-on-island: '<red>個玩家唔喺你嘅課程上!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>已將你從課程中驅逐!</red>'
+        success: '<green>你已將</green><aqua>[name] </aqua><green>從課程中驅逐。</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] 有一個課程。先註銷或刪除佢哋!</red>'
+        setowner:
+          description: 將課程所有權轉移畀玩家
+          already-owner: '<red>玩家已經係呢個課程嘅擁有者!</red>'
+      range:
+        description: 管理員課程範圍命令
+        display:
+          description: 顯示/隱藏課程範圍指示器
+          hint: |-
+            <red>紅色屏障圖標</red><white>顯示當前受保護範圍限制。
+            </white><gray>灰色粒子</gray><white>顯示最大限制。
+            </white><green>綠色粒子</green><white>顯示默認受保護範圍(如果受保護範圍與之唔同)。</white>
+        set:
+          description: 設定課程受保護範圍
+        reset:
+          description: 將受保護範圍重置為世界默認值
+      register:
+        parameters: <玩家>
+        description: 將玩家註冊到你所喺嘅無主課程
+        registered-island: '<green>已將玩家註冊到 [xyz] 嘅課程。</green>'
+        already-owned: '<red>個地區已被另一個玩家擁有!</red>'
+        no-island-here: '<red>呢到冇玩家課程。確認以建立一個。</red>'
+        in-deletion: '<red>呢個空間目前正在重新生成。稍後重試。</red>'
+      unregister:
+        description: 從課程中註銷擁有者,但保持課程塊原樣
+        unregistered-island: '<green>已從 [xyz] 嘅課程中註銷玩家。</green>'
+      info:
+        description: 獲取關於你所喺位置或玩家嘅資訊
+        no-island: '<red>你當前唔喺已註冊嘅課程中...</red>'
+        island-location: '地區位置: [xyz]'
+        island-coords: '地區座標: [xz1] 至 [xz2]'
+        is-spawn: 地區係生成島
+      setrange:
+        description: 設定玩家課程嘅範圍
+        range-updated: 地區範圍已更新為 [number]
+      tp:
+        description: 傳送到玩家嘅課程
+      getrank:
+        description: 獲取玩家喺其課程中嘅排名
+        rank-is: '<green>排名係佢哋課程中嘅 [rank]。</green>'
+      setrank:
+        description: 設定玩家喺其課程中嘅排名
+      setspawn:
+        description: 將課程設定為呢個世界嘅生成點
+        already-spawn: '<red>呢個課程已係生成點!</red>'
+        no-island-here: '<red>呢到冇已註冊嘅課程。</red>'
+        confirmation: '<red>你確定要將呢個課程設定為呢個世界嘅生成點嗎?</red>'
+      delete:
+        description: 刪除玩家並重新生成其課程
+        deleted-island: '<green>[xyz] 嘅地區已成功重新生成。</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>切換進入創意模式
+          </green><green>喺課程結束
+          </green><green>同進入島嶼
+          </green>
+        name: "跑酷創意模式"
+      ELYTRA:
+        description: 切換使用
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>末影人可以移除
+          </green><green>塊</green>
+      ENTER_EXIT_MESSAGES:
+        description: 顯示進入同退出消息
+        island: "[name] 嘅課程"
+        name: 進入/退出消息
+        now-entering: '<green>依家進入</green><aqua>[name]</aqua><green>。</green>'
+        now-entering-your-island: '<green>依家進入你嘅課程。</green>'
+        now-leaving: '<green>依家離開</green><aqua>[name]</aqua><green>。</green>'
+        now-leaving-your-island: '<green>依家離開你嘅課程。</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>移除超出受保護範圍嘅生物
+          </green><green>玩家空間
+          </green>
+        name: '<yellow>將生物限制喺玩家課程</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>玩家喺課程中重生
+          </green>
+        name: 地區重生
+      LOCK:
+        name: 鎖定玩家課程
+      OFFLINE_REDSTONE:
+        description: "<green>禁用時,紅石將唔會 </green><green>喺所有成員離線嘅課程中運作。 </green><green>可能有助於減少卡頓。   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>允許活塞將塊推到
+          </green><green>玩家課程外</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>啟用/禁用 PVP
+          </red><red>喺受保護課程中。</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>傳送到課程時移除怪物
+          </green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>防止玩家喺下列情況下傳送
+          </green><green>佢哋正喺下落。</green>
+        hint: '<red>下落時無法傳送!</red>'
+    locked: '<red>呢個課程已鎖定!</red>'
+    protected: '<red>地區受保護: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>保護</gold>'
+        description: |-
+          <green>保護設定
+          </green><green>用於呢個課程</green>
+      SETTING:
+        description: |-
+          <green>通用設定
+          </green><green>用於呢個課程</green>

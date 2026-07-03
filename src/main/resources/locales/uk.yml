@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Старт встановлено!</green>"
+  end-set: "<green>Фініш встановлено!</green>"
+  already-set: "<red>Старт і фініш вже встановлені! Розбийте один для скидання.</red>"
+  start-removed: "<aqua>Старт видалено!</aqua>"
+  end-removed: "<aqua>Фініш видалено!</aqua>"
+  resetting-start-end: "<yellow>Скидання стартової і фінішної точок!</yellow>"
+  start: "<aqua>Паркур починається!</aqua>"
+  no-start-yet: "<red>Старт ще не встановлено.</red>"
+  no-end-yet: "<red>Фініш ще не встановлено.</red>"
+  to-start: "<light_purple>Для початку наступіть на золоту натискну пластину.</light_purple>"
+  session-ended: "<red>Ваша сесія паркуру завершена.</red>"
+  end: "<green>Паркур завершено!</green>"
+  you-took: "<light_purple>Ви витратили [number]!</light_purple>"
+  start-before-end: "<aqua>Вам потрібно почати перед завершенням!</aqua>"
+  checkpoint: "<yellow>Контрольна точка!</yellow>"
+  checkpoint-set: "<green>Контрольну точку встановлено!</green>"
+  set-the-end: "<red>Встановіть фінішну пластину</red>"
+  hours: "години"
+  minutes: "хвилини"
+  seconds: "секунди"
+  hours-short: "г"
+  minutes-short: "хв"
+  seconds-short: "с"
+  courses:
+    description: "Виберіть один і спробуйте!"
+    gui-title: "Паркур Маршрути"
+    head-description: "<aqua>[runs] запусків</aqua>"
+  top:
+    gui-title: "Рейтинг Найшвидших Маршрутів"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Ваш рейтинг: [number]</green>"
+    beat-previous-time: "<light_purple>Ви побили свій попередній рекорд!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Ви не побили свій попередній рекорд!</aqua>"
+  errors:
+    not-on-island: "<red>Ви маєте бути на паркур маршруті, щоб це зробити</red>"
+    no-warp: "<red>Цей маршрут уже приватний</red>"
+    not-in-run: "<red>Ви маєте запустити маршрут, щоб це зробити</red>"
+  warp:
+    set: "<light_purple>Точку варпу встановлено! Гравці тепер можуть бачити ваш маршрут!</light_purple>"
+    replaced: "<yellow>Точку варпу встановлено! Стара точка деактивована!</yellow>"
+    removed: "<red>Точку варпу видалено. Гравці більше не бачитимуть ваш маршрут.</red>"
+    warping: "<green>Варпування на маршрут!</green>"
+    no-warp: "<red>Для цього маршруту варп не встановлено!</red>"
+    unknown-course: "<red>Невідомий маршрут!</red>"
+  quit:
+    success: "<yellow>Ви вийшли з запуску і можете використовувати команди знову</yellow>"
+  general:
+    errors:
+      no-island: '<red>У вас немає маршруту!</red>'
+      player-has-island: '<red>Гравець уже має маршрут!</red>'
+      player-has-no-island: '<red>Цей гравець не має маршруту!</red>'
+      already-have-island: '<red>Ви вже маєте маршрут!</red>'
+      no-safe-location: '<red>Безпечне місце на маршруті не знайдено!</red>'
+      not-owner: '<red>Ви не власник вашої команди!</red>'
+  commands:
+    parkour:
+      courses:
+        description: показати доступні маршрути для гри та варпу
+      cleartop:
+        description: очистити топ десять вашого маршруту або видалити очки гравця з нього
+        parameters: <ім'я гравця>
+      setwarp:
+        description: встановити точку варпу та зробити ваш маршрут публічним
+      warp:
+        description: Варп на маршрут за назвою або на старт, якщо ви на одному
+        parameters: <назва маршруту>
+      removewarp:
+        description: видалити точку варпу та зробити ваш маршрут приватним
+      help:
+        description: Запустити паркур маршрут або телепортуватися на ваш маршрут
+      go:
+        parameters: '[номер дома]'
+      sethome:
+        parameters: '[номер дома]'
+      top:
+        description: "Показати рейтинг маршрутів"
+      quit:
+        description: "Зупинити таймер на поточному маршруті"
+    island:
+      go:
+        parameters: '[номер дома]'
+        description: телепортувати вас на ваш маршрут
+        teleport: '<green>Телепортую вас на ваш маршрут.</green>'
+        teleported: '<green>Телепортовано вас на дім </green><yellow>#[number].</yellow>'
+      help:
+        description: основна команда паркур
+      create:
+        description: створити маршрут, використовуючи додатковий план (потрібно дозвіл)
+        parameters: <план>
+        too-many-islands: "<red>У цьому світі забагато маршрутів: немає місця для створення вашого.</red>"
+        cannot-create-island: '<red>Місце не знайдено в відведений час, будь ласка, спробуйте ще раз...</red>'
+        unable-create-island: '<red>Ваш маршрут не вдалося створити, будь ласка, зверніться до адміністратора.</red>'
+        creating-island: '<green>Пошук місця для вашого маршруту...</green>'
+        pasting:
+          estimated-time: '<green>Орієнтовний час: </green><aqua>[number] </aqua><green>секунд.</green>'
+          blocks: '<green>Будуємо блок за блоком: </green><aqua>[number] </aqua><green>всього блоків...</green>'
+          entities: '<green>Заповнюємо сутностями: </green><aqua>[number] </aqua><green>всього сутностей...</green>'
+          done: '<green>Готово! Ваш маршрут готовий і чекає на вас!</green>'
+        pick: '<dark_green>Виберіть маршрут</dark_green>'
+        unknown-blueprint: '<red>Цей план ще не завантажено.</red>'
+        on-first-login: '<green>Ласкаво просимо! Ми почнемо підготовляти ваш маршрут за кілька секунд.</green>'
+        you-can-teleport-to-your-island: '<green>Ви можете телепортуватися на ваш маршрут коли захочете.</green>'
+      info:
+        description: показати інформацію про ваш маршрут або маршрут гравця
+        parameters: <гравець>
+      near:
+        description: показати назву сусідніх маршрутів навколо вас
+        parameters: ''
+        the-following-islands: '<green>Поруч знаходяться такі маршрути:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Північ
+        south: Південь
+        east: Схід
+        west: Захід
+        no-neighbors: '<red>У вас немає сусідніх маршрутів!</red>'
+      reset:
+        description: перезапустити ваш маршрут та видалити старий
+        parameters: <план>
+        none-left: '<red>У вас більше не лишилося перезапусків!</red>'
+        resets-left: '<red>У вас залишилось </red><aqua>[number] </aqua><red>перезапусків</red>'
+        confirmation: |-
+          <red>Ви впевнені?
+          </red><red>Усі учасники маршруту будуть вигнані, потім доведеться запрошувати знову.
+          </red><red>Назад дороги не буде: після видалення поточного маршруту <bold>неможливо </bold></red> <red>відновити його.</red>
+        kicked-from-island: '<red>Вас вигнано з вашого маршруту в [gamemode], бо власник робить перезапуск.</red>'
+      sethome:
+        description: встановити точку телепортації дома
+        must-be-on-your-island: '<red>Ви маєте бути на своєму маршруті, щоб встановити дім!</red>'
+        num-homes: '<red>Дома можуть бути від 1 до [number].</red>'
+        home-set: '<gold>Ваш дім на маршруті встановлено на вашу поточну локацію.</gold>'
+        nether:
+          not-allowed: '<red>Вам не дозволено встановлювати дім у Нижньому світі.</red>'
+          confirmation: '<red>Ви впевнені, що хочете встановити дім у Нижньому світі?</red>'
+        the-end:
+          not-allowed: '<red>Вам не дозволено встановлювати дім у Краю.</red>'
+          confirmation: '<red>Ви впевнені, що хочете встановити дім у Краю?</red>'
+        parameters: '[номер дома]'
+      setname:
+        description: встановити назву для вашого маршруту
+        name-too-short: '<red>Занадто коротко. Мінімум [number] символів.</red>'
+        name-too-long: '<red>Занадто довго. Максимум [number] символів.</red>'
+        name-already-exists: '<red>Уже існує маршрут з такою назвою!</red>'
+        parameters: <назва>
+        success: '<green>Успішно встановлено назву вашого маршруту на </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: скинути назву вашого маршруту
+        success: '<green>Успішно скинуто назву вашого маршруту.</green>'
+      team:
+        description: керувати вашою командою
+        coop:
+          description: зробити гравця рангом кооп на вашому маршруті
+          parameters: <гравець>
+          cannot-coop-yourself: '<red>Ви не можете кооперуватися з собою!</red>'
+          already-has-rank: '<red>Гравець уже має ранг!</red>'
+          you-are-a-coop-member: '<dark_green>Ви були скооперовані </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Ви скооперували </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] запрошує вас приєднатися як член кооп вашого маршруту.</green>'
+        uncoop:
+          description: видалити ранг кооп у гравця
+          parameters: <гравець>
+          cannot-uncoop-yourself: '<red>Ви не можете скасувати кооперацію з собою!</red>'
+          cannot-uncoop-member: '<red>Ви не можете скасувати кооперацію з членом команди!</red>'
+          player-not-cooped: '<red>Гравець не кооперований!</red>'
+          you-are-no-longer-a-coop-member: '<red>Ви більше не член кооп [name]''s маршруту.</red>'
+          all-members-logged-off: '<red>Всі члени маршруту вийшли, тому ви більше не член кооп [name]''s маршруту.</red>'
+          success: '<aqua>[name] </aqua><green>більше не член кооп вашого маршруту.</green>'
+          is-full: '<red>Ви не можете кооперувати когось іще.</red>'
+        trust:
+          description: дати гравцю довірений ранг на вашому маршруті
+          parameters: <гравець>
+          trust-in-yourself: '<red>Вірте в себе!</red>'
+          name-has-invited-you: '<green>[name] запрошує вас приєднатися як довірена особа вашого маршруту.</green>'
+          player-already-trusted: '<red>Гравець уже довірений!</red>'
+          you-are-trusted: '<dark_green>Вам довіряють </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Ви довіряєте </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Ви не можете дати довіру кому-то іще.</red>'
+        invite:
+          description: запросити гравця приєднатися до вашого маршруту
+          invitation-sent: '<green>Запрошення надіслано </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Видалення запрошення.</red>'
+          name-has-invited-you: '<green>[name] запрошує вас приєднатися до їхнього маршруту.</green>'
+          to-accept-or-reject: '<green>Введіть /[label] team accept щоб прийняти, або /[label] team reject щоб відхилити</green>'
+          you-will-lose-your-island: '<red>УВАГА! Ви втратите ваш маршрут якщо прийнете!</red>'
+          errors:
+            cannot-invite-self: '<red>Ви не можете запросити себе!</red>'
+            cooldown: '<red>Ви не можете запросити цю людину ще [number] секунд.</red>'
+            island-is-full: '<red>Ваш маршрут переповнений, ви не можете запросити когось іще.</red>'
+            none-invited-you: '<red>Вас ніхто не запрошував :c.</red>'
+            you-already-are-in-team: '<red>Ви вже в команді!</red>'
+            already-on-team: '<red>Цей гравець уже в команді!</red>'
+            invalid-invite: '<red>Це запрошення більше не дійсне, вибачте.</red>'
+            you-have-already-invited: '<red>Ви вже запросили цього гравця!</red>'
+          parameters: <гравець>
+          you-can-invite: '<green>Ви можете запросити ще [number] гравців.</green>'
+          accept:
+            description: прийняти запрошення
+            you-joined-island: '<green>Ви приєднались до маршруту! Використовуйте </green><aqua>/[label] team </aqua><green>щоб побачити інших членів.</green>'
+            name-joined-your-island: '<green>[name] приєднався до вашого маршруту!</green>'
+            confirmation: |-
+              <red>Ви впевнені, що хочете прийняти це запрошення?
+              </red><red><bold>Ви <underlined>ВТРАТИТЕ </underlined></bold></red><red><bold>ваш поточний маршрут!</bold></red>
+          reject:
+            description: відхилити запрошення
+            you-rejected-invite: '<green>Ви відхилили запрошення приєднатися до маршруту.</green>'
+            name-rejected-your-invite: '<red>[name] відхилив ваше запрошення маршруту!</red>'
+          cancel:
+            description: скасувати очікуване запрошення приєднатися до вашого маршруту
+        leave:
+          cannot-leave: '<red>Власники не можуть вийти! Спершу станьте членом, або виганяйте всіх членів.</red>'
+          description: покинути ваш маршрут
+          left-your-island: '<red>[name] </red><red>покинув ваш маршрут</red>'
+          success: '<green>Ви покинули цей маршрут.</green>'
+        kick:
+          description: видалити члена з вашого маршруту
+          parameters: <гравець>
+          owner-kicked: '<red>Власник вигнав вас з маршруту в [gamemode]!</red>'
+          cannot-kick: '<red>Ви не можете вигнати себе!</red>'
+          success: '<aqua>[name] </aqua><green>був вигнаний з вашого маршруту.</green>'
+        demote:
+          description: понизити ранг гравця на вашому маршруті
+          parameters: <гравець>
+          errors:
+            cant-demote-yourself: '<red>Ви не можете понизити себе!</red>'
+          failure: '<red>Гравець не може бути понижений далі!</red>'
+          success: '<green>Понижено [name] на [rank]</green>'
+        promote:
+          description: підвищити ранг гравця на вашому маршруті
+          parameters: <гравець>
+          failure: '<red>Гравець не може бути підвищений далі!</red>'
+          success: '<green>Підвищено [name] на [rank]</green>'
+        setowner:
+          description: передати володіння вашим маршрутом члену
+          errors:
+            cant-transfer-to-yourself: '<red>Ви не можете передати володіння собі! </red><gray>(<italic> Ну, насправді, ви могли б... Але ми цього не хочемо. Тому що це марно.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Цей гравець не є частиною вашої команди маршруту!</red>'
+          name-is-the-owner: '<green>[name] тепер власник маршруту!</green>'
+          parameters: <гравець>
+          you-are-the-owner: '<green>Ви тепер власник маршруту!</green>'
+      ban:
+        description: забанити гравця з вашого маршруту
+        parameters: <гравець>
+        cannot-ban-yourself: '<red>Ви не можете забанити себе!</red>'
+        cannot-ban: '<red>Цього гравця не можна забанити.</red>'
+        cannot-ban-member: '<red>Спершу виганяйте члена команди, потім банте.</red>'
+        cannot-ban-more-players: '<red>Ви досягли лімітуту банів, ви не можете забанити більше гравців з вашого маршруту.</red>'
+        player-already-banned: '<red>Гравець уже забанений.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  тепер забанений з вашого маршруту.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  забанив вас з їхнього маршруту!</red>'
+        you-are-banned: '<aqua>Ви забанені з цього маршруту!</aqua>'
+      unban:
+        description: розбанити гравця з вашого маршруту
+        parameters: <гравець>
+        cannot-unban-yourself: '<red>Ви не можете розбанити себе!</red>'
+        player-not-banned: '<red>Гравець не забанений.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  тепер розбанений з вашого маршруту.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  розбанив вас з їхнього маршруту!</green>'
+      banlist:
+        description: список забаненних гравців
+        noone: '<green>Ніхто не забанений на цьому маршруті.</green>'
+        the-following: '<aqua>Такі гравці забанені:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Ви можете забанити ще </aqua><yellow>[number] </yellow><aqua>гравців.</aqua>'
+      settings:
+        description: показати параметри маршруту
+      language:
+        description: виберіть мову
+        parameters: '[мова]'
+        not-available: '<red>Ця мова недоступна.</red>'
+        already-selected: '<red>Ви вже вибрали цю мову.</red>'
+      expel:
+        description: виганяти гравця з вашого маршруту
+        parameters: <гравець>
+        cannot-expel-yourself: '<red>Ви не можете виганяти себе!</red>'
+        cannot-expel: '<red>Цього гравця не можна виганяти.</red>'
+        cannot-expel-member: '<red>Ви не можете виганяти члена команди!</red>'
+        not-on-island: '<red>Цього гравця немає на вашому маршруті!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  виганяв вас з маршруту!</red>'
+        success: '<green>Ви виганяли </green><aqua>[name] </aqua><green>з маршруту.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] має маршрут. Спершу зніміть реєстрацію або видаліть!</red>'
+        setowner:
+          description: передає володіння маршрутом гравцю
+          already-owner: '<red>Гравець уже власник цього маршруту!</red>'
+      range:
+        description: Команда діапазону маршруту адміністратора
+        display:
+          description: Показати/сховати індикатори діапазону маршруту
+          hint: |-
+            <red>Червоні бар'єри </red><white>показують поточну межу захисту маршруту.
+            </white><gray>Сірі частинки </gray><white>показують максимальну межу.
+            </white><green>Зелені частинки </green><white>показують типовий діапазон захисту, якщо діапазон захисту відрізняється від нього.</white>
+        set:
+          description: Встановити діапазон захисту маршруту
+        reset:
+          description: Скинути діапазон захисту маршруту до значення світу за замовчуванням
+      register:
+        parameters: <гравець>
+        description: зареєструвати гравця на маршруті без власника, на якому ви знаходитесь
+        registered-island: '<green>Зареєстровано гравця на маршруті в [xyz].</green>'
+        already-owned: '<red>Область уже належить іншому гравцю!</red>'
+        no-island-here: '<red>Тут немає маршруту. Підтвердіть, щоб створити один.</red>'
+        in-deletion: '<red>Цей простір в даний час регенерується. Спробуйте пізніше.</red>'
+      unregister:
+        description: скасувати реєстрацію власника з маршруту, але зберегти блоки маршруту
+        unregistered-island: '<green>Скасовано реєстрацію гравця з маршруту в [xyz].</green>'
+      info:
+        description: отримати інформацію про те, де ви знаходитесь або на чийому маршруті
+        no-island: '<red>Ви не знаходитесь на зареєстрованому маршруті прямо зараз...</red>'
+        island-location: 'Розташування області: [xyz]'
+        island-coords: 'Координати області: [xz1] до [xz2]'
+        is-spawn: Область - це маршрут спавну
+      setrange:
+        description: встановити діапазон маршруту гравця
+        range-updated: Діапазон області оновлено на [number]
+      tp:
+        description: телепортуватися на маршрут гравця
+      getrank:
+        description: отримати ранг гравця на їхньому маршруті
+        rank-is: '<green>Ранг [rank] на їхньому маршруті.</green>'
+      setrank:
+        description: встановити ранг гравця на їхньому маршруті
+      setspawn:
+        description: встановити маршрут як спавн для цього світу
+        already-spawn: '<red>Цей маршрут уже спавн!</red>'
+        no-island-here: '<red>Тут немає зареєстрованого маршруту.</red>'
+        confirmation: '<red>Ви впевнені, що хочете встановити цей маршрут як спавн для цього світу?</red>'
+      delete:
+        description: видаляє гравця та регенерує їхній маршрут
+        deleted-island: '<green>Область в </green><yellow>[xyz] </yellow><green>була успішно перегенерована.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Переключає вхід у творчий режим
+          </green><green>в кінці маршруту та
+          </green><green>входу на маршрут
+          </green>
+        name: "Режим творчого паркуру"
+      ELYTRA:
+        description: Переключити використання
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Ендермени можуть видаляти
+          </green><green>блоки</green>
+      ENTER_EXIT_MESSAGES:
+        description: Показати повідомлення входу та виходу
+        island: "маршрут [name]"
+        name: Повідомлення входу/виходу
+        now-entering: '<green>Вхід на </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Вхід на ваш маршрут.</green>'
+        now-leaving: '<green>Вихід з </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Вихід з вашого маршруту.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Видалити мобів які вибігають
+          </green><green>за межи захищеної
+          </green><green>області маршруту</green>
+        name: '<yellow>Обмежити мобів до маршруту гравця</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Гравці відроджуються
+          </green><green>на своєму маршруті</green>
+        name: Відродження області
+      LOCK:
+        name: Заблокувати маршрут гравця
+      OFFLINE_REDSTONE:
+        description: "<green>Коли вимкнено, червоний камінь\n</green><green>не буде працювати на маршрутах\n</green><green>де всі члени офлайн.\n</green><green>Може допомогти зменшити лаг.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Дозволити поршням штовхати
+          </green><green>блоки поза межи маршруту гравця</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Включити/Вимкнути PVP
+          </red><red>на захищеному маршруті.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Видалити монстрів при
+          </green><green>телепортації на маршрут</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Запобігти телепортації гравців
+          </green><green>якщо вони падають.</green>
+        hint: '<red>Ви не можете телепортуватися поки падаєте!</red>'
+    locked: '<red>Цей маршрут заблокований!</red>'
+    protected: '<red>Область захищена: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Захист</gold>'
+        description: |-
+          <green>Параметри захисту
+          </green><green>для цього маршруту</green>
+      SETTING:
+        description: |-
+          <green>Загальні параметри
+          </green><green>для цього маршруту</green>

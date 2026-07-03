@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Punct de început setat!</green>"
+  end-set: "<green>Punct final setat!</green>"
+  already-set: "<red>Începutul și sfârșitul sunt deja setate! Distrugeți una pentru a reseta.</red>"
+  start-removed: "<aqua>Punct de început eliminat!</aqua>"
+  end-removed: "<aqua>Punct final eliminat!</aqua>"
+  resetting-start-end: "<yellow>Resetarea punctelor de început și sfârşit!</yellow>"
+  start: "<aqua>Început parkour!</aqua>"
+  no-start-yet: "<red>Nu este încă setat un punct de început.</red>"
+  no-end-yet: "<red>Nu este încă setat un punct final.</red>"
+  to-start: "<light_purple>Pentru a începe, mergeți pe placa de presiune aurie.</light_purple>"
+  session-ended: "<red>Sesiunea ta de parkour s-a încheiat.</red>"
+  end: "<green>Sfârşit parkour!</green>"
+  you-took: "<light_purple>Ți-a luat [number]!</light_purple>"
+  start-before-end: "<aqua>Trebuie să începi înainte de a termina!</aqua>"
+  checkpoint: "<yellow>Punct de control!</yellow>"
+  checkpoint-set: "<green>Punct de control setat!</green>"
+  set-the-end: "<red>Setează punctul final</red>"
+  hours: "ore"
+  minutes: "minute"
+  seconds: "secunde"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Alege-ți pe și încearcă!"
+    gui-title: "Cursuri de Parkour"
+    head-description: "<aqua>[runs] încercări</aqua>"
+  top:
+    gui-title: "Clasament Cursuri Cel Mai Rapid"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Rangul tău: [number]</green>"
+    beat-previous-time: "<light_purple>Ți-ai depășit tiempo anterior!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Nu ți-ai depășit tiempo anterior!</aqua>"
+  errors:
+    not-on-island: "<red>Trebuie să fii pe un curs de parkour pentru a face asta</red>"
+    no-warp: "<red>Acest curs este deja privat</red>"
+    not-in-run: "<red>Trebuie să fii în curs în acest moment pentru a face asta</red>"
+  warp:
+    set: "<light_purple>Punct de teleport setat! Jucătorii pot acum vedea cursul tău!</light_purple>"
+    replaced: "<yellow>Punct de teleport setat! Punct vechi dezactivat!</yellow>"
+    removed: "<red>Punct de teleport eliminat. Jucătorii nu vor mai vedea cursul tău.</red>"
+    warping: "<green>Teleportare la curs!</green>"
+    no-warp: "<red>Nu este un punct de teleport setat pentru acest curs!</red>"
+    unknown-course: "<red>Curs necunoscut!</red>"
+  quit:
+    success: "<yellow>Ai ieșit din sesiunea ta și poți folosi din nou comenzile</yellow>"
+  general:
+    errors:
+      no-island: '<red>Nu ai un curs!</red>'
+      player-has-island: '<red>Acel jucător are deja un curs!</red>'
+      player-has-no-island: '<red>Acel jucător nu are un curs!</red>'
+      already-have-island: '<red>Ai deja un curs!</red>'
+      no-safe-location: '<red>Niciun loc sigur găsit în curs!</red>'
+      not-owner: '<red>Nu ești proprietarul echipei tale!</red>'
+  commands:
+    parkour:
+      courses:
+        description: arată cursurile disponibile pentru a juca și se teleporta
+      cleartop:
+        description: șterge top zece al cursului tău sau elimină scorul unui jucător
+        parameters: <nume jucător>
+      setwarp:
+        description: stabilește punctul de teleport și face cursul tău public
+      warp:
+        description: Teleportează-te la un curs după nume sau la început dacă ești în unul
+        parameters: <nume curs>
+      removewarp:
+        description: elimină punctul de teleport și face cursul tău privat
+      help:
+        description: Începe un curs de parkour sau teleportează-te la cursul tău
+      go:
+        parameters: '[numărul acasă]'
+      sethome:
+        parameters: '[numărul acasă]'
+      top:
+        description: "Arată clasamentul top cursuri"
+      quit:
+        description: "Oprește cronometrul cursului actual"
+    island:
+      go:
+        parameters: '[numărul acasă]'
+        description: te teleportează la cursul tău
+        teleport: '<green>Teleportare la cursul tău.</green>'
+        teleported: '<green>Teleportat la acasă </green><yellow>#[number].</yellow>'
+      help:
+        description: comanda principală a parkourului
+      create:
+        description: creează un curs, folosind un plan opțional (necesită permisiune)
+        parameters: <plan>
+        too-many-islands: "<red>Sunt prea multe cursuri în această lume: nu este suficient spațiu pentru a-ți crea al tău.</red>"
+        cannot-create-island: '<red>Un loc nu a putut fi găsit la timp, încearcă din nou...</red>'
+        unable-create-island: '<red>Cursul tău nu a putut fi generat, contactează un administrator.</red>'
+        creating-island: '<green>Căutând un loc pentru cursul tău...</green>'
+        pasting:
+          estimated-time: '<green>Timp estimat: </green><aqua>[number] </aqua><green>secunde.</green>'
+          blocks: '<green>Construind bloc cu bloc: </green><aqua>[number] </aqua><green>blocuri în total...</green>'
+          entities: '<green>Umplând cu entități: </green><aqua>[number] </aqua><green>entități în total...</green>'
+          done: '<green>Gata! Cursul tău este gata și te așteaptă!</green>'
+        pick: '<dark_green>Alege un curs</dark_green>'
+        unknown-blueprint: '<red>Acel plan nu a fost încă încărcat.</red>'
+        on-first-login: '<green>Bun venit! Vom începe să îți pregătim cursul în câteva secunde.</green>'
+        you-can-teleport-to-your-island: '<green>Poți să te teleportezi la cursul tău când dorești.</green>'
+      info:
+        description: arată informații despre cursul tău sau cursul jucătorului
+        parameters: <jucător>
+      near:
+        description: arată numele cursurilor vecine din jurul tău
+        parameters: ''
+        the-following-islands: '<green>Următoarele cursuri sunt în apropiere:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Nord
+        south: Sud
+        east: Est
+        west: Vest
+        no-neighbors: '<red>Nu ai cursuri vecine imediate!</red>'
+      reset:
+        description: reinițializează-ți cursul și elimină cel vechi
+        parameters: <plan>
+        none-left: '<red>Nu mai ai reinițializări!</red>'
+        resets-left: '<red>Ai încă </red><aqua>[number] </aqua><red>reinițializări</red>'
+        confirmation: |-
+          <red>Ești sigur că vrei să faci asta?
+          </red><red>Toți membrii cursului vor fi expulzați, va trebui să-i reinviți după.
+          </red><red>Nu se mai întoarce: odată ce cursul tău actual este șters, nu va fi <bold>nicio </bold></red> <red>cale de recuperare mai târziu.</red>
+        kicked-from-island: '<red>Ai fost expulzat de pe cursul tău în [gamemode] pentru că proprietarul îl reinițializează.</red>'
+      sethome:
+        description: setează punctul tău de teleportare acasă
+        must-be-on-your-island: '<red>Trebuie să fii pe cursul tău pentru a seta o casă!</red>'
+        num-homes: '<red>Casele pot fi de la 1 la [number].</red>'
+        home-set: '<gold>Casa cursului tău a fost setată la locația ta actuală.</gold>'
+        nether:
+          not-allowed: '<red>Nu ai voie să-ți setezi casa în Nether.</red>'
+          confirmation: '<red>Ești sigur că vrei să-ți setezi casa în Nether?</red>'
+        the-end:
+          not-allowed: '<red>Nu ai voie să-ți setezi casa în End.</red>'
+          confirmation: '<red>Ești sigur că vrei să-ți setezi casa în End?</red>'
+        parameters: '[numărul acasă]'
+      setname:
+        description: setează un nume pentru cursul tău
+        name-too-short: '<red>Prea scurt. Dimensiunea minimă este [number] caractere.</red>'
+        name-too-long: '<red>Prea lung. Dimensiunea maximă este [number] caractere.</red>'
+        name-already-exists: '<red>Există deja un curs cu acel nume!</red>'
+        parameters: <nume>
+        success: '<green>Numele cursului tău a fost setat la </green><aqua>[name]</aqua><green>.</green>'
+      resetname:
+        description: resetează numele cursului tău
+        success: '<green>Numele cursului tău a fost resetat cu succes.</green>'
+      team:
+        description: gestionează-ți echipa
+        coop:
+          description: fă un jucător membru coop al cursului tău
+          parameters: <jucător>
+          cannot-coop-yourself: '<red>Nu poți face pe tine însuți coop!</red>'
+          already-has-rank: '<red>Jucătorul are deja un rang!</red>'
+          you-are-a-coop-member: '<dark_green>Ai fost făcut coop de </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Ai făcut </green><aqua>[name]</aqua><green> coop.</green>'
+          name-has-invited-you: '<green>[name] te-a invitat să te alături ca membru coop al cursului lui.</green>'
+        uncoop:
+          description: elimina rangul coop de la un jucător
+          parameters: <jucător>
+          cannot-uncoop-yourself: '<red>Nu poți elimina rangul coop de la tine!</red>'
+          cannot-uncoop-member: '<red>Nu poți elimina rangul coop de la un membru al echipei!</red>'
+          player-not-cooped: '<red>Jucătorul nu este coop!</red>'
+          you-are-no-longer-a-coop-member: '<red>Nu mai ești membru coop al cursului [name].</red>'
+          all-members-logged-off: '<red>Toți membrii cursului s-au deconectat, deci nu mai ești membru coop al cursului [name].</red>'
+          success: '<aqua>[name] </aqua><green>nu mai este membru coop al cursului tău.</green>'
+          is-full: '<red>Nu poți face coop pe nimeni altcineva.</red>'
+        trust:
+          description: dă unui jucător un rang de încredere pe cursul tău
+          parameters: <jucător>
+          trust-in-yourself: '<red>Ai încredere în tine!</red>'
+          name-has-invited-you: '<green>[name] te-a invitat să te alături ca membru de încredere al cursului lui.</green>'
+          player-already-trusted: '<red>Jucătorul este deja de încredere!</red>'
+          you-are-trusted: '<dark_green>Ești de încredere de </dark_green><aqua>[name]</aqua><green>!</green>'
+          success: '<green>Ai avut încredere în </green><aqua>[name]</aqua><green>.</green>'
+          is-full: '<red>Nu poți avea încredere în nimeni altcineva.</red>'
+        invite:
+          description: invită un jucător să se alăture cursului tău
+          invitation-sent: '<green>Invitație trimisă la </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Eliminare invitație.</red>'
+          name-has-invited-you: '<green>[name] te-a invitat să te alături la cursul lui.</green>'
+          to-accept-or-reject: '<green>Fă /[label] team accept pentru a accepta, sau /[label] team reject pentru a refuza</green>'
+          you-will-lose-your-island: '<red>AVERTISMENT! Vei pierde cursul tău dacă accepți!</red>'
+          errors:
+            cannot-invite-self: '<red>Nu te poți invita pe tine!</red>'
+            cooldown: '<red>Nu poți invita acea persoană pentru încă [number] secunde.</red>'
+            island-is-full: '<red>Cursul tău este plin, nu mai poți invita pe nimeni.</red>'
+            none-invited-you: '<red>Nimeni nu te-a invitat :c.</red>'
+            you-already-are-in-team: '<red>Ești deja în o echipă!</red>'
+            already-on-team: '<red>Acel jucător este deja în o echipă!</red>'
+            invalid-invite: '<red>Acea invitație nu mai este valabilă, îmi pare rău.</red>'
+            you-have-already-invited: '<red>Ai deja invitat acel jucător!</red>'
+          parameters: <jucător>
+          you-can-invite: '<green>Poți invita [number] alți jucători.</green>'
+          accept:
+            description: acceptă o invitație
+            you-joined-island: '<green>Te-ai alăturat unui curs! Folosește </green><aqua>/[label] team </aqua><green>pentru a vedea ceilalți membri.</green>'
+            name-joined-your-island: '<green>[name] s-a alăturat cursului tău!</green>'
+            confirmation: |-
+              <red>Ești sigur că vrei să accepți această invitație?
+              </red><red><bold>VEI PIERDE </bold></red><red><bold>cursul tău actual!</bold></red>
+          reject:
+            description: refuză o invitație
+            you-rejected-invite: '<green>Ai refuzat invitația de a te alătura unui curs.</green>'
+            name-rejected-your-invite: '<red>[name] a refuzat invitația ta!</red>'
+          cancel:
+            description: anulează invitația în așteptare
+        leave:
+          cannot-leave: '<red>Proprietarii nu pot pleca! Devino mai întâi membru, sau expulzează toți membrii.</red>'
+          description: pleacă din cursul tău
+          left-your-island: '<red>[name] </red><red>a plecat din cursul tău</red>'
+          success: '<green>Ai plecat din acest curs.</green>'
+        kick:
+          description: elimina un membru din cursul tău
+          parameters: <jucător>
+          owner-kicked: '<red>Proprietarul te-a expulzat din curs în [gamemode]!</red>'
+          cannot-kick: '<red>Nu te poți expulza pe tine!</red>'
+          success: '<aqua>[name] </aqua><green>a fost expulzat din cursul tău.</green>'
+        demote:
+          description: retrogradează un jucător pe cursul tău
+          parameters: <jucător>
+          errors:
+            cant-demote-yourself: '<red>Nu te poți retrograda pe tine!</red>'
+          failure: '<red>Jucătorul nu poate fi retrogradat mai departe!</red>'
+          success: '<green>Ai retrogradat [name] la [rank]</green>'
+        promote:
+          description: promovează un jucător pe cursul tău
+          parameters: <jucător>
+          failure: '<red>Jucătorul nu poate fi promovat mai departe!</red>'
+          success: '<green>Ai promovat [name] la [rank]</green>'
+        setowner:
+          description: transferă proprietatea cursului tău unui membru
+          errors:
+            cant-transfer-to-yourself: '<red>Nu poți transfera proprietatea ție! </red><gray>(<italic> Ei bine, de fapt ai putea... Dar nu vrem să o faci. Pentru că este inutil.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Acel jucător nu face parte din echipa ta!</red>'
+          name-is-the-owner: '<green>[name] este acum proprietarul cursului!</green>'
+          parameters: <jucător>
+          you-are-the-owner: '<green>Acum ești proprietarul cursului!</green>'
+      ban:
+        description: interzice un jucător din cursul tău
+        parameters: <jucător>
+        cannot-ban-yourself: '<red>Nu te poți interzice!</red>'
+        cannot-ban: '<red>Acel jucător nu poate fi interzis.</red>'
+        cannot-ban-member: '<red>Expulzează mai întâi membrul echipei, apoi interzice-l.</red>'
+        cannot-ban-more-players: '<red>Ai atins limita de interzicere, nu mai poți interzice alți jucători din cursul tău.</red>'
+        player-already-banned: '<red>Jucătorul este deja interzis.</red>'
+        player-banned: '<aqua>[name]</aqua><red> este acum interzis din cursul tău.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red> te-a interzis din cursul lui!</red>'
+        you-are-banned: '<aqua>Ești interzis din acest curs!</aqua>'
+      unban:
+        description: ridica interdictia unui jucător din cursul tău
+        parameters: <jucător>
+        cannot-unban-yourself: '<red>Nu te poți ridica interdictia!</red>'
+        player-not-banned: '<red>Jucătorul nu este interzis.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green> nu mai este interzis din cursul tău.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green> ți-a ridicat interdictia din cursul lui!</green>'
+      banlist:
+        description: listează jucătorii interziși
+        noone: '<green>Nimeni nu este interzis din acest curs.</green>'
+        the-following: '<aqua>Următorii jucători sunt interziși:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Poți interzice până la </aqua><yellow>[number] </yellow><aqua>alți jucători.</aqua>'
+      settings:
+        description: afișează setările cursului
+      language:
+        description: selectează limba
+        parameters: '[limba]'
+        not-available: '<red>Această limbă nu este disponibilă.</red>'
+        already-selected: '<red>Folosești deja această limbă.</red>'
+      expel:
+        description: expulzează un jucător din cursul tău
+        parameters: <jucător>
+        cannot-expel-yourself: '<red>Nu te poți expulza pe tine!</red>'
+        cannot-expel: '<red>Acel jucător nu poate fi expulzat.</red>'
+        cannot-expel-member: '<red>Nu poți expulza un membru al echipei!</red>'
+        not-on-island: '<red>Acel jucător nu este pe cursul tău!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red> te-a expulzat din curs!</red>'
+        success: '<green>Ai expulzat </green><aqua>[name] </aqua><green>din curs.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] are un curs. Anulează înregistrarea sau elimină-l mai întâi!</red>'
+        setowner:
+          description: transferă proprietatea cursului jucătorului
+          already-owner: '<red>Jucătorul este deja proprietarul acestui curs!</red>'
+      range:
+        description: Comandă admin rază curs
+        display:
+          description: Arată/ascunde indicatorii de rază curs
+          hint: |-
+            <red>Iconurile Red Barrier </red><white>arată limita curentă a razei protejate.
+            </white><gray>Particulele gri </gray><white>arată limita maximă.
+            </white><green>Particulele verzi </green><white>arată raza protejată implicită dacă raza de protecție diferă.</white>
+        set:
+          description: Stabilește raza protejată a cursului
+        reset:
+          description: Resetează raza protejată la valoarea implicită a lumii
+      register:
+        parameters: <jucător>
+        description: înregistrează jucătorul pe cursul fără proprietar în care te afli
+        registered-island: '<green>Jucător înregistrat pe curs la [xyz].</green>'
+        already-owned: '<red>Zona este deja deținută de alt jucător!</red>'
+        no-island-here: '<red>Nu este un curs aici. Confirmă pentru a face unul.</red>'
+        in-deletion: '<red>Acest spațiu este în curs de ștergere. Încearcă mai târziu.</red>'
+      unregister:
+        description: anulează înregistrarea proprietarului de pe un curs, dar păstrează blocurile
+        unregistered-island: '<green>Jucător neînregistrat de pe curs la [xyz].</green>'
+      info:
+        description: obține informații despre locul în care te afli sau despre jucător
+        no-island: '<red>Nu ești pe un curs înregistrat în acest moment...</red>'
+        island-location: 'Locația zonei: [xyz]'
+        island-coords: 'Coordonate zone: [xz1] la [xz2]'
+        is-spawn: Zona este un curs de spawn
+      setrange:
+        description: setează raza cursului jucătorului
+        range-updated: Rază zone actualizată la [number]
+      tp:
+        description: teleportează-te la cursul unui jucător
+      getrank:
+        description: obține rangul unui jucător pe cursul lui
+        rank-is: '<green>Rangul este [rank] pe cursul lui.</green>'
+      setrank:
+        description: setează rangul unui jucător pe cursul lui
+      setspawn:
+        description: setează un curs ca spawn pentru această lume
+        already-spawn: '<red>Acest curs este deja un spawn!</red>'
+        no-island-here: '<red>Nu este un curs înregistrat aici.</red>'
+        confirmation: '<red>Ești sigur că vrei să setezi acest curs ca spawn pentru această lume?</red>'
+      delete:
+        description: șterge un jucător și regenerează cursul lui
+        deleted-island: '<green>Zona la </green><yellow>[xyz] </yellow><green>a fost regenerată cu succes.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Activează/dezactivează modul creativ
+          </green><green>la sfârșitul cursului și
+          </green><green>intrând pe curs
+          </green>
+        name: "Mod Creativ Parkour"
+      ELYTRA:
+        description: Activează/dezactivează utilizarea
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermenii pot elimina
+          </green><green>blocuri</green>
+      ENTER_EXIT_MESSAGES:
+        description: Arată mesaje de intrare și ieșire
+        island: "Curs de [name]"
+        name: Mesaje intrare/ieșire
+        now-entering: '<green>Intri acum în </green><aqua>[name]</aqua><green>.</green>'
+        now-entering-your-island: '<green>Intri acum în cursul tău.</green>'
+        now-leaving: '<green>Ieși acum din </green><aqua>[name]</aqua><green>.</green>'
+        now-leaving-your-island: '<green>Ieși acum din cursul tău.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Elimina creaturi care ies
+          </green><green>din spațiul protejat
+          </green><green>al jucătorului</green>
+        name: '<yellow>Limitează creaturi la cursul jucătorului</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Jucătorii se reînviază
+          </green><green>în cursul lor</green>
+        name: Reînviere curs
+      LOCK:
+        name: Blochează cursul jucătorului
+      OFFLINE_REDSTONE:
+        description: "<green>Când este dezactivată, redstone\n</green><green>nu va funcționa în cursuri\n</green><green>unde toți membrii sunt offline.\n</green><green>Poate ajuta la reducerea lag-ului.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Permitere pistonilor să împingă
+          </green><green>blocuri în afara cursului unui jucător</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Activează/dezactivează PVP
+          </red><red>în cursul protejat.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Elimina monștri când
+          </green><green>se teleportează la un curs</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Preveni jucătorii să se teleporteze
+          </green><green>dacă cad.</green>
+        hint: '<red>Nu poți să te teleportezi în timp ce cazi!</red>'
+    locked: '<red>Acest curs este blocat!</red>'
+    protected: '<red>Zonă protejată: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Protecție</gold>'
+        description: |-
+          <green>Setări de protecție
+          </green><green>pentru acest curs</green>
+      SETTING:
+        description: |-
+          <green>Setări generale
+          </green><green>pentru acest curs</green>

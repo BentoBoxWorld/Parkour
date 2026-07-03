@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Awal diatur!</green>"
+  end-set: "<green>Akhir diatur!</green>"
+  already-set: "<red>Awal dan Akhir sudah diatur! Hancurkan salah satunya untuk reset.</red>"
+  start-removed: "<aqua>Awal dihapus!</aqua>"
+  end-removed: "<aqua>Akhir dihapus!</aqua>"
+  resetting-start-end: "<yellow>Mereset awal dan akhir!</yellow>"
+  start: "<aqua>Mulai parkour!</aqua>"
+  no-start-yet: "<red>Belum ada awal yang diatur.</red>"
+  no-end-yet: "<red>Belum ada akhir yang diatur.</red>"
+  to-start: "<light_purple>Untuk memulai, berdirilah di plat tekanan emas.</light_purple>"
+  session-ended: "<red>Sesi parkour Anda berakhir.</red>"
+  end: "<green>Selesai Parkour!</green>"
+  you-took: "<light_purple>Anda membutuhkan [number]!</light_purple>"
+  start-before-end: "<aqua>Anda perlu memulai sebelum mengakhiri!</aqua>"
+  checkpoint: "<yellow>Checkpoint!</yellow>"
+  checkpoint-set: "<green>Checkpoint diatur!</green>"
+  set-the-end: "<red>Atur plat akhir</red>"
+  hours: "jam"
+  minutes: "menit"
+  seconds: "detik"
+  hours-short: "j"
+  minutes-short: "m"
+  seconds-short: "d"
+  courses:
+    description: "Pilih satu dan coba!"
+    gui-title: "Kursus Parkour"
+    head-description: "<aqua>[runs] run</aqua>"
+  top:
+    gui-title: "Peringkat Kursus Tercepat"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Peringkat Anda: [number]</green>"
+    beat-previous-time: "<light_purple>Anda mengalahkan waktu sebelumnya!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Anda tidak mengalahkan waktu sebelumnya!</aqua>"
+  errors:
+    not-on-island: "<red>Anda harus berada di kursus parkour untuk melakukannya</red>"
+    no-warp: "<red>Kursus ini sudah pribadi</red>"
+    not-in-run: "<red>Anda harus sedang menjalankan kursus untuk melakukannya</red>"
+  warp:
+    set: "<light_purple>Titik warp diatur! Pemain sekarang bisa melihat kursus Anda!</light_purple>"
+    replaced: "<yellow>Titik warp diatur! Titik lama dinonaktifkan!</yellow>"
+    removed: "<red>Titik warp dihapus. Pemain tidak akan melihat kursus Anda.</red>"
+    warping: "<green>Warp ke kursus!</green>"
+    no-warp: "<red>Tidak ada warp yang diatur untuk kursus ini!</red>"
+    unknown-course: "<red>Kursus tidak dikenal!</red>"
+  quit:
+    success: "<yellow>Anda telah berhenti dari run Anda, dan dapat menjalankan perintah lagi</yellow>"
+  general:
+    errors:
+      no-island: '<red>Anda tidak memiliki kursus!</red>'
+      player-has-island: '<red>Pemain sudah memiliki kursus!</red>'
+      player-has-no-island: '<red>Pemain itu tidak memiliki kursus!</red>'
+      already-have-island: '<red>Anda sudah memiliki kursus!</red>'
+      no-safe-location: '<red>Tidak ada lokasi aman yang ditemukan di kursus!</red>'
+      not-owner: '<red>Anda bukan pemilik tim Anda!</red>'
+  commands:
+    parkour:
+      courses:
+        description: tampilkan kursus yang tersedia untuk dimainkan dan warp ke
+      cleartop:
+        description: hapus sepuluh teratas kursus Anda atau hapus skor pemain dari itu
+        parameters: <nama pemain>
+      setwarp:
+        description: menetapkan titik warp dan membuat kursus Anda publik
+      warp:
+        description: Warp ke kursus berdasarkan nama atau ke awal jika Anda berada di satu
+        parameters: <nama kursus>
+      removewarp:
+        description: menghapus titik warp dan membuat kursus Anda pribadi
+      help:
+        description: Mulai kursus parkour atau teleport ke kursus Anda
+      go:
+        parameters: '[nomor rumah]'
+      sethome:
+        parameters: '[nomor rumah]'
+      top:
+        description: "Tampilkan peringkat kursus teratas"
+      quit:
+        description: "Hentikan timer di kursus saat ini"
+    island:
+      go:
+        parameters: '[nomor rumah]'
+        description: teleport Anda ke kursus Anda
+        teleport: '<green>Menteleport Anda ke kursus Anda.</green>'
+        teleported: '<green>Menteleport Anda ke rumah </green><yellow>#[number].</yellow>'
+      help:
+        description: perintah parkour utama
+      create:
+        description: buat kursus, menggunakan blueprint opsional (memerlukan izin)
+        parameters: <blueprint>
+        too-many-islands: "<red>Ada terlalu banyak kursus di dunia ini: tidak cukup ruang untuk kursus Anda dibuat.</red>"
+        cannot-create-island: '<red>Tempat tidak dapat ditemukan tepat waktu, silakan coba lagi...</red>'
+        unable-create-island: '<red>Kursus Anda tidak dapat dibuat, silakan hubungi administrator.</red>'
+        creating-island: '<green>Mencari tempat untuk kursus Anda...</green>'
+        pasting:
+          estimated-time: '<green>Waktu perkiraan: </green><aqua>[number] </aqua><green>detik.</green>'
+          blocks: '<green>Membangunnya blok demi blok: </green><aqua>[number] </aqua><green>blok semuanya...</green>'
+          entities: '<green>Mengisinya dengan entitas: </green><aqua>[number] </aqua><green>entitas semuanya...</green>'
+          done: '<green>Selesai! Kursus Anda siap dan menunggu Anda!</green>'
+        pick: '<dark_green>Pilih kursus</dark_green>'
+        unknown-blueprint: '<red>Blueprint itu belum dimuat.</red>'
+        on-first-login: '<green>Selamat datang! Kami akan mulai menyiapkan kursus Anda dalam beberapa detik.</green>'
+        you-can-teleport-to-your-island: '<green>Anda dapat teleport ke kursus Anda kapan saja.</green>'
+      info:
+        description: tampilkan info tentang kursus Anda atau kursus pemain
+        parameters: <pemain>
+      near:
+        description: tampilkan nama kursus tetangga di sekitar Anda
+        parameters: ''
+        the-following-islands: '<green>Kursus berikut berdekatan:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Utara
+        south: Selatan
+        east: Timur
+        west: Barat
+        no-neighbors: '<red>Anda tidak memiliki kursus tetangga langsung!</red>'
+      reset:
+        description: mulai ulang kursus Anda dan hapus yang lama
+        parameters: <blueprint>
+        none-left: '<red>Anda tidak memiliki lagi reset!</red>'
+        resets-left: '<red>Anda memiliki </red><aqua>[number] </aqua><red>reset tersisa</red>'
+        confirmation: |-
+          <red>Apakah Anda yakin ingin melakukan ini?
+          </red><red>Semua anggota kursus akan dikeluarkan dari kursus, Anda harus mengundang mereka lagi nanti.
+          </red><red>Tidak ada jalan kembali: setelah kursus saat ini Anda dihapus, tidak akan ada <bold>tidak ada </bold></red> <red>cara untuk mengambilnya nanti.</red>
+        kicked-from-island: '<red>Anda dikeluarkan dari kursus Anda di [gamemode] karena pemilik mereset.</red>'
+      sethome:
+        description: atur titik teleport rumah Anda
+        must-be-on-your-island: '<red>Anda harus berada di kursus Anda untuk mengatur rumah!</red>'
+        num-homes: '<red>Rumah bisa 1 hingga [number].</red>'
+        home-set: '<gold>Rumah kursus Anda telah diatur ke lokasi Anda saat ini.</gold>'
+        nether:
+          not-allowed: '<red>Anda tidak diizinkan mengatur rumah Anda di Nether.</red>'
+          confirmation: '<red>Apakah Anda yakin ingin mengatur rumah Anda di Nether?</red>'
+        the-end:
+          not-allowed: '<red>Anda tidak diizinkan mengatur rumah Anda di End.</red>'
+          confirmation: '<red>Apakah Anda yakin ingin mengatur rumah Anda di End?</red>'
+        parameters: '[nomor rumah]'
+      setname:
+        description: atur nama untuk kursus Anda
+        name-too-short: '<red>Terlalu pendek. Ukuran minimum adalah [number] karakter.</red>'
+        name-too-long: '<red>Terlalu panjang. Ukuran maksimal adalah [number] karakter.</red>'
+        name-already-exists: '<red>Sudah ada kursus dengan nama itu!</red>'
+        parameters: <nama>
+        success: '<green>Berhasil atur nama kursus Anda ke </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: reset nama kursus Anda
+        success: '<green>Berhasil reset nama kursus Anda.</green>'
+      team:
+        description: kelola tim Anda
+        coop:
+          description: buat pemain rank coop di kursus Anda
+          parameters: <pemain>
+          cannot-coop-yourself: '<red>Anda tidak dapat coop diri sendiri!</red>'
+          already-has-rank: '<red>Pemain sudah memiliki rank!</red>'
+          you-are-a-coop-member: '<dark_green>Anda dicoop oleh </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Anda dicoop </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] telah mengundang Anda untuk bergabung menjadi anggota coop kursus mereka.</green>'
+        uncoop:
+          description: hapus rank coop dari pemain
+          parameters: <pemain>
+          cannot-uncoop-yourself: '<red>Anda tidak dapat uncoop diri sendiri!</red>'
+          cannot-uncoop-member: '<red>Anda tidak dapat uncoop anggota tim!</red>'
+          player-not-cooped: '<red>Pemain tidak dicoop!</red>'
+          you-are-no-longer-a-coop-member: '<red>Anda tidak lagi menjadi anggota coop kursus [name].</red>'
+          all-members-logged-off: '<red>Semua anggota kursus keluar jadinya Anda tidak lagi menjadi anggota coop kursus [name].</red>'
+          success: '<aqua>[name] </aqua><green>tidak lagi menjadi anggota coop kursus Anda.</green>'
+          is-full: '<red>Anda tidak dapat coop siapa pun lagi.</red>'
+        trust:
+          description: berikan pemain rank terpercaya di kursus Anda
+          parameters: <pemain>
+          trust-in-yourself: '<red>Percaya pada diri sendiri!</red>'
+          name-has-invited-you: '<green>[name] telah mengundang Anda untuk bergabung menjadi anggota terpercaya kursus mereka.</green>'
+          player-already-trusted: '<red>Pemain sudah terpercaya!</red>'
+          you-are-trusted: '<dark_green>Anda dipercaya oleh </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Anda mempercayai </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Anda tidak dapat mempercayai siapa pun lagi.</red>'
+        invite:
+          description: undang pemain untuk bergabung dengan kursus Anda
+          invitation-sent: '<green>Undangan dikirim ke </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Menghapus undangan.</red>'
+          name-has-invited-you: '<green>[name] telah mengundang Anda untuk bergabung dengan kursus mereka.</green>'
+          to-accept-or-reject: '<green>Lakukan /[label] team accept untuk menerima, atau /[label] team reject untuk menolak</green>'
+          you-will-lose-your-island: '<red>PERINGATAN! Anda akan kehilangan kursus Anda jika menerima!</red>'
+          errors:
+            cannot-invite-self: '<red>Anda tidak dapat mengundang diri sendiri!</red>'
+            cooldown: '<red>Anda tidak dapat mengundang orang itu selama [number] detik lagi.</red>'
+            island-is-full: '<red>Kursus Anda penuh, Anda tidak dapat mengundang siapa pun lagi.</red>'
+            none-invited-you: '<red>Tidak ada yang mengundang Anda :c.</red>'
+            you-already-are-in-team: '<red>Anda sudah berada di tim!</red>'
+            already-on-team: '<red>Pemain itu sudah berada di tim!</red>'
+            invalid-invite: '<red>Undangan itu tidak lagi valid, maaf.</red>'
+            you-have-already-invited: '<red>Anda sudah mengundang pemain itu!</red>'
+          parameters: <pemain>
+          you-can-invite: '<green>Anda dapat mengundang [number] pemain lagi.</green>'
+          accept:
+            description: terima undangan
+            you-joined-island: '<green>Anda bergabung dengan kursus! Gunakan </green><aqua>/[label] team </aqua><green>untuk melihat anggota lain.</green>'
+            name-joined-your-island: '<green>[name] bergabung dengan kursus Anda!</green>'
+            confirmation: |-
+              <red>Apakah Anda yakin ingin menerima undangan ini?
+              </red><red><bold>Anda akan <underlined>KEHILANGAN </underlined></bold></red><red><bold>kursus Anda saat ini!</bold></red>
+          reject:
+            description: tolak undangan
+            you-rejected-invite: '<green>Anda menolak undangan untuk bergabung dengan kursus.</green>'
+            name-rejected-your-invite: '<red>[name] menolak undangan kursus Anda!</red>'
+          cancel:
+            description: batalkan undangan yang tertunda untuk bergabung dengan kursus Anda
+        leave:
+          cannot-leave: '<red>Pemilik tidak dapat pergi! Jadilah anggota terlebih dahulu, atau keluarkan semua anggota.</red>'
+          description: tinggalkan kursus Anda
+          left-your-island: '<red>[name] </red><red>meninggalkan kursus Anda</red>'
+          success: '<green>Anda meninggalkan kursus ini.</green>'
+        kick:
+          description: hapus anggota dari kursus Anda
+          parameters: <pemain>
+          owner-kicked: '<red>Pemilik mengeluarkan Anda dari kursus di [gamemode]!</red>'
+          cannot-kick: '<red>Anda tidak dapat mengeluarkan diri sendiri!</red>'
+          success: '<aqua>[name] </aqua><green>telah dikeluarkan dari kursus Anda.</green>'
+        demote:
+          description: turunkan peringkat pemain di kursus Anda
+          parameters: <pemain>
+          errors:
+            cant-demote-yourself: '<red>Anda tidak bisa menurunkan diri sendiri!</red>'
+          failure: '<red>Pemain tidak dapat diturunkan lagi!</red>'
+          success: '<green>Turunkan [name] menjadi [rank]</green>'
+        promote:
+          description: naikkan peringkat pemain di kursus Anda
+          parameters: <pemain>
+          failure: '<red>Pemain tidak dapat dinaikkan lagi!</red>'
+          success: '<green>Naikkan [name] menjadi [rank]</green>'
+        setowner:
+          description: transfer kepemilikan kursus Anda ke anggota
+          errors:
+            cant-transfer-to-yourself: '<red>Anda tidak bisa mentransfer kepemilikan ke diri sendiri! </red><gray>(<italic> Yah, sebenarnya Anda bisa... Tapi kami tidak ingin Anda melakukannya. Karena tidak ada gunanya.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Pemain itu bukan bagian dari tim kursus Anda!</red>'
+          name-is-the-owner: '<green>[name] sekarang adalah pemilik kursus!</green>'
+          parameters: <pemain>
+          you-are-the-owner: '<green>Anda sekarang adalah pemilik kursus!</green>'
+      ban:
+        description: larang pemain dari kursus Anda
+        parameters: <pemain>
+        cannot-ban-yourself: '<red>Anda tidak dapat melarang diri sendiri!</red>'
+        cannot-ban: '<red>Pemain itu tidak dapat dilarang.</red>'
+        cannot-ban-member: '<red>Keluarkan anggota tim terlebih dahulu, kemudian larang.</red>'
+        cannot-ban-more-players: '<red>Anda mencapai batas larangan, Anda tidak dapat melarang lebih banyak pemain dari kursus Anda.</red>'
+        player-already-banned: '<red>Pemain sudah dilarang.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  sekarang dilarang dari kursus Anda.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  melarang Anda dari kursus mereka!</red>'
+        you-are-banned: '<aqua>Anda dilarang dari kursus ini!</aqua>'
+      unban:
+        description: hapus larangan pemain dari kursus Anda
+        parameters: <pemain>
+        cannot-unban-yourself: '<red>Anda tidak dapat menghapus larangan diri sendiri!</red>'
+        player-not-banned: '<red>Pemain tidak dilarang.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  sekarang tidak dilarang dari kursus Anda.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  menghapus larangan Anda dari kursus mereka!</green>'
+      banlist:
+        description: daftar pemain yang dilarang
+        noone: '<green>Tidak ada yang dilarang di kursus ini.</green>'
+        the-following: '<aqua>Pemain berikut dilarang:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Anda dapat melarang hingga </aqua><yellow>[number] </yellow><aqua>pemain lagi.</aqua>'
+      settings:
+        description: tampilkan pengaturan kursus
+      language:
+        description: pilih bahasa
+        parameters: '[bahasa]'
+        not-available: '<red>Bahasa ini tidak tersedia.</red>'
+        already-selected: '<red>Anda sudah menggunakan bahasa ini.</red>'
+      expel:
+        description: usir pemain dari kursus Anda
+        parameters: <pemain>
+        cannot-expel-yourself: '<red>Anda tidak dapat mengusir diri sendiri!</red>'
+        cannot-expel: '<red>Pemain itu tidak dapat diusir.</red>'
+        cannot-expel-member: '<red>Anda tidak dapat mengusir anggota tim!</red>'
+        not-on-island: '<red>Pemain itu tidak berada di kursus Anda!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  mengusir Anda dari kursus!</red>'
+        success: '<green>Anda mengusir </green><aqua>[name] </aqua><green>dari kursus.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] memiliki kursus. Batalkan pendaftaran atau hapus mereka terlebih dahulu!</red>'
+        setowner:
+          description: mentransfer kepemilikan kursus ke pemain
+          already-owner: '<red>Pemain sudah menjadi pemilik kursus ini!</red>'
+      range:
+        description: Perintah jangkauan kursus Admin
+        display:
+          description: Tampilkan/sembunyikan indikator jangkauan kursus
+          hint: |-
+            <red>Ikon Penghalang Merah </red><white>menunjukkan batas jangkauan perlindungan saat ini.
+            </white><gray>Partikel Abu-abu </gray><white>menunjukkan batas maksimal.
+            </white><green>Partikel Hijau </green><white>menunjukkan jangkauan perlindungan default jika jangkauan perlindungan berbeda darinya.</white>
+        set:
+          description: Menetapkan jangkauan perlindungan kursus
+        reset:
+          description: Mengatur ulang jangkauan perlindungan ke default dunia
+      register:
+        parameters: <pemain>
+        description: daftarkan pemain ke kursus yang tidak dimiliki yang Anda tempati
+        registered-island: '<green>Pemain terdaftar ke kursus di [xyz].</green>'
+        already-owned: '<red>Area sudah dimiliki oleh pemain lain!</red>'
+        no-island-here: '<red>Tidak ada kursus pemain di sini. Konfirmasi untuk membuat satu.</red>'
+        in-deletion: '<red>Ruang ini sedang diregenerasi. Coba nanti.</red>'
+      unregister:
+        description: batalkan pendaftaran pemilik dari kursus, tetapi simpan blok kursus apa adanya
+        unregistered-island: '<green>Pemain tidak terdaftar dari kursus di [xyz].</green>'
+      info:
+        description: dapatkan info di mana Anda berada atau di pemain
+        no-island: '<red>Anda tidak berada di kursus terdaftar saat ini...</red>'
+        island-location: 'Lokasi area: [xyz]'
+        island-coords: 'Koordinat area: [xz1] ke [xz2]'
+        is-spawn: Area adalah kursus spawn
+      setrange:
+        description: atur jangkauan kursus pemain
+        range-updated: Jangkauan area diperbarui ke [number]
+      tp:
+        description: teleport ke kursus pemain
+      getrank:
+        description: dapatkan peringkat pemain di kursus mereka
+        rank-is: '<green>Peringkat adalah [rank] di kursus mereka.</green>'
+      setrank:
+        description: atur peringkat pemain di kursus mereka
+      setspawn:
+        description: atur kursus sebagai spawn untuk dunia ini
+        already-spawn: '<red>Kursus ini sudah menjadi spawn!</red>'
+        no-island-here: '<red>Tidak ada kursus terdaftar di sini.</red>'
+        confirmation: '<red>Apakah Anda yakin ingin mengatur kursus ini sebagai spawn untuk dunia ini?</red>'
+      delete:
+        description: menghapus pemain dan meregenerasi kursus mereka
+        deleted-island: '<green>Area di </green><yellow>[xyz] </yellow><green>telah berhasil diregenerasi.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Mengalihkan mode kreatif
+          </green><green>di akhir kursus dan
+          </green><green>memasuki pulau
+          </green>
+        name: "Mode Kreatif Parkour"
+      ELYTRA:
+        description: Alihkan penggunaan
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermen dapat menghapus
+          </green><green>blok</green>
+      ENTER_EXIT_MESSAGES:
+        description: Tampilkan pesan masuk dan keluar
+        island: "kursus [name]"
+        name: Pesan Masuk/Keluar
+        now-entering: '<green>Sekarang memasuki </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Sekarang memasuki kursus Anda.</green>'
+        now-leaving: '<green>Sekarang meninggalkan </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Sekarang meninggalkan kursus Anda.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Hapus mob yang keluar
+          </green><green>dari ruang pemain
+          </green><green>yang dilindungi</green>
+        name: '<yellow>Batasi mob ke kursus pemain</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Pemain menghidupkan kembali
+          </green><green>di kursus mereka</green>
+        name: Respawn area
+      LOCK:
+        name: Kunci kursus pemain
+      OFFLINE_REDSTONE:
+        description: "<green>Ketika dinonaktifkan, redstone\n</green><green>tidak akan beroperasi di kursus\n</green><green>di mana semua anggota offline.\n</green><green>Mungkin membantu mengurangi lag.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Izinkan piston mendorong
+          </green><green>blok di luar kursus pemain</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Aktifkan/Nonaktifkan PVP
+          </red><red>di kursus yang dilindungi.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Hapus monster saat
+          </green><green>teleport ke kursus</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Cegah pemain teleport
+          </green><green>jika mereka jatuh.</green>
+        hint: '<red>Anda tidak dapat teleport saat Anda jatuh!</red>'
+    locked: '<red>Kursus ini terkunci!</red>'
+    protected: '<red>Area dilindungi: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Perlindungan</gold>'
+        description: |-
+          <green>Pengaturan perlindungan
+          </green><green>untuk kursus ini</green>
+      SETTING:
+        description: |-
+          <green>Pengaturan umum
+          </green><green>untuk kursus ini</green>
