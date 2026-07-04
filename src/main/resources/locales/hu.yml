@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Kezdőpont beállítva!</green>"
+  end-set: "<green>Végpont beállítva!</green>"
+  already-set: "<red>A kezdő- és végpont már be van állítva! Törd meg az egyiket az alaphelyzetbe állításhoz.</red>"
+  start-removed: "<aqua>Kezdőpont eltávolítva!</aqua>"
+  end-removed: "<aqua>Végpont eltávolítva!</aqua>"
+  resetting-start-end: "<yellow>Kezdő- és végpontok alaphelyzetbe állítása!</yellow>"
+  start: "<aqua>Parkour pálya kezdete!</aqua>"
+  no-start-yet: "<red>Még nem lett beállítva kezdőpont.</red>"
+  no-end-yet: "<red>Még nem lett beállítva végpont.</red>"
+  to-start: "<light_purple>Az elindításhoz állj rá az arany nyomólapra.</light_purple>"
+  session-ended: "<red>A parkour munkamenetod véget ért.</red>"
+  end: "<green>Parkour pálya vége!</green>"
+  you-took: "<light_purple>Ez [number] időbe telt!</light_purple>"
+  start-before-end: "<aqua>El kell kezdened, mielőtt végeznél!</aqua>"
+  checkpoint: "<yellow>Ellenőrzési pont!</yellow>"
+  checkpoint-set: "<green>Ellenőrzési pont beállítva!</green>"
+  set-the-end: "<red>Állítsd be a véglapot</red>"
+  hours: "óra"
+  minutes: "perc"
+  seconds: "másodperc"
+  hours-short: "ó"
+  minutes-short: "p"
+  seconds-short: "mp"
+  courses:
+    description: "Válassz egyet és próbáld meg!"
+    gui-title: "Parkour Pályák"
+    head-description: "<aqua>[runs] futás</aqua>"
+  top:
+    gui-title: "Legjobb Pálya Ranglista"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>A te helyezésed: [number]</green>"
+    beat-previous-time: "<light_purple>Túlszárnyaltad az előző idődet!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Nem szárnyaltad túl az előző idődet!</aqua>"
+  errors:
+    not-on-island: "<red>Egy parkour pályán kell lenned ahhoz, hogy ezt megtedd</red>"
+    no-warp: "<red>Ez a pálya már privát</red>"
+    not-in-run: "<red>Jelenleg egy pálya futásában kell lenned ahhoz, hogy ezt megtedd</red>"
+  warp:
+    set: "<light_purple>Teleportálási pont beállítva! A játékosok mostantól láthatják a pályádat!</light_purple>"
+    replaced: "<yellow>Teleportálási pont beállítva! Régi pont kikapcsolva!</yellow>"
+    removed: "<red>Teleportálási pont eltávolítva. A játékosok nem fogják látni a pályádat.</red>"
+    warping: "<green>Teleportálás a pályára!</green>"
+    no-warp: "<red>Ehhez a pályához nincs beállított teleportálási pont!</red>"
+    unknown-course: "<red>Ismeretlen pálya!</red>"
+  quit:
+    success: "<yellow>Abbahagytad a futást, és ismét használhatod a parancsokat</yellow>"
+  general:
+    errors:
+      no-island: '<red>Nincs pályád!</red>'
+      player-has-island: '<red>A játékosnak már van pályája!</red>'
+      player-has-no-island: '<red>Ennek a játékosnak nincs pályája!</red>'
+      already-have-island: '<red>Már van egy pályád!</red>'
+      no-safe-location: '<red>Nincs biztonságos hely a pályán!</red>'
+      not-owner: '<red>Nem vagy a csapad tulajdonosa!</red>'
+  commands:
+    parkour:
+      courses:
+        description: elérhető pályák megjelenítése és teleportáláshoz
+      cleartop:
+        description: töröld a pályád tíz legjobbjait, vagy távolítsd el egy játékos pontszámát
+        parameters: <játékos neve>
+      setwarp:
+        description: beállítja a teleportálási pontot és nyílvánossá teszi a pályádat
+      warp:
+        description: Teleportálj egy pályára név szerint, vagy a kezdetre, ha egy pályán vagy
+        parameters: <pálya neve>
+      removewarp:
+        description: eltávolítja a teleportálási pontot és priváttá teszi a pályádat
+      help:
+        description: Parkour pálya elindítása vagy teleportálás a saját pályádra
+      go:
+        parameters: '[lakhely száma]'
+      sethome:
+        parameters: '[lakhely száma]'
+      top:
+        description: "A legjobb pálya ranglisták megjelenítése"
+      quit:
+        description: "Állítsd meg az időzítőt az aktuális pályán"
+    island:
+      go:
+        parameters: '[lakhely száma]'
+        description: teleportál a pályádra
+        teleport: '<green>Teleportálás a pályádra.</green>'
+        teleported: '<green>Teleportálva a lakhely #</green><yellow>[number]-re.</yellow>'
+      help:
+        description: a fő parkour parancs
+      create:
+        description: pálya létrehozása, opcionálisan blueprint segítségével (engedély szükséges)
+        parameters: <blueprint>
+        too-many-islands: "<red>Túl sok pálya van ebben a világban: nincs hely a te pályád létrehozásához.</red>"
+        cannot-create-island: '<red>Nem található hely időben, próbáld újra...</red>'
+        unable-create-island: '<red>A pályádat nem lehetett generálni, fordulj egy adminisztrátorhoz.</red>'
+        creating-island: '<green>A pályád számára megfelelő hely keresése...</green>'
+        pasting:
+          estimated-time: '<green>Becsült idő: </green><aqua>[number] </aqua><green>másodperc.</green>'
+          blocks: '<green>Blokk blokkonként építés: </green><aqua>[number] </aqua><green>blokk összesen...</green>'
+          entities: '<green>Kitöltés entitásokkal: </green><aqua>[number] </aqua><green>entitás összesen...</green>'
+          done: '<green>Kész! A pályád kész és vár rád!</green>'
+        pick: '<dark_green>Válassz egy pályát</dark_green>'
+        unknown-blueprint: '<red>Ez a blueprint még nem lett betöltve.</red>'
+        on-first-login: '<green>Üdvözöljük! Pár másodperc múlva elkezdjük a pályád előkészítését.</green>'
+        you-can-teleport-to-your-island: '<green>Bármikor teleportálhatsz a pályádra.</green>'
+      info:
+        description: információk megjelenítése a pályádról vagy a játékos pályájáról
+        parameters: <játékos>
+      near:
+        description: a körülötted lévő szomszédos pályák neveit mutassa
+        parameters: ''
+        the-following-islands: '<green>Az alábbi pályák vannak a közelben:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Észak
+        south: Dél
+        east: Kelet
+        west: Nyugat
+        no-neighbors: '<red>Nincsenek azonnali szomszédos pályáid!</red>'
+      reset:
+        description: indítsd újra a pályádat, és távolítsd el a régit
+        parameters: <blueprint>
+        none-left: '<red>Nincs több alaphelyzetbe állításod!</red>'
+        resets-left: '<red>[number] alaphelyzetbe </red><aqua></aqua><red>állításod maradt</red>'
+        confirmation: |-
+          <red>Biztosan ezt szeretnéd?
+          </red><red>A pálya összes tagja ki lesz rúgva, később újra meg kell hívnod őket.
+          </red><red>Nincs visszatérés: miután a jelenlegi pályádat törölik, nincs <bold>mód </bold></red> <red>arra, hogy később visszakapd.</red>
+        kicked-from-island: '<red>Ki lettél rúgva a pályádról [gamemode]-ban, mert a tulajdonos alaphelyzetbe állítja.</red>'
+      sethome:
+        description: állítsd be a lakóhely teleportálási pontod
+        must-be-on-your-island: '<red>A pályádon kell lenned ahhoz, hogy beállítsd a lakóhelyet!</red>'
+        num-homes: '<red>A lakóhelyek 1-től [number]-ig lehetnek.</red>'
+        home-set: '<gold>A pályád lakóhelye beállítva az aktuális helyadre.</gold>'
+        nether:
+          not-allowed: '<red>Nem állíthatsz be lakóhelyet a Netherben.</red>'
+          confirmation: '<red>Biztosan a Netherben szeretnéd beállítani a lakóhelyedet?</red>'
+        the-end:
+          not-allowed: '<red>Nem állíthatsz be lakóhelyet a The End-ben.</red>'
+          confirmation: '<red>Biztosan The End-ben szeretnéd beállítani a lakóhelyedet?</red>'
+        parameters: '[lakhely száma]'
+      setname:
+        description: állítsd be a pályád nevét
+        name-too-short: '<red>Túl rövid. A minimális méret [number] karakter.</red>'
+        name-too-long: '<red>Túl hosszú. A maximális méret [number] karakter.</red>'
+        name-already-exists: '<red>Már létezik pálya ezzel a névvel!</red>'
+        parameters: <név>
+        success: '<green>Sikeresen beállítottad a pályád nevét: </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: alaphelyzetbe állítsd a pályád nevét
+        success: '<green>A pályád neve sikeresen alaphelyzetbe lett állítva.</green>'
+      team:
+        description: kezeld a csapatodat
+        coop:
+          description: adj egy játékosnak coop rangot a pályádon
+          parameters: <játékos>
+          cannot-coop-yourself: '<red>Nem koopozhatsz magaddal!</red>'
+          already-has-rank: '<red>A játékosnak már van rangja!</red>'
+          you-are-a-coop-member: '<dark_green>Coopizva lettél a </dark_green><aqua>[name]</aqua><green> által.</green>'
+          success: '<green>Coopiztetted </green><aqua>[name]</aqua><green> játékost.</green>'
+          name-has-invited-you: '<green>[name] meghívott, hogy legyél coop tag a pályáján.</green>'
+        uncoop:
+          description: távolítsd el egy játékos coop rangját
+          parameters: <játékos>
+          cannot-uncoop-yourself: '<red>Nem veheted el a coop rangodat magadtól!</red>'
+          cannot-uncoop-member: '<red>Nem veheted el egy csapattag coop rangját!</red>'
+          player-not-cooped: '<red>A játékos nincs coopizva!</red>'
+          you-are-no-longer-a-coop-member: '<red>Már nem vagy coop tag a [name] pályáján.</red>'
+          all-members-logged-off: '<red>A pálya összes tagja kijelentkezet, ezért már nem vagy coop tag a [name] pályáján.</red>'
+          success: '<aqua>[name] </aqua><green>már nem coop tag a pályádon.</green>'
+          is-full: '<red>Nem coopízhatsz senki mást.</red>'
+        trust:
+          description: adj egy játékosnak megbízott rangot a pályádon
+          parameters: <játékos>
+          trust-in-yourself: '<red>Bízz magadban!</red>'
+          name-has-invited-you: '<green>[name] meghívott, hogy legyél megbízott tag a pályáján.</green>'
+          player-already-trusted: '<red>A játékos már megbízott!</red>'
+          you-are-trusted: '<dark_green>Megbíznak benned: </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Megbíztál </green><aqua>[name]</aqua><green> játékosban.</green>'
+          is-full: '<red>Nem bízhatsz meg senkiben többé.</red>'
+        invite:
+          description: hívj meg egy játékost, hogy csatlakozzon a pályádra
+          invitation-sent: '<green>Meghívás elküldve: </green><aqua>[name]</aqua><green>-nek.</green>'
+          removing-invite: '<red>Meghívás eltávolítása.</red>'
+          name-has-invited-you: '<green>[name] meghívott, hogy csatlakozz a pályájára.</green>'
+          to-accept-or-reject: '<green>Írj /[label] team accept értékeket az elfogadáshoz, vagy /[label] team reject az elutasításhoz</green>'
+          you-will-lose-your-island: '<red>FIGYELMEZTETÉS! Elveszíted a pályádat, ha elfogadod!</red>'
+          errors:
+            cannot-invite-self: '<red>Nem hívhatsz meg magadat!</red>'
+            cooldown: '<red>Nem hívhatod meg ezt az emberyt még [number] másodpercig.</red>'
+            island-is-full: '<red>A pályád tele van, nem tudsz senkit mást meghívni.</red>'
+            none-invited-you: '<red>Senki sem hívott meg :c.</red>'
+            you-already-are-in-team: '<red>Már egy csapatban vagy!</red>'
+            already-on-team: '<red>Ez a játékos már egy csapatban van!</red>'
+            invalid-invite: '<red>Ez a meghívás már nem érvényes, sajnálom.</red>'
+            you-have-already-invited: '<red>Már meghívtad ezt a játékost!</red>'
+          parameters: <játékos>
+          you-can-invite: '<green>[number] további játékost tudsz meghívni.</green>'
+          accept:
+            description: fogadd el a meghívást
+            you-joined-island: '<green>Csatlakoztál egy pályához! Írj /[label] team parancsot a többi tag megtekintéséhez.</green>'
+            name-joined-your-island: '<green>[name] csatlakozott a pályádra!</green>'
+            confirmation: |-
+              <red>Biztosan el szeretnéd fogadni ezt a meghívást?
+              </red><red><bold>Majd <underlined>ELVESZÍTÉST </underlined></bold></red><red><bold>az aktuális pályádat!</bold></red>
+          reject:
+            description: utasítsd el a meghívást
+            you-rejected-invite: '<green>Elutasítottad a meghívást egy pályára való csatlakozáshoz.</green>'
+            name-rejected-your-invite: '<red>[name] elutasította a pálya meghívásod!</red>'
+          cancel:
+            description: visszavonni a függőben lévő meghívást a pályádra való csatlakozáshoz
+        leave:
+          cannot-leave: '<red>A tulajdonosok nem hagyhatják el! Első lépésként csapattag legyél, vagy rúgd ki az összes tagot.</red>'
+          description: hagyja el a pályáját
+          left-your-island: '<red>[name] </red><red>elhagyta a pályádat</red>'
+          success: '<green>Elhagytad ezt a pályát.</green>'
+        kick:
+          description: távolítsd el egy tagot a pályádról
+          parameters: <játékos>
+          owner-kicked: '<red>A tulajdonos kirúgott a [gamemode] pályáról!</red>'
+          cannot-kick: '<red>Nem rúghatsz ki magadat!</red>'
+          success: '<aqua>[name] </aqua><green>ki lett rúgva a pályádról.</green>'
+        demote:
+          description: egy szinttel csökkentsd egy játékos rangját a pályádon
+          parameters: <játékos>
+          errors:
+            cant-demote-yourself: '<red>Nem csökkkentheted a saját rangodat!</red>'
+          failure: '<red>A játékos nem csökkenthető tovább!</red>'
+          success: '<green>Csökkentett [name] [rank]-ra</green>'
+        promote:
+          description: egy szinttel emelje meg egy játékos rangját a pályádon
+          parameters: <játékos>
+          failure: '<red>A játékos nem emelhető tovább!</red>'
+          success: '<green>Emeléd [name] [rank]-ra</green>'
+        setowner:
+          description: vidd át a pályád tulajdonjogát egy tagnak
+          errors:
+            cant-transfer-to-yourself: '<red>Nem vidheted át a tulajdonjogot magadnak! </red><gray>(<italic> Nos, valójában meglehetne... De nem akarjuk, hogy megtedd. Mert haszontalan.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Ez a játékos nem része a pálya csapadnak!</red>'
+          name-is-the-owner: '<green>[name] mostantól a pálya tulajdonosa!</green>'
+          parameters: <játékos>
+          you-are-the-owner: '<green>Mostantól te vagy a pálya tulajdonosa!</green>'
+      ban:
+        description: tiltsd le a játékost a pályádról
+        parameters: <játékos>
+        cannot-ban-yourself: '<red>Nem tilthatod le magadat!</red>'
+        cannot-ban: '<red>Ez a játékos nem tiltható le.</red>'
+        cannot-ban-member: '<red>Először rúgd ki a csapattag, majd tilts le.</red>'
+        cannot-ban-more-players: '<red>Elérted a tiltási korlátot, nem tudsz több játékost tiltani le a pályádról.</red>'
+        player-already-banned: '<red>A játékos már tiltva van.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  mostantól tiltva van a pályádról.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  tiltott le a pályájáról!</red>'
+        you-are-banned: '<aqua>Tiltva vagy erről a pályáról!</aqua>'
+      unban:
+        description: oldja fel a tilalmat egy játékosra a pályádról
+        parameters: <játékos>
+        cannot-unban-yourself: '<red>Nem oldhatod fel a saját tilalmad!</red>'
+        player-not-banned: '<red>A játékos nincs tiltva.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  mostantól feloldott a pályádról.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  feloldotta a tilalmad a pályájáról!</green>'
+      banlist:
+        description: felsorold a tiltott játékosokat
+        noone: '<green>Senki nincs tiltva ezen a pályán.</green>'
+        the-following: '<aqua>Az alábbi játékosok vannak tiltva:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Még </aqua><yellow>[number] </yellow><aqua>játékost tudsz tiltani.</aqua>'
+      settings:
+        description: megjeleníti a pálya beállításait
+      language:
+        description: válassz nyelvet
+        parameters: '[nyelv]'
+        not-available: '<red>Ez a nyelv nem érhető el.</red>'
+        already-selected: '<red>Már ezt a nyelvet használod.</red>'
+      expel:
+        description: rúgd ki a játékost a pályádról
+        parameters: <játékos>
+        cannot-expel-yourself: '<red>Nem rúghatsz ki magadat!</red>'
+        cannot-expel: '<red>Ez a játékos nem rúgható ki.</red>'
+        cannot-expel-member: '<red>Nem rúghatsz ki egy csapattag!</red>'
+        not-on-island: '<red>Ez a játékos nincs a pályádon!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  kirúgott a pályáról!</red>'
+        success: '<green>Kirúgtad </green><aqua>[name]</aqua><green> a pályádról.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] már van pályája. Előbb nyilvántartásból kivonatsd vagy töröld!</red>'
+        setowner:
+          description: vidd át a pálya tulajdonjogát a játékosnak
+          already-owner: '<red>A játékos már a pálya tulajdonosa!</red>'
+      range:
+        description: Admin pálya tartománya parancs
+        display:
+          description: Mutasd/elrejts a pálya tartományi mutatóit
+          hint: |-
+            <red>Piros gát ikonok </red><white>mutatják a jelenlegi védett tartomány korlátot.
+            </white><gray>Szürke részecskék </gray><white>mutatják a maximális korlátot.
+            </white><green>Zöld részecskék </green><green>mutatják az alapértelmezett védett tartományt, ha a védelmi tartomány eltér tőle.</white>
+        set:
+          description: Beállítja a pálya védett tartományát
+        reset:
+          description: Alaphelyzetbe állítja a védett tartományt a világ alapértelmezettjére
+      register:
+        parameters: <játékos>
+        description: játékos regisztrálása a tulajdonos nélküli pályára, amelyen vagy
+        registered-island: '<green>Játékos regisztrálva a [xyz] pályára.</green>'
+        already-owned: '<red>A terület már egy másik játékos tulajdona!</red>'
+        no-island-here: '<red>Itt nincs játékos pálya. Erősítsd meg az egyiket.</red>'
+        in-deletion: '<red>Ez a terület jelenleg újra generálódik. Próbáld később.</red>'
+      unregister:
+        description: szüntess meg egy pálya tulajdonosi nyilvántartást, de tartsd meg a pálya blokkjait
+        unregistered-island: '<green>Játékos nyilvántartása eltávolítva a [xyz] pályáról.</green>'
+      info:
+        description: információk a helyről, ahol vagy, vagy a játékosról
+        no-island: '<red>Jelenleg nem vagy egy regisztrált pályán...</red>'
+        island-location: 'Terület helye: [xyz]'
+        island-coords: 'Terület koordinátái: [xz1] és [xz2]'
+        is-spawn: A terület egy spawn pálya
+      setrange:
+        description: a játékos pályájának tartományát állítsd be
+        range-updated: 'Terület tartománya frissítve erre: [number]'
+      tp:
+        description: teleportálj egy játékos pályájára
+      getrank:
+        description: egy játékos rangját szerezd meg a saját pályájáról
+        rank-is: '<green>Rang [rank] a saját pályájáról.</green>'
+      setrank:
+        description: egy játékos rangját állítsd be a saját pályájáról
+      setspawn:
+        description: egy pályát állítson be spawn-ként ehhez a világhoz
+        already-spawn: '<red>Ez a pálya már spawn!</red>'
+        no-island-here: '<red>Itt nincs regisztrált pálya.</red>'
+        confirmation: '<red>Biztosan beállítod ezt a pályát spawn-ként ebben a világban?</red>'
+      delete:
+        description: egy játékost töröl és újra generálja a pályáját
+        deleted-island: '<green>Terület </green><yellow>[xyz] </yellow><green>sikeresen újra lett generálva.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>A kreatív mód be/kikapcsolása
+          </green><green>a pálya végén és
+          </green><green>a területre lépéskor
+          </green>
+        name: "Parkour Kreatív Mód"
+      ELYTRA:
+        description: Használat be/kikapcsolása
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Az Endermennek eltávolítani
+          </green><green>blokkokat</green>
+      ENTER_EXIT_MESSAGES:
+        description: Be- és kilépési üzenetek megjelenítése
+        island: "[name] pályája"
+        name: Belépés/kilépés üzenetek
+        now-entering: '<green>Belépés </green><aqua>[name]</aqua><green> -re.</green>'
+        now-entering-your-island: '<green>Belépés a pályádra.</green>'
+        now-leaving: '<green>Kilépés </green><aqua>[name]</aqua><green> -ről.</green>'
+        now-leaving-your-island: '<green>Kilépés a pályádról.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Távolítsd el a mobokat, amelyek
+          </green><green>kívül mennek a védett
+          </green><green>játékos térből</green>
+        name: '<yellow>Korlátozd a mobokat a játékos pályájára</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>A játékosok megjelennek
+          </green><green>a saját pályájukon</green>
+        name: Terület visszatérése
+      LOCK:
+        name: A játékos pályájának zárolása
+      OFFLINE_REDSTONE:
+        description: "<green>Ha ki van kapcsolva, a redstone\n</green><green>nem fog működni a pályákon\n</green><green>ahol az összes tag offline.\n</green><green>Segíthet csökkenteni a lag-et.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Engedj meg a pistonoknak, hogy
+          </green><green>blokkat tolj a játékos pályájáról</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>A PVP bekapcsolása/kikapcsolása
+          </red><red>a védett pályán.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Távolítsd el a szörnyek
+          </green><green>a pályára történő teleportáláskor</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Megakadályozd, hogy a játékosok teleportáljanak
+          </green><green>ha esnek.</green>
+        hint: '<red>Nem tudsz teleportálni, míg eszel!</red>'
+    locked: '<red>Ez a pálya zárva van!</red>'
+    protected: '<red>Védett terület: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Védelem</gold>'
+        description: |-
+          <green>Védelmi beállítások
+          </green><green>ehhez a pályához</green>
+      SETTING:
+        description: |-
+          <green>Általános beállítások
+          </green><green>ehhez a pályához</green>

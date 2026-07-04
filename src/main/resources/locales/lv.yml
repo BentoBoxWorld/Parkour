@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Starts iestatīts!</green>"
+  end-set: "<green>Beigas iestatītas!</green>"
+  already-set: "<red>Starts un beigas jau ir iestatītas! Salauz vienu, lai atiestatītu.</red>"
+  start-removed: "<aqua>Starts noņemts!</aqua>"
+  end-removed: "<aqua>Beigas noņemtas!</aqua>"
+  resetting-start-end: "<yellow>Atiestatām starta un beigu punktus!</yellow>"
+  start: "<aqua>Parkura starts!</aqua>"
+  no-start-yet: "<red>Starts vēl nav iestatīts.</red>"
+  no-end-yet: "<red>Beigas vēl nav iestatītas.</red>"
+  to-start: "<light_purple>Lai sāktu, nospiediet uz zeltīta spiediena plāksnes.</light_purple>"
+  session-ended: "<red>Jūsu parkura sesija ir beigusies.</red>"
+  end: "<green>Parkura beigas!</green>"
+  you-took: "<light_purple>Jūs paņēmāt [number]!</light_purple>"
+  start-before-end: "<aqua>Jums ir jāsāk pirms beigām!</aqua>"
+  checkpoint: "<yellow>Kontrolpunkts!</yellow>"
+  checkpoint-set: "<green>Kontrolpunkts iestatīts!</green>"
+  set-the-end: "<red>Iestatiet beigu plāksni</red>"
+  hours: "stundas"
+  minutes: "minūtes"
+  seconds: "sekundes"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Izvēlieties vienu un mēģiniet!"
+    gui-title: "Parkura Kursi"
+    head-description: "<aqua>[runs] skrējieni</aqua>"
+  top:
+    gui-title: "Ātrākie Kursu Vērtējumi"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Jūsu vieta: [number]</green>"
+    beat-previous-time: "<light_purple>Jūs pārspējāt savu iepriekšējo laiku!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Jūs nepārspējāt savu iepriekšējo laiku!</aqua>"
+  errors:
+    not-on-island: "<red>Jums ir jābūt uz parkura kursa, lai to izdarītu</red>"
+    no-warp: "<red>Šis kurss jau ir privāts</red>"
+    not-in-run: "<red>Jums ir jāpalaiž kurss, lai to izdarītu</red>"
+  warp:
+    set: "<light_purple>Warp vieta iestatīta! Spēlētāji tagad var redzēt jūsu kursu!</light_purple>"
+    replaced: "<yellow>Warp vieta iestatīta! Veca vieta deaktivēta!</yellow>"
+    removed: "<red>Warp vieta noņemta. Spēlētāji neredz jūsu kursu.</red>"
+    warping: "<green>Warpeju uz kursu!</green>"
+    no-warp: "<red>Šim kursam warp nav iestatīts!</red>"
+    unknown-course: "<red>Nezināms kurss!</red>"
+  quit:
+    success: "<yellow>Jūs esat izstādinājis no skrējuma un varat izmantot komandas atkal</yellow>"
+  general:
+    errors:
+      no-island: '<red>Jums nav kursa!</red>'
+      player-has-island: '<red>Spēlētājam jau ir kurss!</red>'
+      player-has-no-island: '<red>Šim spēlētājam nav kursa!</red>'
+      already-have-island: '<red>Jums jau ir kurss!</red>'
+      no-safe-location: '<red>Drošā vieta kursā netika atrasta!</red>'
+      not-owner: '<red>Jūs neesat jūsu komandas īpašnieks!</red>'
+  commands:
+    parkour:
+      courses:
+        description: parādīt pieejamus kursus spēlēšanai un warpa
+      cleartop:
+        description: notīrīt jūsu kursa desmit labākos vai noņemt spēlētāja rezultātu
+        parameters: <spēlētāja vārds>
+      setwarp:
+        description: iestatiet warp vietu un padariet savu kursu publiku
+      warp:
+        description: Warps uz kursu pēc nosaukuma vai uz sākumu, ja jūs esat uz viena
+        parameters: <kursa nosaukums>
+      removewarp:
+        description: noņemiet warp vietu un padariet savu kursu privātu
+      help:
+        description: Sākt parkura kursu vai teleportēties uz savu kursu
+      go:
+        parameters: '[mājas numurs]'
+      sethome:
+        parameters: '[mājas numurs]'
+      top:
+        description: "Parādīt kursu vērtējumus"
+      quit:
+        description: "Apturēt taimeri uz pašreizējā kursa"
+    island:
+      go:
+        parameters: '[mājas numurs]'
+        description: teleportēt jūs uz jūsu kursu
+        teleport: '<green>Teleportēju jūs uz jūsu kursu.</green>'
+        teleported: '<green>Teleportēti uz māju </green><yellow>#[number].</yellow>'
+      help:
+        description: galvenā parkura komanda
+      create:
+        description: izveidojiet kursu, izmantojot pēc izvēles rasējumu (nepieciešama atļauja)
+        parameters: <rasējums>
+        too-many-islands: "<red>Šajā pasaulē ir pārāk daudz kursu: jūsu izveidošanai nav vietas.</red>"
+        cannot-create-island: '<red>Vieta netika atrasta laikā, lūdzu, mēģiniet vēlreiz...</red>'
+        unable-create-island: '<red>Jūsu kursu nevarēja izveidot, lūdzu, sazinieties ar administratoru.</red>'
+        creating-island: '<green>Meklēju vietu jūsu kursam...</green>'
+        pasting:
+          estimated-time: '<green>Aprēķinātais laiks: </green><aqua>[number] </aqua><green>sekundes.</green>'
+          blocks: '<green>Būvējam bloku pēc bloka: </green><aqua>[number] </aqua><green>bloku kopā...</green>'
+          entities: '<green>Uzpildām ar entītijām: </green><aqua>[number] </aqua><green>entītiju kopā...</green>'
+          done: '<green>Pabeigts! Jūsu kurss ir gatavs un gaida jūs!</green>'
+        pick: '<dark_green>Izvēlieties kursu</dark_green>'
+        unknown-blueprint: '<red>Šis rasējums vēl nav ielādēts.</red>'
+        on-first-login: '<green>Laipni lūdzam! Mēs sāksim jūsu kursa sagatavošanu pēc dažām sekundēm.</green>'
+        you-can-teleport-to-your-island: '<green>Jūs varat teleportēties uz savu kursu, kad vēlaties.</green>'
+      info:
+        description: attēlot informāciju par jūsu kursu vai spēlētāja kursu
+        parameters: <spēlētājs>
+      near:
+        description: rādīt blakus kursu nosaukumus ap jums
+        parameters: ''
+        the-following-islands: '<green>Šādi kursi atrodas tuvu:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Ziemeļi
+        south: Dienvidi
+        east: Austrumi
+        west: Rietumi
+        no-neighbors: '<red>Jums nav tuvumā esošo kursu!</red>'
+      reset:
+        description: pārsākt savu kursu un noņemt veco
+        parameters: <rasējums>
+        none-left: '<red>Jums vairs nav sākšanas atļaujas!</red>'
+        resets-left: '<red>Jums ir palikušas </red><aqua>[number] </aqua><red>pārsākšanas</red>'
+        confirmation: |-
+          <red>Vai jūs esat pārliecināts, ka vēlaties to izdarīt?
+          </red><red>Visi kursa dalībnieki tiks izsūtīti, pēc tam būs jāpiesauc viņus atkal.
+          </red><red>Nav atpakaļceļa: kad jūsu pašreizējais kurss ir dzēsts, nebūs <bold>nekāda </bold></red> <red>veida to vēlāk atjaunot.</red>
+        kicked-from-island: '<red>Jūs tiekat izsūtīti no jūsu kursa [gamemode], jo īpašnieks to pārsāk.</red>'
+      sethome:
+        description: iestatiet mājas teleportācijas punktu
+        must-be-on-your-island: '<red>Jums ir jābūt uz sava kursa, lai iestatītu māju!</red>'
+        num-homes: '<red>Mājas var būt no 1 līdz [number].</red>'
+        home-set: '<gold>Jūsu māja uz kursa ir iestatīta uz jūsu pašreizējo atrašanās vietu.</gold>'
+        nether:
+          not-allowed: '<red>Jums nav atļauts iestatīt māju Elles pasaulē.</red>'
+          confirmation: '<red>Vai esat pārliecināts, ka vēlaties iestatīt māju Elles pasaulē?</red>'
+        the-end:
+          not-allowed: '<red>Jums nav atļauts iestatīt māju Beigās.</red>'
+          confirmation: '<red>Vai esat pārliecināts, ka vēlaties iestatīt māju Beigās?</red>'
+        parameters: '[mājas numurs]'
+      setname:
+        description: iestatiet nosaukumu jūsu kursam
+        name-too-short: '<red>Pārāk īss. Minimālais lielums ir [number] rakstzīmes.</red>'
+        name-too-long: '<red>Pārāk garš. Maksimālais lielums ir [number] rakstzīmes.</red>'
+        name-already-exists: '<red>Kurss ar šādu nosaukumu jau eksistē!</red>'
+        parameters: <nosaukums>
+        success: '<green>Veiksmīgi iestatīti jūsu kursa nosaukums uz </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: atiestatiet jūsu kursa nosaukumu
+        success: '<green>Veiksmīgi atiestatīts jūsu kursa nosaukums.</green>'
+      team:
+        description: pārvaldīt savu komandu
+        coop:
+          description: padariet spēlētāju koopejas rangu uz jūsu kursa
+          parameters: <spēlētājs>
+          cannot-coop-yourself: '<red>Jūs nevarat kooperēt sevi!</red>'
+          already-has-rank: '<red>Spēlētājam jau ir rangs!</red>'
+          you-are-a-coop-member: '<dark_green>Jūs bijāt kooperēti </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Jūs kooperējāt </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] jūs aicina pievienoties kā koopeas loceklis jūsu kursam.</green>'
+        uncoop:
+          description: noņemiet koopeas rangu no spēlētāja
+          parameters: <spēlētājs>
+          cannot-uncoop-yourself: '<red>Jūs nevarat noņemt sevi no kooperācijas!</red>'
+          cannot-uncoop-member: '<red>Jūs nevarat noņemt komandas locekli no kooperācijas!</red>'
+          player-not-cooped: '<red>Spēlētājs nav kooperēts!</red>'
+          you-are-no-longer-a-coop-member: '<red>Jūs vairs neesat koopeas loceklis [name]''s kursam.</red>'
+          all-members-logged-off: '<red>Visi kursa dalībnieki izlogojas, tāpēc jūs vairs neesat koopeas loceklis [name]''s kursam.</red>'
+          success: '<aqua>[name] </aqua><green>vairs nav jūsu kursa koopeas loceklis.</green>'
+          is-full: '<red>Jūs nevarat kooperēt vēl kādu.</red>'
+        trust:
+          description: piešķiriet spēlētājam uzticamo rangu uz jūsu kursa
+          parameters: <spēlētājs>
+          trust-in-yourself: '<red>Uzticieties sev!</red>'
+          name-has-invited-you: '<green>[name] jūs aicina pievienoties kā uzticams loceklis jūsu kursam.</green>'
+          player-already-trusted: '<red>Spēlētājam jau ir uzticība!</red>'
+          you-are-trusted: '<dark_green>Jums tiek uzticēts </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Jūs uzticējāt </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Jūs nevarat uzticēt vēl kādam.</red>'
+        invite:
+          description: uzaicināt spēlētāju pievienoties jūsu kursam
+          invitation-sent: '<green>Uzaicinājums nosūtīts </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Noņemšu uzaicinājumu.</red>'
+          name-has-invited-you: '<green>[name] jūs aicina pievienoties viņu kursam.</green>'
+          to-accept-or-reject: '<green>Ierakstiet /[label] team accept lai pieņemtu, vai /[label] team reject lai noraidītu</green>'
+          you-will-lose-your-island: '<red>BRĪDINĀJUMS! Jūs zaudēsiet savu kursu, ja pieņemsiet!</red>'
+          errors:
+            cannot-invite-self: '<red>Jūs nevarat uzaicināt sevi!</red>'
+            cooldown: '<red>Jūs nevarat uzaicināt šo personu vēl [number] sekundes.</red>'
+            island-is-full: '<red>Jūsu kurss ir pilns, jūs nevarat uzaicināt vēl kādu.</red>'
+            none-invited-you: '<red>Jūs neesat neviena aicināts :c.</red>'
+            you-already-are-in-team: '<red>Jūs jau esat komandā!</red>'
+            already-on-team: '<red>Šis spēlētājs jau ir komandā!</red>'
+            invalid-invite: '<red>Šis uzaicinājums vairs nav spēkā, piedodiet.</red>'
+            you-have-already-invited: '<red>Jūs jau ste uzaicinājis šo spēlētāju!</red>'
+          parameters: <spēlētājs>
+          you-can-invite: '<green>Jūs varat uzaicināt vēl [number] spēlētājus.</green>'
+          accept:
+            description: pieņemiet uzaicinājumu
+            you-joined-island: '<green>Jūs pievienojāties kursam! Izmantojiet </green><aqua>/[label] team </aqua><green>lai redzētu citus locekļus.</green>'
+            name-joined-your-island: '<green>[name] pievienojās jūsu kursam!</green>'
+            confirmation: |-
+              <red>Vai jūs esat pārliecināts, ka vēlaties pieņemt šo uzaicinājumu?
+              </red><red><bold>Jūs <underlined>ZAUDĒSIET </underlined></bold></red><red><bold>savu pašreizējo kursu!</bold></red>
+          reject:
+            description: noraidīt uzaicinājumu
+            you-rejected-invite: '<green>Jūs noraidījāt uzaicinājumu pievienoties kursam.</green>'
+            name-rejected-your-invite: '<red>[name] noraidīja jūsu kursa uzaicinājumu!</red>'
+          cancel:
+            description: atcelt piesardzību uzaicinājumu pievienoties jūsu kursam
+        leave:
+          cannot-leave: '<red>Īpašnieki nevarat izietu! Vispirms kļūstiet dalībnieks, vai izsūtiet visus locekļus.</red>'
+          description: atstāt savu kursu
+          left-your-island: '<red>[name] </red><red>atstāja jūsu kursu</red>'
+          success: '<green>Jūs atstājāt šo kursu.</green>'
+        kick:
+          description: noņemiet dalībnieku no jūsu kursa
+          parameters: <spēlētājs>
+          owner-kicked: '<red>Īpašnieks jūs izsūtīja no kursa [gamemode]!</red>'
+          cannot-kick: '<red>Jūs nevarat izsūtīt sevi!</red>'
+          success: '<aqua>[name] </aqua><green>tika izsūtīts no jūsu kursa.</green>'
+        demote:
+          description: pazemot spēlētāja rangu uz jūsu kursa
+          parameters: <spēlētājs>
+          errors:
+            cant-demote-yourself: '<red>Jūs nevarat pazemot sevi!</red>'
+          failure: '<red>Spēlētāju vбольше nevar pazemot!</red>'
+          success: '<green>Pazemots [name] uz [rank]</green>'
+        promote:
+          description: paaugstiniet spēlētāja rangu uz jūsu kursa
+          parameters: <spēlētājs>
+          failure: '<red>Spēlētāju vairs nevar paaugstināt!</red>'
+          success: '<green>Paaugstināts [name] uz [rank]</green>'
+        setowner:
+          description: pārsūtīt sava kursa īpašumtiesības dalībniekam
+          errors:
+            cant-transfer-to-yourself: '<red>Jūs nevarat pārsūtīt īpašumtiesības sev! </red><gray>(<italic> Nu, faktiski varētu... Bet mēs to nevēlamies. Jo tas ir bezjēdzīgi.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Šis spēlētājs nav daļa no jūsu kursa komandas!</red>'
+          name-is-the-owner: '<green>[name] tagad ir kursa īpašnieks!</green>'
+          parameters: <spēlētājs>
+          you-are-the-owner: '<green>Jūs tagad esat kursa īpašnieks!</green>'
+      ban:
+        description: aizliedziet spēlētājam no jūsu kursa
+        parameters: <spēlētājs>
+        cannot-ban-yourself: '<red>Jūs nevarat aizliedzēt sevi!</red>'
+        cannot-ban: '<red>Šo spēlētāju nevar aizliedzēt.</red>'
+        cannot-ban-member: '<red>Vispirms izsūtiet komandas locekli, tad aizliedziet.</red>'
+        cannot-ban-more-players: '<red>Jūs esat sasniedzis aizlieguma limitu, jūs vairs nevarat aizliedzēt spēlētājus no jūsu kursa.</red>'
+        player-already-banned: '<red>Spēlētājs jau ir aizliegts.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  tagad ir aizliegts no jūsu kursa.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  aizliedza jūs no viņu kursa!</red>'
+        you-are-banned: '<aqua>Jūs esat aizliegti no šī kursa!</aqua>'
+      unban:
+        description: atļaut spēlētājam no jūsu kursa
+        parameters: <spēlētājs>
+        cannot-unban-yourself: '<red>Jūs nevarat atļaut sevi!</red>'
+        player-not-banned: '<red>Spēlētājs nav aizliegts.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  tagad ir atļauts no jūsu kursa.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  atļāva jūs no viņu kursa!</green>'
+      banlist:
+        description: aizliegto spēlētāju saraksts
+        noone: '<green>Neviens nav aizliegts uz šī kursa.</green>'
+        the-following: '<aqua>Šādi spēlētāji ir aizliegti:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Jūs varat aizliedzēt vēl </aqua><yellow>[number] </yellow><aqua>spēlētājus.</aqua>'
+      settings:
+        description: attēlot kursa iestatījumus
+      language:
+        description: izvēlieties valodu
+        parameters: '[valoda]'
+        not-available: '<red>Šī valoda nav pieejama.</red>'
+        already-selected: '<red>Jūs jau esat izvēlējies šo valodu.</red>'
+      expel:
+        description: izsūtiet spēlētāju no jūsu kursa
+        parameters: <spēlētājs>
+        cannot-expel-yourself: '<red>Jūs nevarat izsūtīt sevi!</red>'
+        cannot-expel: '<red>Šo spēlētāju nevar izsūtīt.</red>'
+        cannot-expel-member: '<red>Jūs nevarat izsūtīt komandas locekli!</red>'
+        not-on-island: '<red>Šis spēlētājs nav uz jūsu kursa!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  jūs izsūtīja no kursa!</red>'
+        success: '<green>Jūs izsūtījāt </green><aqua>[name] </aqua><green>no kursa.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] ir kurss. Vispirms atreģistrējiet vai izdzēsiet!</red>'
+        setowner:
+          description: pārsūta kursa īpašumtiesības spēlētājam
+          already-owner: '<red>Spēlētājs jau ir šī kursa īpašnieks!</red>'
+      range:
+        description: Administratora kursa diapazona komanda
+        display:
+          description: Parādīt/paslēpt kursa diapazona indikatorus
+          hint: |-
+            <red>Sarkanā barjera ikonas </red><white>rāda pašreizējo kursa aizsardzības diapazonu.
+            </white><gray>Pelēkās daļiņas </gray><white>rāda maksimālo diapazonu.
+            </white><green>Zaļās daļiņas </green><white>rāda noklusējuma aizsardzības diapazonu, ja tas atšķiras.</white>
+        set:
+          description: Iestatiet kursa aizsardzības diapazonu
+        reset:
+          description: Atiestatiet kursa aizsardzības diapazonu uz pasaules noklusējuma
+      register:
+        parameters: <spēlētājs>
+        description: reģistrēt spēlētāju uz bezmājnieka kursa, uz kura jūs stāvat
+        registered-island: '<green>Spēlētājs reģistrēts uz kursa [xyz].</green>'
+        already-owned: '<red>Apgabals jau pieder citam spēlētājam!</red>'
+        no-island-here: '<red>Šeit nav kursa. Apstipriniet, lai izveidotu.</red>'
+        in-deletion: '<red>Šis apgabals pašlaik tiek atjaunots. Mēģiniet vēlāk.</red>'
+      unregister:
+        description: atreģistrēt īpašnieku no kursa, bet saglabāt kursa blokus
+        unregistered-island: '<green>Spēlētājs atreģistrēts no kursa [xyz].</green>'
+      info:
+        description: iegūt informāciju par jūsu atrašanās vietu vai spēlētāja kursu
+        no-island: '<red>Jūs pašlaik neatrodaties uz reģistrēta kursa...</red>'
+        island-location: 'Apgabala atrašanās vieta: [xyz]'
+        island-coords: 'Apgabala koordinātes: [xz1] uz [xz2]'
+        is-spawn: Apgabals ir sākuma kurss
+      setrange:
+        description: iestatiet spēlētāja kursa diapazonu
+        range-updated: Apgabala diapazons atjaunots uz [number]
+      tp:
+        description: teleportēties uz spēlētāja kursu
+      getrank:
+        description: iegūt spēlētāja rangu viņu kursā
+        rank-is: '<green>Rangs [rank] viņu kursā.</green>'
+      setrank:
+        description: iestatiet spēlētāja rangu viņu kursā
+      setspawn:
+        description: iestatiet kursu kā sākuma kursu šajā pasaulē
+        already-spawn: '<red>Šis kurss jau ir sākuma kurss!</red>'
+        no-island-here: '<red>Šeit nav reģistrēta kursa.</red>'
+        confirmation: '<red>Vai jūs esat pārliecināts, ka vēlaties iestatīt šo kursu kā sākuma kursu šajā pasaulē?</red>'
+      delete:
+        description: dzēš spēlētāju un atjaunina viņu kursu
+        deleted-island: '<green>Apgabals </green><yellow>[xyz] </yellow><green>tika veiksmīgi atjaunots.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Pārslēdz kreatīvo režīmu
+          </green><green>kursa beigās un
+          </green><green>ieeju uz kursu
+          </green>
+        name: "Parkura Kreatīvais Režīms"
+      ELYTRA:
+        description: Pārslēgt izmantošanu
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermeni var noņemt
+          </green><green>blokus</green>
+      ENTER_EXIT_MESSAGES:
+        description: Attēlot ieejas un izejas ziņojumus
+        island: "[name] kurss"
+        name: Ieejas/Izejas ziņojumi
+        now-entering: '<green>Ieeju </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Ieeju uz jūsu kursu.</green>'
+        now-leaving: '<green>Izeju no </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Izeju no jūsu kursa.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Noņemiet mobs kas aiziet
+          </green><green>ārpus aizsargātas
+          </green><green>kursa apgabala</green>
+        name: '<yellow>Ierobežot mobos spēlētāja kursam</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Spēlētāji atdzimst
+          </green><green>uz sava kursa</green>
+        name: Apgabala atdzimšana
+      LOCK:
+        name: Bloķēt spēlētāja kursu
+      OFFLINE_REDSTONE:
+        description: "<green>Kad deaktivēts, sarkans akmens\n</green><green>nedarbosies kursos\n</green><green>kur visi dalībnieki ir bezsaistē.\n</green><green>Var palīdzēt samazināt lag.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Atļaut virzuļiem grūst
+          </green><green>blokus ārpus spēlētāja kursa</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Ieslēgt/Izslēgt PVP
+          </red><red>uz aizsargāta kursa.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Noņemiet monstra kad
+          </green><green>teleportējat uz kursu</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Neļaut spēlētājiem teleportēties
+          </green><green>ja viņi krīt.</green>
+        hint: '<red>Jūs nevarat teleportēties kamēr krītat!</red>'
+    locked: '<red>Šis kurss ir bloķēts!</red>'
+    protected: '<red>Apgabals aizsargāts: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Aizsardzība</gold>'
+        description: |-
+          <green>Aizsardzības iestatījumi
+          </green><green>šim kursam</green>
+      SETTING:
+        description: |-
+          <green>Vispārējie iestatījumi
+          </green><green>šim kursam</green>

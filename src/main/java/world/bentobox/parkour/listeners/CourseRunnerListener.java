@@ -189,7 +189,8 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         boolean shouldStopRun = switch (e.getCause()) {
-            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
+            // CONSUMABLE_EFFECT covers chorus fruit teleports (the old CHORUS_FRUIT cause)
+            case ENDER_PEARL, CONSUMABLE_EFFECT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
             case COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
         UUID playerUUID = e.getPlayer().getUniqueId();

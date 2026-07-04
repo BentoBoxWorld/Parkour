@@ -1,9 +1,9 @@
 package world.bentobox.parkour.commands;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -17,30 +17,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.eclipse.jdt.annotation.NonNull;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.managers.CommandsManager;
-import world.bentobox.bentobox.managers.LocalesManager;
-import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.bentobox.util.Util;
-import world.bentobox.parkour.AbstractParkourTest;
+import world.bentobox.parkour.CommonTestSetup;
 import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.Settings;
 
@@ -48,31 +40,23 @@ import world.bentobox.parkour.Settings;
  * @author tastybento
  *
  */
-@RunWith(PowerMockRunner.class)
-public class WarpCommandTest extends AbstractParkourTest {
+class WarpCommandTest extends CommonTestSetup {
 
 	@Mock
 	private CompositeCommand ac;
 	@Mock
 	private User user;
-	@Mock
-	private LocalesManager lm;
-	private UUID uuid;
-	@Mock
-	private World world;
-	@Mock
 	private WarpCommand cmd;
 	@Mock
 	private ParkourManager parkourManager;
-	@Mock
-	private Location location;
 	@Mock
 	private @NonNull Player p;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@Override
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -84,7 +68,6 @@ public class WarpCommandTest extends AbstractParkourTest {
 		when(user.isOp()).thenReturn(false);
 		when(user.getPermissionValue(anyString(), anyInt())).thenReturn(4);
 		when(user.getWorld()).thenReturn(world);
-		uuid = UUID.randomUUID();
 		when(user.getUniqueId()).thenReturn(uuid);
 		when(user.getPlayer()).thenReturn(p);
 		when(user.getName()).thenReturn("tastybento");
@@ -102,8 +85,6 @@ public class WarpCommandTest extends AbstractParkourTest {
 		when(im.getIsland(world, user)).thenReturn(island);
 		when(im.hasIsland(world, user)).thenReturn(true);
 		when(im.inTeam(world, uuid)).thenReturn(true);
-		when(island.getRankCommand(anyString())).thenReturn(RanksManager.OWNER_RANK);
-		when(island.getRank(user)).thenReturn(RanksManager.MEMBER_RANK);
 		when(im.userIsOnIsland(any(), any())).thenReturn(true);
 
 		// Parkour Manager
@@ -128,10 +109,10 @@ public class WarpCommandTest extends AbstractParkourTest {
 		Settings settings = new Settings();
 		when(addon.getSettings()).thenReturn(settings);
 
-		// Static classes : Bukkit, Util
-		PowerMockito.mockStatic(Bukkit.class, Mockito.RETURNS_MOCKS);
-		PowerMockito.mockStatic(Util.class, Mockito.RETURNS_MOCKS);
-		when(Util.tabLimit(any(), any())).thenCallRealMethod();
+		// Stub Util methods
+		mockedUtil.when(() -> Util.tabLimit(any(), any())).thenCallRealMethod();
+		mockedUtil.when(() -> Util.teleportAsync(any(), any(), any())).thenReturn(java.util.concurrent.CompletableFuture.completedFuture(true));
+
 		// DUT
 		cmd = new WarpCommand(ac);
 	}
@@ -141,7 +122,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#WarpCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
 	 */
 	@Test
-	public void testWarpCommand() {
+	void testWarpCommand() {
 		assertNotNull(cmd);
 	}
 
@@ -149,7 +130,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * Test method for {@link world.bentobox.parkour.commands.WarpCommand#setup()}.
 	 */
 	@Test
-	public void testSetup() {
+	void testSetup() {
 		assertEquals("warp", cmd.getPermission());
 		assertEquals("parkour.commands.parkour.warp.description", cmd.getDescription());
 		assertEquals("parkour.commands.parkour.warp.parameters", cmd.getParameters());
@@ -162,9 +143,9 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteHelp() {
+	void testCanExecuteHelp() {
 		assertFalse(cmd.canExecute(user, "", List.of("more", "than", "one")));
-		verify(user).sendMessage("commands.help.header", "[label]", null);
+		verify(user).sendMessage("commands.help.header", "[label]", "Parkour");
 	}
 
 	/**
@@ -172,21 +153,23 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testCanExecuteNoArgNotOnParkourIsland() {
+	void testCanExecuteNoArgNotOnParkourIsland() {
+		// Not on any island
+		when(im.getIslandAt(location)).thenReturn(Optional.empty());
 		assertFalse(cmd.canExecute(user, "", List.of()));
 		// On island, but not in world
 		when(im.getIslandAt(location)).thenReturn(Optional.of(island));
 		when(addon.inWorld(world)).thenReturn(false);
 		assertFalse(cmd.canExecute(user, "", List.of()));
 		verify(user, times(2)).sendMessage("parkour.errors.not-on-island");
-		verify(user, times(2)).sendMessage("commands.help.header", "[label]", null);
+		verify(user, times(2)).sendMessage("commands.help.header", "[label]", "Parkour");
 	}
 
 	/**
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoArgOnIslandNoWarp() {
+    void testCanExecuteNoArgOnIslandNoWarp() {
         when(im.getIslandAt(location)).thenReturn(Optional.of(island));
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -198,7 +181,7 @@ public class WarpCommandTest extends AbstractParkourTest {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoArgSuccess() {
+    void testCanExecuteNoArgSuccess() {
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.of(location));
         when(im.getIslandAt(location)).thenReturn(Optional.of(island));
         assertTrue(cmd.canExecute(user, "", List.of()));
@@ -209,7 +192,7 @@ public class WarpCommandTest extends AbstractParkourTest {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteArgNoWarps() {
+    void testCanExecuteArgNoWarps() {
         when(parkourManager.getWarps()).thenReturn(new HashMap<>());
         assertFalse(cmd.canExecute(user, "", List.of("tastybento")));
         verify(user).sendMessage("parkour.warp.unknown-course");
@@ -219,7 +202,7 @@ public class WarpCommandTest extends AbstractParkourTest {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteArgDifferentPlayer() {
+    void testCanExecuteArgDifferentPlayer() {
         when(parkourManager.getWarps()).thenReturn(Map.of("Bill", location));
         assertFalse(cmd.canExecute(user, "", List.of("tastybento")));
         verify(user).sendMessage("parkour.warp.unknown-course");
@@ -229,7 +212,7 @@ public class WarpCommandTest extends AbstractParkourTest {
      * Test method for {@link world.bentobox.parkour.commands.WarpCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteArgMixedCase() {
+    void testCanExecuteArgMixedCase() {
         when(parkourManager.getWarps()).thenReturn(Map.of("tAsTyBeNtO", location));
         assertTrue(cmd.canExecute(user, "", List.of("tastybento")));
         verify(user, never()).sendMessage(any());
@@ -240,7 +223,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testExecuteUserStringListOfString() {
+	void testExecuteUserStringListOfString() {
 		// Set warpspot
 		testCanExecuteArgMixedCase();
 		// Run test
@@ -248,8 +231,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 		verify(user).sendMessage("parkour.warp.warping");
 		// Teleport user
 		verify(p, times(2)).playSound(location, Sound.ENTITY_BAT_TAKEOFF, 1F, 1F);
-		PowerMockito.verifyStatic(Util.class);
-		Util.teleportAsync(p, location, TeleportCause.COMMAND);
+		mockedUtil.verify(() -> Util.teleportAsync(p, location, TeleportCause.COMMAND));
 
 	}
 
@@ -258,7 +240,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testTabCompleteUserStringListOfString() {
+	void testTabCompleteUserStringListOfString() {
 		assertTrue(cmd.tabComplete(user, "", List.of("ta")).get().isEmpty());
 		when(parkourManager.getWarps()).thenReturn(Map.of("tAsTyBeNtO", location));
 		List<String> list = cmd.tabComplete(user, "", List.of("ta")).get();
@@ -270,7 +252,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testTabCompleteUserStringListOfStringEmpty() {
+	void testTabCompleteUserStringListOfStringEmpty() {
 		assertTrue(cmd.tabComplete(user, "", List.of()).get().isEmpty());
 		when(parkourManager.getWarps()).thenReturn(Map.of("tAsTyBeNtO", location));
 		List<String> list = cmd.tabComplete(user, "", List.of("ta")).get();
@@ -282,7 +264,7 @@ public class WarpCommandTest extends AbstractParkourTest {
 	 * {@link world.bentobox.parkour.commands.WarpCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
 	 */
 	@Test
-	public void testTabCompleteUserStringListOfString10OptionsEmpty() {
+	void testTabCompleteUserStringListOfString10OptionsEmpty() {
 		assertTrue(cmd.tabComplete(user, "", List.of("ta")).get().isEmpty());
 		Map<String, Location> map = new HashMap<>();
 		map.put("tAsTyBeNtO1", location);

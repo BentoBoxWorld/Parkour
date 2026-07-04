@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Start gesetzt!</green>"
+  end-set: "<green>Ende gesetzt!</green>"
+  already-set: "<red>Start und Ende bereits gesetzt! Zerstöre eine Platte zum Zurücksetzen.</red>"
+  start-removed: "<aqua>Start entfernt!</aqua>"
+  end-removed: "<aqua>Ende entfernt!</aqua>"
+  resetting-start-end: "<yellow>Setze Start- und Endpunkte zurück!</yellow>"
+  start: "<aqua>Parkour-Start!</aqua>"
+  no-start-yet: "<red>Es gibt noch keinen Start.</red>"
+  no-end-yet: "<red>Es gibt noch kein Ende.</red>"
+  to-start: "<light_purple>Zum Starten auf die goldene Druckplatte treten.</light_purple>"
+  session-ended: "<red>Deine Parkour-Sitzung endete.</red>"
+  end: "<green>Parkour-Ende!</green>"
+  you-took: "<light_purple>Du brauchtest [number]!</light_purple>"
+  start-before-end: "<aqua>Du musst starten, bevor du endest!</aqua>"
+  checkpoint: "<yellow>Checkpoint!</yellow>"
+  checkpoint-set: "<green>Checkpoint gesetzt!</green>"
+  set-the-end: "<red>Setze die Endplatte</red>"
+  hours: "Stunden"
+  minutes: "Minuten"
+  seconds: "Sekunden"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Wähle einen und versuche dein Bestes!"
+    gui-title: "Parkour-Strecken"
+    head-description: "<aqua>[runs] Versuche</aqua>"
+  top:
+    gui-title: "Schnellste Strecken-Rankings"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Dein Platz: [number]</green>"
+    beat-previous-time: "<light_purple>Du hast deine vorherige Zeit geschlagen!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Du hast deine vorherige Zeit nicht geschlagen!</aqua>"
+  errors:
+    not-on-island: "<red>Du musst auf einer Parkour-Strecke sein</red>"
+    no-warp: "<red>Diese Strecke ist bereits privat</red>"
+    not-in-run: "<red>Du musst gerade eine Strecke laufen</red>"
+  warp:
+    set: "<light_purple>Warp-Punkt gesetzt! Spieler können deine Strecke jetzt sehen!</light_purple>"
+    replaced: "<yellow>Warp-Punkt gesetzt! Alter Punkt deaktiviert!</yellow>"
+    removed: "<red>Warp-Punkt entfernt. Spieler sehen deine Strecke nicht mehr.</red>"
+    warping: "<green>Warp zur Strecke!</green>"
+    no-warp: "<red>Es gibt keinen Warp-Punkt für diese Strecke!</red>"
+    unknown-course: "<red>Unbekannte Strecke!</red>"
+  quit:
+    success: "<yellow>Du hast deinen Lauf beendet und kannst jetzt wieder Befehle verwenden</yellow>"
+  general:
+    errors:
+      no-island: '<red>Du hast keine Strecke!</red>'
+      player-has-island: '<red>Dieser Spieler hat bereits eine Strecke!</red>'
+      player-has-no-island: '<red>Dieser Spieler hat keine Strecke!</red>'
+      already-have-island: '<red>Du hast bereits eine Strecke!</red>'
+      no-safe-location: '<red>Kein sicherer Ort in der Strecke gefunden!</red>'
+      not-owner: '<red>Du bist nicht der Besitzer deines Teams!</red>'
+  commands:
+    parkour:
+      courses:
+        description: Zeige verfügbare Strecken zum Spielen und Warpen an
+      cleartop:
+        description: Lösche die Top-Zehn deiner Strecke oder entferne die Punktzahl eines Spielers
+        parameters: <Spielername>
+      setwarp:
+        description: Setzt den Warp-Punkt und macht deine Strecke öffentlich
+      warp:
+        description: Warp zu einer Strecke nach Name oder zum Start wenn du auf einer bist
+        parameters: <Streckenname>
+      removewarp:
+        description: Entfernt den Warp-Punkt und macht deine Strecke privat
+      help:
+        description: Starte eine Parkour-Strecke oder teleportiere dich zu deiner Strecke
+      go:
+        parameters: '[Startpunkt-Nummer]'
+      sethome:
+        parameters: '[Startpunkt-Nummer]'
+      top:
+        description: "Zeige die Top Strecken-Rankings"
+      quit:
+        description: "Stopppe den Timer auf der aktuellen Strecke"
+    island:
+      go:
+        parameters: '[Startpunkt-Nummer]'
+        description: Teleportiere dich zu deiner Strecke
+        teleport: '<green>Teleportiere dich zu deiner Strecke.</green>'
+        teleported: '<green>Du wurdest zu Startpunkt </green><yellow>#[number] teleportiert.</yellow>'
+      help:
+        description: der Haupt-Parkour-Befehl
+      create:
+        description: Erstelle eine Strecke mit optionalem Blueprint (benötigt Berechtigung)
+        parameters: <Blueprint>
+        too-many-islands: "<red>Es gibt zu viele Strecken in dieser Welt: Es gibt nicht genug Platz für deine.</red>"
+        cannot-create-island: '<red>Ein Platz konnte nicht rechtzeitig gefunden werden, versuche es bitte erneut...</red>'
+        unable-create-island: '<red>Deine Strecke konnte nicht erstellt werden, kontaktiere bitte einen Administrator.</red>'
+        creating-island: '<green>Suche einen Platz für deine Strecke...</green>'
+        pasting:
+          estimated-time: '<green>Geschätzte Zeit: </green><aqua>[number] </aqua><green>Sekunden.</green>'
+          blocks: '<green>Baue Block für Block: </green><aqua>[number] </aqua><green>Blöcke insgesamt...</green>'
+          entities: '<green>Fülle es mit Entities: </green><aqua>[number] </aqua><green>Entities insgesamt...</green>'
+          done: '<green>Fertig! Deine Strecke ist bereit!</green>'
+        pick: '<dark_green>Wähle eine Strecke</dark_green>'
+        unknown-blueprint: '<red>Dieser Blueprint wurde noch nicht geladen.</red>'
+        on-first-login: '<green>Willkommen! Wir werden deine Strecke in ein paar Sekunden vorbereiten.</green>'
+        you-can-teleport-to-your-island: '<green>Du kannst dich zu deiner Strecke teleportieren wenn du möchtest.</green>'
+      info:
+        description: Zeige Informationen über deine Strecke oder die Strecke eines Spielers
+        parameters: <Spieler>
+      near:
+        description: Zeige Namen von Strecken in deiner Nähe
+        parameters: ''
+        the-following-islands: '<green>Folgende Strecken sind in der Nähe:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Norden
+        south: Süden
+        east: Osten
+        west: Westen
+        no-neighbors: '<red>Du hast keine Strecken in der unmittelbaren Nähe!</red>'
+      reset:
+        description: Setze deine Strecke zurück und entferne die alte
+        parameters: <Blueprint>
+        none-left: '<red>Du hast keine Zurückstellungen mehr!</red>'
+        resets-left: '<red>Du hast noch </red><aqua>[number] </aqua><red>Zurückstellungen</red>'
+        confirmation: |-
+          <red>Bist du sicher, dass du das tun möchtest?
+          </red><red>Alle Strecken-Mitglieder werden von der Strecke entfernt, du musst sie danach neu einladen.
+          </red><red>Es gibt kein Zurück: Sobald deine aktuelle Strecke gelöscht wird, gibt es <bold>keinen </bold></red> <red>Weg, sie später abzurufen.</red>
+        kicked-from-island: '<red>Du wurdest von deiner Strecke in [gamemode] entfernt, weil der Besitzer sie zurücksetzt.</red>'
+      sethome:
+        description: Lege deinen Heimat-Teleport-Punkt fest
+        must-be-on-your-island: '<red>Du musst auf deiner Strecke sein um den Startpunkt zu setzen!</red>'
+        num-homes: '<red>Startpunkte können von 1 bis [number] sein.</red>'
+        home-set: '<gold>Dein Strecken-Startpunkt wurde auf deinen aktuellen Ort gesetzt.</gold>'
+        nether:
+          not-allowed: '<red>Du darfst deinen Startpunkt nicht in der Hölle setzen.</red>'
+          confirmation: '<red>Bist du sicher, dass du deinen Startpunkt in der Hölle setzen möchtest?</red>'
+        the-end:
+          not-allowed: '<red>Du darfst deinen Startpunkt nicht im End setzen.</red>'
+          confirmation: '<red>Bist du sicher, dass du deinen Startpunkt im End setzen möchtest?</red>'
+        parameters: '[Startpunkt-Nummer]'
+      setname:
+        description: Lege einen Namen für deine Strecke fest
+        name-too-short: '<red>Zu kurz. Minimale Größe ist [number] Zeichen.</red>'
+        name-too-long: '<red>Zu lang. Maximale Größe ist [number] Zeichen.</red>'
+        name-already-exists: '<red>Es existiert bereits eine Strecke mit diesem Namen!</red>'
+        parameters: <Name>
+        success: '<green>Du hast den Namen deiner Strecke erfolgreich auf </green><aqua>[name]</aqua><green> gesetzt.</green>'
+      resetname:
+        description: Setze den Namen deiner Strecke zurück
+        success: '<green>Du hast den Namen deiner Strecke erfolgreich zurückgesetzt.</green>'
+      team:
+        description: Verwalte dein Team
+        coop:
+          description: Mache einen Spieler zum Coop-Rang auf deiner Strecke
+          parameters: <Spieler>
+          cannot-coop-yourself: '<red>Du kannst dich nicht selbst coopen!</red>'
+          already-has-rank: '<red>Dieser Spieler hat bereits einen Rang!</red>'
+          you-are-a-coop-member: '<dark_green>Du wurdest gecooped von </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Du hast </green><aqua>[name]</aqua><green> gecooped.</green>'
+          name-has-invited-you: '<green>[name] hat dich eingeladen, ein Coop-Mitglied ihrer Strecke zu werden.</green>'
+        uncoop:
+          description: Entferne einen Coop-Rang von einem Spieler
+          parameters: <Spieler>
+          cannot-uncoop-yourself: '<red>Du kannst dich nicht selbst uncoopen!</red>'
+          cannot-uncoop-member: '<red>Du kannst ein Teamitglied nicht uncoopen!</red>'
+          player-not-cooped: '<red>Dieser Spieler ist nicht gecooped!</red>'
+          you-are-no-longer-a-coop-member: '<red>Du bist kein Coop-Mitglied mehr von [name]''s Strecke.</red>'
+          all-members-logged-off: '<red>Alle Strecken-Mitglieder sind offline, daher bist du kein Coop-Mitglied mehr von [name]''s Strecke.</red>'
+          success: '<aqua>[name] </aqua><green>ist kein Coop-Mitglied mehr deiner Strecke.</green>'
+          is-full: '<red>Du kannst niemand anderen coopen.</red>'
+        trust:
+          description: Gib einem Spieler vertrauten Rang auf deiner Strecke
+          parameters: <Spieler>
+          trust-in-yourself: '<red>Vertrau dir selbst!</red>'
+          name-has-invited-you: '<green>[name] hat dich eingeladen, ein vertrauenswürdiges Mitglied ihrer Strecke zu werden.</green>'
+          player-already-trusted: '<red>Dieser Spieler wird bereits vertraut!</red>'
+          you-are-trusted: '<dark_green>Du wirst vertraut von </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Du vertraust </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Du kannst niemandem anderen vertrauen.</red>'
+        invite:
+          description: Lade einen Spieler ein, deiner Strecke beizutreten
+          invitation-sent: '<green>Einladung gesendet an </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Entferne Einladung.</red>'
+          name-has-invited-you: '<green>[name] hat dich eingeladen, seiner Strecke beizutreten.</green>'
+          to-accept-or-reject: '<green>Nutze /[label] team accept um anzunehmen, oder /[label] team reject um abzulehnen</green>'
+          you-will-lose-your-island: '<red>WARNUNG! Du wirst deine Strecke verlieren wenn du annimmst!</red>'
+          errors:
+            cannot-invite-self: '<red>Du kannst dich nicht selbst einladen!</red>'
+            cooldown: '<red>Du kannst diese Person für weitere [number] Sekunden nicht einladen.</red>'
+            island-is-full: '<red>Deine Strecke ist voll, du kannst niemanden anderen einladen.</red>'
+            none-invited-you: '<red>Niemand hat dich eingeladen :c.</red>'
+            you-already-are-in-team: '<red>Du bist bereits in einem Team!</red>'
+            already-on-team: '<red>Dieser Spieler ist bereits in einem Team!</red>'
+            invalid-invite: '<red>Diese Einladung ist nicht mehr gültig, entschuldige.</red>'
+            you-have-already-invited: '<red>Du hast diesen Spieler bereits eingeladen!</red>'
+          parameters: <Spieler>
+          you-can-invite: '<green>Du kannst noch [number] weitere Spieler einladen.</green>'
+          accept:
+            description: Akzeptiere eine Einladung
+            you-joined-island: '<green>Du bist einer Strecke beigetreten! Nutze </green><aqua>/[label] team </aqua><green>um die anderen Mitglieder zu sehen.</green>'
+            name-joined-your-island: '<green>[name] ist deiner Strecke beigetreten!</green>'
+            confirmation: |-
+              <red>Bist du sicher, dass du diese Einladung annehmen möchtest?
+              </red><red><bold>Du wirst deine aktuelle Strecke <underlined>VERLIEREN </underlined></bold></red><red><bold>!</bold></red>
+          reject:
+            description: Lehne eine Einladung ab
+            you-rejected-invite: '<green>Du hast die Einladung abgelehnt, einer Strecke beizutreten.</green>'
+            name-rejected-your-invite: '<red>[name] hat deine Strecken-Einladung abgelehnt!</red>'
+          cancel:
+            description: Breche die ausstehende Einladung ab
+        leave:
+          cannot-leave: '<red>Besitzer können nicht gehen! Werde zunächst ein Mitglied oder kick alle Mitglieder.</red>'
+          description: Verlasse deine Strecke
+          left-your-island: '<red>[name] </red><red>hat deine Strecke verlassen</red>'
+          success: '<green>Du hast diese Strecke verlassen.</green>'
+        kick:
+          description: Entferne ein Mitglied aus deiner Strecke
+          parameters: <Spieler>
+          owner-kicked: '<red>Der Besitzer hat dich aus der Strecke in [gamemode] geworfen!</red>'
+          cannot-kick: '<red>Du kannst dich nicht selbst rauswerfen!</red>'
+          success: '<aqua>[name] </aqua><green>wurde aus deiner Strecke geworfen.</green>'
+        demote:
+          description: Demotiere einen Spieler auf deiner Strecke um einen Rang
+          parameters: <Spieler>
+          errors:
+            cant-demote-yourself: '<red>Du kannst dich nicht selbst demotieren!</red>'
+          failure: '<red>Dieser Spieler kann nicht weiter demotiert werden!</red>'
+          success: '<green>Demotiert [name] zu [rank]</green>'
+        promote:
+          description: Beförder einen Spieler auf deiner Strecke um einen Rang
+          parameters: <Spieler>
+          failure: '<red>Dieser Spieler kann nicht weiter befördert werden!</red>'
+          success: '<green>Befördert [name] zu [rank]</green>'
+        setowner:
+          description: Übertrage deine Strecken-Besitzrechte an ein Mitglied
+          errors:
+            cant-transfer-to-yourself: '<red>Du kannst die Besitzrechte nicht an dich selbst übertragen! </red><gray>(<italic> Nun ja, eigentlich könntest du... Aber wir wollen nicht, dass du es tust. Weil es sinnlos ist.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Dieser Spieler ist nicht Teil deines Strecken-Teams!</red>'
+          name-is-the-owner: '<green>[name] ist jetzt der Strecken-Besitzer!</green>'
+          parameters: <Spieler>
+          you-are-the-owner: '<green>Du bist jetzt der Strecken-Besitzer!</green>'
+      ban:
+        description: Sperren Sie einen Spieler aus Ihrer Strecke
+        parameters: <Spieler>
+        cannot-ban-yourself: '<red>Du kannst dich nicht selbst sperren!</red>'
+        cannot-ban: '<red>Dieser Spieler kann nicht gesperrt werden.</red>'
+        cannot-ban-member: '<red>Warf das Teamitglied zunächst raus, dann sperren.</red>'
+        cannot-ban-more-players: '<red>Du hast die Sperrgrenze erreicht, du kannst keine weiteren Spieler aus deiner Strecke sperren.</red>'
+        player-already-banned: '<red>Dieser Spieler ist bereits gesperrt.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  ist jetzt aus deiner Strecke gesperrt.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  hat dich aus ihrer Strecke gesperrt!</red>'
+        you-are-banned: '<aqua>Du bist aus dieser Strecke gesperrt!</aqua>'
+      unban:
+        description: Entsperren Sie einen Spieler aus Ihrer Strecke
+        parameters: <Spieler>
+        cannot-unban-yourself: '<red>Du kannst dich nicht selbst entsperren!</red>'
+        player-not-banned: '<red>Dieser Spieler ist nicht gesperrt.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  ist jetzt aus deiner Strecke entsperrt.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  hat dich aus ihrer Strecke entsperrt!</green>'
+      banlist:
+        description: Liste der gesperrten Spieler
+        noone: '<green>Niemand ist auf dieser Strecke gesperrt.</green>'
+        the-following: '<aqua>Folgende Spieler sind gesperrt:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Du kannst bis zu </aqua><yellow>[number] </yellow><aqua>weitere Spieler sperren.</aqua>'
+      settings:
+        description: Zeige Strecken-Einstellungen
+      language:
+        description: Wähle Sprache
+        parameters: '[Sprache]'
+        not-available: '<red>Diese Sprache ist nicht verfügbar.</red>'
+        already-selected: '<red>Du verwendest bereits diese Sprache.</red>'
+      expel:
+        description: Treibe einen Spieler aus deiner Strecke
+        parameters: <Spieler>
+        cannot-expel-yourself: '<red>Du kannst dich nicht selbst austreiben!</red>'
+        cannot-expel: '<red>Dieser Spieler kann nicht ausgewiesen werden.</red>'
+        cannot-expel-member: '<red>Du kannst ein Teamitglied nicht ausweisen!</red>'
+        not-on-island: '<red>Dieser Spieler befindet sich nicht auf deiner Strecke!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  hat dich aus der Strecke ausgewiesen!</red>'
+        success: '<green>Du hast </green><aqua>[name] </aqua><green>aus der Strecke ausgewiesen.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] hat eine Strecke. Hebe die Registrierung auf oder lösche diese zunächst!</red>'
+        setowner:
+          description: Übertrage die Strecken-Besitzrechte zum Spieler
+          already-owner: '<red>Dieser Spieler ist bereits der Besitzer dieser Strecke!</red>'
+      range:
+        description: Admin-Strecken-Bereichs-Befehl
+        display:
+          description: Strecken-Bereichs-Indikatoren anzeigen/verbergen
+          hint: |-
+            <red>Rote Barrier-Icons </red><white>zeigen die aktuelle geschützte Bereichsgrenze.
+            </white><gray>Graue Partikel </gray><white>zeigen die maximale Grenze.
+            </white><green>Grüne Partikel </green><white>zeigen den Standard-geschützten Bereich an, falls dieser sich vom Schutzbereich unterscheidet.</white>
+        set:
+          description: Setzt den geschützten Strecken-Bereich
+        reset:
+          description: Setzt den geschützten Bereich auf die Welt-Standard zurück
+      register:
+        parameters: <Spieler>
+        description: Registriere Spieler zu unbesessener Strecke wo du bist
+        registered-island: '<green>Spieler registriert zu Strecke bei [xyz].</green>'
+        already-owned: '<red>Das Gebiet gehört bereits einem anderen Spieler!</red>'
+        no-island-here: '<red>Es gibt keine Spieler-Strecke hier. Bestätige um eine zu erstellen.</red>'
+        in-deletion: '<red>Dieser Bereich wird gerade regeneriert. Versuche es später.</red>'
+      unregister:
+        description: Hebe die Registrierung des Besitzers von einer Strecke auf, behalte aber die Strecken-Blöcke
+        unregistered-island: '<green>Spieler abgemeldet von Strecke bei [xyz].</green>'
+      info:
+        description: Erhalte Informationen darüber, wo du bist oder über einen Spieler
+        no-island: '<red>Du bist gerade nicht in einer registrierten Strecke...</red>'
+        island-location: 'Gebiet-Ort: [xyz]'
+        island-coords: 'Gebiet-Koordinaten: [xz1] zu [xz2]'
+        is-spawn: Gebiet ist eine Spawn-Strecke
+      setrange:
+        description: Lege den Bereich von Spieler-Strecke fest
+        range-updated: Gebiet-Bereich auf [number] aktualisiert
+      tp:
+        description: Teleportiere zu einer Spieler-Strecke
+      getrank:
+        description: Erhalte den Rang eines Spielers in ihrer Strecke
+        rank-is: '<green>Rang ist [rank] in ihrer Strecke.</green>'
+      setrank:
+        description: Lege den Rang eines Spielers in ihrer Strecke fest
+      setspawn:
+        description: Setze eine Strecke als Spawn für diese Welt
+        already-spawn: '<red>Diese Strecke ist bereits ein Spawn!</red>'
+        no-island-here: '<red>Es gibt keine registrierte Strecke hier.</red>'
+        confirmation: '<red>Bist du sicher, dass du diese Strecke als Spawn für diese Welt setzen möchtest?</red>'
+      delete:
+        description: Lösche einen Spieler und regeneriere seine Strecke
+        deleted-island: '<green>Gebiet bei </green><yellow>[xyz] </yellow><green>wurde erfolgreich regeneriert.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Aktiviert den Creative Mode
+          </green><green>am Ende der Strecke und
+          </green><green>beim Betreten der Strecke
+          </green>
+        name: "Parkour Creative Mode"
+      ELYTRA:
+        description: Nutzung umschalten
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermen können
+          </green><green>Blöcke entfernen</green>
+      ENTER_EXIT_MESSAGES:
+        description: Anzeige von Ein- und Ausgangs-Meldungen
+        island: "[name]'s Strecke"
+        name: Ein-/Ausgangs-Meldungen
+        now-entering: '<green>Betrittst gerade </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Du betrittst gerade deine Strecke.</green>'
+        now-leaving: '<green>Verlässt gerade </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Du verlässt gerade deine Strecke.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Entferne Mobs die
+          </green><green>außerhalb des geschützten
+          </green><green>Spieler-Bereichs gehen</green>
+        name: '<yellow>Limitiere Mobs auf Spieler-Strecke</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Spieler spawnen
+          </green><green>in ihrer Strecke</green>
+        name: Gebiet-Wiedererscheinen
+      LOCK:
+        name: Sperren Sie Spieler-Strecke
+      OFFLINE_REDSTONE:
+        description: "<green>Wenn deaktiviert, funktioniert\n</green><green>Redstone nicht in Strecken,\n</green><green>wo alle Mitglieder offline sind.\n</green><green>Kann helfen, Lag zu reduzieren.</green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Erlaube Pistons, Blöcke
+          </green><green>außerhalb einer Spieler-Strecke zu schieben</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Aktiviere/Deaktiviere PVP
+          </red><red>in geschützter Strecke.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Entferne Monster beim
+          </green><green>Teleportieren zu einer Strecke</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Verhindere, dass Spieler sich teleportieren
+          </green><green>wenn sie fallen.</green>
+        hint: '<red>Du kannst dich nicht teleportieren während du fällst!</red>'
+    locked: '<red>Diese Strecke ist gesperrt!</red>'
+    protected: '<red>Gebiet geschützt: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Schutz</gold>'
+        description: |-
+          <green>Schutz-Einstellungen
+          </green><green>für diese Strecke</green>
+      SETTING:
+        description: |-
+          <green>Allgemeine Einstellungen
+          </green><green>für diese Strecke</green>

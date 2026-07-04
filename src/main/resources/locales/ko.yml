@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>시작이 설정되었습니다!</green>"
+  end-set: "<green>끝이 설정되었습니다!</green>"
+  already-set: "<red>시작과 끝이 이미 설정되어 있습니다! 하나를 부수어 리셋하세요.</red>"
+  start-removed: "<aqua>시작이 제거되었습니다!</aqua>"
+  end-removed: "<aqua>끝이 제거되었습니다!</aqua>"
+  resetting-start-end: "<yellow>시작과 끝을 리셋 중입니다!</yellow>"
+  start: "<aqua>파쿠르 시작!</aqua>"
+  no-start-yet: "<red>아직 시작이 설정되지 않았습니다.</red>"
+  no-end-yet: "<red>아직 끝이 설정되지 않았습니다.</red>"
+  to-start: "<light_purple>시작하려면 금빛 압력판 위에 서세요.</light_purple>"
+  session-ended: "<red>당신의 파쿠르 세션이 끝났습니다.</red>"
+  end: "<green>파쿠르 끝!</green>"
+  you-took: "<light_purple>당신은 [number]를 소요했습니다!</light_purple>"
+  start-before-end: "<aqua>끝내기 전에 시작해야 합니다!</aqua>"
+  checkpoint: "<yellow>체크포인트!</yellow>"
+  checkpoint-set: "<green>체크포인트가 설정되었습니다!</green>"
+  set-the-end: "<red>끝 판을 설정하세요</red>"
+  hours: "시간"
+  minutes: "분"
+  seconds: "초"
+  hours-short: "시"
+  minutes-short: "분"
+  seconds-short: "초"
+  courses:
+    description: "하나를 선택하고 시도해보세요!"
+    gui-title: "파쿠르 코스"
+    head-description: "<aqua>[runs]회 실행</aqua>"
+  top:
+    gui-title: "가장 빠른 코스 순위"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>당신의 순위: [number]</green>"
+    beat-previous-time: "<light_purple>당신은 이전 기록을 경신했습니다!</light_purple>"
+    did-not-beat-previous-time: "<aqua>당신은 이전 기록을 경신하지 못했습니다!</aqua>"
+  errors:
+    not-on-island: "<red>파쿠르 코스를 실행하려면 코스 위에 있어야 합니다</red>"
+    no-warp: "<red>이 코스는 이미 비공개입니다</red>"
+    not-in-run: "<red>코스를 실행하려면 현재 코스를 달리고 있어야 합니다</red>"
+  warp:
+    set: "<light_purple>워프 지점이 설정되었습니다! 플레이어는 이제 당신의 코스를 볼 수 있습니다!</light_purple>"
+    replaced: "<yellow>워프 지점이 설정되었습니다! 이전 지점이 비활성화되었습니다!</yellow>"
+    removed: "<red>워프 지점이 제거되었습니다. 플레이어는 당신의 코스를 볼 수 없습니다.</red>"
+    warping: "<green>코스로 워프 중입니다!</green>"
+    no-warp: "<red>이 코스에 대해 설정된 워프가 없습니다!</red>"
+    unknown-course: "<red>알 수 없는 코스입니다!</red>"
+  quit:
+    success: "<yellow>실행을 중단했으며, 이제 명령을 실행할 수 있습니다</yellow>"
+  general:
+    errors:
+      no-island: '<red>당신은 코스를 가지고 있지 않습니다!</red>'
+      player-has-island: '<red>플레이어는 이미 코스를 가지고 있습니다!</red>'
+      player-has-no-island: '<red>그 플레이어는 코스를 가지고 있지 않습니다!</red>'
+      already-have-island: '<red>당신은 이미 코스를 가지고 있습니다!</red>'
+      no-safe-location: '<red>코스에서 안전한 위치를 찾을 수 없습니다!</red>'
+      not-owner: '<red>당신은 당신의 팀의 소유자가 아닙니다!</red>'
+  commands:
+    parkour:
+      courses:
+        description: 플레이할 수 있는 코스를 표시하고 워프합니다
+      cleartop:
+        description: 당신의 코스의 상위 10개를 지우거나 플레이어의 점수를 제거합니다
+        parameters: <플레이어 이름>
+      setwarp:
+        description: 워프 지점을 설정하고 당신의 코스를 공개합니다
+      warp:
+        description: 코스 이름으로 코스에 워프하거나 코스 위에 있으면 시작점으로 워프합니다
+        parameters: <코스 이름>
+      removewarp:
+        description: 워프 지점을 제거하고 당신의 코스를 비공개로 만듭니다
+      help:
+        description: 파쿠르 코스를 시작하거나 당신의 코스에 텔레포트합니다
+      go:
+        parameters: '[홈 번호]'
+      sethome:
+        parameters: '[홈 번호]'
+      top:
+        description: "상위 코스 순위를 표시합니다"
+      quit:
+        description: "현재 코스에서 타이머를 중지합니다"
+    island:
+      go:
+        parameters: '[홈 번호]'
+        description: 당신의 코스에 텔레포트합니다
+        teleport: '<green>당신의 코스로 텔레포트 중입니다.</green>'
+        teleported: '<green>홈으로 텔레포트했습니다</green><yellow>#[number].</yellow>'
+      help:
+        description: 주요 파쿠르 명령어
+      create:
+        description: 선택적 블루프린트를 사용하여 코스를 생성합니다 (권한 필요)
+        parameters: <블루프린트>
+        too-many-islands: "<red>이 월드에는 너무 많은 코스가 있습니다: 당신의 코스를 만들 공간이 없습니다.</red>"
+        cannot-create-island: '<red>시간 내에 자리를 찾을 수 없었습니다. 다시 시도하세요...</red>'
+        unable-create-island: '<red>당신의 코스를 생성할 수 없었습니다. 관리자에게 연락하세요.</red>'
+        creating-island: '<green>당신의 코스를 위한 자리를 찾고 있습니다...</green>'
+        pasting:
+          estimated-time: '<green>예상 시간: </green><aqua>[number] </aqua><green>초.</green>'
+          blocks: '<green>블록 단위로 구축 중: </green><aqua>[number] </aqua><green>모든 블록...</green>'
+          entities: '<green>엔터티로 채우는 중: </green><aqua>[number] </aqua><green>모든 엔터티...</green>'
+          done: '<green>완료! 당신의 코스가 준비되었습니다!</green>'
+        pick: '<dark_green>코스를 선택하세요</dark_green>'
+        unknown-blueprint: '<red>그 블루프린트는 아직 로드되지 않았습니다.</red>'
+        on-first-login: '<green>환영합니다! 몇 초 후에 당신의 코스 준비를 시작하겠습니다.</green>'
+        you-can-teleport-to-your-island: '<green>원할 때 당신의 코스에 텔레포트할 수 있습니다.</green>'
+      info:
+        description: 당신의 코스 또는 플레이어의 코스에 대한 정보를 표시합니다
+        parameters: <플레이어>
+      near:
+        description: 당신 주변의 인접한 코스 이름을 표시합니다
+        parameters: ''
+        the-following-islands: '<green>다음 코스가 가까이 있습니다:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: 북쪽
+        south: 남쪽
+        east: 동쪽
+        west: 서쪽
+        no-neighbors: '<red>인접한 코스가 없습니다!</red>'
+      reset:
+        description: 당신의 코스를 다시 시작하고 이전 코스를 제거합니다
+        parameters: <블루프린트>
+        none-left: '<red>더 이상 리셋이 남지 않았습니다!</red>'
+        resets-left: '<red>당신은</red><aqua>[number] </aqua><red>리셋이 남았습니다</red>'
+        confirmation: |-
+          <red>정말로 이 작업을 수행하시겠습니까?
+          </red><red>모든 코스 구성원이 코스에서 제거되며 나중에 다시 초대해야 합니다.
+          </red><red>되돌릴 방법이 없습니다: 현재 코스가 삭제되면, <bold>나중에</bold></red><red>검색할 방법이 없습니다.</red>
+        kicked-from-island: '<red>소유자가 리셋 중이므로 [gamemode]의 코스에서 제거되었습니다.</red>'
+      sethome:
+        description: 홈 텔레포트 지점을 설정합니다
+        must-be-on-your-island: '<red>홈을 설정하려면 당신의 코스 위에 있어야 합니다!</red>'
+        num-homes: '<red>홈은 1부터 [number]까지입니다.</red>'
+        home-set: '<gold>당신의 코스 홈이 현재 위치로 설정되었습니다.</gold>'
+        nether:
+          not-allowed: '<red>네더에서 홈을 설정할 수 없습니다.</red>'
+          confirmation: '<red>네더에서 홈을 설정하시겠습니까?</red>'
+        the-end:
+          not-allowed: '<red>엔더월드에서 홈을 설정할 수 없습니다.</red>'
+          confirmation: '<red>엔더월드에서 홈을 설정하시겠습니까?</red>'
+        parameters: '[홈 번호]'
+      setname:
+        description: 당신의 코스에 이름을 설정합니다
+        name-too-short: '<red>너무 짧습니다. 최소 크기는 [number]자입니다.</red>'
+        name-too-long: '<red>너무 깁니다. 최대 크기는 [number]자입니다.</red>'
+        name-already-exists: '<red>그 이름의 코스가 이미 있습니다!</red>'
+        parameters: <이름>
+        success: '<green>당신의 코스 이름을</green><aqua>[name]</aqua><green>으로 성공적으로 설정했습니다.</green>'
+      resetname:
+        description: 당신의 코스 이름을 리셋합니다
+        success: '<green>당신의 코스 이름을 성공적으로 리셋했습니다.</green>'
+      team:
+        description: 당신의 팀을 관리합니다
+        coop:
+          description: 플레이어를 당신의 코스에서 협동 랭크로 만듭니다
+          parameters: <플레이어>
+          cannot-coop-yourself: '<red>자신을 협동시킬 수 없습니다!</red>'
+          already-has-rank: '<red>플레이어는 이미 랭크를 가지고 있습니다!</red>'
+          you-are-a-coop-member: '<dark_green>당신은</dark_green><aqua>[name]</aqua><green>에 의해 협동되었습니다.</green>'
+          success: '<green>당신은</green><aqua>[name]</aqua><green>을 협동시켰습니다.</green>'
+          name-has-invited-you: '<green>[name]은 당신을 그들의 코스의 협동 회원으로 초대했습니다.</green>'
+        uncoop:
+          description: 플레이어에서 협동 랭크를 제거합니다
+          parameters: <플레이어>
+          cannot-uncoop-yourself: '<red>자신을 협동 해제할 수 없습니다!</red>'
+          cannot-uncoop-member: '<red>팀 구성원을 협동 해제할 수 없습니다!</red>'
+          player-not-cooped: '<red>플레이어는 협동되지 않았습니다!</red>'
+          you-are-no-longer-a-coop-member: '<red>당신은 더 이상 [name]의 코스의 협동 회원이 아닙니다.</red>'
+          all-members-logged-off: '<red>모든 코스 구성원이 로그오프했으므로 당신은 더 이상 [name]의 코스의 협동 회원이 아닙니다.</red>'
+          success: '<aqua>[name] </aqua><green>은 더 이상 당신의 코스의 협동 회원이 아닙니다.</green>'
+          is-full: '<red>다른 사람을 협동시킬 수 없습니다.</red>'
+        trust:
+          description: 플레이어에게 당신의 코스에서 신뢰받는 랭크를 제공합니다
+          parameters: <플레이어>
+          trust-in-yourself: '<red>자신을 믿으세요!</red>'
+          name-has-invited-you: '<green>[name]은 당신을 그들의 코스의 신뢰받는 회원으로 초대했습니다.</green>'
+          player-already-trusted: '<red>플레이어는 이미 신뢰받고 있습니다!</red>'
+          you-are-trusted: '<dark_green>당신은</dark_green><aqua>[name]</aqua><green>으로부터 신뢰받고 있습니다!</green>'
+          success: '<green>당신은</green><aqua>[name]</aqua><green>을 신뢰했습니다.</green>'
+          is-full: '<red>다른 사람을 신뢰할 수 없습니다.</red>'
+        invite:
+          description: 플레이어를 당신의 코스에 초대합니다
+          invitation-sent: '<green>초대가 전송되었습니다</green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>초대를 제거 중입니다.</red>'
+          name-has-invited-you: '<green>[name]은 당신을 그들의 코스에 참여하도록 초대했습니다.</green>'
+          to-accept-or-reject: '<green>수락하려면 /[label] team accept를 실행하거나, 거절하려면 /[label] team reject를 실행하세요</green>'
+          you-will-lose-your-island: '<red>경고! 수락하면 당신의 코스를 잃게 됩니다!</red>'
+          errors:
+            cannot-invite-self: '<red>자신을 초대할 수 없습니다!</red>'
+            cooldown: '<red>그 사람을 초대하기 위해 [number]초를 기다려야 합니다.</red>'
+            island-is-full: '<red>당신의 코스는 가득 찼습니다. 다른 사람을 초대할 수 없습니다.</red>'
+            none-invited-you: '<red>아무도 당신을 초대하지 않았습니다 :c.</red>'
+            you-already-are-in-team: '<red>당신은 이미 팀에 있습니다!</red>'
+            already-on-team: '<red>그 플레이어는 이미 팀에 있습니다!</red>'
+            invalid-invite: '<red>그 초대는 더 이상 유효하지 않습니다. 죄송합니다.</red>'
+            you-have-already-invited: '<red>당신은 이미 그 플레이어를 초대했습니다!</red>'
+          parameters: <플레이어>
+          you-can-invite: '<green>최대 [number]명의 플레이어를 더 초대할 수 있습니다.</green>'
+          accept:
+            description: 초대를 수락합니다
+            you-joined-island: '<green>당신은 코스에 참여했습니다! 사용</green><aqua>/[label] team </aqua><green>다른 구성원을 보려면.</green>'
+            name-joined-your-island: '<green>[name]이 당신의 코스에 참여했습니다!</green>'
+            confirmation: |-
+              <red>이 초대를 수락하시겠습니까?
+              </red><red><bold>당신은 <underlined>잃을</underlined></bold></red><red><bold>당신의 현재 코스를 잃을 것입니다!</bold></red>
+          reject:
+            description: 초대를 거절합니다
+            you-rejected-invite: '<green>당신은 코스에 참여하도록 한 초대를 거절했습니다.</green>'
+            name-rejected-your-invite: '<red>[name]이 당신의 코스 초대를 거절했습니다!</red>'
+          cancel:
+            description: 당신의 코스에 참여하기 위한 보류 중인 초대를 취소합니다
+        leave:
+          cannot-leave: '<red>소유자는 떠날 수 없습니다! 먼저 회원이 되거나 모든 회원을 제거하세요.</red>'
+          description: 당신의 코스를 떠납니다
+          left-your-island: '<red>[name] </red><red>당신의 코스를 떠났습니다</red>'
+          success: '<green>이 코스를 떠났습니다.</green>'
+        kick:
+          description: 당신의 코스에서 회원을 제거합니다
+          parameters: <플레이어>
+          owner-kicked: '<red>소유자가 [gamemode]의 코스에서 당신을 제거했습니다!</red>'
+          cannot-kick: '<red>자신을 제거할 수 없습니다!</red>'
+          success: '<aqua>[name] </aqua><green>은 당신의 코스에서 제거되었습니다.</green>'
+        demote:
+          description: 당신의 코스에서 플레이어를 강등시킵니다
+          parameters: <플레이어>
+          errors:
+            cant-demote-yourself: '<red>자신을 강등시킬 수 없습니다!</red>'
+          failure: '<red>플레이어를 더 이상 강등시킬 수 없습니다!</red>'
+          success: '<green>[name]을 [rank]로 강등시켰습니다</green>'
+        promote:
+          description: 당신의 코스에서 플레이어를 승진시킵니다
+          parameters: <플레이어>
+          failure: '<red>플레이어를 더 이상 승진시킬 수 없습니다!</red>'
+          success: '<green>[name]을 [rank]로 승진시켰습니다</green>'
+        setowner:
+          description: 당신의 코스 소유권을 회원에게 이전합니다
+          errors:
+            cant-transfer-to-yourself: '<red>자신에게 소유권을 이전할 수 없습니다!</red><gray>(<italic>실제로는 할 수 있지만... 하지 마세요. 쓸모가 없습니다.</italic></gray><gray>)</gray>'
+            target-is-not-member: '<red>그 플레이어는 당신의 코스 팀의 일부가 아닙니다!</red>'
+          name-is-the-owner: '<green>[name]은 이제 코스 소유자입니다!</green>'
+          parameters: <플레이어>
+          you-are-the-owner: '<green>당신은 이제 코스 소유자입니다!</green>'
+      ban:
+        description: 플레이어를 당신의 코스에서 차단합니다
+        parameters: <플레이어>
+        cannot-ban-yourself: '<red>자신을 차단할 수 없습니다!</red>'
+        cannot-ban: '<red>그 플레이어를 차단할 수 없습니다.</red>'
+        cannot-ban-member: '<red>먼저 팀 구성원을 제거한 후 차단하세요.</red>'
+        cannot-ban-more-players: '<red>차단 한도에 도달했습니다. 당신의 코스에서 더 이상 플레이어를 차단할 수 없습니다.</red>'
+        player-already-banned: '<red>플레이어는 이미 차단되어 있습니다.</red>'
+        player-banned: '<aqua>[name]</aqua><red>은 당신의 코스에서 차단되었습니다.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>이 당신을 그들의 코스에서 차단했습니다!</red>'
+        you-are-banned: '<aqua>당신은 이 코스에서 차단되어 있습니다!</aqua>'
+      unban:
+        description: 플레이어를 당신의 코스에서 차단 해제합니다
+        parameters: <플레이어>
+        cannot-unban-yourself: '<red>자신을 차단 해제할 수 없습니다!</red>'
+        player-not-banned: '<red>플레이어는 차단되지 않았습니다.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>은 당신의 코스에서 차단 해제되었습니다.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>이 당신을 그들의 코스에서 차단 해제했습니다!</green>'
+      banlist:
+        description: 차단된 플레이어를 나열합니다
+        noone: '<green>이 코스에서 차단된 플레이어가 없습니다.</green>'
+        the-following: '<aqua>다음 플레이어들이 차단되어 있습니다:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>최대</aqua><yellow>[number] </yellow><aqua>명의 플레이어를 더 차단할 수 있습니다.</aqua>'
+      settings:
+        description: 코스 설정을 표시합니다
+      language:
+        description: 언어를 선택합니다
+        parameters: '[언어]'
+        not-available: '<red>이 언어는 사용할 수 없습니다.</red>'
+        already-selected: '<red>당신은 이미 이 언어를 사용하고 있습니다.</red>'
+      expel:
+        description: 플레이어를 당신의 코스에서 추방합니다
+        parameters: <플레이어>
+        cannot-expel-yourself: '<red>자신을 추방할 수 없습니다!</red>'
+        cannot-expel: '<red>그 플레이어를 추방할 수 없습니다.</red>'
+        cannot-expel-member: '<red>팀 구성원을 추방할 수 없습니다!</red>'
+        not-on-island: '<red>그 플레이어는 당신의 코스에 없습니다!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>이 당신을 코스에서 추방했습니다!</red>'
+        success: '<green>당신은</green><aqua>[name] </aqua><green>을 코스에서 추방했습니다.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name]은 코스를 가지고 있습니다. 먼저 등록 취소하거나 삭제하세요!</red>'
+        setowner:
+          description: 플레이어에게 코스 소유권을 이전합니다
+          already-owner: '<red>플레이어는 이미 이 코스의 소유자입니다!</red>'
+      range:
+        description: 관리자 코스 범위 명령어
+        display:
+          description: 코스 범위 표시기를 표시/숨김
+          hint: |-
+            <red>빨간 배리어 아이콘</red><white>은 현재 보호 범위 한계를 표시합니다.
+            </white><gray>회색 파티클</gray><white>은 최대 한계를 표시합니다.
+            </white><green>녹색 파티클</green><white>은 보호 범위가 기본값과 다른 경우 기본 보호 범위를 표시합니다.</white>
+        set:
+          description: 코스 보호 범위를 설정합니다
+        reset:
+          description: 보호 범위를 월드 기본값으로 리셋합니다
+      register:
+        parameters: <플레이어>
+        description: 등록되지 않은 코스에 플레이어를 등록합니다
+        registered-island: '<green>[xyz]의 코스에 플레이어를 등록했습니다.</green>'
+        already-owned: '<red>이 지역은 이미 다른 플레이어가 소유하고 있습니다!</red>'
+        no-island-here: '<red>여기에 플레이어 코스가 없습니다. 확인을 위해 하나를 만드세요.</red>'
+        in-deletion: '<red>이 공간은 현재 재생성 중입니다. 나중에 시도하세요.</red>'
+      unregister:
+        description: 소유자를 코스에서 등록 취소하지만 코스 블록은 유지합니다
+        unregistered-island: '<green>[xyz]의 코스에서 플레이어를 등록 취소했습니다.</green>'
+      info:
+        description: 당신이 있는 곳 또는 플레이어에 대한 정보를 얻습니다
+        no-island: '<red>현재 등록된 코스에 없습니다...</red>'
+        island-location: '지역 위치: [xyz]'
+        island-coords: '지역 좌표: [xz1]에서 [xz2]'
+        is-spawn: 지역은 스폰 섬입니다
+      setrange:
+        description: 플레이어의 코스 범위를 설정합니다
+        range-updated: 지역 범위를 [number]으로 업데이트했습니다
+      tp:
+        description: 플레이어의 코스에 텔레포트합니다
+      getrank:
+        description: 플레이어의 코스에서의 랭크를 얻습니다
+        rank-is: '<green>랭크는 코스에서 [rank]입니다.</green>'
+      setrank:
+        description: 플레이어의 코스에서의 랭크를 설정합니다
+      setspawn:
+        description: 코스를 이 월드의 스폰으로 설정합니다
+        already-spawn: '<red>이 코스는 이미 스폰입니다!</red>'
+        no-island-here: '<red>여기에 등록된 코스가 없습니다.</red>'
+        confirmation: '<red>정말로 이 코스를 이 월드의 스폰으로 설정하시겠습니까?</red>'
+      delete:
+        description: 플레이어를 삭제하고 그들의 코스를 재생성합니다
+        deleted-island: '<green>[xyz]의 지역이 성공적으로 재생성되었습니다.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>크리에이티브 모드 진입을 전환합니다
+          </green><green>코스의 끝에
+          </green><green>및 섬 진입
+          </green>
+        name: "파쿠르 크리에이티브 모드"
+      ELYTRA:
+        description: 사용을 전환합니다
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>엔더맨이 블록을 제거할 수 있습니다
+          </green>
+      ENTER_EXIT_MESSAGES:
+        description: 진입/퇴출 메시지 표시
+        island: "[name]의 코스"
+        name: 진입/퇴출 메시지
+        now-entering: '<green>현재</green><aqua>[name]</aqua><green>에 진입 중입니다.</green>'
+        now-entering-your-island: '<green>당신의 코스에 진입 중입니다.</green>'
+        now-leaving: '<green>현재</green><aqua>[name]</aqua><green>을 떠나고 있습니다.</green>'
+        now-leaving-your-island: '<green>당신의 코스를 떠나고 있습니다.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>보호된 범위 밖으로 나간 몹을 제거합니다
+          </green><green>플레이어 공간
+          </green>
+        name: '<yellow>몹을 플레이어 코스에 제한</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>플레이어는 코스에서 재스폰됩니다
+          </green>
+        name: 지역 재스폰
+      LOCK:
+        name: 플레이어 코스를 잠금
+      OFFLINE_REDSTONE:
+        description: "<green>비활성화된 경우, 레드스톤은 </green><green>모든 회원이 오프라인인 코스에서 작동하지 않습니다. </green><green>렉을 줄일 수 있습니다.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>활석이 플레이어의 코스 바깥쪽에 블록을 밀 수 있도록 허용
+          </green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>PVP를 활성화/비활성화합니다
+          </red><red>보호된 코스에서.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>코스에 텔레포트할 때 몬스터를 제거합니다
+          </green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>플레이어가 텔레포트하는 것을 방지합니다
+          </green><green>낙하 중인 경우.</green>
+        hint: '<red>낙하 중에는 텔레포트할 수 없습니다!</red>'
+    locked: '<red>이 코스는 잠겨 있습니다!</red>'
+    protected: '<red>지역 보호: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>보호</gold>'
+        description: |-
+          <green>보호 설정
+          </green><green>이 코스용</green>
+      SETTING:
+        description: |-
+          <green>일반 설정
+          </green><green>이 코스용</green>

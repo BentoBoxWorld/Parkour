@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>起点已设置!</green>"
+  end-set: "<green>终点已设置!</green>"
+  already-set: "<red>起点和终点已设置!打破其中一个来重置。</red>"
+  start-removed: "<aqua>起点已移除!</aqua>"
+  end-removed: "<aqua>终点已移除!</aqua>"
+  resetting-start-end: "<yellow>正在重置起点和终点!</yellow>"
+  start: "<aqua>跑酷开始!</aqua>"
+  no-start-yet: "<red>还未设置起点。</red>"
+  no-end-yet: "<red>还未设置终点。</red>"
+  to-start: "<light_purple>要开始,请踩在金色压力板上。</light_purple>"
+  session-ended: "<red>你的跑酷会话已结束。</red>"
+  end: "<green>跑酷完成!</green>"
+  you-took: "<light_purple>你用时 [number]!</light_purple>"
+  start-before-end: "<aqua>你需要在完成前先开始!</aqua>"
+  checkpoint: "<yellow>检查点!</yellow>"
+  checkpoint-set: "<green>检查点已设置!</green>"
+  set-the-end: "<red>设置终点板</red>"
+  hours: "小时"
+  minutes: "分钟"
+  seconds: "秒"
+  hours-short: "时"
+  minutes-short: "分"
+  seconds-short: "秒"
+  courses:
+    description: "选择一个并尝试!"
+    gui-title: "跑酷课程"
+    head-description: "<aqua>[runs] 次运行</aqua>"
+  top:
+    gui-title: "最快课程排名"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>你的排名: [number]</green>"
+    beat-previous-time: "<light_purple>你击败了之前的记录!</light_purple>"
+    did-not-beat-previous-time: "<aqua>你没有击败之前的记录!</aqua>"
+  errors:
+    not-on-island: "<red>你必须在跑酷课程上才能做到这一点</red>"
+    no-warp: "<red>此课程已是私有的</red>"
+    not-in-run: "<red>你必须正在运行课程才能做到这一点</red>"
+  warp:
+    set: "<light_purple>传送点已设置!玩家现在可以看到你的课程!</light_purple>"
+    replaced: "<yellow>传送点已设置!旧传送点已停用!</yellow>"
+    removed: "<red>传送点已移除。玩家将看不到你的课程。</red>"
+    warping: "<green>正在传送到课程!</green>"
+    no-warp: "<red>此课程没有设置传送点!</red>"
+    unknown-course: "<red>未知课程!</red>"
+  quit:
+    success: "<yellow>你已退出运行,现在可以执行命令</yellow>"
+  general:
+    errors:
+      no-island: '<red>你没有课程!</red>'
+      player-has-island: '<red>玩家已经有课程了!</red>'
+      player-has-no-island: '<red>该玩家没有课程!</red>'
+      already-have-island: '<red>你已经有课程了!</red>'
+      no-safe-location: '<red>在课程中找不到安全位置!</red>'
+      not-owner: '<red>你不是你的队伍的所有者!</red>'
+  commands:
+    parkour:
+      courses:
+        description: 显示可玩和可传送的课程
+      cleartop:
+        description: 清除你的课程前十或从中删除玩家的分数
+        parameters: <玩家名>
+      setwarp:
+        description: 设置传送点并公开你的课程
+      warp:
+        description: 按名称传送到课程,或者如果你在课程上则传送到开始
+        parameters: <课程名>
+      removewarp:
+        description: 移除传送点并私密化你的课程
+      help:
+        description: 开始跑酷课程或传送到你的课程
+      go:
+        parameters: '[主页号码]'
+      sethome:
+        parameters: '[主页号码]'
+      top:
+        description: "显示顶级课程排名"
+      quit:
+        description: "停止当前课程上的计时器"
+    island:
+      go:
+        parameters: '[主页号码]'
+        description: 传送你到你的课程
+        teleport: '<green>正在传送你到你的课程。</green>'
+        teleported: '<green>已传送你到主页</green><yellow>#[number]。</yellow>'
+      help:
+        description: 主要跑酷命令
+      create:
+        description: 使用可选的蓝图创建课程(需要权限)
+        parameters: <蓝图>
+        too-many-islands: "<red>此世界中的课程太多:没有足够的空间来创建你的课程。</red>"
+        cannot-create-island: '<red>在时间内找不到位置,请重试...</red>'
+        unable-create-island: '<red>无法生成你的课程,请联系管理员。</red>'
+        creating-island: '<green>正在寻找你的课程位置...</green>'
+        pasting:
+          estimated-time: '<green>预计时间: </green><aqua>[number] </aqua><green>秒。</green>'
+          blocks: '<green>按块构建: </green><aqua>[number] </aqua><green>所有块...</green>'
+          entities: '<green>用实体填充: </green><aqua>[number] </aqua><green>所有实体...</green>'
+          done: '<green>完成!你的课程已准备好!</green>'
+        pick: '<dark_green>选择课程</dark_green>'
+        unknown-blueprint: '<red>该蓝图尚未加载。</red>'
+        on-first-login: '<green>欢迎!我们将在几秒后开始准备你的课程。</green>'
+        you-can-teleport-to-your-island: '<green>你可以随时传送到你的课程。</green>'
+      info:
+        description: 显示关于你的课程或玩家课程的信息
+        parameters: <玩家>
+      near:
+        description: 显示你周围相邻课程的名称
+        parameters: ''
+        the-following-islands: '<green>以下课程靠近:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: 北
+        south: 南
+        east: 东
+        west: 西
+        no-neighbors: '<red>你没有相邻的课程!</red>'
+      reset:
+        description: 重启你的课程并删除旧课程
+        parameters: <蓝图>
+        none-left: '<red>你没有重置机会了!</red>'
+        resets-left: '<red>你有</red><aqua>[number] </aqua><red>次重置剩余</red>'
+        confirmation: |-
+          <red>你确定要这样做吗?
+          </red><red>所有课程成员将被踢出课程,之后需要重新邀请。
+          </red><red>没有回头路:一旦删除你的当前课程,就<bold>无法</bold></red><red>稍后恢复。</red>
+        kicked-from-island: '<red>因为所有者正在重置,你被踢出 [gamemode] 中的课程。</red>'
+      sethome:
+        description: 设置你的主页传送点
+        must-be-on-your-island: '<red>你必须在你的课程上才能设置主页!</red>'
+        num-homes: '<red>主页可以是 1 到 [number]。</red>'
+        home-set: '<gold>你的课程主页已设置到你的当前位置。</gold>'
+        nether:
+          not-allowed: '<red>你不被允许在下界设置主页。</red>'
+          confirmation: '<red>你确定要在下界设置主页吗?</red>'
+        the-end:
+          not-allowed: '<red>你不被允许在末地设置主页。</red>'
+          confirmation: '<red>你确定要在末地设置主页吗?</red>'
+        parameters: '[主页号码]'
+      setname:
+        description: 为你的课程设置一个名称
+        name-too-short: '<red>太短了。最小大小是 [number] 个字符。</red>'
+        name-too-long: '<red>太长了。最大大小是 [number] 个字符。</red>'
+        name-already-exists: '<red>已经存在一个具有该名称的课程!</red>'
+        parameters: <名称>
+        success: '<green>成功将你的课程名称设置为</green><aqua>[name]</aqua><green>。</green>'
+      resetname:
+        description: 重置你的课程名称
+        success: '<green>成功重置你的课程名称。</green>'
+      team:
+        description: 管理你的队伍
+        coop:
+          description: 在你的课程上给予玩家合作排名
+          parameters: <玩家>
+          cannot-coop-yourself: '<red>你不能自己与自己合作!</red>'
+          already-has-rank: '<red>玩家已经有排名!</red>'
+          you-are-a-coop-member: '<dark_green>你已被</dark_green><aqua>[name]</aqua><green>合作。</green>'
+          success: '<green>你已合作</green><aqua>[name]</aqua><green>。</green>'
+          name-has-invited-you: '<green>[name] 邀请你成为他们课程的合作成员。</green>'
+        uncoop:
+          description: 从玩家移除合作排名
+          parameters: <玩家>
+          cannot-uncoop-yourself: '<red>你不能取消自己的合作!</red>'
+          cannot-uncoop-member: '<red>你不能取消团队成员的合作!</red>'
+          player-not-cooped: '<red>玩家未被合作!</red>'
+          you-are-no-longer-a-coop-member: '<red>你不再是 [name] 课程的合作成员。</red>'
+          all-members-logged-off: '<red>所有课程成员都离线了,所以你不再是 [name] 课程的合作成员。</red>'
+          success: '<aqua>[name] </aqua><green>不再是你课程的合作成员。</green>'
+          is-full: '<red>你不能与任何人合作了。</red>'
+        trust:
+          description: 给予玩家在你的课程上的受信排名
+          parameters: <玩家>
+          trust-in-yourself: '<red>相信自己!</red>'
+          name-has-invited-you: '<green>[name] 邀请你成为他们课程的受信成员。</green>'
+          player-already-trusted: '<red>玩家已经受信!</red>'
+          you-are-trusted: '<dark_green>你受</dark_green><aqua>[name]</aqua><green>信任!</green>'
+          success: '<green>你已信任</green><aqua>[name]</aqua><green>。</green>'
+          is-full: '<red>你不能再信任任何人了。</red>'
+        invite:
+          description: 邀请玩家加入你的课程
+          invitation-sent: '<green>邀请已发送至</green><aqua>[name]</aqua><green>。</green>'
+          removing-invite: '<red>正在移除邀请。</red>'
+          name-has-invited-you: '<green>[name] 邀请你加入他们的课程。</green>'
+          to-accept-or-reject: '<green>要接受,请执行 /[label] team accept,或要拒绝请执行 /[label] team reject</green>'
+          you-will-lose-your-island: '<red>警告!如果接受,你会失去你的课程!</red>'
+          errors:
+            cannot-invite-self: '<red>你不能邀请自己!</red>'
+            cooldown: '<red>你不能在 [number] 秒内再次邀请该玩家。</red>'
+            island-is-full: '<red>你的课程满了,你不能邀请任何其他人。</red>'
+            none-invited-you: '<red>没有人邀请你 :c。</red>'
+            you-already-are-in-team: '<red>你已在一个团队中!</red>'
+            already-on-team: '<red>该玩家已在一个团队中!</red>'
+            invalid-invite: '<red>该邀请不再有效,抱歉。</red>'
+            you-have-already-invited: '<red>你已经邀请了该玩家!</red>'
+          parameters: <玩家>
+          you-can-invite: '<green>你还可以邀请 [number] 名玩家。</green>'
+          accept:
+            description: 接受邀请
+            you-joined-island: '<green>你加入了课程!使用</green><aqua>/[label] team </aqua><green>查看其他成员。</green>'
+            name-joined-your-island: '<green>[name] 加入了你的课程!</green>'
+            confirmation: |-
+              <red>你确定要接受这个邀请吗?
+              </red><red><bold>你会 <underlined>失去</underlined></bold></red><red><bold>你当前的课程!</bold></red>
+          reject:
+            description: 拒绝邀请
+            you-rejected-invite: '<green>你拒绝了加入课程的邀请。</green>'
+            name-rejected-your-invite: '<red>[name] 拒绝了你的课程邀请!</red>'
+          cancel:
+            description: 取消加入你课程的待处理邀请
+        leave:
+          cannot-leave: '<red>所有者不能离开!先成为成员,或踢出所有成员。</red>'
+          description: 离开你的课程
+          left-your-island: '<red>[name] </red><red>离开了你的课程</red>'
+          success: '<green>你离开了这个课程。</green>'
+        kick:
+          description: 从你的课程中移除成员
+          parameters: <玩家>
+          owner-kicked: '<red>所有者将你从 [gamemode] 中的课程踢出!</red>'
+          cannot-kick: '<red>你不能踢自己!</red>'
+          success: '<aqua>[name] </aqua><green>已从你的课程中踢出。</green>'
+        demote:
+          description: 在你的课程上降级玩家
+          parameters: <玩家>
+          errors:
+            cant-demote-yourself: '<red>你不能降级自己!</red>'
+          failure: '<red>玩家不能再被降级了!</red>'
+          success: '<green>已将 [name] 降级至 [rank]</green>'
+        promote:
+          description: 在你的课程上提升玩家
+          parameters: <玩家>
+          failure: '<red>玩家不能再被提升了!</red>'
+          success: '<green>已将 [name] 提升至 [rank]</green>'
+        setowner:
+          description: 将你的课程所有权转移给成员
+          errors:
+            cant-transfer-to-yourself: '<red>你不能将所有权转移给自己!</red><gray>(<italic>实际上你可以...但我们不想让你这样做。因为它没用。</italic></gray><gray>)</gray>'
+            target-is-not-member: '<red>该玩家不是你的课程团队的一部分!</red>'
+          name-is-the-owner: '<green>[name] 现在是课程所有者!</green>'
+          parameters: <玩家>
+          you-are-the-owner: '<green>你现在是课程所有者!</green>'
+      ban:
+        description: 禁止玩家进入你的课程
+        parameters: <玩家>
+        cannot-ban-yourself: '<red>你不能禁止自己!</red>'
+        cannot-ban: '<red>该玩家不能被禁止。</red>'
+        cannot-ban-member: '<red>先踢出团队成员,然后禁止。</red>'
+        cannot-ban-more-players: '<red>你已达到禁止限制,不能再从你的课程中禁止任何玩家。</red>'
+        player-already-banned: '<red>玩家已被禁止。</red>'
+        player-banned: '<aqua>[name]</aqua><red>已被禁止进入你的课程。</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>已将你禁止进入他们的课程!</red>'
+        you-are-banned: '<aqua>你被禁止进入这个课程!</aqua>'
+      unban:
+        description: 取消禁止玩家进入你的课程
+        parameters: <玩家>
+        cannot-unban-yourself: '<red>你不能取消禁止自己!</red>'
+        player-not-banned: '<red>玩家未被禁止。</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>已取消禁止进入你的课程。</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>已取消禁止你进入他们的课程!</green>'
+      banlist:
+        description: 列出被禁止的玩家
+        noone: '<green>这个课程上没有被禁止的玩家。</green>'
+        the-following: '<aqua>以下玩家被禁止:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>你还可以禁止</aqua><yellow>[number] </yellow><aqua>名玩家。</aqua>'
+      settings:
+        description: 显示课程设置
+      language:
+        description: 选择语言
+        parameters: '[语言]'
+        not-available: '<red>此语言不可用。</red>'
+        already-selected: '<red>你已经在使用此语言。</red>'
+      expel:
+        description: 从你的课程中驱逐玩家
+        parameters: <玩家>
+        cannot-expel-yourself: '<red>你不能驱逐自己!</red>'
+        cannot-expel: '<red>该玩家不能被驱逐。</red>'
+        cannot-expel-member: '<red>你不能驱逐团队成员!</red>'
+        not-on-island: '<red>该玩家不在你的课程上!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>已将你从课程中驱逐!</red>'
+        success: '<green>你已将</green><aqua>[name] </aqua><green>从课程中驱逐。</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] 有一个课程。先注销或删除他们!</red>'
+        setowner:
+          description: 将课程所有权转移给玩家
+          already-owner: '<red>玩家已经是此课程的所有者!</red>'
+      range:
+        description: 管理员课程范围命令
+        display:
+          description: 显示/隐藏课程范围指示器
+          hint: |-
+            <red>红色屏障图标</red><white>显示当前受保护范围限制。
+            </white><gray>灰色粒子</gray><white>显示最大限制。
+            </white><green>绿色粒子</green><white>显示默认受保护范围(如果受保护范围与之不同)。</white>
+        set:
+          description: 设置课程受保护范围
+        reset:
+          description: 将受保护范围重置为世界默认值
+      register:
+        parameters: <玩家>
+        description: 将玩家注册到你所在的无主课程
+        registered-island: '<green>已将玩家注册到 [xyz] 的课程。</green>'
+        already-owned: '<red>该地区已被另一个玩家拥有!</red>'
+        no-island-here: '<red>这里没有玩家课程。确认以创建一个。</red>'
+        in-deletion: '<red>此空间目前正在重新生成。稍后重试。</red>'
+      unregister:
+        description: 从课程中注销所有者,但保持课程块原样
+        unregistered-island: '<green>已从 [xyz] 的课程中注销玩家。</green>'
+      info:
+        description: 获取关于你所在位置或玩家的信息
+        no-island: '<red>你当前不在已注册的课程中...</red>'
+        island-location: '地区位置: [xyz]'
+        island-coords: '地区坐标: [xz1] 至 [xz2]'
+        is-spawn: 地区是生成岛
+      setrange:
+        description: 设置玩家课程的范围
+        range-updated: 地区范围已更新为 [number]
+      tp:
+        description: 传送到玩家的课程
+      getrank:
+        description: 获取玩家在其课程中的排名
+        rank-is: '<green>排名是他们课程中的 [rank]。</green>'
+      setrank:
+        description: 设置玩家在其课程中的排名
+      setspawn:
+        description: 将课程设置为此世界的生成点
+        already-spawn: '<red>此课程已是生成点!</red>'
+        no-island-here: '<red>这里没有已注册的课程。</red>'
+        confirmation: '<red>你确定要将此课程设置为此世界的生成点吗?</red>'
+      delete:
+        description: 删除玩家并重新生成其课程
+        deleted-island: '<green>[xyz] 的地区已成功重新生成。</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>切换进入创意模式
+          </green><green>在课程结束
+          </green><green>和进入岛屿
+          </green>
+        name: "跑酷创意模式"
+      ELYTRA:
+        description: 切换使用
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>末影人可以移除
+          </green><green>块</green>
+      ENTER_EXIT_MESSAGES:
+        description: 显示进入和退出消息
+        island: "[name] 的课程"
+        name: 进入/退出消息
+        now-entering: '<green>现在进入</green><aqua>[name]</aqua><green>。</green>'
+        now-entering-your-island: '<green>现在进入你的课程。</green>'
+        now-leaving: '<green>现在离开</green><aqua>[name]</aqua><green>。</green>'
+        now-leaving-your-island: '<green>现在离开你的课程。</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>移除超出受保护范围的生物
+          </green><green>玩家空间
+          </green>
+        name: '<yellow>将生物限制在玩家课程</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>玩家在课程中重生
+          </green>
+        name: 地区重生
+      LOCK:
+        name: 锁定玩家课程
+      OFFLINE_REDSTONE:
+        description: "<green>禁用时,红石将不会 </green><green>在所有成员离线的课程中运作。 </green><green>可能有助于减少卡顿。   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>允许活塞将块推到
+          </green><green>玩家课程外</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>启用/禁用 PVP
+          </red><red>在受保护课程中。</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>传送到课程时移除怪物
+          </green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>防止玩家在以下情况下传送
+          </green><green>他们正在下落。</green>
+        hint: '<red>下落时无法传送!</red>'
+    locked: '<red>此课程已锁定!</red>'
+    protected: '<red>地区受保护: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>保护</gold>'
+        description: |-
+          <green>保护设置
+          </green><green>用于此课程</green>
+      SETTING:
+        description: |-
+          <green>通用设置
+          </green><green>用于此课程</green>

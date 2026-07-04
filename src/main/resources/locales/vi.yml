@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Điểm bắt đầu đã được đặt!</green>"
+  end-set: "<green>Điểm kết thúc đã được đặt!</green>"
+  already-set: "<red>Điểm bắt đầu và kết thúc đã được đặt! Phá một để đặt lại.</red>"
+  start-removed: "<aqua>Điểm bắt đầu đã bị xóa!</aqua>"
+  end-removed: "<aqua>Điểm kết thúc đã bị xóa!</aqua>"
+  resetting-start-end: "<yellow>Đang đặt lại điểm bắt đầu và kết thúc!</yellow>"
+  start: "<aqua>Bắt đầu parkour!</aqua>"
+  no-start-yet: "<red>Chưa có điểm bắt đầu nào được đặt.</red>"
+  no-end-yet: "<red>Chưa có điểm kết thúc nào được đặt.</red>"
+  to-start: "<light_purple>Để bắt đầu, hãy bước lên tấm áp lực vàng.</light_purple>"
+  session-ended: "<red>Phiên parkour của bạn đã kết thúc.</red>"
+  end: "<green>Parkour Hoàn Thành!</green>"
+  you-took: "<light_purple>Bạn sử dụng [number]!</light_purple>"
+  start-before-end: "<aqua>Bạn cần phải bắt đầu trước khi kết thúc!</aqua>"
+  checkpoint: "<yellow>Điểm kiểm tra!</yellow>"
+  checkpoint-set: "<green>Điểm kiểm tra đã được đặt!</green>"
+  set-the-end: "<red>Đặt tấm kết thúc</red>"
+  hours: "giờ"
+  minutes: "phút"
+  seconds: "giây"
+  hours-short: "g"
+  minutes-short: "p"
+  seconds-short: "s"
+  courses:
+    description: "Chọn một và thử nó!"
+    gui-title: "Các Khóa Học Parkour"
+    head-description: "<aqua>[runs] lần chơi</aqua>"
+  top:
+    gui-title: "Xếp Hạng Khóa Học Nhanh Nhất"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Xếp hạng của bạn: [number]</green>"
+    beat-previous-time: "<light_purple>Bạn đã vượt qua thời gian trước đó!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Bạn đã không vượt qua thời gian trước đó!</aqua>"
+  errors:
+    not-on-island: "<red>Bạn phải ở trên một khóa học parkour để làm điều đó</red>"
+    no-warp: "<red>Khóa học này đã ở chế độ riêng tư</red>"
+    not-in-run: "<red>Bạn phải đang chạy một khóa học để làm điều đó</red>"
+  warp:
+    set: "<light_purple>Điểm warp đã được đặt! Các cầu thủ bây giờ có thể thấy khóa học của bạn!</light_purple>"
+    replaced: "<yellow>Điểm warp đã được đặt! Điểm cũ đã bị vô hiệu hóa!</yellow>"
+    removed: "<red>Điểm warp đã bị xóa. Các cầu thủ sẽ không nhìn thấy khóa học của bạn.</red>"
+    warping: "<green>Warp đến khóa học!</green>"
+    no-warp: "<red>Không có warp nào được đặt cho khóa học này!</red>"
+    unknown-course: "<red>Khóa học không xác định!</red>"
+  quit:
+    success: "<yellow>Bạn đã bỏ cuộc chạy, và có thể chạy lệnh lại</yellow>"
+  general:
+    errors:
+      no-island: '<red>Bạn không có khóa học!</red>'
+      player-has-island: '<red>Người chơi đã có khóa học!</red>'
+      player-has-no-island: '<red>Người chơi đó không có khóa học!</red>'
+      already-have-island: '<red>Bạn đã có khóa học!</red>'
+      no-safe-location: '<red>Không tìm thấy vị trí an toàn trong khóa học!</red>'
+      not-owner: '<red>Bạn không phải là chủ sở hữu của đội của bạn!</red>'
+  commands:
+    parkour:
+      courses:
+        description: hiển thị các khóa học có sẵn để chơi và warp đến
+      cleartop:
+        description: xóa mười hàng đầu của khóa học của bạn hoặc xóa điểm của một người chơi
+        parameters: <tên người chơi>
+      setwarp:
+        description: đặt điểm warp và làm cho khóa học của bạn công khai
+      warp:
+        description: Warp đến một khóa học theo tên hoặc đến điểm bắt đầu nếu bạn ở trên một
+        parameters: <tên khóa học>
+      removewarp:
+        description: xóa điểm warp và làm cho khóa học của bạn ở chế độ riêng tư
+      help:
+        description: Bắt đầu một khóa học parkour hoặc teleport đến khóa học của bạn
+      go:
+        parameters: '[số nhà]'
+      sethome:
+        parameters: '[số nhà]'
+      top:
+        description: "Hiển thị xếp hạng khóa học hàng đầu"
+      quit:
+        description: "Dừng bộ hẹn giờ trên khóa học hiện tại"
+    island:
+      go:
+        parameters: '[số nhà]'
+        description: teleport bạn đến khóa học của bạn
+        teleport: '<green>Đang teleport bạn đến khóa học của bạn.</green>'
+        teleported: '<green>Đã teleport bạn đến nhà </green><yellow>#[number].</yellow>'
+      help:
+        description: lệnh parkour chính
+      create:
+        description: tạo một khóa học, sử dụng blueprint tùy chọn (yêu cầu quyền hạn)
+        parameters: <blueprint>
+        too-many-islands: "<red>Có quá nhiều khóa học trong thế giới này: không có đủ chỗ để tạo khóa học của bạn.</red>"
+        cannot-create-island: '<red>Không thể tìm thấy vị trí kịp thời, vui lòng thử lại...</red>'
+        unable-create-island: '<red>Khóa học của bạn không thể được tạo, vui lòng liên hệ với quản trị viên.</red>'
+        creating-island: '<green>Đang tìm vị trí cho khóa học của bạn...</green>'
+        pasting:
+          estimated-time: '<green>Thời gian ước tính: </green><aqua>[number] </aqua><green>giây.</green>'
+          blocks: '<green>Xây dựng nó từng khối: </green><aqua>[number] </aqua><green>khối tất cả...</green>'
+          entities: '<green>Lấp đầy nó bằng các thực thể: </green><aqua>[number] </aqua><green>thực thể tất cả...</green>'
+          done: '<green>Hoàn thành! Khóa học của bạn sẵn sàng và chờ bạn!</green>'
+        pick: '<dark_green>Chọn một khóa học</dark_green>'
+        unknown-blueprint: '<red>Blueprint đó chưa được tải.</red>'
+        on-first-login: '<green>Chào mừng! Chúng tôi sẽ bắt đầu chuẩn bị khóa học của bạn trong vài giây.</green>'
+        you-can-teleport-to-your-island: '<green>Bạn có thể teleport đến khóa học của bạn bất cứ khi nào.</green>'
+      info:
+        description: hiển thị thông tin về khóa học của bạn hoặc khóa học của người chơi
+        parameters: <người chơi>
+      near:
+        description: hiển thị tên của các khóa học lân cận xung quanh bạn
+        parameters: ''
+        the-following-islands: '<green>Các khóa học sau đây ở gần:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Bắc
+        south: Nam
+        east: Đông
+        west: Tây
+        no-neighbors: '<red>Bạn không có khóa học lân cận trực tiếp!</red>'
+      reset:
+        description: khởi động lại khóa học của bạn và xóa khóa học cũ
+        parameters: <blueprint>
+        none-left: '<red>Bạn không còn reset nữa!</red>'
+        resets-left: '<red>Bạn có </red><aqua>[number] </aqua><red>reset còn lại</red>'
+        confirmation: |-
+          <red>Bạn có chắc chắn muốn làm điều này không?
+          </red><red>Tất cả các thành viên khóa học sẽ bị loại khỏi khóa học, bạn sẽ phải mời lại họ sau này.
+          </red><red>Không có quay lại: sau khi khóa học hiện tại của bạn bị xóa, sẽ không có <bold>không </bold></red> <red>cách để lấy lại nó sau này.</red>
+        kicked-from-island: '<red>Bạn bị loại khỏi khóa học của bạn trong [gamemode] vì chủ sở hữu đang đặt lại.</red>'
+      sethome:
+        description: đặt điểm teleport nhà của bạn
+        must-be-on-your-island: '<red>Bạn phải ở trên khóa học của bạn để đặt nhà!</red>'
+        num-homes: '<red>Nhà có thể là 1 đến [number].</red>'
+        home-set: '<gold>Nhà khóa học của bạn đã được đặt ở vị trí hiện tại của bạn.</gold>'
+        nether:
+          not-allowed: '<red>Bạn không được phép đặt nhà của bạn trong Nether.</red>'
+          confirmation: '<red>Bạn có chắc chắn muốn đặt nhà của bạn trong Nether không?</red>'
+        the-end:
+          not-allowed: '<red>Bạn không được phép đặt nhà của bạn trong End.</red>'
+          confirmation: '<red>Bạn có chắc chắn muốn đặt nhà của bạn trong End không?</red>'
+        parameters: '[số nhà]'
+      setname:
+        description: đặt tên cho khóa học của bạn
+        name-too-short: '<red>Quá ngắn. Kích thước tối thiểu là [number] ký tự.</red>'
+        name-too-long: '<red>Quá dài. Kích thước tối đa là [number] ký tự.</red>'
+        name-already-exists: '<red>Đã có một khóa học với tên đó!</red>'
+        parameters: <tên>
+        success: '<green>Đặt thành công tên khóa học của bạn thành </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: đặt lại tên khóa học của bạn
+        success: '<green>Đặt lại tên khóa học của bạn thành công.</green>'
+      team:
+        description: quản lý đội của bạn
+        coop:
+          description: tạo một người chơi rank coop trên khóa học của bạn
+          parameters: <người chơi>
+          cannot-coop-yourself: '<red>Bạn không thể coop chính mình!</red>'
+          already-has-rank: '<red>Người chơi đã có rank!</red>'
+          you-are-a-coop-member: '<dark_green>Bạn được coop bởi </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Bạn đã coop </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] đã mời bạn tham gia thành viên coop khóa học của họ.</green>'
+        uncoop:
+          description: xóa rank coop khỏi người chơi
+          parameters: <người chơi>
+          cannot-uncoop-yourself: '<red>Bạn không thể uncoop chính mình!</red>'
+          cannot-uncoop-member: '<red>Bạn không thể uncoop thành viên đội!</red>'
+          player-not-cooped: '<red>Người chơi không được coop!</red>'
+          you-are-no-longer-a-coop-member: '<red>Bạn không còn là thành viên coop của khóa học [name].</red>'
+          all-members-logged-off: '<red>Tất cả các thành viên khóa học đã đăng xuất nên bạn không còn là thành viên coop của khóa học [name].</red>'
+          success: '<aqua>[name] </aqua><green>không còn là thành viên coop của khóa học của bạn.</green>'
+          is-full: '<red>Bạn không thể coop bất cứ ai khác.</red>'
+        trust:
+          description: cấp một người chơi rank đáng tin cậy trên khóa học của bạn
+          parameters: <người chơi>
+          trust-in-yourself: '<red>Tín tưởng vào chính bạn!</red>'
+          name-has-invited-you: '<green>[name] đã mời bạn tham gia thành viên đáng tin cậy khóa học của họ.</green>'
+          player-already-trusted: '<red>Người chơi đã được tin tưởng!</red>'
+          you-are-trusted: '<dark_green>Bạn được tin tưởng bởi </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Bạn đã tin tưởng </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Bạn không thể tin tưởng bất cứ ai khác.</red>'
+        invite:
+          description: mời một người chơi tham gia khóa học của bạn
+          invitation-sent: '<green>Lời mời được gửi đến </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Đang xóa lời mời.</red>'
+          name-has-invited-you: '<green>[name] đã mời bạn tham gia khóa học của họ.</green>'
+          to-accept-or-reject: '<green>Làm /[label] team accept để chấp nhận, hoặc /[label] team reject để từ chối</green>'
+          you-will-lose-your-island: '<red>CẢNH BÁO! Bạn sẽ mất khóa học của bạn nếu chấp nhận!</red>'
+          errors:
+            cannot-invite-self: '<red>Bạn không thể mời chính mình!</red>'
+            cooldown: '<red>Bạn không thể mời người đó trong [number] giây nữa.</red>'
+            island-is-full: '<red>Khóa học của bạn đầy, bạn không thể mời bất cứ ai khác.</red>'
+            none-invited-you: '<red>Không ai mời bạn :c.</red>'
+            you-already-are-in-team: '<red>Bạn đã ở trong một đội!</red>'
+            already-on-team: '<red>Người chơi đó đã ở trong một đội!</red>'
+            invalid-invite: '<red>Lời mời đó không còn có giá trị, xin lỗi.</red>'
+            you-have-already-invited: '<red>Bạn đã mời người chơi đó rồi!</red>'
+          parameters: <người chơi>
+          you-can-invite: '<green>Bạn có thể mời [number] người chơi nữa.</green>'
+          accept:
+            description: chấp nhận lời mời
+            you-joined-island: '<green>Bạn đã tham gia một khóa học! Sử dụng </green><aqua>/[label] team </aqua><green>để xem các thành viên khác.</green>'
+            name-joined-your-island: '<green>[name] đã tham gia khóa học của bạn!</green>'
+            confirmation: |-
+              <red>Bạn có chắc chắn muốn chấp nhận lời mời này không?
+              </red><red><bold>Bạn sẽ <underlined>MẤT </underlined></bold></red><red><bold>khóa học hiện tại của bạn!</bold></red>
+          reject:
+            description: từ chối lời mời
+            you-rejected-invite: '<green>Bạn đã từ chối lời mời tham gia một khóa học.</green>'
+            name-rejected-your-invite: '<red>[name] đã từ chối lời mời khóa học của bạn!</red>'
+          cancel:
+            description: hủy lời mời đang chờ xử lý để tham gia khóa học của bạn
+        leave:
+          cannot-leave: '<red>Chủ sở hữu không thể rời đi! Trở thành thành viên trước tiên, hoặc loại bỏ tất cả các thành viên.</red>'
+          description: rời khỏi khóa học của bạn
+          left-your-island: '<red>[name] </red><red>đã rời khỏi khóa học của bạn</red>'
+          success: '<green>Bạn đã rời khỏi khóa học này.</green>'
+        kick:
+          description: loại bỏ một thành viên khỏi khóa học của bạn
+          parameters: <người chơi>
+          owner-kicked: '<red>Chủ sở hữu đã loại bỏ bạn khỏi khóa học trong [gamemode]!</red>'
+          cannot-kick: '<red>Bạn không thể loại bỏ chính mình!</red>'
+          success: '<aqua>[name] </aqua><green>đã bị loại khỏi khóa học của bạn.</green>'
+        demote:
+          description: giáng chức một người chơi trên khóa học của bạn
+          parameters: <người chơi>
+          errors:
+            cant-demote-yourself: '<red>Bạn không thể giáng chức chính mình!</red>'
+          failure: '<red>Người chơi không thể bị giáng chức nữa!</red>'
+          success: '<green>Giáng chức [name] xuống [rank]</green>'
+        promote:
+          description: nâng cấp một người chơi trên khóa học của bạn
+          parameters: <người chơi>
+          failure: '<red>Người chơi không thể được nâng cấp nữa!</red>'
+          success: '<green>Nâng cấp [name] lên [rank]</green>'
+        setowner:
+          description: chuyển quyền sở hữu khóa học của bạn cho một thành viên
+          errors:
+            cant-transfer-to-yourself: '<red>Bạn không thể chuyển quyền sở hữu cho chính mình! </red><gray>(<italic> Thực tế, bạn có thể... Nhưng chúng tôi không muốn bạn làm điều đó. Bởi vì nó vô dụng.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Người chơi đó không phải là một phần của đội khóa học của bạn!</red>'
+          name-is-the-owner: '<green>[name] hiện là chủ sở hữu khóa học!</green>'
+          parameters: <người chơi>
+          you-are-the-owner: '<green>Bạn hiện là chủ sở hữu khóa học!</green>'
+      ban:
+        description: cấm một người chơi khỏi khóa học của bạn
+        parameters: <người chơi>
+        cannot-ban-yourself: '<red>Bạn không thể cấm chính mình!</red>'
+        cannot-ban: '<red>Người chơi đó không thể bị cấm.</red>'
+        cannot-ban-member: '<red>Loại bỏ thành viên đội trước, sau đó cấm.</red>'
+        cannot-ban-more-players: '<red>Bạn đã đạt đến giới hạn cấm, bạn không thể cấm thêm người chơi từ khóa học của bạn.</red>'
+        player-already-banned: '<red>Người chơi đã bị cấm.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  hiện bị cấm khỏi khóa học của bạn.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  đã cấm bạn khỏi khóa học của họ!</red>'
+        you-are-banned: '<aqua>Bạn bị cấm khỏi khóa học này!</aqua>'
+      unban:
+        description: hủy cấm một người chơi khỏi khóa học của bạn
+        parameters: <người chơi>
+        cannot-unban-yourself: '<red>Bạn không thể hủy cấm chính mình!</red>'
+        player-not-banned: '<red>Người chơi không bị cấm.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  hiện không bị cấm khỏi khóa học của bạn.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  đã hủy cấm bạn khỏi khóa học của họ!</green>'
+      banlist:
+        description: liệt kê các người chơi bị cấm
+        noone: '<green>Không ai bị cấm trên khóa học này.</green>'
+        the-following: '<aqua>Các người chơi sau đây bị cấm:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Bạn có thể cấm tối đa </aqua><yellow>[number] </yellow><aqua>người chơi khác.</aqua>'
+      settings:
+        description: hiển thị cài đặt khóa học
+      language:
+        description: chọn ngôn ngữ
+        parameters: '[ngôn ngữ]'
+        not-available: '<red>Ngôn ngữ này không có sẵn.</red>'
+        already-selected: '<red>Bạn đang sử dụng ngôn ngữ này rồi.</red>'
+      expel:
+        description: trục xuất một người chơi khỏi khóa học của bạn
+        parameters: <người chơi>
+        cannot-expel-yourself: '<red>Bạn không thể trục xuất chính mình!</red>'
+        cannot-expel: '<red>Người chơi đó không thể bị trục xuất.</red>'
+        cannot-expel-member: '<red>Bạn không thể trục xuất thành viên đội!</red>'
+        not-on-island: '<red>Người chơi đó không ở trên khóa học của bạn!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  đã trục xuất bạn khỏi khóa học!</red>'
+        success: '<green>Bạn đã trục xuất </green><aqua>[name] </aqua><green>khỏi khóa học.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] có một khóa học. Hủy đăng ký hoặc xóa họ trước!</red>'
+        setowner:
+          description: chuyển quyền sở hữu khóa học cho người chơi
+          already-owner: '<red>Người chơi đã là chủ sở hữu của khóa học này!</red>'
+      range:
+        description: Lệnh phạm vi khóa học Admin
+        display:
+          description: Hiển thị/ẩn các chỉ báo phạm vi khóa học
+          hint: |-
+            <red>Các biểu tượng Rào chắn Đỏ </red><white>hiển thị giới hạn phạm vi bảo vệ hiện tại.
+            </white><gray>Các hạt Xám </gray><white>hiển thị giới hạn tối đa.
+            </white><green>Các hạt Xanh </green><white>hiển thị phạm vi bảo vệ mặc định nếu phạm vi bảo vệ khác với nó.</white>
+        set:
+          description: Đặt phạm vi bảo vệ khóa học
+        reset:
+          description: Đặt lại phạm vi bảo vệ thành mặc định thế giới
+      register:
+        parameters: <người chơi>
+        description: đăng ký người chơi cho khóa học không sở hữu mà bạn đang ở
+        registered-island: '<green>Người chơi đã đăng ký vào khóa học tại [xyz].</green>'
+        already-owned: '<red>Khu vực đã được sở hữu bởi một người chơi khác!</red>'
+        no-island-here: '<red>Không có khóa học người chơi ở đây. Xác nhận để tạo một.</red>'
+        in-deletion: '<red>Không gian này đang được tái tạo. Thử lại sau.</red>'
+      unregister:
+        description: hủy đăng ký chủ sở hữu khỏi khóa học, nhưng giữ các khối khóa học nguyên trạng
+        unregistered-island: '<green>Người chơi đã hủy đăng ký khỏi khóa học tại [xyz].</green>'
+      info:
+        description: lấy thông tin về nơi bạn ở hoặc về người chơi
+        no-island: '<red>Bạn hiện không ở trong một khóa học đã đăng ký...</red>'
+        island-location: 'Vị trí khu vực: [xyz]'
+        island-coords: 'Tọa độ khu vực: [xz1] đến [xz2]'
+        is-spawn: Khu vực là khóa học spawn
+      setrange:
+        description: đặt phạm vi của khóa học của người chơi
+        range-updated: Phạm vi khu vực được cập nhật thành [number]
+      tp:
+        description: teleport đến khóa học của người chơi
+      getrank:
+        description: nhận rank của một người chơi trong khóa học của họ
+        rank-is: '<green>Rank là [rank] trong khóa học của họ.</green>'
+      setrank:
+        description: đặt rank của một người chơi trong khóa học của họ
+      setspawn:
+        description: đặt khóa học là spawn cho thế giới này
+        already-spawn: '<red>Khóa học này đã là spawn!</red>'
+        no-island-here: '<red>Không có khóa học đã đăng ký ở đây.</red>'
+        confirmation: '<red>Bạn có chắc chắn muốn đặt khóa học này làm spawn cho thế giới này không?</red>'
+      delete:
+        description: xóa một người chơi và tái tạo khóa học của họ
+        deleted-island: '<green>Khu vực tại </green><yellow>[xyz] </yellow><green>đã được tái tạo thành công.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Bật/tắt chế độ sáng tạo
+          </green><green>ở cuối khóa học và
+          </green><green>vào đảo
+          </green>
+        name: "Chế Độ Sáng Tạo Parkour"
+      ELYTRA:
+        description: Bật/tắt sử dụng
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermen có thể xóa
+          </green><green>khối</green>
+      ENTER_EXIT_MESSAGES:
+        description: Hiển thị tin nhắn nhập và thoát
+        island: "khóa học của [name]"
+        name: Tin nhắn Nhập/Thoát
+        now-entering: '<green>Hiện đang vào </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Hiện đang vào khóa học của bạn.</green>'
+        now-leaving: '<green>Hiện đang rời khỏi </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Hiện đang rời khỏi khóa học của bạn.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Xóa quái vật đi ra ngoài
+          </green><green>không gian người chơi
+          </green><green>được bảo vệ</green>
+        name: '<yellow>Giới hạn mob đến khóa học của người chơi</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Người chơi hồi sinh
+          </green><green>trong khóa học của họ</green>
+        name: Hồi sinh khu vực
+      LOCK:
+        name: Khóa khóa học của người chơi
+      OFFLINE_REDSTONE:
+        description: "<green>Khi bị vô hiệu hóa, redstone\n</green><green>sẽ không hoạt động trong khóa học\n</green><green>nơi tất cả các thành viên đang ngoại tuyến.\n</green><green>Có thể giúp giảm lag.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Cho phép piston đẩy
+          </green><green>khối bên ngoài khóa học của người chơi</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Bật/tắt PVP
+          </red><red>trong khóa học được bảo vệ.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Xóa quái vật khi
+          </green><green>teleport vào khóa học</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Ngăn chặn người chơi teleport
+          </green><green>nếu họ đang rơi.</green>
+        hint: '<red>Bạn không thể teleport khi bạn đang rơi!</red>'
+    locked: '<red>Khóa học này bị khóa!</red>'
+    protected: '<red>Khu vực được bảo vệ: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Bảo Vệ</gold>'
+        description: |-
+          <green>Cài đặt bảo vệ
+          </green><green>cho khóa học này</green>
+      SETTING:
+        description: |-
+          <green>Cài đặt chung
+          </green><green>cho khóa học này</green>
