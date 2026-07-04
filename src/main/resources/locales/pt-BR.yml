@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Ponto de partida definido!</green>"
+  end-set: "<green>Ponto de chegada definido!</green>"
+  already-set: "<red>Ponto de partida e chegada já estão definidos! Quebre um para repor.</red>"
+  start-removed: "<aqua>Ponto de partida removido!</aqua>"
+  end-removed: "<aqua>Ponto de chegada removido!</aqua>"
+  resetting-start-end: "<yellow>Repondo pontos de partida e chegada!</yellow>"
+  start: "<aqua>Início do percurso parkour!</aqua>"
+  no-start-yet: "<red>Ainda não há ponto de partida definido.</red>"
+  no-end-yet: "<red>Ainda não há ponto de chegada definido.</red>"
+  to-start: "<light_purple>Para começar, pise na placa de pressão dourada.</light_purple>"
+  session-ended: "<red>Sua sessão de parkour terminou.</red>"
+  end: "<green>Fim do percurso parkour!</green>"
+  you-took: "<light_purple>Demorou [number]!</light_purple>"
+  start-before-end: "<aqua>Você precisa começar antes de terminar!</aqua>"
+  checkpoint: "<yellow>Ponto de verificação!</yellow>"
+  checkpoint-set: "<green>Ponto de verificação definido!</green>"
+  set-the-end: "<red>Defina a placa de chegada</red>"
+  hours: "horas"
+  minutes: "minutos"
+  seconds: "segundos"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Escolha um e tente!"
+    gui-title: "Percursos Parkour"
+    head-description: "<aqua>[runs] execuções</aqua>"
+  top:
+    gui-title: "Melhores Classificações de Percursos"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Sua classificação: [number]</green>"
+    beat-previous-time: "<light_purple>Você bateu seu tempo anterior!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Você não bateu seu tempo anterior!</aqua>"
+  errors:
+    not-on-island: "<red>Você deve estar em um percurso parkour para fazer isso</red>"
+    no-warp: "<red>Este percurso já é privado</red>"
+    not-in-run: "<red>Você deve estar executando um percurso para fazer isso</red>"
+  warp:
+    set: "<light_purple>Ponto de teletransporte definido! Os jogadores podem ver seu percurso!</light_purple>"
+    replaced: "<yellow>Ponto de teletransporte definido! Ponto anterior desativado!</yellow>"
+    removed: "<red>Ponto de teletransporte removido. Os jogadores não verão seu percurso.</red>"
+    warping: "<green>Teletransportando para o percurso!</green>"
+    no-warp: "<red>Não há ponto de teletransporte definido para este percurso!</red>"
+    unknown-course: "<red>Percurso desconhecido!</red>"
+  quit:
+    success: "<yellow>Você deixou de executar e pode usar comandos novamente</yellow>"
+  general:
+    errors:
+      no-island: '<red>Você não tem um percurso!</red>'
+      player-has-island: '<red>O jogador já tem um percurso!</red>'
+      player-has-no-island: '<red>Este jogador não tem um percurso!</red>'
+      already-have-island: '<red>Você já tem um percurso!</red>'
+      no-safe-location: '<red>Nenhuma localização segura encontrada no percurso!</red>'
+      not-owner: '<red>Você não é o dono de sua equipe!</red>'
+  commands:
+    parkour:
+      courses:
+        description: mostrar percursos disponíveis para jogar e teletransporte
+      cleartop:
+        description: limpar os dez melhores do seu percurso ou remover a pontuação de um jogador
+        parameters: <nome do jogador>
+      setwarp:
+        description: define o ponto de teletransporte e torna seu percurso público
+      warp:
+        description: Teletransporte para um percurso por nome ou para o início se estiver em um
+        parameters: <nome do percurso>
+      removewarp:
+        description: remove o ponto de teletransporte e torna seu percurso privado
+      help:
+        description: Comece um percurso parkour ou teletransporte para seu percurso
+      go:
+        parameters: '[número da casa]'
+      sethome:
+        parameters: '[número da casa]'
+      top:
+        description: "Mostrar as melhores classificações de percursos"
+      quit:
+        description: "Parar o cronômetro no percurso atual"
+    island:
+      go:
+        parameters: '[número da casa]'
+        description: teletransportá-lo para seu percurso
+        teleport: '<green>Teletransportando você para seu percurso.</green>'
+        teleported: '<green>Teletransportado para a casa </green><yellow>#[number].</yellow>'
+      help:
+        description: o comando parkour principal
+      create:
+        description: criar um percurso, opcionalmente usando um blueprint (requer permissão)
+        parameters: <blueprint>
+        too-many-islands: "<red>Há muitos percursos neste mundo: não há espaço para criar seu percurso.</red>"
+        cannot-create-island: '<red>Não foi encontrado um local a tempo, tente novamente...</red>'
+        unable-create-island: '<red>Seu percurso não pôde ser gerado, contate um administrador.</red>'
+        creating-island: '<green>Procurando um local para seu percurso...</green>'
+        pasting:
+          estimated-time: '<green>Tempo estimado: </green><aqua>[number] </aqua><green>segundos.</green>'
+          blocks: '<green>Construindo bloco a bloco: </green><aqua>[number] </aqua><green>blocos no total...</green>'
+          entities: '<green>Preenchendo com entidades: </green><aqua>[number] </aqua><green>entidades no total...</green>'
+          done: '<green>Pronto! Seu percurso está pronto e aguardando!</green>'
+        pick: '<dark_green>Escolha um percurso</dark_green>'
+        unknown-blueprint: '<red>Este blueprint ainda não foi carregado.</red>'
+        on-first-login: '<green>Bem-vindo! Começaremos a preparar seu percurso em alguns segundos.</green>'
+        you-can-teleport-to-your-island: '<green>Você pode teletransportar-se para seu percurso quando quiser.</green>'
+      info:
+        description: mostrar informações sobre seu percurso ou o percurso do jogador
+        parameters: <jogador>
+      near:
+        description: mostrar o nome dos percursos vizinhos ao seu redor
+        parameters: ''
+        the-following-islands: '<green>Os seguintes percursos estão próximos:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Norte
+        south: Sul
+        east: Leste
+        west: Oeste
+        no-neighbors: '<red>Você não tem percursos vizinhos imediatos!</red>'
+      reset:
+        description: reiniciar seu percurso e remover o antigo
+        parameters: <blueprint>
+        none-left: '<red>Você não tem mais reposições!</red>'
+        resets-left: '<red>Você tem </red><aqua>[number] </aqua><red>reposições restantes</red>'
+        confirmation: |-
+          <red>Tem certeza que quer fazer isso?
+          </red><red>Todos os membros do percurso serão expulsos, você precisará reinvitá-los depois.
+          </red><red>Não há volta atrás: uma vez que seu percurso atual for deletado, não há <bold>forma </bold></red> <red>de recuperá-lo mais tarde.</red>
+        kicked-from-island: '<red>Você foi expulso de seu percurso em [gamemode] porque o dono o está repostulando.</red>'
+      sethome:
+        description: definir seu ponto de teletransporte de casa
+        must-be-on-your-island: '<red>Você deve estar em seu percurso para definir a casa!</red>'
+        num-homes: '<red>As casas podem ser de 1 a [number].</red>'
+        home-set: '<gold>O ponto de casa de seu percurso foi definido para sua localização atual.</gold>'
+        nether:
+          not-allowed: '<red>Você não pode definir sua casa no Nether.</red>'
+          confirmation: '<red>Tem certeza que quer definir sua casa no Nether?</red>'
+        the-end:
+          not-allowed: '<red>Você não pode definir sua casa no The End.</red>'
+          confirmation: '<red>Tem certeza que quer definir sua casa no The End?</red>'
+        parameters: '[número da casa]'
+      setname:
+        description: definir um nome para seu percurso
+        name-too-short: '<red>Muito curto. O tamanho mínimo é [number] caracteres.</red>'
+        name-too-long: '<red>Muito longo. O tamanho máximo é [number] caracteres.</red>'
+        name-already-exists: '<red>Já existe um percurso com esse nome!</red>'
+        parameters: <nome>
+        success: '<green>Você definiu com sucesso o nome de seu percurso para </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: repor o nome de seu percurso
+        success: '<green>Nome de seu percurso repostulado com sucesso.</green>'
+      team:
+        description: gerenciar sua equipe
+        coop:
+          description: dar a um jogador um cargo de coop em seu percurso
+          parameters: <jogador>
+          cannot-coop-yourself: '<red>Você não pode fazer coop consigo mesmo!</red>'
+          already-has-rank: '<red>O jogador já tem um cargo!</red>'
+          you-are-a-coop-member: '<dark_green>Você foi coopado por </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Você coopou </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] convidou você para ser um membro coop de seu percurso.</green>'
+        uncoop:
+          description: remover um cargo de coop de um jogador
+          parameters: <jogador>
+          cannot-uncoop-yourself: '<red>Você não pode desfazer coop consigo mesmo!</red>'
+          cannot-uncoop-member: '<red>Você não pode desfazer coop de um membro da equipe!</red>'
+          player-not-cooped: '<red>O jogador não está em coop!</red>'
+          you-are-no-longer-a-coop-member: '<red>Você não é mais um membro coop do percurso de [name].</red>'
+          all-members-logged-off: '<red>Todos os membros do percurso se desconectaram, então você não é mais um membro coop do percurso de [name].</red>'
+          success: '<aqua>[name] </aqua><green>não é mais um membro coop de seu percurso.</green>'
+          is-full: '<red>Você não pode fazer coop com mais ninguém.</red>'
+        trust:
+          description: dar a um jogador um cargo confiável em seu percurso
+          parameters: <jogador>
+          trust-in-yourself: '<red>Confie em você mesmo!</red>'
+          name-has-invited-you: '<green>[name] convidou você para ser um membro confiável de seu percurso.</green>'
+          player-already-trusted: '<red>O jogador já é confiável!</red>'
+          you-are-trusted: '<dark_green>Você é confiável por </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Você confiou em </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Você não pode confiar em mais ninguém.</red>'
+        invite:
+          description: convidar um jogador para se juntar ao seu percurso
+          invitation-sent: '<green>Convite enviado para </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Removendo convite.</red>'
+          name-has-invited-you: '<green>[name] convidou você para se juntar a seu percurso.</green>'
+          to-accept-or-reject: '<green>Faça /[label] team accept para aceitar, ou /[label] team reject para rejeitar</green>'
+          you-will-lose-your-island: '<red>AVISO! Você perderá seu percurso se aceitar!</red>'
+          errors:
+            cannot-invite-self: '<red>Você não pode convidar a si mesmo!</red>'
+            cooldown: '<red>Você não pode convidar essa pessoa por mais [number] segundos.</red>'
+            island-is-full: '<red>Seu percurso está cheio, você não pode convidar mais ninguém.</red>'
+            none-invited-you: '<red>Ninguém o convidou :c.</red>'
+            you-already-are-in-team: '<red>Você já está em uma equipe!</red>'
+            already-on-team: '<red>Este jogador já está em uma equipe!</red>'
+            invalid-invite: '<red>Este convite não é mais válido, desculpe.</red>'
+            you-have-already-invited: '<red>Você já convidou este jogador!</red>'
+          parameters: <jogador>
+          you-can-invite: '<green>Você pode convidar [number] jogadores a mais.</green>'
+          accept:
+            description: aceitar um convite
+            you-joined-island: '<green>Você se juntou a um percurso! Use </green><aqua>/[label] team </aqua><green>para ver os outros membros.</green>'
+            name-joined-your-island: '<green>[name] se juntou a seu percurso!</green>'
+            confirmation: |-
+              <red>Tem certeza que quer aceitar este convite?
+              </red><red><bold>Você vai <underlined>PERDER </underlined></bold></red><red><bold>seu percurso atual!</bold></red>
+          reject:
+            description: rejeitar um convite
+            you-rejected-invite: '<green>Você rejeitou o convite para se juntar a um percurso.</green>'
+            name-rejected-your-invite: '<red>[name] rejeitou seu convite de percurso!</red>'
+          cancel:
+            description: cancelar o convite pendente para se juntar a seu percurso
+        leave:
+          cannot-leave: '<red>Os donos não podem sair! Torne-se um membro primeiro, ou expulse todos os membros.</red>'
+          description: sair de seu percurso
+          left-your-island: '<red>[name] </red><red>saiu de seu percurso</red>'
+          success: '<green>Você saiu deste percurso.</green>'
+        kick:
+          description: remover um membro de seu percurso
+          parameters: <jogador>
+          owner-kicked: '<red>O dono o expulsou do percurso em [gamemode]!</red>'
+          cannot-kick: '<red>Você não pode expulsar a si mesmo!</red>'
+          success: '<aqua>[name] </aqua><green>foi expulso de seu percurso.</green>'
+        demote:
+          description: rebaixar um jogador em seu percurso um nível
+          parameters: <jogador>
+          errors:
+            cant-demote-yourself: '<red>Você não pode se rebaixar!</red>'
+          failure: '<red>O jogador não pode ser rebaixado mais!</red>'
+          success: '<green>Você rebaixou [name] para [rank]</green>'
+        promote:
+          description: promover um jogador em seu percurso um nível
+          parameters: <jogador>
+          failure: '<red>O jogador não pode ser promovido mais!</red>'
+          success: '<green>Você promoveu [name] para [rank]</green>'
+        setowner:
+          description: transferir a propriedade de seu percurso para um membro
+          errors:
+            cant-transfer-to-yourself: '<red>Você não pode transferir propriedade para si mesmo! </red><gray>(<italic> Bem, na verdade, você poderia... Mas não queremos que você faça. Porque é inútil.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Este jogador não faz parte de sua equipe de percurso!</red>'
+          name-is-the-owner: '<green>[name] é agora o dono do percurso!</green>'
+          parameters: <jogador>
+          you-are-the-owner: '<green>Você agora é o dono do percurso!</green>'
+      ban:
+        description: banir um jogador de seu percurso
+        parameters: <jogador>
+        cannot-ban-yourself: '<red>Você não pode banir a si mesmo!</red>'
+        cannot-ban: '<red>Este jogador não pode ser banido.</red>'
+        cannot-ban-member: '<red>Expulse o membro da equipe primeiro, depois banir.</red>'
+        cannot-ban-more-players: '<red>Você atingiu o limite de banimentos, você não pode banir mais jogadores de seu percurso.</red>'
+        player-already-banned: '<red>O jogador já está banido.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  agora está banido de seu percurso.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  o banniu de seu percurso!</red>'
+        you-are-banned: '<aqua>Você está banido deste percurso!</aqua>'
+      unban:
+        description: desbanir um jogador de seu percurso
+        parameters: <jogador>
+        cannot-unban-yourself: '<red>Você não pode se desbanir!</red>'
+        player-not-banned: '<red>O jogador não está banido.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  agora está desbanido de seu percurso.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  o desbaniu de seu percurso!</green>'
+      banlist:
+        description: listar jogadores banidos
+        noone: '<green>Ninguém está banido neste percurso.</green>'
+        the-following: '<aqua>Os seguintes jogadores estão banidos:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Você pode banir até </aqua><yellow>[number] </yellow><aqua>mais jogadores.</aqua>'
+      settings:
+        description: mostrar configurações do percurso
+      language:
+        description: selecionar idioma
+        parameters: '[idioma]'
+        not-available: '<red>Este idioma não está disponível.</red>'
+        already-selected: '<red>Você já está usando este idioma.</red>'
+      expel:
+        description: expulsar um jogador de seu percurso
+        parameters: <jogador>
+        cannot-expel-yourself: '<red>Você não pode se expulsar!</red>'
+        cannot-expel: '<red>Este jogador não pode ser expulso.</red>'
+        cannot-expel-member: '<red>Você não pode expulsar um membro da equipe!</red>'
+        not-on-island: '<red>Este jogador não está em seu percurso!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  o expulsou do percurso!</red>'
+        success: '<green>Você expulsou </green><aqua>[name] </aqua><green>do percurso.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] tem um percurso. Remova o registro ou delete-o primeiro!</red>'
+        setowner:
+          description: transferir a propriedade do percurso para o jogador
+          already-owner: '<red>O jogador já é o dono deste percurso!</red>'
+      range:
+        description: Comando de alcance de percurso do admin
+        display:
+          description: Mostrar/ocultar indicadores de alcance de percurso
+          hint: |-
+            <red>Ícones de barreira vermelha </red><white>mostram o limite de alcance protegido atual.
+            </white><gray>Partículas cinzentas </gray><white>mostram o limite máximo.
+            </white><green>Partículas verdes </green><white>mostram o alcance protegido padrão se o alcance de proteção for diferente dele.</white>
+        set:
+          description: Define o alcance protegido do percurso
+        reset:
+          description: Repõe o alcance protegido para o padrão do mundo
+      register:
+        parameters: <jogador>
+        description: registrar um jogador em um percurso não proprietário em que você está
+        registered-island: '<green>Jogador registrado em um percurso em [xyz].</green>'
+        already-owned: '<red>A área já é propriedade de outro jogador!</red>'
+        no-island-here: '<red>Não há um percurso de jogador aqui. Confirme para criar um.</red>'
+        in-deletion: '<red>Este espaço está sendo regenerado. Tente mais tarde.</red>'
+      unregister:
+        description: remover o registro do dono de um percurso, mas manter os blocos do percurso como estão
+        unregistered-island: '<green>Registro do jogador removido do percurso em [xyz].</green>'
+      info:
+        description: obter informações sobre o local onde você está ou sobre o jogador
+        no-island: '<red>Você não está em um percurso registado agora...</red>'
+        island-location: 'Localização da área: [xyz]'
+        island-coords: 'Coordenadas da área: [xz1] a [xz2]'
+        is-spawn: A área é um percurso de spawn
+      setrange:
+        description: definir o alcance do percurso do jogador
+        range-updated: Alcance da área atualizado para [number]
+      tp:
+        description: teletransportar para o percurso de um jogador
+      getrank:
+        description: obter o cargo de um jogador em seu percurso
+        rank-is: '<green>O cargo é [rank] em seu percurso.</green>'
+      setrank:
+        description: definir o cargo de um jogador em seu percurso
+      setspawn:
+        description: definir um percurso como spawn para este mundo
+        already-spawn: '<red>Este percurso já é um spawn!</red>'
+        no-island-here: '<red>Não há um percurso registado aqui.</red>'
+        confirmation: '<red>Tem certeza que quer definir este percurso como o spawn para este mundo?</red>'
+      delete:
+        description: deletar um jogador e regenerar seu percurso
+        deleted-island: '<green>A área em </green><yellow>[xyz] </yellow><green>foi regenerada com sucesso.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Ativa/desativa modo criativo
+          </green><green>no fim do percurso e
+          </green><green>ao entrar na área
+          </green>
+        name: "Modo Criativo de Parkour"
+      ELYTRA:
+        description: Alternar uso
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Os Endermen podem remover
+          </green><green>blocos</green>
+      ENTER_EXIT_MESSAGES:
+        description: Mostrar mensagens de entrada e saída
+        island: "percurso de [name]"
+        name: Mensagens de entrada/saída
+        now-entering: '<green>Entrando em </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Entrando em seu percurso.</green>'
+        now-leaving: '<green>Saindo de </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Saindo de seu percurso.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Remover mobs que saem
+          </green><green>fora do espaço protegido
+          </green><green>do jogador</green>
+        name: '<yellow>Limitar mobs ao percurso do jogador</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Os jogadores aparecem
+          </green><green>em seu percurso</green>
+        name: Regresso à área
+      LOCK:
+        name: Bloquear percurso do jogador
+      OFFLINE_REDSTONE:
+        description: "<green>Quando desativado, o redstone\n</green><green>não funcionará nos percursos\n</green><green>onde todos os membros estão offline.\n</green><green>Pode ajudar a reduzir lag.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Permitir que os pistões empurrem
+          </green><green>blocos para fora de um percurso de jogador</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Ativar/desativar PVP
+          </red><red>no percurso protegido.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Remover monstros ao
+          </green><green>teletransportar para um percurso</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Impedir que os jogadores se teletransportem
+          </green><green>se estiverem caindo.</green>
+        hint: '<red>Você não pode se teletransportar enquanto está caindo!</red>'
+    locked: '<red>Este percurso está bloqueado!</red>'
+    protected: '<red>Área protegida: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Proteção</gold>'
+        description: |-
+          <green>Configurações de proteção
+          </green><green>para este percurso</green>
+      SETTING:
+        description: |-
+          <green>Configurações gerais
+          </green><green>para este percurso</green>

@@ -15,6 +15,12 @@ parkour:
     # Sub-command of main player command that will be run on each player command call.
     # By default it is sub-command 'go'.
     default-action: go
+  # Prevent players from dying when they fall into the void while running a course.
+  # If true, players who drop into the void are not killed. Instead their velocity is
+  # set to zero and they are teleported back to their last checkpoint, or to the course
+  # start if they have not reached a checkpoint yet.
+  # If false, players take void damage and can die, ending their run.
+  prevent-void-death: true
 world:
   # Friendly name for this world. Used in admin commands. Must be a single word
   friendly-name: Parkour

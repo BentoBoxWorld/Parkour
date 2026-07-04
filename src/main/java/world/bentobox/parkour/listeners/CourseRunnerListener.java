@@ -170,7 +170,12 @@ public class CourseRunnerListener extends AbstractListener {
                 || !parkourRunManager.timers().containsKey(e.getEntity().getUniqueId())) {
             return;
         }
-        // Put player back to last checkpoint. Do not cancel event so that player takes some damage
+        // If enabled, prevent the player from dying in the void - just send them back unharmed
+        if (addon.getSettings().isPreventVoidDeath()) {
+            e.setCancelled(true);
+        }
+        // Put player back to last checkpoint (or the course start if no checkpoint reached yet).
+        // If the event is not cancelled the player still takes some damage.
         player.playEffect(EntityEffect.ENTITY_POOF);
         player.setVelocity(new Vector(0, 0, 0));
         player.setFallDistance(0);
@@ -184,7 +189,8 @@ public class CourseRunnerListener extends AbstractListener {
     @EventHandler
     public void onTeleport(PlayerTeleportEvent e) {
         boolean shouldStopRun = switch (e.getCause()) {
-            case ENDER_PEARL, CHORUS_FRUIT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
+            // CONSUMABLE_EFFECT covers chorus fruit teleports (the old CHORUS_FRUIT cause)
+            case ENDER_PEARL, CONSUMABLE_EFFECT, DISMOUNT, EXIT_BED, NETHER_PORTAL, END_PORTAL -> false;
             case COMMAND, PLUGIN, SPECTATE, END_GATEWAY, UNKNOWN -> true;
         };
         UUID playerUUID = e.getPlayer().getUniqueId();

@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Start ustawiony!</green>"
+  end-set: "<green>Koniec ustawiony!</green>"
+  already-set: "<red>Start i koniec są już ustawione! Zniszcz jeden aby zresetować.</red>"
+  start-removed: "<aqua>Start usunięty!</aqua>"
+  end-removed: "<aqua>Koniec usunięty!</aqua>"
+  resetting-start-end: "<yellow>Resetowanie punktu startu i końca!</yellow>"
+  start: "<aqua>Start Parkour!</aqua>"
+  no-start-yet: "<red>Nie ma jeszcze ustawionego startu.</red>"
+  no-end-yet: "<red>Nie ma jeszcze ustawionego końca.</red>"
+  to-start: "<light_purple>Aby rozpocząć, wstąp na złotą płytę naciśnięcia.</light_purple>"
+  session-ended: "<red>Twoja sesja parkour'u skończyła się.</red>"
+  end: "<green>Koniec Parkour!</green>"
+  you-took: "<light_purple>Potrzebowałeś [number]!</light_purple>"
+  start-before-end: "<aqua>Musisz zacząć zanim skończysz!</aqua>"
+  checkpoint: "<yellow>Punkt kontrolny!</yellow>"
+  checkpoint-set: "<green>Punkt kontrolny ustawiony!</green>"
+  set-the-end: "<red>Ustaw płytę końca</red>"
+  hours: "godzin"
+  minutes: "minut"
+  seconds: "sekund"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Wybierz jeden i spróbuj!"
+    gui-title: "Tory Parkour"
+    head-description: "<aqua>[runs] prób</aqua>"
+  top:
+    gui-title: "Najszybsze Rankingi Torów"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Twoja pozycja: [number]</green>"
+    beat-previous-time: "<light_purple>Pobiłeś swój poprzedni czas!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Nie pobiłeś swojego poprzedniego czasu!</aqua>"
+  errors:
+    not-on-island: "<red>Musisz być na torze parkour</red>"
+    no-warp: "<red>Ten tor jest już prywatny</red>"
+    not-in-run: "<red>Musisz aktualnie przechodzić tor</red>"
+  warp:
+    set: "<light_purple>Punkt warp ustawiony! Gracze mogą teraz zobaczyć twój tor!</light_purple>"
+    replaced: "<yellow>Punkt warp ustawiony! Stary punkt deaktywowany!</yellow>"
+    removed: "<red>Punkt warp usunięty. Gracze nie będą widzieć twojego toru.</red>"
+    warping: "<green>Warp do toru!</green>"
+    no-warp: "<red>Nie ma ustawionego warpu dla tego toru!</red>"
+    unknown-course: "<red>Nieznany tor!</red>"
+  quit:
+    success: "<yellow>Zakończyłeś swój przebieg i możesz teraz ponownie używać poleceń</yellow>"
+  general:
+    errors:
+      no-island: '<red>Nie masz toru!</red>'
+      player-has-island: '<red>Gracz ma już tor!</red>'
+      player-has-no-island: '<red>Ten gracz nie ma toru!</red>'
+      already-have-island: '<red>Masz już tor!</red>'
+      no-safe-location: '<red>Nie znaleziono bezpiecznego miejsca na torze!</red>'
+      not-owner: '<red>Nie jesteś właścicielem swojego zespołu!</red>'
+  commands:
+    parkour:
+      courses:
+        description: pokaż dostępne tory do gry i warp
+      cleartop:
+        description: wyczyść dziesięć najlepszych torów lub usuń wynik gracza
+        parameters: <nazwa gracza>
+      setwarp:
+        description: ustawia punkt warp i publiczny tor
+      warp:
+        description: Warp do toru wg nazwy lub do startu jeśli jesteś na jednym
+        parameters: <nazwa toru>
+      removewarp:
+        description: usuwa punkt warp i czyni tor prywatnym
+      help:
+        description: Zacznij tor parkour lub teleportuj się do swojego toru
+      go:
+        parameters: '[numer domu]'
+      sethome:
+        parameters: '[numer domu]'
+      top:
+        description: "Pokaż rankingi najlepszych torów"
+      quit:
+        description: "Zatrzymaj stoper na bieżącym torze"
+    island:
+      go:
+        parameters: '[numer domu]'
+        description: teleportuj się do swojego toru
+        teleport: '<green>Teleportujesz się do swojego toru.</green>'
+        teleported: '<green>Teleportowany do domu </green><yellow>#[number].</yellow>'
+      help:
+        description: główne polecenie parkour
+      create:
+        description: stwórz tor przy użyciu opcjonalnego schematu (wymagane uprawnienia)
+        parameters: <schemat>
+        too-many-islands: "<red>W tym świecie jest zbyt wiele torów: nie ma wystarczająco miejsca dla twojego.</red>"
+        cannot-create-island: '<red>Miejsce nie mogło być znalezione na czas, spróbuj ponownie...</red>'
+        unable-create-island: '<red>Twój tor nie mógł zostać wygenerowany, skontaktuj się z administratorem.</red>'
+        creating-island: '<green>Szukam miejsca dla twojego toru...</green>'
+        pasting:
+          estimated-time: '<green>Szacowany czas: </green><aqua>[number] </aqua><green>sekund.</green>'
+          blocks: '<green>Budowanie blok po bloku: </green><aqua>[number] </aqua><green>bloków razem...</green>'
+          entities: '<green>Wypełnianie bytami: </green><aqua>[number] </aqua><green>bytów razem...</green>'
+          done: '<green>Gotowe! Twój tor jest gotowy i czeka na ciebie!</green>'
+        pick: '<dark_green>Wybierz tor</dark_green>'
+        unknown-blueprint: '<red>Ten schemat nie został jeszcze załadowany.</red>'
+        on-first-login: '<green>Witaj! Zaczniemy przygotowywać twój tor za kilka sekund.</green>'
+        you-can-teleport-to-your-island: '<green>Możesz się teleportować do swojego toru kiedy chcesz.</green>'
+      info:
+        description: pokaż informacje o twoim torze lub torze gracza
+        parameters: <gracz>
+      near:
+        description: pokaż nazwy sąsiednich torów wokół ciebie
+        parameters: ''
+        the-following-islands: '<green>Następujące tory są blisko:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Północ
+        south: Południe
+        east: Wschód
+        west: Zachód
+        no-neighbors: '<red>Nie masz żadnych sąsiednich torów!</red>'
+      reset:
+        description: zrestartuj swój tor i usuń stary
+        parameters: <schemat>
+        none-left: '<red>Nie masz już resetów!</red>'
+        resets-left: '<red>Masz </red><aqua>[number] </aqua><red>resetów pozostałych</red>'
+        confirmation: |-
+          <red>Jesteś pewny że chcesz to zrobić?
+          </red><red>Wszyscy członkowie toru będą wyrzuceni, będziesz musiał ich ponownie zaprosić.
+          </red><red>Nie ma powrotu: gdy twój obecny tor zostanie usunięty, <bold>nie będzie </bold></red> <red>żadnego sposobu na jego odzyskanie później.</red>
+        kicked-from-island: '<red>Zostałeś wyrzucony ze swojego toru w [gamemode] ponieważ właściciel go resetuje.</red>'
+      sethome:
+        description: ustaw punkt teleportacji domu
+        must-be-on-your-island: '<red>Musisz być na swoim torze aby ustawić dom!</red>'
+        num-homes: '<red>Domy mogą być od 1 do [number].</red>'
+        home-set: '<gold>Twój dom toru został ustawiony w twojej bieżącej lokalizacji.</gold>'
+        nether:
+          not-allowed: '<red>Nie możesz ustawić domu w Nether.</red>'
+          confirmation: '<red>Jesteś pewny że chcesz ustawić dom w Nether?</red>'
+        the-end:
+          not-allowed: '<red>Nie możesz ustawić domu w Endu.</red>'
+          confirmation: '<red>Jesteś pewny że chcesz ustawić dom w Endu?</red>'
+        parameters: '[numer domu]'
+      setname:
+        description: ustaw nazwę dla swojego toru
+        name-too-short: '<red>Za krótko. Minimalna wielkość to [number] znaków.</red>'
+        name-too-long: '<red>Za długo. Maksymalna wielkość to [number] znaków.</red>'
+        name-already-exists: '<red>Istnieje już tor z tą nazwą!</red>'
+        parameters: <nazwa>
+        success: '<green>Pomyślnie ustawiłeś nazwę swojego toru na </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: zresetuj nazwę swojego toru
+        success: '<green>Pomyślnie zresetowałeś nazwę swojego toru.</green>'
+      team:
+        description: zarządzaj swoim zespołem
+        coop:
+          description: przyznaj graczowi rangę coop na swoim torze
+          parameters: <gracz>
+          cannot-coop-yourself: '<red>Nie możesz sam siebie coopować!</red>'
+          already-has-rank: '<red>Ten gracz ma już rangę!</red>'
+          you-are-a-coop-member: '<dark_green>Został coopowany przez </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Coopowałeś </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] zaprosił/a ciebie aby był/a członkiem coop jego toru.</green>'
+        uncoop:
+          description: usuń rangę coop od gracza
+          parameters: <gracz>
+          cannot-uncoop-yourself: '<red>Nie możesz sam siebie uncoopować!</red>'
+          cannot-uncoop-member: '<red>Nie możesz uncoopować członka zespołu!</red>'
+          player-not-cooped: '<red>Ten gracz nie jest coopowany!</red>'
+          you-are-no-longer-a-coop-member: '<red>Nie jesteś już członkiem coop toru [name].</red>'
+          all-members-logged-off: '<red>Wszyscy członkowie toru wylogowali się, więc nie jesteś już członkiem coop toru [name].</red>'
+          success: '<aqua>[name] </aqua><green>nie jest już członkiem coop twojego toru.</green>'
+          is-full: '<red>Nie możesz coopować nikogo innego.</red>'
+        trust:
+          description: daj graczowi rangę zaufanego na swoim torze
+          parameters: <gracz>
+          trust-in-yourself: '<red>Zaufaj sobie!</red>'
+          name-has-invited-you: '<green>[name] zaprosił/a ciebie aby był/a zaufanym członkiem jego toru.</green>'
+          player-already-trusted: '<red>Ten gracz jest już zaufany!</red>'
+          you-are-trusted: '<dark_green>Jesteś zaufany przez </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Ufasz </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Nie możesz ufać nikomu innemu.</red>'
+        invite:
+          description: zaproś gracza do dołączenia do twojego toru
+          invitation-sent: '<green>Zaproszenie wysłane do </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Usuwanie zaproszenia.</red>'
+          name-has-invited-you: '<green>[name] zaprosił/a ciebie aby dołączyć do jego toru.</green>'
+          to-accept-or-reject: '<green>Wpisz /[label] team accept aby zaakceptować, lub /[label] team reject aby odrzucić</green>'
+          you-will-lose-your-island: '<red>OSTRZEŻENIE! Stracisz swój tor jeśli zaakceptujesz!</red>'
+          errors:
+            cannot-invite-self: '<red>Nie możesz zaprosić siebie!</red>'
+            cooldown: '<red>Nie możesz zaprosić tę osobę przez następne [number] sekund.</red>'
+            island-is-full: '<red>Twój tor jest pełny, nie możesz zaprosić nikogo innego.</red>'
+            none-invited-you: '<red>Nikt cię nie zaprosił :c.</red>'
+            you-already-are-in-team: '<red>Już jesteś w zespole!</red>'
+            already-on-team: '<red>Ten gracz jest już w zespole!</red>'
+            invalid-invite: '<red>To zaproszenie nie jest już ważne, przepraszam.</red>'
+            you-have-already-invited: '<red>Już zaprosiliśmy tego gracza!</red>'
+          parameters: <gracz>
+          you-can-invite: '<green>Możesz zaprosić jeszcze [number] graczy.</green>'
+          accept:
+            description: zaakceptuj zaproszenie
+            you-joined-island: '<green>Dołączyłeś do toru! Użyj </green><aqua>/[label] team </aqua><green>aby zobaczyć pozostałych członków.</green>'
+            name-joined-your-island: '<green>[name] dołączył/a do twojego toru!</green>'
+            confirmation: |-
+              <red>Jesteś pewny że chcesz zaakceptować to zaproszenie?
+              </red><red><bold>STRACISZ twój obecny tor <underlined>STRACISZ </underlined></bold></red><red><bold>!</bold></red>
+          reject:
+            description: odrzuć zaproszenie
+            you-rejected-invite: '<green>Odrzuciłeś zaproszenie do dołączenia do toru.</green>'
+            name-rejected-your-invite: '<red>[name] odrzucił/a twoje zaproszenie do toru!</red>'
+          cancel:
+            description: anuluj oczekujące zaproszenie do dołączenia do twojego toru
+        leave:
+          cannot-leave: '<red>Właściciele nie mogą odejść! Najpierw zostań członkiem lub wyrzuć wszystkich członków.</red>'
+          description: opuść swój tor
+          left-your-island: '<red>[name] </red><red>opuścił/a twój tor</red>'
+          success: '<green>Opuściłeś ten tor.</green>'
+        kick:
+          description: usuń członka z twojego toru
+          parameters: <gracz>
+          owner-kicked: '<red>Właściciel wyrzucił ciebie z toru w [gamemode]!</red>'
+          cannot-kick: '<red>Nie możesz wyrzucić siebie!</red>'
+          success: '<aqua>[name] </aqua><green>został wyrzucony z twojego toru.</green>'
+        demote:
+          description: zdegraduj gracza na swoim torze
+          parameters: <gracz>
+          errors:
+            cant-demote-yourself: '<red>Nie możesz się zdegradować!</red>'
+          failure: '<red>Ten gracz nie może być już zdegradowany!</red>'
+          success: '<green>Zdegradowany [name] na [rank]</green>'
+        promote:
+          description: awansuj gracza na swoim torze
+          parameters: <gracz>
+          failure: '<red>Ten gracz nie może być już awansowany!</red>'
+          success: '<green>Awansowany [name] na [rank]</green>'
+        setowner:
+          description: przekaż własność twojego toru członkowi
+          errors:
+            cant-transfer-to-yourself: '<red>Nie możesz przekazać własności sobie! </red><gray>(<italic> No cóż, technicznie bym mógł... Ale nie chcemy abyś to robił. Ponieważ to bezcelowe.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Ten gracz nie jest członkiem twojego zespołu toru!</red>'
+          name-is-the-owner: '<green>[name] jest teraz właścicielem toru!</green>'
+          parameters: <gracz>
+          you-are-the-owner: '<green>Jesteś teraz właścicielem toru!</green>'
+      ban:
+        description: zablokuj gracza z twojego toru
+        parameters: <gracz>
+        cannot-ban-yourself: '<red>Nie możesz się zablokować!</red>'
+        cannot-ban: '<red>Ten gracz nie może być zablokowany.</red>'
+        cannot-ban-member: '<red>Najpierw wyrzuć członka zespołu, potem zablokuj.</red>'
+        cannot-ban-more-players: '<red>Osiągnąłeś limit blokad, nie możesz blokować więcej graczy ze swojego toru.</red>'
+        player-already-banned: '<red>Ten gracz jest już zablokowany.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  jest teraz zablokowany z twojego toru.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  zablokował/a ciebie z ich toru!</red>'
+        you-are-banned: '<aqua>Jesteś zablokowany z tego toru!</aqua>'
+      unban:
+        description: odblokuj gracza z twojego toru
+        parameters: <gracz>
+        cannot-unban-yourself: '<red>Nie możesz się odblokować!</red>'
+        player-not-banned: '<red>Ten gracz nie jest zablokowany.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  jest teraz odblokowany z twojego toru.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  odblokowała/a ciebie z ich toru!</green>'
+      banlist:
+        description: lista zablokowanych graczy
+        noone: '<green>Nikt nie jest zablokowany na tym torze.</green>'
+        the-following: '<aqua>Następujący gracze są zablokowani:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Możesz zablokować do </aqua><yellow>[number] </yellow><aqua>więcej graczy.</aqua>'
+      settings:
+        description: pokaż ustawienia toru
+      language:
+        description: wybierz język
+        parameters: '[język]'
+        not-available: '<red>Ten język jest niedostępny.</red>'
+        already-selected: '<red>Już używasz ten język.</red>'
+      expel:
+        description: wygnaj gracza ze swojego toru
+        parameters: <gracz>
+        cannot-expel-yourself: '<red>Nie możesz siebie wygonić!</red>'
+        cannot-expel: '<red>Ten gracz nie może być wygoniony.</red>'
+        cannot-expel-member: '<red>Nie możesz wygonić członka zespołu!</red>'
+        not-on-island: '<red>Ten gracz nie jest na twoim torze!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  wygnął/a ciebie z toru!</red>'
+        success: '<green>Wygnałeś </green><aqua>[name] </aqua><green>z toru.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] ma tor. Najpierw wyrejestruj lub usuń!</red>'
+        setowner:
+          description: przekazuje właściwość toru graczowi
+          already-owner: '<red>Ten gracz jest już właścicielem tego toru!</red>'
+      range:
+        description: Polecenie zakresu toru Admin
+        display:
+          description: Pokaż/ukryj wskaźniki zakresu toru
+          hint: |-
+            <red>Czerwone ikony barier </red><white>pokazują aktualny limit chronionego zasięgu.
+            </white><gray>Szare cząsteczki </gray><white>pokazują maksymalny limit.
+            </white><green>Zielone cząsteczki </green><white>pokazują domyślny chroniony zasięg jeśli zakres ochrony się od niego różni.</white>
+        set:
+          description: Ustawia chroniony zasięg toru
+        reset:
+          description: Resetuje chroniony zasięg do domyślnego świata
+      register:
+        parameters: <gracz>
+        description: zarejestruj gracza na nienależący tor gdzie jesteś
+        registered-island: '<green>Gracz zarejestrowany na tor w [xyz].</green>'
+        already-owned: '<red>Ta strefa jest już własnością innego gracza!</red>'
+        no-island-here: '<red>Tu nie ma toru gracza. Potwierdź aby go utworzyć.</red>'
+        in-deletion: '<red>Ta strefa jest aktualnie regenerowana. Spróbuj później.</red>'
+      unregister:
+        description: wyrejestruj właściciela z toru ale zachowaj bloki toru
+        unregistered-island: '<green>Gracz wyrejestrowany z toru w [xyz].</green>'
+      info:
+        description: uzyskaj info gdzie jesteś lub o graczu
+        no-island: '<red>Obecnie nie jesteś w zarejestrowanym torze...</red>'
+        island-location: 'Lokalizacja strefy: [xyz]'
+        island-coords: 'Współrzędne strefy: [xz1] do [xz2]'
+        is-spawn: Strefa jest torem spawn
+      setrange:
+        description: ustaw zasięg toru gracza
+        range-updated: Zasięg strefy zaktualizowany na [number]
+      tp:
+        description: teleportuj się na tor gracza
+      getrank:
+        description: uzyskaj rangę gracza w jego torze
+        rank-is: '<green>Ranga to [rank] w jego torze.</green>'
+      setrank:
+        description: ustaw rangę gracza w jego torze
+      setspawn:
+        description: ustaw tor jako spawn dla tego świata
+        already-spawn: '<red>Ten tor jest już spawn!</red>'
+        no-island-here: '<red>Tu nie ma zarejestrowanego toru.</red>'
+        confirmation: '<red>Jesteś pewny że chcesz ustawić ten tor jako spawn dla tego świata?</red>'
+      delete:
+        description: usuń gracza i regeneruj jego tor
+        deleted-island: '<green>Strefa w </green><yellow>[xyz] </yellow><green>została pomyślnie regenerowana.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Przełącza tryb kreatywny
+          </green><green>na końcu toru i
+          </green><green>przy wejściu na tor
+          </green>
+        name: "Parkour Creative Mode"
+      ELYTRA:
+        description: Przełącz użycie
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermani mogą usuwać
+          </green><green>bloki</green>
+      ENTER_EXIT_MESSAGES:
+        description: Wyświetl wiadomości wejścia i wyjścia
+        island: "[name]'s tor"
+        name: Wiadomości wejścia/wyjścia
+        now-entering: '<green>Teraz wchodzisz do </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Teraz wchodzisz na swój tor.</green>'
+        now-leaving: '<green>Teraz wychodzisz z </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Teraz wychodzisz ze swojego toru.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Usuń moby które idą
+          </green><green>poza chronioną
+          </green><green>przestrzeń gracza</green>
+        name: '<yellow>Ogranicz moby do toru gracza</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Gracze respawnują
+          </green><green>na swoim torze</green>
+        name: Respawn strefy
+      LOCK:
+        name: Zablokuj tor gracza
+      OFFLINE_REDSTONE:
+        description: "<green>Gdy wyłączone, redstone\n</green><green>nie będzie pracować w torach\n</green><green>gdzie wszyscy członkowie są offline.\n</green><green>Może pomóc zmniejszyć lag.</green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Pozwól piston om przesuwać
+          </green><green>bloki poza tor gracza</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Włącz/Wyłącz PVP
+          </red><red>w chronionym torze.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Usuń potwory gdy
+          </green><green>teleportujesz się na tor</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Zapobiegaj graczom teleportowaniu
+          </green><green>jeśli spadają.</green>
+        hint: '<red>Nie możesz się teleportować podczas spadania!</red>'
+    locked: '<red>Ten tor jest zablokowany!</red>'
+    protected: '<red>Strefa chroniona: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Ochrona</gold>'
+        description: |-
+          <green>Ustawienia ochrony
+          </green><green>dla tego toru</green>
+      SETTING:
+        description: |-
+          <green>Ogólne ustawienia
+          </green><green>dla tego toru</green>

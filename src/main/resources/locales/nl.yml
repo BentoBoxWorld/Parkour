@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Start ingesteld!</green>"
+  end-set: "<green>Einde ingesteld!</green>"
+  already-set: "<red>Start en einde zijn al ingesteld! Breek er een om in te stellen.</red>"
+  start-removed: "<aqua>Start verwijderd!</aqua>"
+  end-removed: "<aqua>Einde verwijderd!</aqua>"
+  resetting-start-end: "<yellow>Start- en eindpunten opnieuw instellen!</yellow>"
+  start: "<aqua>Parkour start!</aqua>"
+  no-start-yet: "<red>Er is nog geen start ingesteld.</red>"
+  no-end-yet: "<red>Er is nog geen einde ingesteld.</red>"
+  to-start: "<light_purple>Stap op de gouden drukplaat om te starten.</light_purple>"
+  session-ended: "<red>Je parkourzitting is beëindigd.</red>"
+  end: "<green>Parkour einde!</green>"
+  you-took: "<light_purple>Je hebt [number] nodig gehad!</light_purple>"
+  start-before-end: "<aqua>Je moet beginnen voordat je eindigt!</aqua>"
+  checkpoint: "<yellow>Checkpoint!</yellow>"
+  checkpoint-set: "<green>Checkpoint ingesteld!</green>"
+  set-the-end: "<red>Stel de eindplaat in</red>"
+  hours: "uren"
+  minutes: "minuten"
+  seconds: "seconden"
+  hours-short: "u"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Kies een en geef je best!"
+    gui-title: "Parkour Banen"
+    head-description: "<aqua>[runs] runs</aqua>"
+  top:
+    gui-title: "Snelste Baan Ranglijsten"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Je rang: [number]</green>"
+    beat-previous-time: "<light_purple>Je hebt je vorige tijd verslagen!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Je hebt je vorige tijd niet verslagen!</aqua>"
+  errors:
+    not-on-island: "<red>Je moet op een parkour baan zijn</red>"
+    no-warp: "<red>Deze baan is al privé</red>"
+    not-in-run: "<red>Je moet momenteel een baan aan het lopen zijn</red>"
+  warp:
+    set: "<light_purple>Warp-plek ingesteld! Spelers kunnen je baan nu zien!</light_purple>"
+    replaced: "<yellow>Warp-plek ingesteld! Oude plek gedeactiveerd!</yellow>"
+    removed: "<red>Warp-plek verwijderd. Spelers zien je baan niet meer.</red>"
+    warping: "<green>Warpen naar de baan!</green>"
+    no-warp: "<red>Er is geen warp ingesteld voor deze baan!</red>"
+    unknown-course: "<red>Onbekende baan!</red>"
+  quit:
+    success: "<yellow>Je hebt je run beëindigd en kunt nu weer commando's uitvoeren</yellow>"
+  general:
+    errors:
+      no-island: '<red>Je hebt geen baan!</red>'
+      player-has-island: '<red>Speler heeft al een baan!</red>'
+      player-has-no-island: '<red>Deze speler heeft geen baan!</red>'
+      already-have-island: '<red>Je hebt al een baan!</red>'
+      no-safe-location: '<red>Geen veilige locatie gevonden op baan!</red>'
+      not-owner: '<red>Je bent niet de eigenaar van je team!</red>'
+  commands:
+    parkour:
+      courses:
+        description: toon beschikbare banen om te spelen en naar te warpen
+      cleartop:
+        description: wis je top tien van je baan of verwijder de score van een speler
+        parameters: <speler naam>
+      setwarp:
+        description: stelt de warp-plek in en maakt je baan openbaar
+      warp:
+        description: Warp naar een baan op naam of naar de start als je op een bent
+        parameters: <baannaam>
+      removewarp:
+        description: verwijdert de warp-plek en maakt je baan privé
+      help:
+        description: Start een parkour baan of teleporteer naar je baan
+      go:
+        parameters: '[thuis nummer]'
+      sethome:
+        parameters: '[thuis nummer]'
+      top:
+        description: "Toon de top baan ranglijsten"
+      quit:
+        description: "Stop de timer op de huidige baan"
+    island:
+      go:
+        parameters: '[thuis nummer]'
+        description: teleporteer je naar je baan
+        teleport: '<green>Je wordt naar je baan geteleporteerd.</green>'
+        teleported: '<green>Je bent geteleporteerd naar home </green><yellow>#[number].</yellow>'
+      help:
+        description: het belangrijkste parkour commando
+      create:
+        description: maak een baan met een optionele bouwprint (vereist toestemming)
+        parameters: <bouwprint>
+        too-many-islands: "<red>Er zijn te veel banen in deze wereld: er is niet genoeg ruimte voor de jouwe.</red>"
+        cannot-create-island: '<red>Een plek kon niet op tijd worden gevonden, probeer alstublieft opnieuw...</red>'
+        unable-create-island: '<red>Je baan kon niet worden gegenereerd, neem alstublieft contact op met een beheerder.</red>'
+        creating-island: '<green>Een plek zoeken voor je baan...</green>'
+        pasting:
+          estimated-time: '<green>Geschatte tijd: </green><aqua>[number] </aqua><green>seconden.</green>'
+          blocks: '<green>Bouwen het blok voor blok: </green><aqua>[number] </aqua><green>blokken totaal...</green>'
+          entities: '<green>Vullen met entities: </green><aqua>[number] </aqua><green>entities totaal...</green>'
+          done: '<green>Klaar! Je baan is gereed en wacht op je!</green>'
+        pick: '<dark_green>Kies een baan</dark_green>'
+        unknown-blueprint: '<red>Deze bouwprint is nog niet geladen.</red>'
+        on-first-login: '<green>Welkom! We zullen je baan over enkele seconden voorbereiden.</green>'
+        you-can-teleport-to-your-island: '<green>Je kunt jezelf naar je baan teleporteren wanneer je maar wilt.</green>'
+      info:
+        description: toon info over je baan of de baan van een speler
+        parameters: <speler>
+      near:
+        description: toon de naam van nabijgelegen banen om je heen
+        parameters: ''
+        the-following-islands: '<green>De volgende banen liggen dicht bij:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Noord
+        south: Zuid
+        east: Oost
+        west: West
+        no-neighbors: '<red>Je hebt geen onmiddellijke nabijgelegen banen!</red>'
+      reset:
+        description: herstart je baan en verwijder de oude
+        parameters: <bouwprint>
+        none-left: '<red>Je hebt geen resets meer over!</red>'
+        resets-left: '<red>Je hebt </red><aqua>[number] </aqua><red>resets over</red>'
+        confirmation: |-
+          <red>Weet je zeker dat je dit wilt doen?
+          </red><red>Alle baanleden zullen uit de baan worden getrapt, je moet ze daarna opnieuw uitnodigen.
+          </red><red>Er is geen terug: zodra je huidige baan is verwijderd, is er <bold>geen </bold></red> <red>manier om het later op te halen.</red>
+        kicked-from-island: '<red>Je bent uit je baan in [gamemode] getrapt omdat de eigenaar deze reset.</red>'
+      sethome:
+        description: stel je teleportpunt thuis in
+        must-be-on-your-island: '<red>Je moet op je baan zijn om thuis in te stellen!</red>'
+        num-homes: '<red>Thuisplekken kunnen van 1 tot [number] zijn.</red>'
+        home-set: '<gold>Je baanthuis is ingesteld op je huidige locatie.</gold>'
+        nether:
+          not-allowed: '<red>Je mag je thuis niet in de Nether instellen.</red>'
+          confirmation: '<red>Weet je zeker dat je je thuis in de Nether wilt instellen?</red>'
+        the-end:
+          not-allowed: '<red>Je mag je thuis niet in het End instellen.</red>'
+          confirmation: '<red>Weet je zeker dat je je thuis in het End wilt instellen?</red>'
+        parameters: '[thuis nummer]'
+      setname:
+        description: stel een naam in voor je baan
+        name-too-short: '<red>Te kort. Minimumgrootte is [number] tekens.</red>'
+        name-too-long: '<red>Te lang. Maximumgrootte is [number] tekens.</red>'
+        name-already-exists: '<red>Er bestaat al een baan met die naam!</red>'
+        parameters: <naam>
+        success: '<green>Je hebt de naam van je baan succesvol ingesteld op </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: reset je baannaam
+        success: '<green>Je hebt je baannaam succesvol gereset.</green>'
+      team:
+        description: beheer je team
+        coop:
+          description: maak een speler coop-rang op je baan
+          parameters: <speler>
+          cannot-coop-yourself: '<red>Je kunt jezelf niet coop-en!</red>'
+          already-has-rank: '<red>Deze speler heeft al een rang!</red>'
+          you-are-a-coop-member: '<dark_green>Je bent gecoop-ed door </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Je hebt </green><aqua>[name]</aqua><green> gecoop-ed.</green>'
+          name-has-invited-you: '<green>[name] heeft je uitgenodigd om lid te worden van een coop-lid van hun baan.</green>'
+        uncoop:
+          description: verwijder coop-rang van speler
+          parameters: <speler>
+          cannot-uncoop-yourself: '<red>Je kunt jezelf niet uncoop-en!</red>'
+          cannot-uncoop-member: '<red>Je kunt een teamlid niet uncoop-en!</red>'
+          player-not-cooped: '<red>Deze speler is niet gecoop-ed!</red>'
+          you-are-no-longer-a-coop-member: '<red>Je bent geen coop-lid meer van [name]''s baan.</red>'
+          all-members-logged-off: '<red>Alle baanleden zijn offline, dus je bent geen coop-lid meer van [name]''s baan.</red>'
+          success: '<aqua>[name] </aqua><green>is geen coop-lid meer van je baan.</green>'
+          is-full: '<red>Je kunt niemand anders coop-en.</red>'
+        trust:
+          description: geef een speler vertrouwde rang op je baan
+          parameters: <speler>
+          trust-in-yourself: '<red>Vertrouw jezelf!</red>'
+          name-has-invited-you: '<green>[name] heeft je uitgenodigd om lid te worden van een vertrouwd lid van hun baan.</green>'
+          player-already-trusted: '<red>Deze speler wordt al vertrouwd!</red>'
+          you-are-trusted: '<dark_green>Je wordt vertrouwd door </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Je vertrouwt </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Je kunt niemand anders vertrouwen.</red>'
+        invite:
+          description: nodig een speler uit om je baan te betreden
+          invitation-sent: '<green>Uitnodiging verzonden naar </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Uitnodiging verwijderen.</red>'
+          name-has-invited-you: '<green>[name] heeft je uitgenodigd om zich bij hun baan aan te sluiten.</green>'
+          to-accept-or-reject: '<green>Voer /[label] team accept in om te accepteren of /[label] team reject om af te wijzen</green>'
+          you-will-lose-your-island: '<red>WAARSCHUWING! Je zult je baan verliezen als je accepteert!</red>'
+          errors:
+            cannot-invite-self: '<red>Je kunt jezelf niet uitnodigen!</red>'
+            cooldown: '<red>Je kunt deze persoon voor nog [number] seconden niet uitnodigen.</red>'
+            island-is-full: '<red>Je baan is vol, je kunt niemand anders uitnodigen.</red>'
+            none-invited-you: '<red>Niemand heeft je uitgenodigd :c.</red>'
+            you-already-are-in-team: '<red>Je bent al in een team!</red>'
+            already-on-team: '<red>Deze speler is al in een team!</red>'
+            invalid-invite: '<red>Deze uitnodiging is niet meer geldig, sorry.</red>'
+            you-have-already-invited: '<red>Je hebt deze speler al uitgenodigd!</red>'
+          parameters: <speler>
+          you-can-invite: '<green>Je kunt nog [number] spelers uitnodigen.</green>'
+          accept:
+            description: accepteer een uitnodiging
+            you-joined-island: '<green>Je bent aangesoten bij een baan! Voer </green><aqua>/[label] team </aqua><green>in om de andere leden te zien.</green>'
+            name-joined-your-island: '<green>[name] is lid geworden van je baan!</green>'
+            confirmation: |-
+              <red>Weet je zeker dat je deze uitnodiging wilt accepteren?
+              </red><red><bold>Je zult je huidige baan <underlined>VERLIEZEN </underlined></bold></red><red><bold>!</bold></red>
+          reject:
+            description: wijs een uitnodiging af
+            you-rejected-invite: '<green>Je hebt de uitnodiging om je bij een baan aan te sluiten afgewezen.</green>'
+            name-rejected-your-invite: '<red>[name] heeft je baanuitnodiging afgewezen!</red>'
+          cancel:
+            description: annuleer de uitnodiging om je bij je baan aan te sluiten
+        leave:
+          cannot-leave: '<red>Eigenaren kunnen niet weggaan! Word eerst lid of trap alle leden eruit.</red>'
+          description: verlaat je baan
+          left-your-island: '<red>[name] </red><red>heeft je baan verlaten</red>'
+          success: '<green>Je hebt deze baan verlaten.</green>'
+        kick:
+          description: verwijder een lid uit je baan
+          parameters: <speler>
+          owner-kicked: '<red>De eigenaar heeft je uit de baan in [gamemode] getrapt!</red>'
+          cannot-kick: '<red>Je kunt jezelf niet trappen!</red>'
+          success: '<aqua>[name] </aqua><green>is uit je baan getrapt.</green>'
+        demote:
+          description: degradeer een speler op je baan
+          parameters: <speler>
+          errors:
+            cant-demote-yourself: '<red>Je kunt jezelf niet degraderen!</red>'
+          failure: '<red>Deze speler kan niet verder worden gedegradeerd!</red>'
+          success: '<green>Gedegradeerd [name] naar [rank]</green>'
+        promote:
+          description: bevorder een speler op je baan
+          parameters: <speler>
+          failure: '<red>Deze speler kan niet verder worden bevorderd!</red>'
+          success: '<green>Bevorderd [name] naar [rank]</green>'
+        setowner:
+          description: draag je baaneigendom over aan een lid
+          errors:
+            cant-transfer-to-yourself: '<red>Je kunt het eigendom niet naar jezelf overdragen! </red><gray>(<italic> Nou ja, eigenlijk zou je kunnen... Maar we willen niet dat je het doet. Omdat het nutteloos is.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Deze speler maakt geen deel uit van je baanteam!</red>'
+          name-is-the-owner: '<green>[name] is nu de baaneigenaar!</green>'
+          parameters: <speler>
+          you-are-the-owner: '<green>Je bent nu de baaneigenaar!</green>'
+      ban:
+        description: sluit een speler uit van je baan
+        parameters: <speler>
+        cannot-ban-yourself: '<red>Je kunt jezelf niet verbannen!</red>'
+        cannot-ban: '<red>Deze speler kan niet worden verbannen.</red>'
+        cannot-ban-member: '<red>Trap het teamlid eerst eruit en verbann ze dan.</red>'
+        cannot-ban-more-players: '<red>Je hebt de banlimieten bereikt, je kunt niet meer spelers uit je baan verbannen.</red>'
+        player-already-banned: '<red>Deze speler is al verbannen.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  is nu verbannen uit je baan.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  heeft je uit hun baan verbannen!</red>'
+        you-are-banned: '<aqua>Je bent verbannen uit deze baan!</aqua>'
+      unban:
+        description: hef het verbod van een speler op je baan op
+        parameters: <speler>
+        cannot-unban-yourself: '<red>Je kunt jezelf niet ontzeggen!</red>'
+        player-not-banned: '<red>Deze speler is niet verbannen.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  is nu ontzegd van je baan.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  heeft je ontzegd van hun baan!</green>'
+      banlist:
+        description: lijst verbannen spelers
+        noone: '<green>Niemand is verbannen op deze baan.</green>'
+        the-following: '<aqua>De volgende spelers zijn verbannen:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Je kunt tot </aqua><yellow>[number] </yellow><aqua>meer spelers verbannen.</aqua>'
+      settings:
+        description: toon baanvoorkeuren
+      language:
+        description: selecteer taal
+        parameters: '[taal]'
+        not-available: '<red>Deze taal is niet beschikbaar.</red>'
+        already-selected: '<red>Je gebruikt al deze taal.</red>'
+      expel:
+        description: verwijder een speler uit je baan
+        parameters: <speler>
+        cannot-expel-yourself: '<red>Je kunt jezelf niet uitdrijven!</red>'
+        cannot-expel: '<red>Deze speler kan niet worden uitgeworpen.</red>'
+        cannot-expel-member: '<red>Je kunt een teamlid niet uitdrijven!</red>'
+        not-on-island: '<red>Deze speler staat niet op je baan!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  heeft je uit de baan uitgeworpen!</red>'
+        success: '<green>Je hebt </green><aqua>[name] </aqua><green>uit de baan uitgeworpen.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] heeft een baan. Meld af of verwijder ze eerst!</red>'
+        setowner:
+          description: draagt baaneigendom over aan de speler
+          already-owner: '<red>Deze speler is al eigenaar van deze baan!</red>'
+      range:
+        description: Admin baanbereik commando
+        display:
+          description: Bereik-indicatoren tonen/verbergen
+          hint: |-
+            <red>Rode Barrière-pictogrammen </red><white>tonen de huidige beschermde bereikslimiet.
+            </white><gray>Grijze deeltjes </gray><white>tonen de maximale limiet.
+            </white><green>Groene deeltjes </green><white>tonen het standaard beschermde bereik als het bereik afwijkt.</white>
+        set:
+          description: Stelt het beschermde baanbereik in
+        reset:
+          description: Zet het beschermde bereik terug naar de wereldstandaard
+      register:
+        parameters: <speler>
+        description: registreer speler op onbeheerde baan waar je bent
+        registered-island: '<green>Speler geregistreerd op baan op [xyz].</green>'
+        already-owned: '<red>Dit gebied is al eigendom van een ander spieler!</red>'
+        no-island-here: '<red>Er is geen spielerbaan hier. Bevestig om er een te maken.</red>'
+        in-deletion: '<red>Dit gebied wordt momenteel opnieuw gegenereerd. Probeer het later.</red>'
+      unregister:
+        description: meld eigenaar af van baan maar behoud baan blokken
+        unregistered-island: '<green>Speler afgemeld van baan op [xyz].</green>'
+      info:
+        description: krijg info over waar je bent of over een speler
+        no-island: '<red>Je bent momenteel niet in een geregistreerde baan...</red>'
+        island-location: 'Gebiedlocatie: [xyz]'
+        island-coords: 'Gebiedcoördinaten: [xz1] tot [xz2]'
+        is-spawn: Gebied is een spawn baan
+      setrange:
+        description: stel bereik van spieler baan in
+        range-updated: Gebiedbereik bijgewerkt naar [number]
+      tp:
+        description: teleporteer naar een spieler baan
+      getrank:
+        description: krijg rang van een speler in hun baan
+        rank-is: '<green>Rang is [rank] in hun baan.</green>'
+      setrank:
+        description: stel rang van speler in hun baan in
+      setspawn:
+        description: stel een baan in als spawn voor deze wereld
+        already-spawn: '<red>Deze baan is al een spawn!</red>'
+        no-island-here: '<red>Er is geen geregistreerde baan hier.</red>'
+        confirmation: '<red>Weet je zeker dat je deze baan als spawn voor deze wereld wilt instellen?</red>'
+      delete:
+        description: verwijder een speler en hergeneer hun baan
+        deleted-island: '<green>Gebied op </green><yellow>[xyz] </yellow><green>is succesvol opnieuw gegenereerd.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Schakelt creative mode in
+          </green><green>aan het einde van baan en
+          </green><green>bij het betreden van de baan
+          </green>
+        name: "Parkour Creative Mode"
+      ELYTRA:
+        description: Schakel gebruik in
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermen kunnen
+          </green><green>blokken verwijderen</green>
+      ENTER_EXIT_MESSAGES:
+        description: Toon in- en uitgangsberichten
+        island: "[name]'s baan"
+        name: In-/uitgangsberichten
+        now-entering: '<green>Je betreedt nu </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Je betreedt nu je baan.</green>'
+        now-leaving: '<green>Je verlaat nu </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Je verlaat nu je baan.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Verwijder mobs die
+          </green><green>buiten beschermde
+          </green><green>spielerruimte gaan</green>
+        name: '<yellow>Limitmobs tot spieler baan</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Spelers spawnen
+          </green><green>in hun baan</green>
+        name: Gebied respawn
+      LOCK:
+        name: Sluit spieler baan af
+      OFFLINE_REDSTONE:
+        description: "<green>Wanneer uitgeschakeld, wordt\n</green><green>redstone niet gebruikt in banen\n</green><green>waar alle leden offline zijn.\n</green><green>Kan helpen lag te verminderen.</green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Sta pistons toe blokken
+          </green><green>buiten een spieler baan te duwen</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Inschakelen/uitschakelen PVP
+          </red><red>in beschermde baan.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Verwijder monsters wanneer
+          </green><green>naar een baan wordt geteleporteerd</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Voorkom dat spelers zich teleporteren
+          </green><green>terwijl ze vallen.</green>
+        hint: '<red>Je kunt je niet teleporteren terwijl je valt!</red>'
+    locked: '<red>Deze baan is vergrendeld!</red>'
+    protected: '<red>Gebied beschermd: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Bescherming</gold>'
+        description: |-
+          <green>Beschermingsinstellingen
+          </green><green>voor deze baan</green>
+      SETTING:
+        description: |-
+          <green>Algemene instellingen
+          </green><green>voor deze baan</green>

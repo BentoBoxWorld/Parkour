@@ -1,9 +1,9 @@
 package world.bentobox.parkour.commands;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -19,74 +19,42 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
 
-import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
-import world.bentobox.bentobox.database.objects.Island;
 import world.bentobox.bentobox.managers.CommandsManager;
-import world.bentobox.bentobox.managers.IslandWorldManager;
-import world.bentobox.bentobox.managers.IslandsManager;
-import world.bentobox.bentobox.managers.LocalesManager;
 import world.bentobox.bentobox.managers.PlayersManager;
 import world.bentobox.bentobox.managers.RanksManager;
 import world.bentobox.bentobox.util.Util;
-import world.bentobox.parkour.Parkour;
+import world.bentobox.parkour.CommonTestSetup;
 import world.bentobox.parkour.ParkourManager;
 import world.bentobox.parkour.Settings;
+import world.bentobox.parkour.WhiteBox;
 import world.bentobox.parkour.gui.RankingsUI;
-import world.bentobox.parkour.mocks.ServerMocks;
 
 /**
  * @author tastybento
- *
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Bukkit.class, BentoBox.class, User.class, Util.class, RanksManager.class })
-public class ClearTopCommandTest {
+class ClearTopCommandTest extends CommonTestSetup {
 
-    @Mock
-    private BentoBox plugin;
     @Mock
     private CompositeCommand ac;
     @Mock
     private User user;
     @Mock
-    private LocalesManager lm;
-    @Mock
-    private Parkour addon;
-    private UUID uuid;
-    @Mock
-    private World world;
-    @Mock
-    private IslandsManager im;
-    @Mock
-    private @Nullable Island island;
-    @Mock
-    private IslandWorldManager iwm;
-    @Mock
     private ParkourManager parkourManager;
 
     private ClearTopCommand cmd;
     @Mock
-    private @NonNull Location location;
+    private @NonNull Location loc;
     @Mock
     private RankingsUI rankings;
     @Mock
@@ -94,19 +62,10 @@ public class ClearTopCommandTest {
     @Mock
     private RanksManager rm;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
+    @Override
+    @BeforeEach
     public void setUp() throws Exception {
-        ServerMocks.newServer();
-        // Set up plugin
-        Whitebox.setInternalState(BentoBox.class, "instance", plugin);
-        world.bentobox.bentobox.Settings s = new world.bentobox.bentobox.Settings();
-        when(plugin.getSettings()).thenReturn(s);
-
-        // Bukkit
-        PowerMockito.mockStatic(Bukkit.class, Mockito.RETURNS_MOCKS);
+        super.setUp();
 
         // Command manager
         CommandsManager cm = mock(CommandsManager.class);
@@ -114,21 +73,18 @@ public class ClearTopCommandTest {
 
         // Player
         Player p = mock(Player.class);
-        // Sometimes use Mockito.withSettings().verboseLogging()
         when(user.isOp()).thenReturn(false);
         when(user.getPermissionValue(anyString(), anyInt())).thenReturn(4);
         when(user.getWorld()).thenReturn(world);
-        uuid = UUID.randomUUID();
         when(user.getUniqueId()).thenReturn(uuid);
         when(user.getPlayer()).thenReturn(p);
         when(user.getName()).thenReturn("tastybento");
-        when(user.getLocation()).thenReturn(location);
+        when(user.getLocation()).thenReturn(loc);
         when(user.getTranslation(any())).thenAnswer(invocation -> invocation.getArgument(0, String.class));
         User.setPlugin(plugin);
 
-        // Util
-        PowerMockito.mockStatic(Util.class, Mockito.RETURNS_MOCKS);
-        when(Util.getUUID("tastybento")).thenReturn(uuid);
+        // Util static (Bukkit and Util are already statically mocked by CommonTestSetup)
+        mockedUtil.when(() -> Util.getUUID("tastybento")).thenReturn(uuid);
 
         // Parent command has no aliases
         when(ac.getSubCommandAliases()).thenReturn(new HashMap<>());
@@ -137,9 +93,8 @@ public class ClearTopCommandTest {
         when(addon.getRankings()).thenReturn(rankings);
 
         // Islands
-        when(plugin.getIslands()).thenReturn(im);
         when(im.getIsland(world, user)).thenReturn(island);
-        when(im.getIslandAt(location)).thenReturn(Optional.of(island));
+        when(im.getIslandAt(loc)).thenReturn(Optional.of(island));
         when(im.hasIsland(world, user)).thenReturn(true);
         when(im.inTeam(world, uuid)).thenReturn(true);
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.OWNER_RANK);
@@ -147,12 +102,10 @@ public class ClearTopCommandTest {
         when(im.userIsOnIsland(any(), any())).thenReturn(true);
 
         // Parkour Manager
-        // No warp spot
         when(parkourManager.getWarpSpot(island)).thenReturn(Optional.empty());
         when(addon.getParkourManager()).thenReturn(parkourManager);
 
         // IWM
-        when(plugin.getIWM()).thenReturn(iwm);
         when(iwm.getPermissionPrefix(any())).thenReturn("parkour.");
         when(iwm.inWorld(world)).thenReturn(true);
 
@@ -160,8 +113,8 @@ public class ClearTopCommandTest {
         Settings settings = new Settings();
         when(addon.getSettings()).thenReturn(settings);
 
-        // RanksManager
-        Whitebox.setInternalState(RanksManager.class, "instance", rm);
+        // RanksManager singleton
+        WhiteBox.setInternalState(RanksManager.class, "instance", rm);
 
         // Players Manager
         when(addon.getPlayers()).thenReturn(pm);
@@ -171,18 +124,19 @@ public class ClearTopCommandTest {
         cmd = new ClearTopCommand(ac);
     }
 
-    @After
-    public void tearDown() {
-        ServerMocks.unsetBukkitServer();
-        User.clearUsers();
-        Mockito.framework().clearInlineMocks();
+    @Override
+    @AfterEach
+    public void tearDown() throws Exception {
+        // Reset the RanksManager singleton so other test classes get a fresh instance
+        WhiteBox.setInternalState(RanksManager.class, "instance", null);
+        super.tearDown();
     }
 
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#ClearTopCommand(world.bentobox.bentobox.api.commands.CompositeCommand)}.
      */
     @Test
-    public void testClearTopCommand() {
+    void testClearTopCommand() {
         assertNotNull(cmd);
     }
 
@@ -190,29 +144,28 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#setup()}.
      */
     @Test
-    public void testSetup() {
+    void testSetup() {
         assertEquals("cleartop", cmd.getPermission());
         assertEquals("parkour.commands.parkour.cleartop.description", cmd.getDescription());
         assertEquals("parkour.commands.parkour.cleartop.parameters", cmd.getParameters());
         assertTrue(cmd.isConfigurableRankCommand());
         assertTrue(cmd.isOnlyPlayer());
-
     }
 
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteShowHelp() {
-        assertFalse(cmd.canExecute(user, "", List.of("too","many","args")));
-        verify(user).sendMessage("commands.help.header","[label]",null);
+    void testCanExecuteShowHelp() {
+        assertFalse(cmd.canExecute(user, "", List.of("too", "many", "args")));
+        verify(user).sendMessage("commands.help.header", "[label]", "Parkour");
     }
 
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteNoIsland() {
+    void testCanExecuteNoIsland() {
         when(im.hasIsland(world, user)).thenReturn(false);
         when(im.inTeam(world, uuid)).thenReturn(false);
         assertFalse(cmd.canExecute(user, "", List.of()));
@@ -223,18 +176,17 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteInsufficientRank() {
+    void testCanExecuteInsufficientRank() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.ADMIN_RANK);
         assertFalse(cmd.canExecute(user, "", List.of()));
         verify(user).sendMessage("general.errors.insufficient-rank", TextVariables.RANK, null);
-
     }
 
     /**
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecuteUnknownPlayer() {
+    void testCanExecuteUnknownPlayer() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.VISITOR_RANK);
         assertFalse(cmd.canExecute(user, "", List.of("lspvicky")));
         verify(user).sendMessage("general.errors.unknown-player", TextVariables.NAME, "lspvicky");
@@ -244,7 +196,7 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#canExecute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testCanExecute() {
+    void testCanExecute() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.VISITOR_RANK);
         assertTrue(cmd.canExecute(user, "", List.of("tastybento")));
         assertTrue(cmd.canExecute(user, "", List.of()));
@@ -254,7 +206,7 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#execute(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testExecuteUserStringListOfString() {
+    void testExecuteUserStringListOfString() {
         assertTrue(cmd.execute(user, "", List.of("tastybento")));
         verify(user).sendMessage("commands.confirmation.confirm", "[seconds]", "10");
     }
@@ -263,7 +215,7 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#confirmed(world.bentobox.bentobox.api.user.User)}.
      */
     @Test
-    public void testConfirmed() {
+    void testConfirmed() {
         when(island.getRankCommand(anyString())).thenReturn(RanksManager.VISITOR_RANK);
         assertTrue(cmd.canExecute(user, "", List.of("tastybento")));
         cmd.confirmed(user);
@@ -277,7 +229,7 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#confirmed(world.bentobox.bentobox.api.user.User)}.
      */
     @Test
-    public void testConfirmedNoIsland() {
+    void testConfirmedNoIsland() {
         when(im.getIsland(world, user)).thenReturn(null);
         cmd.confirmed(user);
         verify(user).sendMessage("general.errors.no-island");
@@ -287,7 +239,7 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testTabCompleteUserStringListOfStringSuccess() {
+    void testTabCompleteUserStringListOfStringSuccess() {
         Map<UUID, Long> map = Map.of(uuid, 20L);
         when(parkourManager.getRankings(island, 10)).thenReturn(map);
         Optional<List<String>> opList = cmd.tabComplete(user, "", List.of(""));
@@ -299,7 +251,7 @@ public class ClearTopCommandTest {
      * Test method for {@link world.bentobox.parkour.commands.ClearTopCommand#tabComplete(world.bentobox.bentobox.api.user.User, java.lang.String, java.util.List)}.
      */
     @Test
-    public void testTabCompleteUserStringListOfStringNotOnIsland() {
+    void testTabCompleteUserStringListOfStringNotOnIsland() {
         when(im.getIsland(world, user)).thenReturn(null);
         Optional<List<String>> opList = cmd.tabComplete(user, "", List.of(""));
         assertTrue(opList.isEmpty());

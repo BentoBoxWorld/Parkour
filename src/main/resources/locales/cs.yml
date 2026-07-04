@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Start nastaven!</green>"
+  end-set: "<green>Konec nastaven!</green>"
+  already-set: "<red>Start a konec jsou již nastaveny! Rozbij jedno aby se resetovalo.</red>"
+  start-removed: "<aqua>Start odstraněn!</aqua>"
+  end-removed: "<aqua>Konec odstraněn!</aqua>"
+  resetting-start-end: "<yellow>Resetování startovního a koncového bodu!</yellow>"
+  start: "<aqua>Parkour start!</aqua>"
+  no-start-yet: "<red>Zatím není nastaven žádný start.</red>"
+  no-end-yet: "<red>Zatím není nastaven žádný konec.</red>"
+  to-start: "<light_purple>Chcete-li začít, stoupněte si na zlatou tiskací desku.</light_purple>"
+  session-ended: "<red>Vaše parkourová relace skončila.</red>"
+  end: "<green>Parkour konec!</green>"
+  you-took: "<light_purple>Potřeboval jsi [number]!</light_purple>"
+  start-before-end: "<aqua>Musíš začít dříve než skončit!</aqua>"
+  checkpoint: "<yellow>Kontrolní bod!</yellow>"
+  checkpoint-set: "<green>Kontrolní bod nastaven!</green>"
+  set-the-end: "<red>Nastav koncovou desku</red>"
+  hours: "hodin"
+  minutes: "minut"
+  seconds: "sekund"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Vyberte si jeden a zkuste si to!"
+    gui-title: "Parkour Tratě"
+    head-description: "<aqua>[runs] pokusů</aqua>"
+  top:
+    gui-title: "Nejrychlejší Žebříčky Tratí"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Vaše pozice: [number]</green>"
+    beat-previous-time: "<light_purple>Pokořil jsi svůj předchozí čas!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Nepokořil jsi svůj předchozí čas!</aqua>"
+  errors:
+    not-on-island: "<red>Musíš být na parkourové trati</red>"
+    no-warp: "<red>Tato trať je již privátní</red>"
+    not-in-run: "<red>Musíš aktuálně běžet trať</red>"
+  warp:
+    set: "<light_purple>Warp místo nastaveno! Hráči nyní mohou vidět vaši trať!</light_purple>"
+    replaced: "<yellow>Warp místo nastaveno! Staré místo deaktivováno!</yellow>"
+    removed: "<red>Warp místo odstraněno. Hráči nebudou vidět vaši trať.</red>"
+    warping: "<green>Warp na trať!</green>"
+    no-warp: "<red>Pro tuto trať není nastaven žádný warp!</red>"
+    unknown-course: "<red>Neznámá trať!</red>"
+  quit:
+    success: "<yellow>Skončil jsi svůj běh a nyní můžeš znovu používat příkazy</yellow>"
+  general:
+    errors:
+      no-island: '<red>Nemáš trať!</red>'
+      player-has-island: '<red>Hráč již má trať!</red>'
+      player-has-no-island: '<red>Tento hráč nemá trať!</red>'
+      already-have-island: '<red>Již máš trať!</red>'
+      no-safe-location: '<red>Nebyl nalezen bezpečný údaj na trati!</red>'
+      not-owner: '<red>Nejsi vlastníkem svého týmu!</red>'
+  commands:
+    parkour:
+      courses:
+        description: zobrazit dostupné tratě k hraní a warpu
+      cleartop:
+        description: smazat deset nejlepších tratí nebo odebrat skóre hráče
+        parameters: <jméno hráče>
+      setwarp:
+        description: nastaví warp místo a zveřejní vaši trať
+      warp:
+        description: Warp na trať podle jména nebo na start pokud jsi na jedné
+        parameters: <jméno tratě>
+      removewarp:
+        description: odstraní warp místo a zesílí vaši trať privátní
+      help:
+        description: Spusť parkourovou trať nebo se teleportuj na svou trať
+      go:
+        parameters: '[číslo domova]'
+      sethome:
+        parameters: '[číslo domova]'
+      top:
+        description: "Zobrazit top žebříčky tratí"
+      quit:
+        description: "Zastavit časovač na aktuální trati"
+    island:
+      go:
+        parameters: '[číslo domova]'
+        description: teleportuje tě na svou trať
+        teleport: '<green>Teleportuješ se na svou trať.</green>'
+        teleported: '<green>Teleportován na domov </green><yellow>#[number].</yellow>'
+      help:
+        description: hlavní parkourový příkaz
+      create:
+        description: vytvořit trať pomocí volitelného blueprintu (vyžaduje oprávnění)
+        parameters: <blueprint>
+        too-many-islands: "<red>V tomto světě je příliš mnoho tratí: není dost místa pro vaši.</red>"
+        cannot-create-island: '<red>Místo nebylo nalezeno včas, zkuste znovu...</red>'
+        unable-create-island: '<red>Vaši trať nelze generovat, kontaktujte prosím administrátora.</red>'
+        creating-island: '<green>Hledám místo pro vaši trať...</green>'
+        pasting:
+          estimated-time: '<green>Odhadovaný čas: </green><aqua>[number] </aqua><green>sekund.</green>'
+          blocks: '<green>Budování blok po bloku: </green><aqua>[number] </aqua><green>bloků celkem...</green>'
+          entities: '<green>Vyplnění entity: </green><aqua>[number] </aqua><green>entity celkem...</green>'
+          done: '<green>Hotovo! Vaše trať je připravena a čeká na vás!</green>'
+        pick: '<dark_green>Vyberte si trať</dark_green>'
+        unknown-blueprint: '<red>Tento blueprint ještě nebyl načten.</red>'
+        on-first-login: '<green>Vítejte! Vaši trať začneme připravovat za pár sekund.</green>'
+        you-can-teleport-to-your-island: '<green>Můžete se teleportovat na svou trať, kdykoli chcete.</green>'
+      info:
+        description: zobrazit informace o vaší trati nebo trati hráče
+        parameters: <hráč>
+      near:
+        description: zobrazit názvy sousedních tratí kolem vás
+        parameters: ''
+        the-following-islands: '<green>Následující tratě jsou blízko:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Sever
+        south: Jih
+        east: Východ
+        west: Západ
+        no-neighbors: '<red>Nemáš žádné sousední tratě!</red>'
+      reset:
+        description: restartuj svou trať a odstraň starou
+        parameters: <blueprint>
+        none-left: '<red>Nemáš více resetů!</red>'
+        resets-left: '<red>Máš </red><aqua>[number] </aqua><red>resetů zbývajících</red>'
+        confirmation: |-
+          <red>Jste si jistý/á, že to chcete udělat?
+          </red><red>Všichni členové trati budou vykopáni, poté si je budete muset znovu pozvat.
+          </red><red>Není cesty zpět: jakmile bude vaše aktuální trať odstraněna, nebude <bold>žádný </bold></red> <red>způsob, jak ji později obnovit.</red>
+        kicked-from-island: '<red>Byl jsi vyhozen ze své trati v [gamemode] protože ji vlastník resetuje.</red>'
+      sethome:
+        description: nastav svůj bod teleportace domů
+        must-be-on-your-island: '<red>Musíš být na své trati aby ses nastavil domů!</red>'
+        num-homes: '<red>Domovy mohou být od 1 do [number].</red>'
+        home-set: '<gold>Váš domů trati byl nastaven na vaši aktuální polohu.</gold>'
+        nether:
+          not-allowed: '<red>Nemůžeš si nastavit domů v Netheru.</red>'
+          confirmation: '<red>Jsi si jistý/á, že si chceš nastavit domů v Netheru?</red>'
+        the-end:
+          not-allowed: '<red>Nemůžeš si nastavit domů v Endu.</red>'
+          confirmation: '<red>Jsi si jistý/á, že si chceš nastavit domů v Endu?</red>'
+        parameters: '[číslo domova]'
+      setname:
+        description: nastav jméno pro svou trať
+        name-too-short: '<red>Příliš krátký. Minimální velikost je [number] znaků.</red>'
+        name-too-long: '<red>Příliš dlouhý. Maximální velikost je [number] znaků.</red>'
+        name-already-exists: '<red>Již existuje trať s tímto jménem!</red>'
+        parameters: <jméno>
+        success: '<green>Úspěšně jsi nastavil jméno své trati na </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: resetuj jméno své trati
+        success: '<green>Úspěšně jsi resetoval jméno své trati.</green>'
+      team:
+        description: spravuj svůj tým
+        coop:
+          description: udělej z hráče coop rank na své trati
+          parameters: <hráč>
+          cannot-coop-yourself: '<red>Nemůžeš si koopovat sám sebe!</red>'
+          already-has-rank: '<red>Tento hráč již má rank!</red>'
+          you-are-a-coop-member: '<dark_green>Byl jsi koopován </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Koopoval jsi </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] tě pozval/a aby si stal/a členem coop trati.</green>'
+        uncoop:
+          description: odstraň coop rank od hráče
+          parameters: <hráč>
+          cannot-uncoop-yourself: '<red>Nemůžeš si odkoopovat sám sebe!</red>'
+          cannot-uncoop-member: '<red>Nemůžeš odkoopovat člena týmu!</red>'
+          player-not-cooped: '<red>Tento hráč není koopován!</red>'
+          you-are-no-longer-a-coop-member: '<red>Už nejsi členem coop trati [name].</red>'
+          all-members-logged-off: '<red>Všichni členové trati se odhlásili, takže už nejsi členem coop trati [name].</red>'
+          success: '<aqua>[name] </aqua><green>již není členem coop vaší trati.</green>'
+          is-full: '<red>Nemůžeš koopovat nikoho dalšího.</red>'
+        trust:
+          description: dej hráči důvěryhodný rank na své trati
+          parameters: <hráč>
+          trust-in-yourself: '<red>Věř sám sobě!</red>'
+          name-has-invited-you: '<green>[name] tě pozval/a aby si stal/a důvěryhodným členem jejich trati.</green>'
+          player-already-trusted: '<red>Tento hráč je již důvěryhodný!</red>'
+          you-are-trusted: '<dark_green>Jsi důvěryhodný pro </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Důvěřuješ </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Nemůžeš důvěřovat nikomu dalšímu.</red>'
+        invite:
+          description: pozvi hráče aby se připojil k tvé trati
+          invitation-sent: '<green>Pozvánka poslána </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Odebírání pozvánky.</red>'
+          name-has-invited-you: '<green>[name] tě pozval/a aby ses připojil/a k jejich trati.</green>'
+          to-accept-or-reject: '<green>Udělej /[label] team accept abys přijal, nebo /[label] team reject abys zamítl</green>'
+          you-will-lose-your-island: '<red>UPOZORNĚNÍ! Pokud přijmeš, ztratíš svou trať!</red>'
+          errors:
+            cannot-invite-self: '<red>Nemůžeš pozvat sám sebe!</red>'
+            cooldown: '<red>Nemůžeš pozvat tuto osobu dalších [number] sekund.</red>'
+            island-is-full: '<red>Vaše trať je plná, nemůžeš pozvat nikoho dalšího.</red>'
+            none-invited-you: '<red>Nikdo tě nepozvala :c.</red>'
+            you-already-are-in-team: '<red>Už jsi v týmu!</red>'
+            already-on-team: '<red>Tento hráč je již v týmu!</red>'
+            invalid-invite: '<red>Tato pozvánka je již neplatná, omlouvám se.</red>'
+            you-have-already-invited: '<red>Už jsi pozvala tohoto hráče!</red>'
+          parameters: <hráč>
+          you-can-invite: '<green>Můžeš pozvat dalších [number] hráčů.</green>'
+          accept:
+            description: přijmi pozvánku
+            you-joined-island: '<green>Připojil/a ses k trati! Gebruik </green><aqua>/[label] team </aqua><green>aby vidíš ostatní členy.</green>'
+            name-joined-your-island: '<green>[name] se připojil/a k tvé trati!</green>'
+            confirmation: |-
+              <red>Jsi si jistý/á, že chceš přijmout tuto pozvánku?
+              </red><red><bold>Ztratíš svou aktuální trať <underlined>ZTRATÍŠ </underlined></bold></red><red><bold>!</bold></red>
+          reject:
+            description: odmítni pozvánku
+            you-rejected-invite: '<green>Odmítl/a jsi pozvánku k připojení k trati.</green>'
+            name-rejected-your-invite: '<red>[name] odmítl/a tvou pozvánku na trať!</red>'
+          cancel:
+            description: zrušit čekající pozvánku k připojení k tvé trati
+        leave:
+          cannot-leave: '<red>Vlastníci nemohou odejít! Nejdřív se staň členem nebo vykopej všechny členy.</red>'
+          description: opusť svou trať
+          left-your-island: '<red>[name] </red><red>opustil/a tvou trať</red>'
+          success: '<green>Opustil/a jsi tuto trať.</green>'
+        kick:
+          description: odstraň člena z tvé trati
+          parameters: <hráč>
+          owner-kicked: '<red>Vlastník tě vykopul/a z trati v [gamemode]!</red>'
+          cannot-kick: '<red>Nemůžeš se vykopnout sám!</red>'
+          success: '<aqua>[name] </aqua><green>byl/a vyhozen/a z tvé trati.</green>'
+        demote:
+          description: snižte hráče na vaší trati
+          parameters: <hráč>
+          errors:
+            cant-demote-yourself: '<red>Nemůžeš se snížit sám!</red>'
+          failure: '<red>Tento hráč nemůže být dále snížen!</red>'
+          success: '<green>Snížen [name] na [rank]</green>'
+        promote:
+          description: povysit hráče na vaší trati
+          parameters: <hráč>
+          failure: '<red>Tento hráč nemůže být dále povýšen!</red>'
+          success: '<green>Povýšen [name] na [rank]</green>'
+        setowner:
+          description: převeďte vlastnictví vaší trati na člena
+          errors:
+            cant-transfer-to-yourself: '<red>Nemůžeš převést vlastnictví na sebe! </red><gray>(<italic> Vlastně bys mohl/a... Ale nechceme aby jsi to dělal/a. Protože je to zbytečné.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Tento hráč není součástí tvého týmu tratě!</red>'
+          name-is-the-owner: '<green>[name] je nyní vlastníkem trati!</green>'
+          parameters: <hráč>
+          you-are-the-owner: '<green>Jsi nyní vlastníkem trati!</green>'
+      ban:
+        description: zakázat hráči přístup na vaši trať
+        parameters: <hráč>
+        cannot-ban-yourself: '<red>Nemůžeš si sám zakázat!</red>'
+        cannot-ban: '<red>Tento hráč nemůže být zakázán.</red>'
+        cannot-ban-member: '<red>Nejdřív vykopej člena týmu, potom zakáz.</red>'
+        cannot-ban-more-players: '<red>Dosáhl/a si limitu zákazu, nemůžeš zakázat více hráčů z tvé trati.</red>'
+        player-already-banned: '<red>Tento hráč je již zakázán.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  je nyní zakázán/a z tvé trati.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  tě zakázal/a z jejich trati!</red>'
+        you-are-banned: '<aqua>Jsi zakázán/a z této trati!</aqua>'
+      unban:
+        description: zrušit zákaz hráči na vaší trati
+        parameters: <hráč>
+        cannot-unban-yourself: '<red>Nemůžeš si zrušit zákaz sám!</red>'
+        player-not-banned: '<red>Tento hráč není zakázán.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  je nyní odbanován/a z tvé trati.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  tě odbanoval/a z jejich trati!</green>'
+      banlist:
+        description: seznam zakázaných hráčů
+        noone: '<green>Nikdo není zakázán/a na této trati.</green>'
+        the-following: '<aqua>Následující hráči jsou zakázáni:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Můžeš zakázat až </aqua><yellow>[number] </yellow><aqua>dalších hráčů.</aqua>'
+      settings:
+        description: zobrazit nastavení trati
+      language:
+        description: vybrat jazyk
+        parameters: '[jazyk]'
+        not-available: '<red>Tento jazyk není dostupný.</red>'
+        already-selected: '<red>Již používáš tento jazyk.</red>'
+      expel:
+        description: vyhoď hráče z tvé trati
+        parameters: <hráč>
+        cannot-expel-yourself: '<red>Nemůžeš sám sebe vyhodit!</red>'
+        cannot-expel: '<red>Tento hráč nemůže být vyhozen.</red>'
+        cannot-expel-member: '<red>Nemůžeš vyhodit člena týmu!</red>'
+        not-on-island: '<red>Tento hráč není na tvé trati!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  tě vyhodi/a z trati!</red>'
+        success: '<green>Vyhodi/a jsi </green><aqua>[name] </aqua><green>z trati.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] má trať. Nejdřív zrušit registraci nebo smazat!</red>'
+        setowner:
+          description: převede vlastnictví trati hráči
+          already-owner: '<red>Tento hráč je již vlastníkem této trati!</red>'
+      range:
+        description: Příkaz rozsahu trati Admin
+        display:
+          description: Zobrazit/skrýt ukazatele rozsahu trati
+          hint: |-
+            <red>Červené ikony bariéry </red><white>zobrazují aktuální limit chráněného rozsahu.
+            </white><gray>Šedé částice </gray><white>zobrazují maximální limit.
+            </white><green>Zelené částice </green><white>zobrazují výchozí chráněný rozsah, pokud se rozsah ochrany liší.</white>
+        set:
+          description: Nastaví chráněný rozsah trati
+        reset:
+          description: Resetuje chráněný rozsah na výchozí svět
+      register:
+        parameters: <hráč>
+        description: registruj hráče na nevlastněné trati kde jsi
+        registered-island: '<green>Hráč registrován na trať v [xyz].</green>'
+        already-owned: '<red>Tato oblast je již vlastněna jiným hráčem!</red>'
+        no-island-here: '<red>Zde není žádná hráčská trať. Potvrďte aby se vytvořila.</red>'
+        in-deletion: '<red>Tato oblast se právě regeneruje. Zkuste později.</red>'
+      unregister:
+        description: zrušit registraci vlastníka z trati ale zachovat bloky trati
+        unregistered-island: '<green>Hráč nezaregistrován z trati v [xyz].</green>'
+      info:
+        description: získat info kde jsi nebo o hráči
+        no-island: '<red>Nyní nejsi v registrované trati...</red>'
+        island-location: 'Umístění oblasti: [xyz]'
+        island-coords: 'Souřadnice oblasti: [xz1] až [xz2]'
+        is-spawn: Oblast je spawn trať
+      setrange:
+        description: nastav rozsah hráčské trati
+        range-updated: Rozsah oblasti aktualizován na [number]
+      tp:
+        description: teleportuj se na hráčskou trať
+      getrank:
+        description: získej rank hráče v jejich trati
+        rank-is: '<green>Rank je [rank] v jejich trati.</green>'
+      setrank:
+        description: nastav rank hráče v jejich trati
+      setspawn:
+        description: nastav trať jako spawn pro tento svět
+        already-spawn: '<red>Tato trať je již spawn!</red>'
+        no-island-here: '<red>Zde není žádná registrovaná trať.</red>'
+        confirmation: '<red>Jsi si jistý/á že chceš nastavit tuto trať jako spawn pro tento svět?</red>'
+      delete:
+        description: smaž hráče a regeneruj jeho trať
+        deleted-island: '<green>Oblast v </green><yellow>[xyz] </yellow><green>byla úspěšně regenerována.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Přepíná režim Creative
+          </green><green>na konci trati a
+          </green><green>při vstupu na trať
+          </green>
+        name: "Parkour Creative Mode"
+      ELYTRA:
+        description: Přepnout použití
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermani mohou odstraňovat
+          </green><green>bloky</green>
+      ENTER_EXIT_MESSAGES:
+        description: Zobrazit zprávy o vstupu a výstupu
+        island: "[name]'s trať"
+        name: Zprávy vstupu/výstupu
+        now-entering: '<green>Nyní vstupuješ do </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Nyní vstupuješ na svou trať.</green>'
+        now-leaving: '<green>Nyní opouštíš </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Nyní opouštíš svou trať.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Odstraň moby které jdou
+          </green><green>mimo chráněný
+          </green><green>hráčský prostor</green>
+        name: '<yellow>Limituj moby na hráčskou trať</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Hráči se respawnují
+          </green><green>na své trati</green>
+        name: Respawn oblasti
+      LOCK:
+        name: Zamkni hráčskou trať
+      OFFLINE_REDSTONE:
+        description: "<green>Když je vypnuto, redstone\n</green><green>nebude pracovat v tratích\n</green><green>kde jsou všichni členové offline.\n</green><green>Může pomoci snížit lag.</green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Dovolte pístům tlačit
+          </green><green>bloky mimo hráčskou trať</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Zapnout/Vypnout PVP
+          </red><red>v chráněné trati.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Odstraň netvory když
+          </green><green>se teleportuješ na trať</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Zabránit hráčům v teleportaci
+          </green><green>pokud padají.</green>
+        hint: '<red>Nemůžeš se teleportovat zatímco padáš!</red>'
+    locked: '<red>Tato trať je uzamčena!</red>'
+    protected: '<red>Oblast chráněna: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Ochrana</gold>'
+        description: |-
+          <green>Nastavení ochrany
+          </green><green>pro tuto trať</green>
+      SETTING:
+        description: |-
+          <green>Obecná nastavení
+          </green><green>pro tuto trať</green>

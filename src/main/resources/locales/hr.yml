@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Početna točka postavljena!</green>"
+  end-set: "<green>Završna točka postavljena!</green>"
+  already-set: "<red>Početna i završna točka su već postavljene! Solomite jednu da resetirate.</red>"
+  start-removed: "<aqua>Početna točka uklonjena!</aqua>"
+  end-removed: "<aqua>Završna točka uklonjena!</aqua>"
+  resetting-start-end: "<yellow>Resetiranje početne i završne točke!</yellow>"
+  start: "<aqua>Početak parkour tečaja!</aqua>"
+  no-start-yet: "<red>Početna točka još nije postavljena.</red>"
+  no-end-yet: "<red>Završna točka još nije postavljena.</red>"
+  to-start: "<light_purple>Za početak, stanite na zlatnu pritisnu ploču.</light_purple>"
+  session-ended: "<red>Vaša parkour sesija je završena.</red>"
+  end: "<green>Kraj parkour tečaja!</green>"
+  you-took: "<light_purple>Trebalo vam je [number]!</light_purple>"
+  start-before-end: "<aqua>Trebate početi prije nego što završite!</aqua>"
+  checkpoint: "<yellow>Kontrolna točka!</yellow>"
+  checkpoint-set: "<green>Kontrolna točka postavljena!</green>"
+  set-the-end: "<red>Postavite završnu ploču</red>"
+  hours: "sati"
+  minutes: "minute"
+  seconds: "sekunde"
+  hours-short: "h"
+  minutes-short: "m"
+  seconds-short: "s"
+  courses:
+    description: "Odaberite jedan i pokušajte!"
+    gui-title: "Parkour Tečajevi"
+    head-description: "<aqua>[runs] pokušaja</aqua>"
+  top:
+    gui-title: "Najbolje Ocjene Tečaja"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Vaš rang: [number]</green>"
+    beat-previous-time: "<light_purple>Nadmašili ste svoje prethodno vrijeme!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Niste nadmašili svoje prethodno vrijeme!</aqua>"
+  errors:
+    not-on-island: "<red>Trebate biti na parkour tečaju da biste to učinili</red>"
+    no-warp: "<red>Ovaj tečaj je već privatan</red>"
+    not-in-run: "<red>Trebate trenutno pokretati tečaj da biste to učinili</red>"
+  warp:
+    set: "<light_purple>Teleportacijska točka postavljena! Igrači sada mogu vidjeti vaš tečaj!</light_purple>"
+    replaced: "<yellow>Teleportacijska točka postavljena! Stara točka deaktivirana!</yellow>"
+    removed: "<red>Teleportacijska točka uklonjena. Igrači neće vidjeti vaš tečaj.</red>"
+    warping: "<green>Teleportiranje na tečaj!</green>"
+    no-warp: "<red>Za ovaj tečaj nije postavljena teleportacijska točka!</red>"
+    unknown-course: "<red>Nepoznat tečaj!</red>"
+  quit:
+    success: "<yellow>Prestali ste pokretati i možete ponovno koristiti naredbe</yellow>"
+  general:
+    errors:
+      no-island: '<red>Nemate tečaj!</red>'
+      player-has-island: '<red>Igrač već ima tečaj!</red>'
+      player-has-no-island: '<red>Taj igrač nema tečaj!</red>'
+      already-have-island: '<red>Već imate tečaj!</red>'
+      no-safe-location: '<red>Nije pronađena sigurna lokacija u tečaju!</red>'
+      not-owner: '<red>Niste vlasnik vašeg tima!</red>'
+  commands:
+    parkour:
+      courses:
+        description: pokazati dostupne tečajeve za igranje i teleportaciju
+      cleartop:
+        description: očistiti deset najboljih vašeg tečaja ili ukloniti rezultat igrača
+        parameters: <ime igrača>
+      setwarp:
+        description: postavlja teleportacijsku točku i čini vaš tečaj javnim
+      warp:
+        description: Teleportacija na tečaj prema imenu ili na početak ako ste na jednom
+        parameters: <ime tečaja>
+      removewarp:
+        description: uklanja teleportacijsku točku i čini vaš tečaj privatnim
+      help:
+        description: Započnite parkour tečaj ili se teleportrajte na svoj tečaj
+      go:
+        parameters: '[broj doma]'
+      sethome:
+        parameters: '[broj doma]'
+      top:
+        description: "Prikaži najbolje ocjene tečaja"
+      quit:
+        description: "Zaustavite tajmer na trenutnom tečaju"
+    island:
+      go:
+        parameters: '[broj doma]'
+        description: teleportira vas na vaš tečaj
+        teleport: '<green>Teleportiranje vas na vaš tečaj.</green>'
+        teleported: '<green>Teleportirani na dom </green><yellow>#[number].</yellow>'
+      help:
+        description: glavna naredba parkour
+      create:
+        description: kreirati tečaj, opciono koristeći blueprint (zahtijeva dozvolu)
+        parameters: <blueprint>
+        too-many-islands: "<red>U ovom svijetu ima previše tečajeva: nema mjesta za kreiranja vašeg.</red>"
+        cannot-create-island: '<red>Lokacija nije pronađena na vrijeme, pokušajte ponovno...</red>'
+        unable-create-island: '<red>Vaš tečaj nije mogao biti generiran, kontaktirajte administratora.</red>'
+        creating-island: '<green>Tražim lokaciju za vaš tečaj...</green>'
+        pasting:
+          estimated-time: '<green>Procijenjena vremenska razina: </green><aqua>[number] </aqua><green>sekunde.</green>'
+          blocks: '<green>Gradnja blok po blok: </green><aqua>[number] </aqua><green>blokova ukupno...</green>'
+          entities: '<green>Ispunjavanje sa entitetima: </green><aqua>[number] </aqua><green>entiteta ukupno...</green>'
+          done: '<green>Gotovo! Vaš tečaj je spreman i čeka vas!</green>'
+        pick: '<dark_green>Odaberite tečaj</dark_green>'
+        unknown-blueprint: '<red>Taj blueprint još nije učitan.</red>'
+        on-first-login: '<green>Dobrodošli! Počet ćemo pripremati vaš tečaj za nekoliko sekundi.</green>'
+        you-can-teleport-to-your-island: '<green>Možete se teleportirati na vaš tečaj kad god želite.</green>'
+      info:
+        description: prikaži informacije o vašem tečaju ili tečaju igrača
+        parameters: <igrač>
+      near:
+        description: prikaži imena susjednih tečajeva oko vas
+        parameters: ''
+        the-following-islands: '<green>Sljedeći tečajevi su blizu:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Sjever
+        south: Jug
+        east: Istok
+        west: Zapad
+        no-neighbors: '<red>Nemate neposrednih susjednih tečajeva!</red>'
+      reset:
+        description: ponovno pokrenite vaš tečaj i uklonite stari
+        parameters: <blueprint>
+        none-left: '<red>Nemate više resetiranja!</red>'
+        resets-left: '<red>Imate </red><aqua>[number] </aqua><red>preostalih resetiranja</red>'
+        confirmation: |-
+          <red>Jeste li sigurni da želite to učiniti?
+          </red><red>Svi članovi tečaja bit će izbačeni, trebat ćete ih ponovno pozvati kasnije.
+          </red><red>Nema vraćanja: nakon što vaš trenutni tečaj bude obrisan, nema <bold>načina </bold></red> <red>da ga kasnije povratite.</red>
+        kicked-from-island: '<red>Izbačeni ste sa svog tečaja u [gamemode] jer ga vlasnik resetira.</red>'
+      sethome:
+        description: postavite vašu teleportacijsku točku za dom
+        must-be-on-your-island: '<red>Trebate biti na vašem tečaju da biste postavili dom!</red>'
+        num-homes: '<red>Domovi mogu biti od 1 do [number].</red>'
+        home-set: '<gold>Teleportacijska točka doma vašeg tečaja postavljena je na vašu trenutnu lokaciju.</gold>'
+        nether:
+          not-allowed: '<red>Nema dozvole za postavljanje vašeg doma u Netheru.</red>'
+          confirmation: '<red>Jeste li sigurni da želite postaviti vaš dom u Netheru?</red>'
+        the-end:
+          not-allowed: '<red>Nema dozvole za postavljanje vašeg doma u The Endu.</red>'
+          confirmation: '<red>Jeste li sigurni da želite postaviti vaš dom u The Endu?</red>'
+        parameters: '[broj doma]'
+      setname:
+        description: postavite ime za vaš tečaj
+        name-too-short: '<red>Premalo kratko. Minimalna veličina je [number] znakova.</red>'
+        name-too-long: '<red>Premalo dugo. Maksimalna veličina je [number] znakova.</red>'
+        name-already-exists: '<red>Već postoji tečaj sa tim imenom!</red>'
+        parameters: <ime>
+        success: '<green>Uspješno ste postavili ime vašeg tečaja na </green><aqua>[name]</aqua><green> .</green>'
+      resetname:
+        description: resetirajte ime vašeg tečaja
+        success: '<green>Ime vašeg tečaja uspješno resetirano.</green>'
+      team:
+        description: upravljajte vašim timom
+        coop:
+          description: dajte igraču koop rang na vašem tečaju
+          parameters: <igrač>
+          cannot-coop-yourself: '<red>Ne možete se koopirati sami!</red>'
+          already-has-rank: '<red>Igrač već ima rang!</red>'
+          you-are-a-coop-member: '<dark_green>Koopitani ste od strane </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Koopirali ste </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] vas je pozvao da budete koop član njihovog tečaja.</green>'
+        uncoop:
+          description: uklonite koop rang od igrača
+          parameters: <igrač>
+          cannot-uncoop-yourself: '<red>Ne možete se dekoopirati sami!</red>'
+          cannot-uncoop-member: '<red>Ne možete dekoopirati člana tima!</red>'
+          player-not-cooped: '<red>Igrač nije koopiran!</red>'
+          you-are-no-longer-a-coop-member: '<red>Više niste koop član [name]-og tečaja.</red>'
+          all-members-logged-off: '<red>Svi članovi tečaja su se odjavili pa više niste koop član [name]-og tečaja.</red>'
+          success: '<aqua>[name] </aqua><green>više nije koop član vašeg tečaja.</green>'
+          is-full: '<red>Ne možete koopirati nikoga drugoga.</red>'
+        trust:
+          description: dajte igraču pouzdani rang na vašem tečaju
+          parameters: <igrač>
+          trust-in-yourself: '<red>Vjerujte sebi!</red>'
+          name-has-invited-you: '<green>[name] vas je pozvao da budete pouzdani član njihovog tečaja.</green>'
+          player-already-trusted: '<red>Igrač je već pouzdani!</red>'
+          you-are-trusted: '<dark_green>Pouzdani ste od strane </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Pouzdali ste </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Ne možete pouzdati nikoga drugoga.</red>'
+        invite:
+          description: pozovite igrača da se pridruži vašem tečaju
+          invitation-sent: '<green>Poziv poslan </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Uklanjanje poziva.</red>'
+          name-has-invited-you: '<green>[name] vas je pozvao da se pridružite njihovom tečaju.</green>'
+          to-accept-or-reject: '<green>Učinite /[label] team accept da prihvatite, ili /[label] team reject da odbijete</green>'
+          you-will-lose-your-island: '<red>UPOZORENJE! Izgubiti ćete vaš tečaj ako prihvatite!</red>'
+          errors:
+            cannot-invite-self: '<red>Ne možete pozvati sami sebe!</red>'
+            cooldown: '<red>Ne možete pozvati tu osobu još [number] sekundi.</red>'
+            island-is-full: '<red>Vaš tečaj je pun, ne možete pozvati nikoga drugoga.</red>'
+            none-invited-you: '<red>Nitko vas nije pozvao :c.</red>'
+            you-already-are-in-team: '<red>Već ste u timu!</red>'
+            already-on-team: '<red>Taj igrač je već u timu!</red>'
+            invalid-invite: '<red>Taj poziv više nije valjan, izvinjavam se.</red>'
+            you-have-already-invited: '<red>Već ste pozvali tog igrača!</red>'
+          parameters: <igrač>
+          you-can-invite: '<green>Možete pozvati [number] više igrače.</green>'
+          accept:
+            description: prihvatiti poziv
+            you-joined-island: '<green>Pridružili ste se tečaju! Koristite </green><aqua>/[label] team </aqua><green>da vidite ostale članove.</green>'
+            name-joined-your-island: '<green>[name] se pridružio vašem tečaju!</green>'
+            confirmation: |-
+              <red>Jeste li sigurni da želite prihvatiti ovaj poziv?
+              </red><red><bold>Trebali ste <underlined>IZGUBITI </underlined></bold></red><red><bold>vaš trenutni tečaj!</bold></red>
+          reject:
+            description: odbijte poziv
+            you-rejected-invite: '<green>Odbili ste poziv da se pridružite tečaju.</green>'
+            name-rejected-your-invite: '<red>[name] je odbio vaš poziv za tečaj!</red>'
+          cancel:
+            description: otkazati preostali poziv da se pridružite vašem tečaju
+        leave:
+          cannot-leave: '<red>Vlasnici ne mogu otići! Postanite član prvi, ili izbacite sve članove.</red>'
+          description: napustite vaš tečaj
+          left-your-island: '<red>[name] </red><red>je napustio vaš tečaj</red>'
+          success: '<green>Napustili ste ovaj tečaj.</green>'
+        kick:
+          description: uklonite člana sa vašeg tečaja
+          parameters: <igrač>
+          owner-kicked: '<red>Vlasnik vas je izbacio sa tečaja u [gamemode]!</red>'
+          cannot-kick: '<red>Ne možete izbaciti sami sebe!</red>'
+          success: '<aqua>[name] </aqua><green>je izbačen sa vašeg tečaja.</green>'
+        demote:
+          description: snizite igrača na vašem tečaju za jedan rang
+          parameters: <igrač>
+          errors:
+            cant-demote-yourself: '<red>Ne možete se sniziti sami!</red>'
+          failure: '<red>Igrač ne može biti dodatno snižen!</red>'
+          success: '<green>Snizili ste [name] na [rank]</green>'
+        promote:
+          description: povećajte igrača na vašem tečaju za jedan rang
+          parameters: <igrač>
+          failure: '<red>Igrač ne može biti dodatno povećan!</red>'
+          success: '<green>Povećali ste [name] na [rank]</green>'
+        setowner:
+          description: prenesite vlasništvo vašeg tečaja članu
+          errors:
+            cant-transfer-to-yourself: '<red>Ne možete prenijeti vlasništvo sebi! </red><gray>(<italic> Zapravo, mogli biste... Ali ne želimo da to učinite. Jer je beskorisno.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Taj igrač nije dio vašeg tima tečaja!</red>'
+          name-is-the-owner: '<green>[name] je sada vlasnik tečaja!</green>'
+          parameters: <igrač>
+          you-are-the-owner: '<green>Sada ste vlasnik tečaja!</green>'
+      ban:
+        description: zabranite igraču pristup vašem tečaju
+        parameters: <igrač>
+        cannot-ban-yourself: '<red>Ne možete zabraniti sebi!</red>'
+        cannot-ban: '<red>Taj igrač ne može biti zabranjen.</red>'
+        cannot-ban-member: '<red>Prvo izbacite člana tima, zatim zabranite.</red>'
+        cannot-ban-more-players: '<red>Dostigli ste ograničenje zabrane, ne možete zabraniti više igrače sa vašeg tečaja.</red>'
+        player-already-banned: '<red>Igrač je već zabranjen.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  je sada zabranjen sa vašeg tečaja.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  vas je zabranio sa svog tečaja!</red>'
+        you-are-banned: '<aqua>Zabranjeni ste sa ovog tečaja!</aqua>'
+      unban:
+        description: uklonite zabranu igraču sa vašeg tečaja
+        parameters: <igrač>
+        cannot-unban-yourself: '<red>Ne možete se dezbraniti sami!</red>'
+        player-not-banned: '<red>Igrač nije zabranjen.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  je sada dozvoljen sa vašeg tečaja.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  vas je dozvolio sa svog tečaja!</green>'
+      banlist:
+        description: popis zabranjenih igrača
+        noone: '<green>Nitko nije zabranjen na ovom tečaju.</green>'
+        the-following: '<aqua>Sljedeći igrači su zabranjeni:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Možete zabraniti do </aqua><yellow>[number] </yellow><aqua>više igrače.</aqua>'
+      settings:
+        description: prikaži postavke tečaja
+      language:
+        description: odaberite jezik
+        parameters: '[jezik]'
+        not-available: '<red>Ovaj jezik nije dostupan.</red>'
+        already-selected: '<red>Već ste odabrali ovaj jezik.</red>'
+      expel:
+        description: izbacite igrača sa vašeg tečaja
+        parameters: <igrač>
+        cannot-expel-yourself: '<red>Ne možete se izbaciti sami!</red>'
+        cannot-expel: '<red>Taj igrač ne može biti izbačen.</red>'
+        cannot-expel-member: '<red>Ne možete izbaciti člana tima!</red>'
+        not-on-island: '<red>Taj igrač nije na vašem tečaju!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  vas je izbacio sa tečaja!</red>'
+        success: '<green>Izbacili ste </green><aqua>[name] </aqua><green>sa tečaja.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name] ima tečaj. Prvo ga odjavite ili obrišite!</red>'
+        setowner:
+          description: prenesite vlasništvo tečaja igraču
+          already-owner: '<red>Igrač je već vlasnik ovog tečaja!</red>'
+      range:
+        description: Admin naredba domet tečaja
+        display:
+          description: Prikazi/sakrij pokazatelje dosega tečaja
+          hint: |-
+            <red>Crvene ikone barijere </red><white>prikazuju trenutnu granicu zaštićenog dosega.
+            </white><gray>Sive čestice </gray><white>prikazuju maksimalnu granicu.
+            </white><green>Zelene čestice </green><white>prikazuju zadanu zaštićenu granicu ako se doseg zaštite razlikuje od nje.</white>
+        set:
+          description: Postavlja zaštićeni doseg tečaja
+        reset:
+          description: Resetira zaštićeni doseg na svjetsku zadanu vrijednost
+      register:
+        parameters: <igrač>
+        description: registracija igrača na nenaseljenoj tečaju gdje ste
+        registered-island: '<green>Igrač registriran na tečaj na [xyz].</green>'
+        already-owned: '<red>Područje je već vlasništvo drugog igrača!</red>'
+        no-island-here: '<red>Ovdje nema igraču tečaja. Potvrdite da napravite jedan.</red>'
+        in-deletion: '<red>Ovaj prostor se trenutno regenerira. Pokušajte kasnije.</red>'
+      unregister:
+        description: odjave vlasnika sa tečaja, ali zadržite blokove tečaja kako su
+        unregistered-island: '<green>Igrač odjavljuje sa tečaja na [xyz].</green>'
+      info:
+        description: dobiti informacije o mjestu gdje ste ili o igraču
+        no-island: '<red>Trenutno se ne nalazite na registriranom tečaju...</red>'
+        island-location: 'Lokacija područja: [xyz]'
+        island-coords: 'Koordinate područja: [xz1] do [xz2]'
+        is-spawn: Područje je tečaj za spawn
+      setrange:
+        description: postaviti doseg tečaja igrača
+        range-updated: Doseg područja ažuriran na [number]
+      tp:
+        description: teleportacija na tečaj igrača
+      getrank:
+        description: dobiti rang igrača na njihovom tečaju
+        rank-is: '<green>Rang je [rank] na njihovom tečaju.</green>'
+      setrank:
+        description: postaviti rang igrača na njihovom tečaju
+      setspawn:
+        description: postaviti tečaj kao spawn za ovaj svijet
+        already-spawn: '<red>Ovaj tečaj je već spawn!</red>'
+        no-island-here: '<red>Ovdje nema registriranog tečaja.</red>'
+        confirmation: '<red>Jeste li sigurni da želite postaviti ovaj tečaj kao spawn za ovaj svijet?</red>'
+      delete:
+        description: obriši igrača i regenerira njegov tečaj
+        deleted-island: '<green>Područje na </green><yellow>[xyz] </yellow><green>je uspješno regenerirano.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Uključivanje/isključivanje kreativnog moda
+          </green><green>na kraju tečaja i
+          </green><green>pri ulasku u područje
+          </green>
+        name: "Parkour Kreativni Mod"
+      ELYTRA:
+        description: Uključi/isključi korištenje
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermeni mogu ukloniti
+          </green><green>blokove</green>
+      ENTER_EXIT_MESSAGES:
+        description: Prikaži poruke za ulazak i izlazak
+        island: "[name]-ov tečaj"
+        name: Poruke ulaska/izlaska
+        now-entering: '<green>Ulaženjem u </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Ulaženjem u vaš tečaj.</green>'
+        now-leaving: '<green>Izlaženjem iz </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Izlaženjem iz vašeg tečaja.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Uklonite mobs koji ide
+          </green><green>izvan zaštićenog
+          </green><green>igraču prostora</green>
+        name: '<yellow>Ograničite mobs na igraču tečaju</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Igrači se pojavljuju
+          </green><green>na svom tečaju</green>
+        name: Povratak područja
+      LOCK:
+        name: Zaključaj igraču tečaj
+      OFFLINE_REDSTONE:
+        description: "<green>Kada je onemogućen, redstone\n</green><green>neće raditi na tečajima\n</green><green>gdje su svi članovi offline.\n</green><green>Može pomoći smanjiti lag.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Dozvoli pistonima da guraju
+          </green><green>blokove van igraču tečaja</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Uključivanje/isključivanje PVP
+          </red><red>na zaštićenom tečaju.</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Uklonite monstrume pri
+          </green><green>teleportaciji na tečaj</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Sprječavajte igrače da se teleportiraju
+          </green><green>ako padaju.</green>
+        hint: '<red>Ne možete se teleportirati dok padajete!</red>'
+    locked: '<red>Ovaj tečaj je zaključan!</red>'
+    protected: '<red>Zaštićeno područje: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Zaštita</gold>'
+        description: |-
+          <green>Postavke zaštite
+          </green><green>za ovaj tečaj</green>
+      SETTING:
+        description: |-
+          <green>Opće postavke
+          </green><green>za ovaj tečaj</green>

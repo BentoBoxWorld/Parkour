@@ -180,7 +180,7 @@ public class Parkour extends GameModeAddon implements Listener {
         // Set world name
         worldName2 = env.equals(World.Environment.NETHER) ? worldName2 + NETHER : worldName2;
         worldName2 = env.equals(World.Environment.THE_END) ? worldName2 + THE_END : worldName2;
-        WorldCreator wc = WorldCreator.name(worldName2).type(WorldType.FLAT).environment(env);
+        WorldCreator wc = WorldCreator.name(worldName2).environment(env);
         World w = settings.isUseOwnGenerator() ? wc.createWorld() : wc.generator(chunkGenerator2).createWorld();
         // Set spawn rates
         if (w != null) {

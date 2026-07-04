@@ -1,0 +1,403 @@
+#
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+parkour:
+  start-set: "<green>Başlangıç ayarlandı!</green>"
+  end-set: "<green>Bitiş ayarlandı!</green>"
+  already-set: "<red>Başlangıç ve bitiş zaten ayarlandı! Sıfırlamak için birini kır.</red>"
+  start-removed: "<aqua>Başlangıç silindi!</aqua>"
+  end-removed: "<aqua>Bitiş silindi!</aqua>"
+  resetting-start-end: "<yellow>Başlangıç ve bitiş noktaları sıfırlanıyor!</yellow>"
+  start: "<aqua>Parkur başlıyor!</aqua>"
+  no-start-yet: "<red>Başlangıç henüz ayarlanmadı.</red>"
+  no-end-yet: "<red>Bitiş henüz ayarlanmadı.</red>"
+  to-start: "<light_purple>Başlamak için altın basınç plakasının üzerine adım atın.</light_purple>"
+  session-ended: "<red>Parkur seansınız sona erdi.</red>"
+  end: "<green>Parkur Bitti!</green>"
+  you-took: "<light_purple>Aldığınız zaman [number]!</light_purple>"
+  start-before-end: "<aqua>Sona ermeden önce başlamanız gerekiyor!</aqua>"
+  checkpoint: "<yellow>Kontrol noktası!</yellow>"
+  checkpoint-set: "<green>Kontrol noktası ayarlandı!</green>"
+  set-the-end: "<red>Bitiş plakasını ayarla</red>"
+  hours: "saatler"
+  minutes: "dakika"
+  seconds: "saniye"
+  hours-short: "s"
+  minutes-short: "d"
+  seconds-short: "sn"
+  courses:
+    description: "Birini seçin ve deneyin!"
+    gui-title: "Parkur Kursları"
+    head-description: "<aqua>[runs] çalıştırmalar</aqua>"
+  top:
+    gui-title: "En Hızlı Kurs Sıralaması"
+    name-rank: "<aqua>[rank] - </aqua><light_purple>[name]</light_purple>"
+    description: "<yellow>[number]</yellow>"
+    your-rank: "<green>Sizin sıranız: [number]</green>"
+    beat-previous-time: "<light_purple>Önceki rekorunuzu geçtiniz!</light_purple>"
+    did-not-beat-previous-time: "<aqua>Önceki rekorunuzu geçemediniz!</aqua>"
+  errors:
+    not-on-island: "<red>Bunu yapmak için bir parkur kursunda olmalısınız</red>"
+    no-warp: "<red>Bu kurs zaten özel</red>"
+    not-in-run: "<red>Bunu yapmak için bir kurs çalıştırmalısınız</red>"
+  warp:
+    set: "<light_purple>Warp noktası ayarlandı! Oyuncular artık kursunuzu görebilir!</light_purple>"
+    replaced: "<yellow>Warp noktası ayarlandı! Eski nokta devre dışı bırakıldı!</yellow>"
+    removed: "<red>Warp noktası kaldırıldı. Oyuncular kursunuzu göremezler.</red>"
+    warping: "<green>Kursa warp ediliyor!</green>"
+    no-warp: "<red>Bu kurs için warp ayarlanmadı!</red>"
+    unknown-course: "<red>Bilinmeyen kurs!</red>"
+  quit:
+    success: "<yellow>Çalıştırmayı bıraktınız ve tekrar komutları kullanabilirsiniz</yellow>"
+  general:
+    errors:
+      no-island: '<red>Kursunuz yok!</red>'
+      player-has-island: '<red>Oyuncunun zaten kursu var!</red>'
+      player-has-no-island: '<red>Bu oyuncunun kursu yok!</red>'
+      already-have-island: '<red>Zaten kursunuz var!</red>'
+      no-safe-location: '<red>Kursta güvenli yer bulunamadı!</red>'
+      not-owner: '<red>Takımınızın sahibi değilsiniz!</red>'
+  commands:
+    parkour:
+      courses:
+        description: oynayabileceğiniz ve warp atabildiğiniz kursları göster
+      cleartop:
+        description: kursunuzun ilk onunu temizle veya oyuncunun puanını kaldır
+        parameters: <oyuncu adı>
+      setwarp:
+        description: warp noktasını ayarla ve kursunu herkese açık yap
+      warp:
+        description: Ada göre kursa warp yap veya birdeysen başlangıca
+        parameters: <kurs adı>
+      removewarp:
+        description: warp noktasını kaldır ve kursunu özel yap
+      help:
+        description: Parkur kursunu başlat veya kursuna teleport ol
+      go:
+        parameters: '[ev numarası]'
+      sethome:
+        parameters: '[ev numarası]'
+      top:
+        description: "Kurs sıralamalarını göster"
+      quit:
+        description: "Geçerli kursta zamanlayıcıyı durdur"
+    island:
+      go:
+        parameters: '[ev numarası]'
+        description: seni kursuna teleport et
+        teleport: '<green>Seni kursuna teleport ediyorum.</green>'
+        teleported: '<green>Seni ev </green><yellow>#[number].</yellow><green>ye teleport ettim.</green>'
+      help:
+        description: ana parkur komutu
+      create:
+        description: isteğe bağlı plan kullanarak bir kurs oluştur (izin gerekiyor)
+        parameters: <plan>
+        too-many-islands: "<red>Bu dünyada çok fazla kurs var: senin yaratman için yer yok.</red>"
+        cannot-create-island: '<red>Yer zamanında bulunamadı, lütfen tekrar dene...</red>'
+        unable-create-island: '<red>Kursun oluşturulamadı, lütfen yöneticiyle iletişime geç.</red>'
+        creating-island: '<green>Kursun için yer aranıyor...</green>'
+        pasting:
+          estimated-time: '<green>Tahmini zaman: </green><aqua>[number] </aqua><green>saniye.</green>'
+          blocks: '<green>Blok blok inşa ediyoruz: </green><aqua>[number] </aqua><green>toplam blok...</green>'
+          entities: '<green>Varlıklarla dolduruyoruz: </green><aqua>[number] </aqua><green>toplam varlık...</green>'
+          done: '<green>Bitti! Kursun hazır ve seni bekliyor!</green>'
+        pick: '<dark_green>Bir kurs seç</dark_green>'
+        unknown-blueprint: '<red>Bu plan henüz yüklenmedi.</red>'
+        on-first-login: '<green>Hoş geldin! Birkaç saniye içinde kursunu hazırlamaya başlayacağız.</green>'
+        you-can-teleport-to-your-island: '<green>İstediğin zaman kursuna teleport atabilirsin.</green>'
+      info:
+        description: kursun veya oyuncunun kursu hakkında bilgi görüntüle
+        parameters: <oyuncu>
+      near:
+        description: çevrendeki komşu kursların adını göster
+        parameters: ''
+        the-following-islands: '<green>Yakındaki şu kurslar bulundu:</green>'
+        syntax: '<gold>[direction]: </gold><green>[name]</green>'
+        north: Kuzey
+        south: Güney
+        east: Doğu
+        west: Batı
+        no-neighbors: '<red>Komşu kursunuz yok!</red>'
+      reset:
+        description: kursunu sıfırla ve eskisini sil
+        parameters: <plan>
+        none-left: '<red>Sıfırlaman için daha fazla hakkın yok!</red>'
+        resets-left: '<red>Kalan sıfırlama hakkın </red><aqua>[number] </aqua><red></red>'
+        confirmation: |-
+          <red>Bunu yapmak istediğinden emin misin?
+          </red><red>Tüm kurs üyeleri çıkarılacak, sonra onları yeniden davet etmen gerekecek.
+          </red><red>Geri dönüş yok: mevcut kursun silindikten sonra <bold>hiçbir </bold></red> <red>şekilde geri alamazsın.</red>
+        kicked-from-island: '<red>Sahibi sıfırladığı için [gamemode]''da kursundan çıkarıldın.</red>'
+      sethome:
+        description: ev teleport noktasını ayarla
+        must-be-on-your-island: '<red>Evi ayarlamak için kursunda olmalısın!</red>'
+        num-homes: '<red>Evler 1 ila [number] arasında olabilir.</red>'
+        home-set: '<gold>Kursundaki evin mevcut konumuna ayarlandı.</gold>'
+        nether:
+          not-allowed: '<red>Nether''de ev ayarlamaya izin verilmiyor.</red>'
+          confirmation: '<red>Nether''de ev ayarlamak istediğinden emin misin?</red>'
+        the-end:
+          not-allowed: '<red>End''de ev ayarlamaya izin verilmiyor.</red>'
+          confirmation: '<red>End''de ev ayarlamak istediğinden emin misin?</red>'
+        parameters: '[ev numarası]'
+      setname:
+        description: kursuna bir ad belirle
+        name-too-short: '<red>Çok kısa. Minimum [number] karakter.</red>'
+        name-too-long: '<red>Çok uzun. Maksimum [number] karakter.</red>'
+        name-already-exists: '<red>Bu ada sahip bir kurs zaten var!</red>'
+        parameters: <ad>
+        success: '<green>Kurs adın başarıyla </green><aqua>[name]</aqua><green>. olarak ayarlandı</green>'
+      resetname:
+        description: kursun adını sıfırla
+        success: '<green>Kurs adın başarıyla sıfırlandı.</green>'
+      team:
+        description: takımını yönet
+        coop:
+          description: oyuncuyu kursunda koop rütbesine yükselt
+          parameters: <oyuncu>
+          cannot-coop-yourself: '<red>Kendini koop yapamazsın!</red>'
+          already-has-rank: '<red>Oyuncunun zaten rütbesi var!</red>'
+          you-are-a-coop-member: '<dark_green>Seni koop yaptı </dark_green><aqua>[name]</aqua><green>.</green>'
+          success: '<green>Şu kişiyi koop yaptın </green><aqua>[name]</aqua><green>.</green>'
+          name-has-invited-you: '<green>[name] seni kursunun koop üyesi olmaya davet ediyor.</green>'
+        uncoop:
+          description: oyuncudan koop rütbesini kaldır
+          parameters: <oyuncu>
+          cannot-uncoop-yourself: '<red>Kendini koop yapılmaktan çıkaramazsın!</red>'
+          cannot-uncoop-member: '<red>Takım üyesini koop yapılmaktan çıkaramazsın!</red>'
+          player-not-cooped: '<red>Oyuncu koop değil!</red>'
+          you-are-no-longer-a-coop-member: '<red>Artık [name]''nin kurs koop üyesi değilsin.</red>'
+          all-members-logged-off: '<red>Tüm kurs üyeleri çıktığı için artık [name]''nin kurs koop üyesi değilsin.</red>'
+          success: '<aqua>[name] </aqua><green>artık kursunun koop üyesi değil.</green>'
+          is-full: '<red>Başka birini koop yapamazsın.</red>'
+        trust:
+          description: oyuncuya kursunda güvenilen rütbe ver
+          parameters: <oyuncu>
+          trust-in-yourself: '<red>Kendine güven!</red>'
+          name-has-invited-you: '<green>[name] seni kursunun güvenilen üyesi olmaya davet ediyor.</green>'
+          player-already-trusted: '<red>Oyuncu zaten güveniliyor!</red>'
+          you-are-trusted: '<dark_green>Sana güveniliyor </dark_green><aqua>[name]</aqua><green> !</green>'
+          success: '<green>Şu kişiye güvendin </green><aqua>[name]</aqua><green> .</green>'
+          is-full: '<red>Başka birine güvenemezsin.</red>'
+        invite:
+          description: oyuncuyu kursuna katılmaya davet et
+          invitation-sent: '<green>Davetiye gönderildi </green><aqua>[name]</aqua><green>.</green>'
+          removing-invite: '<red>Davetiye kaldırılıyor.</red>'
+          name-has-invited-you: '<green>[name] seni kursuna katılmaya davet ediyor.</green>'
+          to-accept-or-reject: '<green>Kabul etmek için /[label] team accept yaz, veya reddetmek için /[label] team reject yaz</green>'
+          you-will-lose-your-island: '<red>UYARI! Kabul edersen kursunu kaybedeceksin!</red>'
+          errors:
+            cannot-invite-self: '<red>Kendini davet edemezsin!</red>'
+            cooldown: '<red>Bu kişiyi [number] saniye daha davet edemezsin.</red>'
+            island-is-full: '<red>Kursun dolu, başka birini davet edemezsin.</red>'
+            none-invited-you: '<red>Seni hiç kimse davet etmedi :c.</red>'
+            you-already-are-in-team: '<red>Zaten bir takımsın!</red>'
+            already-on-team: '<red>Bu oyuncu zaten bir takımda!</red>'
+            invalid-invite: '<red>Bu davetiye artık geçerli değil, üzür dilerim.</red>'
+            you-have-already-invited: '<red>Bu oyuncuyu zaten davet ettin!</red>'
+          parameters: <oyuncu>
+          you-can-invite: '<green>Daha [number] oyuncu davet edebilirsin.</green>'
+          accept:
+            description: daveti kabul et
+            you-joined-island: '<green>Kursa katıldın! </green><aqua>/[label] team </aqua><green>kullanarak diğer üyeleri görmek için.</green>'
+            name-joined-your-island: '<green>[name] kursuna katıldı!</green>'
+            confirmation: |-
+              <red>Bu daveti kabul etmek istediğinden emin misin?
+              </red><red><bold>Mevcut kursunu <underlined>KAYBEDECEKSİN </underlined></bold></red><red><bold>!</bold></red>
+          reject:
+            description: daveti reddet
+            you-rejected-invite: '<green>Kursa katılma davetiyesini reddettdin.</green>'
+            name-rejected-your-invite: '<red>[name] kurs davetiyeni reddetti!</red>'
+          cancel:
+            description: kursuna katılma davetiyesini iptal et
+        leave:
+          cannot-leave: '<red>Sahipler ayrılamazlar! Önce üye ol, veya tüm üyeleri çıkar.</red>'
+          description: kursunu terk et
+          left-your-island: '<red>[name] </red><red>kursunu terk etti</red>'
+          success: '<green>Bu kursu terk ettin.</green>'
+        kick:
+          description: üyeyi kursundan çıkar
+          parameters: <oyuncu>
+          owner-kicked: '<red>Sahibi seni [gamemode]''da kursundan çıkardı!</red>'
+          cannot-kick: '<red>Kendini çıkaramazsın!</red>'
+          success: '<aqua>[name] </aqua><green>kursundan çıkarıldı.</green>'
+        demote:
+          description: oyuncuyu kursunda rütbe düşür
+          parameters: <oyuncu>
+          errors:
+            cant-demote-yourself: '<red>Kendini rütbe düşüremezsin!</red>'
+          failure: '<red>Oyuncu daha da düşürülemez!</red>'
+          success: '<green>[name] rütbesi [rank]''e düşürüldü</green>'
+        promote:
+          description: oyuncuyu kursunda rütbe yükselt
+          parameters: <oyuncu>
+          failure: '<red>Oyuncu daha da yükseltilemez!</red>'
+          success: '<green>[name] rütbesi [rank]''e yükseltildi</green>'
+        setowner:
+          description: kurs sahipliğini bir üyeye aktar
+          errors:
+            cant-transfer-to-yourself: '<red>Sahipliği kendine aktaramazsın! </red><gray>(<italic> Aslında yapabilirdin... Ama istemiyoruz. Çünkü faydasız.</italic></gray> <gray>)</gray>'
+            target-is-not-member: '<red>Bu oyuncu kurs takımının parçası değil!</red>'
+          name-is-the-owner: '<green>[name] artık kurs sahibi!</green>'
+          parameters: <oyuncu>
+          you-are-the-owner: '<green>Artık kurs sahibisin!</green>'
+      ban:
+        description: oyuncuyu kursundan yasakla
+        parameters: <oyuncu>
+        cannot-ban-yourself: '<red>Kendini yasaklayamazsın!</red>'
+        cannot-ban: '<red>Bu oyuncu yasaklanamaz.</red>'
+        cannot-ban-member: '<red>Önce takım üyesini çıkar, sonra yasakla.</red>'
+        cannot-ban-more-players: '<red>Yasaklama limitine ulaştın, daha fazla oyuncu yasaklayamazsın.</red>'
+        player-already-banned: '<red>Oyuncu zaten yasaklı.</red>'
+        player-banned: '<aqua>[name]</aqua><red>  artık kursundan yasaklı.</red>'
+        owner-banned-you: '<aqua>[name]</aqua><red>  seni kursundan yasakladı!</red>'
+        you-are-banned: '<aqua>Bu kursta yasaklısın!</aqua>'
+      unban:
+        description: oyuncuyu kursundan yasak kaldır
+        parameters: <oyuncu>
+        cannot-unban-yourself: '<red>Kendini yasak kaldıramaz!</red>'
+        player-not-banned: '<red>Oyuncu yasaklı değil.</red>'
+        player-unbanned: '<aqua>[name]</aqua><green>  artık kursundan yasaklı değil.</green>'
+        you-are-unbanned: '<aqua>[name]</aqua><green>  seni kursundan yasağını kaldırdı!</green>'
+      banlist:
+        description: yasaklı oyuncu listesi
+        noone: '<green>Bu kursta hiç kimse yasaklı değil.</green>'
+        the-following: '<aqua>Şu oyuncular yasaklı:</aqua>'
+        names: '<red>[line]</red>'
+        you-can-ban: '<aqua>Daha </aqua><yellow>[number] </yellow><aqua>oyuncu yasaklayabilirsin.</aqua>'
+      settings:
+        description: kurs ayarlarını görüntüle
+      language:
+        description: dil seç
+        parameters: '[dil]'
+        not-available: '<red>Bu dil kullanılamıyor.</red>'
+        already-selected: '<red>Bu dili zaten seçmişsin.</red>'
+      expel:
+        description: oyuncuyu kursundan sür
+        parameters: <oyuncu>
+        cannot-expel-yourself: '<red>Kendini suremezsin!</red>'
+        cannot-expel: '<red>Bu oyuncu sürülemez.</red>'
+        cannot-expel-member: '<red>Takım üyesini suremezsin!</red>'
+        not-on-island: '<red>Bu oyuncu kursunda değil!</red>'
+        player-expelled-you: '<aqua>[name]</aqua><red>  seni kurstan çıkardı!</red>'
+        success: '<green>Şu kişiyi kurstan çıkardın </green><aqua>[name] </aqua><green>.</green>'
+    admin:
+      team:
+        add:
+          name-has-island: '<red>[name]''nin kursu var. Önce kayıttan çıkar veya sil!</red>'
+        setowner:
+          description: kurs sahipliğini oyuncuya aktar
+          already-owner: '<red>Oyuncu zaten bu kursun sahibi!</red>'
+      range:
+        description: Yönetici kurs menzili komutu
+        display:
+          description: Kurs menzili göstergelerini göster/gizle
+          hint: |-
+            <red>Kırmızı bariyer simgeleri </red><white>mevcut kurs koruma sınırını gösterir.
+            </white><gray>Gri parçacıklar </gray><white>maksimum sınırı gösterir.
+            </white><green>Yeşil parçacıklar </green><white>koruma menzili farklıysa varsayılan koruma menzilini gösterir.</white>
+        set:
+          description: Kurs koruma menzilini ayarla
+        reset:
+          description: Kurs koruma menzilini dünyanın varsayılanına sıfırla
+      register:
+        parameters: <oyuncu>
+        description: oyuncuyu üzerinde durduğun sahipsiz kursa kayıt ettir
+        registered-island: '<green>Oyuncu [xyz]''deki kursa kayıt edildi.</green>'
+        already-owned: '<red>Alan zaten başka bir oyuncuya ait!</red>'
+        no-island-here: '<red>Burada kurs yok. Oluşturmak için onayla.</red>'
+        in-deletion: '<red>Bu alan şu anda yenileniyor. Daha sonra dene.</red>'
+      unregister:
+        description: oyuncunun kursundan kaydını sil ama blokları koru
+        unregistered-island: '<green>Oyuncunun [xyz]''deki kurs kaydı silindi.</green>'
+      info:
+        description: nerede olduğun veya oyuncunun kursu hakkında bilgi al
+        no-island: '<red>Şu anda kayıtlı bir kursta değilsin...</red>'
+        island-location: 'Alan konumu: [xyz]'
+        island-coords: 'Alan koordinatları: [xz1] ile [xz2]'
+        is-spawn: Alan başlangıç kursudur
+      setrange:
+        description: oyuncunun kurs menzilini ayarla
+        range-updated: Alan menzili [number]''e güncellendi
+      tp:
+        description: oyuncunun kursuna teleport at
+      getrank:
+        description: oyuncunun kursundaki rütbesini al
+        rank-is: '<green>Rütbesi [rank] kursunda.</green>'
+      setrank:
+        description: oyuncunun kursundaki rütbesini ayarla
+      setspawn:
+        description: kursu bu dünyada başlangıç kursu olarak ayarla
+        already-spawn: '<red>Bu kurs zaten başlangıç kursu!</red>'
+        no-island-here: '<red>Burada kayıtlı kurs yok.</red>'
+        confirmation: '<red>Bu kursu bu dünyada başlangıç kursu olarak ayarlamak istediğinden emin misin?</red>'
+      delete:
+        description: oyuncuyu sil ve kursunu yenile
+        deleted-island: '<green>[xyz]''deki alan başarıyla yenilendi.</green>'
+  protection:
+    flags:
+      PARKOUR_CREATIVE:
+        description: |-
+          <green>Yaratıcı modda girişi
+          </green><green>kurs sonunda ve
+          </green><green>kursa girişi aç/kapat
+          </green>
+        name: "Parkur Yaratıcı Modu"
+      ELYTRA:
+        description: Kullanımı aç/kapat
+      ENDERMAN_GRIEFING:
+        description: |-
+          <green>Endermanlar blok
+          </green><green>çıkarabilir</green>
+      ENTER_EXIT_MESSAGES:
+        description: Giriş ve çıkış mesajlarını görüntüle
+        island: "[name]''nin kursu"
+        name: Giriş/Çıkış Mesajları
+        now-entering: '<green>Şuna giriyorsun </green><aqua>[name]</aqua><green> .</green>'
+        now-entering-your-island: '<green>Kursuna giriyorsun.</green>'
+        now-leaving: '<green>Şundan çıkıyorsun </green><aqua>[name]</aqua><green> .</green>'
+        now-leaving-your-island: '<green>Kursundan çıkıyorsun.</green>'
+      GEO_LIMIT_MOBS:
+        description: |-
+          <green>Koruma dışına çıkan
+          </green><green>mobları kaldır
+          </green><green>oyuncu kursu</green>
+        name: '<yellow>Mobları oyuncu kursuna sınırla</yellow>'
+      ISLAND_RESPAWN:
+        description: |-
+          <green>Oyuncular
+          </green><green>kursunda yeniden canlanır</green>
+        name: Alan yeniden canlanma
+      LOCK:
+        name: Oyuncu kursunu kilitle
+      OFFLINE_REDSTONE:
+        description: "<green>Devre dışı bırakıldığında, kırmızı taş\n</green><green>tüm üyelerin çevrimdışı olduğu kurslarda\n</green><green>çalışmaz.\n</green><green>Lag azaltmaya yardımcı olabilir.   </green>"
+      PISTON_PUSH:
+        description: |-
+          <green>Pistonlara oyuncu kursu dışında
+          </green><green>blok itebilmek izni ver</green>
+      PVP_OVERWORLD:
+        description: |-
+          <red>Korunan kursta PVP''yi
+          </red><red>aç/kapat</red>
+      REMOVE_MOBS:
+        description: |-
+          <green>Kursa teleport olurken
+          </green><green>canavarları kaldır</green>
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          <green>Oyuncuların düşerken teleport
+          </green><green>olmasını engelle.</green>
+        hint: '<red>Düşerken teleport olamazsın!</red>'
+    locked: '<red>Bu kurs kilitli!</red>'
+    protected: '<red>Alan korumalı: [description]</red>'
+    panel:
+      PROTECTION:
+        title: '<gold>Koruma</gold>'
+        description: |-
+          <green>Bu kurs için
+          </green><green>koruma ayarları</green>
+      SETTING:
+        description: |-
+          <green>Bu kurs için
+          </green><green>genel ayarlar</green>

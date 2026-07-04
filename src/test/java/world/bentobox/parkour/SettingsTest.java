@@ -1,58 +1,33 @@
 package world.bentobox.parkour;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
-import org.bukkit.Server;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import world.bentobox.bentobox.api.user.User;
-import world.bentobox.parkour.mocks.ServerMocks;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author tastybento
- *
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(Bukkit.class)
-public class SettingsTest {
+class SettingsTest extends CommonTestSetup {
 
     private Settings s;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
+    @Override
+    @BeforeEach
     public void setUp() throws Exception {
-        Server server = ServerMocks.newServer();
-        PowerMockito.mockStatic(Bukkit.class, Mockito.RETURNS_MOCKS);
-        when(Bukkit.getServer()).thenReturn(server);
+        super.setUp();
         s = new Settings();
-    }
-
-    @After
-    public void tearDown() {
-        ServerMocks.unsetBukkitServer();
-        User.clearUsers();
-        Mockito.framework().clearInlineMocks();
     }
 
     /**
@@ -1529,6 +1504,23 @@ public class SettingsTest {
     @Test
     public void testIsMakeEndPortals() {
         assertFalse(s.isMakeEndPortals());
+    }
+
+    /**
+     * Test method for {@link Settings#isPreventVoidDeath()}.
+     */
+    @Test
+    public void testIsPreventVoidDeath() {
+        assertTrue(s.isPreventVoidDeath());
+    }
+
+    /**
+     * Test method for {@link Settings#setPreventVoidDeath(boolean)}.
+     */
+    @Test
+    public void testSetPreventVoidDeath() {
+        s.setPreventVoidDeath(false);
+        assertFalse(s.isPreventVoidDeath());
     }
 
 }
