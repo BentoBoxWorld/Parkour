@@ -49,7 +49,7 @@ class ParkourManagerTest extends CommonTestSetup {
     @SuppressWarnings("unchecked")
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
 
         // Database setup - mock static like in ParkourTest
@@ -88,7 +88,7 @@ class ParkourManagerTest extends CommonTestSetup {
 
     @Override
     @AfterEach
-    public void tearDown() throws Exception {
+    protected void tearDown() throws Exception {
         if (mockDb != null) {
             mockDb.closeOnDemand();
         }
@@ -99,7 +99,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#ParkourManager(world.bentobox.parkour.Parkour)}.
      */
     @Test
-    public void testParkourManager() {
+    void testParkourManager() {
         assertNotNull(parkourManager);
     }
 
@@ -107,7 +107,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#addScore(world.bentobox.bentobox.database.objects.Island, world.bentobox.bentobox.api.user.User, long)}.
      */
     @Test
-    public void testAddScore() {
+    void testAddScore() {
         User user = User.getInstance(mockPlayer);
         parkourManager.addScore(island, user, 10L);
         Map<UUID, Long> ranks = parkourManager.getRankings(island, 10L);
@@ -119,7 +119,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#clearScores(world.bentobox.bentobox.database.objects.Island)}.
      */
     @Test
-    public void testClearScores() {
+    void testClearScores() {
         testAddScore();
         parkourManager.clearScores(island);
         assertTrue(parkourManager.getRankings(island, 10L).isEmpty());
@@ -129,7 +129,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#removeScore(world.bentobox.bentobox.database.objects.Island, world.bentobox.bentobox.api.user.User)}.
      */
     @Test
-    public void testRemoveScore() {
+    void testRemoveScore() {
         testAddScore();
         User user = User.getInstance(mockPlayer);
         parkourManager.removeScore(island, user);
@@ -140,7 +140,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getRankings(world.bentobox.bentobox.database.objects.Island, long)}.
      */
     @Test
-    public void testGetRankings() {
+    void testGetRankings() {
         Map<UUID, Long> ranks = parkourManager.getRankings(island, 10L);
         assertTrue(ranks.isEmpty());
     }
@@ -149,7 +149,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getRank(world.bentobox.bentobox.database.objects.Island, java.util.UUID)}.
      */
     @Test
-    public void testGetRank() {
+    void testGetRank() {
         int rank = parkourManager.getRank(island, uuid);
         assertEquals(1, rank);
         testAddScore();
@@ -161,7 +161,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getTime(world.bentobox.bentobox.database.objects.Island, java.util.UUID)}.
      */
     @Test
-    public void testGetTime() {
+    void testGetTime() {
         long time = parkourManager.getTime(island, uuid);
         assertEquals(0, time);
         testAddScore();
@@ -173,7 +173,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getParkourData()}.
      */
     @Test
-    public void testGetParkourData() {
+    void testGetParkourData() {
         Collection<ParkourData> data = parkourManager.getParkourData();
         assertTrue(data.isEmpty());
         testAddScore();
@@ -185,7 +185,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getStart(world.bentobox.bentobox.database.objects.Island)}.
      */
     @Test
-    public void testGetStart() {
+    void testGetStart() {
         Optional<Location> start = parkourManager.getStart(island);
         assertTrue(start.isEmpty());
     }
@@ -194,7 +194,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getEnd(world.bentobox.bentobox.database.objects.Island)}.
      */
     @Test
-    public void testGetEnd() {
+    void testGetEnd() {
         Optional<Location> end = parkourManager.getEnd(island);
         assertTrue(end.isEmpty());
     }
@@ -203,7 +203,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getWarpSpot(world.bentobox.bentobox.database.objects.Island)}.
      */
     @Test
-    public void testGetWarpSpot() {
+    void testGetWarpSpot() {
         Optional<Location> warpSpot = parkourManager.getWarpSpot(island);
         assertTrue(warpSpot.isEmpty());
     }
@@ -212,7 +212,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#setStart(world.bentobox.bentobox.database.objects.Island, org.bukkit.Location)}.
      */
     @Test
-    public void testSetStart() {
+    void testSetStart() {
         parkourManager.setStart(island, location);
         Optional<Location> start = parkourManager.getStart(island);
         assertFalse(start.isEmpty());
@@ -222,7 +222,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#setEnd(world.bentobox.bentobox.database.objects.Island, org.bukkit.Location)}.
      */
     @Test
-    public void testSetEnd() {
+    void testSetEnd() {
         parkourManager.setEnd(island, location);
         Optional<Location> end = parkourManager.getEnd(island);
         assertTrue(end.isPresent());
@@ -232,7 +232,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#setWarpSpot(world.bentobox.bentobox.database.objects.Island, org.bukkit.Location)}.
      */
     @Test
-    public void testSetWarpSpot() {
+    void testSetWarpSpot() {
         parkourManager.setWarpSpot(island, location);
         Optional<Location> warpSpot = parkourManager.getWarpSpot(island);
         assertTrue(warpSpot.isPresent());
@@ -242,7 +242,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getWarps()}.
      */
     @Test
-    public void testGetWarps() {
+    void testGetWarps() {
         Map<String, Location> map = parkourManager.getWarps();
         assertTrue(map.isEmpty());
 
@@ -256,7 +256,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getWarps()}.
      */
     @Test
-    public void testGetWarpsNoIslandOwner() {
+    void testGetWarpsNoIslandOwner() {
         // Mock the island to have no owner
         when(island.getOwner()).thenReturn(null);
         parkourManager.setWarpSpot(island, location);
@@ -268,7 +268,7 @@ class ParkourManagerTest extends CommonTestSetup {
      * Test method for {@link world.bentobox.parkour.ParkourManager#getWarps()}.
      */
     @Test
-    public void testGetWarpsNoWarpSpot() {
+    void testGetWarpsNoWarpSpot() {
         parkourManager.setWarpSpot(island, null);
         Map<String, Location> map = parkourManager.getWarps();
         assertTrue(map.isEmpty());

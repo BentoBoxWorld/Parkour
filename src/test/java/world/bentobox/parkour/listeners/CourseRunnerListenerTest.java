@@ -91,7 +91,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      */
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
 
         // Player setup (already done in CommonTestSetup)
@@ -662,11 +662,11 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      * Check that spigot sent the message
      * @param message - message to check
      */
-    public void checkSpigotMessage(String expectedMessage) {
+    void checkSpigotMessage(String expectedMessage) {
         checkSpigotMessage(expectedMessage, 1);
     }
 
-    public void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
+    void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
         // BentoBox 3.14 routes User.sendMessage through Adventure: CommandSender.sendMessage(Component)
         ArgumentCaptor<net.kyori.adventure.text.Component> captor = ArgumentCaptor
                 .forClass(net.kyori.adventure.text.Component.class);

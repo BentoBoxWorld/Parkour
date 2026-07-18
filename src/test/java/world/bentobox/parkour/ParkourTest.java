@@ -54,7 +54,7 @@ class ParkourTest extends CommonTestSetup {
     @SuppressWarnings("unchecked")
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
 
         // Database mock
@@ -109,7 +109,7 @@ class ParkourTest extends CommonTestSetup {
 
     @Override
     @AfterEach
-    public void tearDown() throws Exception {
+    protected void tearDown() throws Exception {
         if (mockDb != null) {
             mockDb.closeOnDemand();
         }

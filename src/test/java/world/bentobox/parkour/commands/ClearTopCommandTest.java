@@ -64,7 +64,7 @@ class ClearTopCommandTest extends CommonTestSetup {
 
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
 
         // Command manager
@@ -126,7 +126,7 @@ class ClearTopCommandTest extends CommonTestSetup {
 
     @Override
     @AfterEach
-    public void tearDown() throws Exception {
+    protected void tearDown() throws Exception {
         // Reset the RanksManager singleton so other test classes get a fresh instance
         WhiteBox.setInternalState(RanksManager.class, "instance", null);
         super.tearDown();
