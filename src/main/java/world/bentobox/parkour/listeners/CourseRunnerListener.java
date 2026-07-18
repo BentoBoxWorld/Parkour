@@ -177,7 +177,10 @@ public class CourseRunnerListener extends AbstractListener {
         // Put player back to last checkpoint (or the course start if no checkpoint reached yet).
         // If the event is not cancelled the player still takes some damage.
         // ENTITY_POOF is not applicable to players (Paper rejects it), so spawn the particles directly.
-        player.getWorld().spawnParticle(Particle.POOF, player.getLocation(), 20, 0.5, 0.5, 0.5, 0.1);
+        Location playerLoc = player.getLocation();
+        if (playerLoc != null) {
+            player.getWorld().spawnParticle(Particle.POOF, playerLoc, 20, 0.5, 0.5, 0.5, 0.1);
+        }
         player.setVelocity(new Vector(0, 0, 0));
         player.setFallDistance(0);
         Location checkpointLocation = parkourRunManager.checkpoints().get(player.getUniqueId());
