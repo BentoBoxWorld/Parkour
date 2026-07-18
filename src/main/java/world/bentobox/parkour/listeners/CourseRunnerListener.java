@@ -44,6 +44,8 @@ import world.bentobox.parkour.ParkourRunRecord;
  */
 public class CourseRunnerListener extends AbstractListener {
 
+    private static final String SESSION_ENDED = "parkour.session-ended";
+
     ParkourRunRecord parkourRunManager;
 
     /**
@@ -140,7 +142,7 @@ public class CourseRunnerListener extends AbstractListener {
         // If the user leaves any island, end and clear the session.
         User user = User.getInstance(e.getPlayerUUID());
         if (parkourRunManager.checkpoints().containsKey(e.getPlayerUUID()) && user.isOnline()) {
-            user.notify("parkour.session-ended");
+            user.notify(SESSION_ENDED);
         }
         parkourRunManager.clear(e.getPlayerUUID());
     }
@@ -150,7 +152,7 @@ public class CourseRunnerListener extends AbstractListener {
         // Game over
         User user = User.getInstance(e.getEntity().getUniqueId());
         if (parkourRunManager.checkpoints().containsKey(e.getEntity().getUniqueId()) && user.isOnline()) {
-            user.notify("parkour.session-ended");
+            user.notify(SESSION_ENDED);
         }
         parkourRunManager.clear(e.getEntity().getUniqueId());
     }
@@ -201,13 +203,12 @@ public class CourseRunnerListener extends AbstractListener {
         if (!parkourRunManager.currentlyTeleporting().contains(playerUUID) && shouldStopRun && parkourRunManager.timers().containsKey(playerUUID)) {
             User user = User.getInstance(playerUUID);
             if (parkourRunManager.checkpoints().containsKey(playerUUID) && user.isOnline()) {
-                user.notify("parkour.session-ended");
+                user.notify(SESSION_ENDED);
             }
             parkourRunManager.clear(playerUUID);
         }
         // Check world - only apply flag actions to Parkour world and only if player is not actively running the course
-        if (e.getTo() == null // To can sometimes be null...
-                || !addon.inWorld(e.getTo())
+        if (!addon.inWorld(e.getTo())
                 || parkourRunManager.timers().containsKey(playerUUID)) {
             return;
         }

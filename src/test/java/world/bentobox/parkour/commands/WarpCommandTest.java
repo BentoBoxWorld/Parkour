@@ -20,7 +20,6 @@ import java.util.Optional;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.eclipse.jdt.annotation.NonNull;

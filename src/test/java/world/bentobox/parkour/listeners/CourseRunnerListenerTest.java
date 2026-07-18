@@ -34,8 +34,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Player.Spigot;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -52,7 +50,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
-import net.md_5.bungee.api.chat.TextComponent;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
@@ -267,7 +264,8 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      */
     @Test
     void testOnPlayerQuit() {
-        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty());
+        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty(),
+                PlayerQuitEvent.QuitReason.DISCONNECTED);
         crl.onPlayerQuit(e);
         assertFalse(prm.timers().containsKey(uuid));
         assertFalse(prm.checkpoints().containsKey(uuid));

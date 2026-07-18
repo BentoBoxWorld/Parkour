@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.eclipse.jdt.annotation.NonNull;
 import org.junit.jupiter.api.BeforeEach;
