@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.contains;
@@ -22,10 +24,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -286,7 +288,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         crl.onVisitorFall(e);
         // prevent-void-death defaults to true, so the player is saved from dying
         assertTrue(e.isCancelled());
-        verify(mockPlayer).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world).spawnParticle(eq(Particle.POOF), eq(location), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer).setFallDistance(0);
         // Verify static call
@@ -309,7 +311,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         crl.onVisitorFall(e);
         // prevent-void-death is off, so the player still takes damage (event not cancelled)
         assertFalse(e.isCancelled());
-        verify(mockPlayer).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world).spawnParticle(eq(Particle.POOF), eq(location), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer).setFallDistance(0);
         // Verify static call
@@ -326,7 +328,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(mockPlayer, DamageCause.BLOCK_EXPLOSION, null, 0);
         crl.onVisitorFall(e);
-        verify(mockPlayer, never()).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world, never()).spawnParticle(eq(Particle.POOF), any(Location.class), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer, never()).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer, never()).setFallDistance(0);
         verify(mockPlayer, never()).teleport(location);
@@ -340,7 +342,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
     void testOnVisitorFallNotRunning() {
         EntityDamageEvent e = new EntityDamageEvent(mockPlayer, DamageCause.VOID, null, 1D);
         crl.onVisitorFall(e);
-        verify(mockPlayer, never()).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world, never()).spawnParticle(eq(Particle.POOF), any(Location.class), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer, never()).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer, never()).setFallDistance(0);
         verify(mockPlayer, never()).teleport(location);
@@ -355,7 +357,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         Creeper creeper = mock(Creeper.class);
         EntityDamageEvent e = new EntityDamageEvent(creeper, DamageCause.VOID, null, 1D);
         crl.onVisitorFall(e);
-        verify(creeper, never()).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world, never()).spawnParticle(eq(Particle.POOF), any(Location.class), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
     }
 
     /**
