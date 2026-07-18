@@ -6,10 +6,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -43,6 +43,8 @@ import world.bentobox.parkour.ParkourRunRecord;
  * @author tastybento
  */
 public class CourseRunnerListener extends AbstractListener {
+
+    private static final String SESSION_ENDED = "parkour.session-ended";
 
     ParkourRunRecord parkourRunManager;
 
@@ -140,7 +142,7 @@ public class CourseRunnerListener extends AbstractListener {
         // If the user leaves any island, end and clear the session.
         User user = User.getInstance(e.getPlayerUUID());
         if (parkourRunManager.checkpoints().containsKey(e.getPlayerUUID()) && user.isOnline()) {
-            user.notify("parkour.session-ended");
+            user.notify(SESSION_ENDED);
         }
         parkourRunManager.clear(e.getPlayerUUID());
     }
@@ -150,7 +152,7 @@ public class CourseRunnerListener extends AbstractListener {
         // Game over
         User user = User.getInstance(e.getEntity().getUniqueId());
         if (parkourRunManager.checkpoints().containsKey(e.getEntity().getUniqueId()) && user.isOnline()) {
-            user.notify("parkour.session-ended");
+            user.notify(SESSION_ENDED);
         }
         parkourRunManager.clear(e.getEntity().getUniqueId());
     }
@@ -176,7 +178,11 @@ public class CourseRunnerListener extends AbstractListener {
         }
         // Put player back to last checkpoint (or the course start if no checkpoint reached yet).
         // If the event is not cancelled the player still takes some damage.
-        player.playEffect(EntityEffect.ENTITY_POOF);
+        // ENTITY_POOF is not applicable to players (Paper rejects it), so spawn the particles directly.
+        Location playerLoc = player.getLocation();
+        if (playerLoc != null) {
+            player.getWorld().spawnParticle(Particle.POOF, playerLoc, 20, 0.5, 0.5, 0.5, 0.1);
+        }
         player.setVelocity(new Vector(0, 0, 0));
         player.setFallDistance(0);
         Location checkpointLocation = parkourRunManager.checkpoints().get(player.getUniqueId());
@@ -197,13 +203,12 @@ public class CourseRunnerListener extends AbstractListener {
         if (!parkourRunManager.currentlyTeleporting().contains(playerUUID) && shouldStopRun && parkourRunManager.timers().containsKey(playerUUID)) {
             User user = User.getInstance(playerUUID);
             if (parkourRunManager.checkpoints().containsKey(playerUUID) && user.isOnline()) {
-                user.notify("parkour.session-ended");
+                user.notify(SESSION_ENDED);
             }
             parkourRunManager.clear(playerUUID);
         }
         // Check world - only apply flag actions to Parkour world and only if player is not actively running the course
-        if (e.getTo() == null // To can sometimes be null...
-                || !addon.inWorld(e.getTo())
+        if (!addon.inWorld(e.getTo())
                 || parkourRunManager.timers().containsKey(playerUUID)) {
             return;
         }

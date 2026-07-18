@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.contains;
@@ -22,18 +24,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.bukkit.EntityEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Player.Spigot;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -50,7 +50,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
-import net.md_5.bungee.api.chat.TextComponent;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
@@ -89,7 +88,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      */
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
 
         // Player setup (already done in CommonTestSetup)
@@ -265,7 +264,8 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      */
     @Test
     void testOnPlayerQuit() {
-        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty());
+        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty(),
+                PlayerQuitEvent.QuitReason.DISCONNECTED);
         crl.onPlayerQuit(e);
         assertFalse(prm.timers().containsKey(uuid));
         assertFalse(prm.checkpoints().containsKey(uuid));
@@ -286,7 +286,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         crl.onVisitorFall(e);
         // prevent-void-death defaults to true, so the player is saved from dying
         assertTrue(e.isCancelled());
-        verify(mockPlayer).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world).spawnParticle(eq(Particle.POOF), eq(location), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer).setFallDistance(0);
         // Verify static call
@@ -309,7 +309,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         crl.onVisitorFall(e);
         // prevent-void-death is off, so the player still takes damage (event not cancelled)
         assertFalse(e.isCancelled());
-        verify(mockPlayer).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world).spawnParticle(eq(Particle.POOF), eq(location), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer).setFallDistance(0);
         // Verify static call
@@ -326,7 +326,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         prm.checkpoints().put(uuid, location);
         EntityDamageEvent e = new EntityDamageEvent(mockPlayer, DamageCause.BLOCK_EXPLOSION, null, 0);
         crl.onVisitorFall(e);
-        verify(mockPlayer, never()).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world, never()).spawnParticle(eq(Particle.POOF), any(Location.class), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer, never()).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer, never()).setFallDistance(0);
         verify(mockPlayer, never()).teleport(location);
@@ -340,7 +340,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
     void testOnVisitorFallNotRunning() {
         EntityDamageEvent e = new EntityDamageEvent(mockPlayer, DamageCause.VOID, null, 1D);
         crl.onVisitorFall(e);
-        verify(mockPlayer, never()).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world, never()).spawnParticle(eq(Particle.POOF), any(Location.class), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
         verify(mockPlayer, never()).setVelocity(new Vector(0, 0, 0));
         verify(mockPlayer, never()).setFallDistance(0);
         verify(mockPlayer, never()).teleport(location);
@@ -355,7 +355,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
         Creeper creeper = mock(Creeper.class);
         EntityDamageEvent e = new EntityDamageEvent(creeper, DamageCause.VOID, null, 1D);
         crl.onVisitorFall(e);
-        verify(creeper, never()).playEffect(EntityEffect.ENTITY_POOF);
+        verify(world, never()).spawnParticle(eq(Particle.POOF), any(Location.class), anyInt(), anyDouble(), anyDouble(), anyDouble(), anyDouble());
     }
 
     /**
@@ -660,11 +660,11 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      * Check that spigot sent the message
      * @param message - message to check
      */
-    public void checkSpigotMessage(String expectedMessage) {
+    void checkSpigotMessage(String expectedMessage) {
         checkSpigotMessage(expectedMessage, 1);
     }
 
-    public void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
+    void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
         // BentoBox 3.14 routes User.sendMessage through Adventure: CommandSender.sendMessage(Component)
         ArgumentCaptor<net.kyori.adventure.text.Component> captor = ArgumentCaptor
                 .forClass(net.kyori.adventure.text.Component.class);

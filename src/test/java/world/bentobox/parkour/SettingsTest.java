@@ -25,7 +25,7 @@ class SettingsTest extends CommonTestSetup {
 
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
         s = new Settings();
     }
@@ -34,7 +34,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getFriendlyName()}.
      */
     @Test
-    public void testGetFriendlyName() {
+    void testGetFriendlyName() {
         assertEquals("Parkour", s.getFriendlyName());
     }
 
@@ -42,7 +42,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getWorldName()}.
      */
     @Test
-    public void testGetWorldName() {
+    void testGetWorldName() {
         assertEquals("parkour_world", s.getWorldName());
     }
 
@@ -50,7 +50,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDifficulty()}.
      */
     @Test
-    public void testGetDifficulty() {
+    void testGetDifficulty() {
         assertEquals(Difficulty.PEACEFUL, s.getDifficulty());
     }
 
@@ -58,7 +58,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandDistance()}.
      */
     @Test
-    public void testGetIslandDistance() {
+    void testGetIslandDistance() {
         assertEquals(400, s.getIslandDistance());
     }
 
@@ -66,7 +66,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandProtectionRange()}.
      */
     @Test
-    public void testGetIslandProtectionRange() {
+    void testGetIslandProtectionRange() {
         assertEquals(100, s.getIslandProtectionRange());
     }
 
@@ -74,7 +74,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandStartX()}.
      */
     @Test
-    public void testGetIslandStartX() {
+    void testGetIslandStartX() {
         assertEquals(0, s.getIslandStartX());
     }
 
@@ -82,7 +82,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandStartZ()}.
      */
     @Test
-    public void testGetIslandStartZ() {
+    void testGetIslandStartZ() {
         assertEquals(0, s.getIslandStartZ());
     }
 
@@ -90,7 +90,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandXOffset()}.
      */
     @Test
-    public void testGetIslandXOffset() {
+    void testGetIslandXOffset() {
         assertEquals(0, s.getIslandXOffset());
     }
 
@@ -98,7 +98,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandZOffset()}.
      */
     @Test
-    public void testGetIslandZOffset() {
+    void testGetIslandZOffset() {
         assertEquals(0, s.getIslandZOffset());
     }
 
@@ -106,7 +106,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIslandHeight()}.
      */
     @Test
-    public void testGetIslandHeight() {
+    void testGetIslandHeight() {
         assertEquals(100, s.getIslandHeight());
     }
 
@@ -114,7 +114,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isUseOwnGenerator()}.
      */
     @Test
-    public void testIsUseOwnGenerator() {
+    void testIsUseOwnGenerator() {
         assertFalse(s.isUseOwnGenerator());
     }
 
@@ -122,7 +122,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getSeaHeight()}.
      */
     @Test
-    public void testGetSeaHeight() {
+    void testGetSeaHeight() {
         assertEquals(0, s.getSeaHeight());
     }
 
@@ -130,7 +130,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getMaxIslands()}.
      */
     @Test
-    public void testGetMaxIslands() {
+    void testGetMaxIslands() {
         assertEquals(-1, s.getMaxIslands());
     }
 
@@ -138,7 +138,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultGameMode()}.
      */
     @Test
-    public void testGetDefaultGameMode() {
+    void testGetDefaultGameMode() {
         assertEquals(GameMode.CREATIVE, s.getDefaultGameMode());
     }
 
@@ -146,7 +146,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isNetherGenerate()}.
      */
     @Test
-    public void testIsNetherGenerate() {
+    void testIsNetherGenerate() {
         assertTrue(s.isNetherGenerate());
     }
 
@@ -154,7 +154,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isNetherIslands()}.
      */
     @Test
-    public void testIsNetherIslands() {
+    void testIsNetherIslands() {
         assertTrue(s.isNetherIslands());
     }
 
@@ -162,7 +162,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isNetherRoof()}.
      */
     @Test
-    public void testIsNetherRoof() {
+    void testIsNetherRoof() {
         assertTrue(s.isNetherRoof());
     }
 
@@ -170,7 +170,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getNetherSpawnRadius()}.
      */
     @Test
-    public void testGetNetherSpawnRadius() {
+    void testGetNetherSpawnRadius() {
         assertEquals(32, s.getNetherSpawnRadius());
     }
 
@@ -178,7 +178,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isEndGenerate()}.
      */
     @Test
-    public void testIsEndGenerate() {
+    void testIsEndGenerate() {
         assertTrue(s.isEndGenerate());
     }
 
@@ -186,7 +186,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isEndIslands()}.
      */
     @Test
-    public void testIsEndIslands() {
+    void testIsEndIslands() {
         assertTrue(s.isEndIslands());
     }
 
@@ -194,7 +194,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isDragonSpawn()}.
      */
     @Test
-    public void testIsDragonSpawn() {
+    void testIsDragonSpawn() {
         assertFalse(s.isDragonSpawn());
     }
 
@@ -202,7 +202,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getRemoveMobsWhitelist()}.
      */
     @Test
-    public void testGetRemoveMobsWhitelist() {
+    void testGetRemoveMobsWhitelist() {
         assertTrue(s.getRemoveMobsWhitelist().isEmpty());
 
     }
@@ -211,7 +211,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getWorldFlags()}.
      */
     @Test
-    public void testGetWorldFlags() {
+    void testGetWorldFlags() {
         assertTrue(s.getWorldFlags().isEmpty());
     }
 
@@ -219,7 +219,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultIslandFlagNames()}.
      */
     @Test
-    public void testGetDefaultIslandFlagNames() {
+    void testGetDefaultIslandFlagNames() {
         assertTrue(s.getDefaultIslandFlagNames().isEmpty());
     }
 
@@ -227,7 +227,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultIslandSettingNames()}.
      */
     @Test
-    public void testGetDefaultIslandSettingNames() {
+    void testGetDefaultIslandSettingNames() {
         assertTrue(s.getDefaultIslandSettingNames().isEmpty());
     }
 
@@ -235,7 +235,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultIslandFlags()}.
      */
     @Test
-    public void testGetDefaultIslandFlags() {
+    void testGetDefaultIslandFlags() {
         assertTrue(s.getDefaultIslandFlags().isEmpty());
     }
 
@@ -243,7 +243,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultIslandSettings()}.
      */
     @Test
-    public void testGetDefaultIslandSettings() {
+    void testGetDefaultIslandSettings() {
         assertTrue(s.getDefaultIslandSettings().isEmpty());
     }
 
@@ -251,7 +251,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getHiddenFlags()}.
      */
     @Test
-    public void testGetHiddenFlags() {
+    void testGetHiddenFlags() {
         assertTrue(s.getHiddenFlags().isEmpty());
     }
 
@@ -259,7 +259,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getVisitorBannedCommands()}.
      */
     @Test
-    public void testGetVisitorBannedCommands() {
+    void testGetVisitorBannedCommands() {
         assertTrue(s.getVisitorBannedCommands().isEmpty());
     }
 
@@ -267,7 +267,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getFallingBannedCommands()}.
      */
     @Test
-    public void testGetFallingBannedCommands() {
+    void testGetFallingBannedCommands() {
         assertTrue(s.getFallingBannedCommands().isEmpty());
     }
 
@@ -275,7 +275,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getMaxTeamSize()}.
      */
     @Test
-    public void testGetMaxTeamSize() {
+    void testGetMaxTeamSize() {
         assertEquals(4, s.getMaxTeamSize());
     }
 
@@ -283,7 +283,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getMaxHomes()}.
      */
     @Test
-    public void testGetMaxHomes() {
+    void testGetMaxHomes() {
         assertEquals(5, s.getMaxHomes());
     }
 
@@ -291,7 +291,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getResetLimit()}.
      */
     @Test
-    public void testGetResetLimit() {
+    void testGetResetLimit() {
         assertEquals(-1, s.getResetLimit());
     }
 
@@ -299,7 +299,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isLeaversLoseReset()}.
      */
     @Test
-    public void testIsLeaversLoseReset() {
+    void testIsLeaversLoseReset() {
         assertFalse(s.isLeaversLoseReset());
     }
 
@@ -307,7 +307,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isKickedKeepInventory()}.
      */
     @Test
-    public void testIsKickedKeepInventory() {
+    void testIsKickedKeepInventory() {
         assertFalse(s.isKickedKeepInventory());
     }
 
@@ -315,7 +315,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isCreateIslandOnFirstLoginEnabled()}.
      */
     @Test
-    public void testIsCreateIslandOnFirstLoginEnabled() {
+    void testIsCreateIslandOnFirstLoginEnabled() {
         assertFalse(s.isCreateIslandOnFirstLoginEnabled());
     }
 
@@ -323,7 +323,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getCreateIslandOnFirstLoginDelay()}.
      */
     @Test
-    public void testGetCreateIslandOnFirstLoginDelay() {
+    void testGetCreateIslandOnFirstLoginDelay() {
         assertEquals(5, s.getCreateIslandOnFirstLoginDelay());
     }
 
@@ -331,7 +331,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isCreateIslandOnFirstLoginAbortOnLogout()}.
      */
     @Test
-    public void testIsCreateIslandOnFirstLoginAbortOnLogout() {
+    void testIsCreateIslandOnFirstLoginAbortOnLogout() {
         assertTrue(s.isCreateIslandOnFirstLoginAbortOnLogout());
     }
 
@@ -339,7 +339,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnJoinResetMoney()}.
      */
     @Test
-    public void testIsOnJoinResetMoney() {
+    void testIsOnJoinResetMoney() {
         assertFalse(s.isOnJoinResetMoney());
     }
 
@@ -347,7 +347,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnJoinResetInventory()}.
      */
     @Test
-    public void testIsOnJoinResetInventory() {
+    void testIsOnJoinResetInventory() {
         assertFalse(s.isOnJoinResetInventory());
     }
 
@@ -355,7 +355,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnJoinResetEnderChest()}.
      */
     @Test
-    public void testIsOnJoinResetEnderChest() {
+    void testIsOnJoinResetEnderChest() {
         assertFalse(s.isOnJoinResetEnderChest());
     }
 
@@ -363,7 +363,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnLeaveResetMoney()}.
      */
     @Test
-    public void testIsOnLeaveResetMoney() {
+    void testIsOnLeaveResetMoney() {
         assertFalse(s.isOnLeaveResetMoney());
     }
 
@@ -371,7 +371,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnLeaveResetInventory()}.
      */
     @Test
-    public void testIsOnLeaveResetInventory() {
+    void testIsOnLeaveResetInventory() {
         assertFalse(s.isOnLeaveResetInventory());
     }
 
@@ -379,7 +379,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnLeaveResetEnderChest()}.
      */
     @Test
-    public void testIsOnLeaveResetEnderChest() {
+    void testIsOnLeaveResetEnderChest() {
         assertFalse(s.isOnLeaveResetEnderChest());
     }
 
@@ -387,7 +387,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isDeathsCounted()}.
      */
     @Test
-    public void testIsDeathsCounted() {
+    void testIsDeathsCounted() {
         assertTrue(s.isDeathsCounted());
     }
 
@@ -395,7 +395,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isAllowSetHomeInNether()}.
      */
     @Test
-    public void testIsAllowSetHomeInNether() {
+    void testIsAllowSetHomeInNether() {
         assertTrue(s.isAllowSetHomeInNether());
     }
 
@@ -403,7 +403,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isAllowSetHomeInTheEnd()}.
      */
     @Test
-    public void testIsAllowSetHomeInTheEnd() {
+    void testIsAllowSetHomeInTheEnd() {
         assertTrue(s.isAllowSetHomeInTheEnd());
     }
 
@@ -411,7 +411,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isRequireConfirmationToSetHomeInNether()}.
      */
     @Test
-    public void testIsRequireConfirmationToSetHomeInNether() {
+    void testIsRequireConfirmationToSetHomeInNether() {
         assertTrue(s.isRequireConfirmationToSetHomeInNether());
     }
 
@@ -419,7 +419,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isRequireConfirmationToSetHomeInTheEnd()}.
      */
     @Test
-    public void testIsRequireConfirmationToSetHomeInTheEnd() {
+    void testIsRequireConfirmationToSetHomeInTheEnd() {
         assertTrue(s.isRequireConfirmationToSetHomeInTheEnd());
     }
 
@@ -427,7 +427,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDeathsMax()}.
      */
     @Test
-    public void testGetDeathsMax() {
+    void testGetDeathsMax() {
         assertEquals(10, s.getDeathsMax());
     }
 
@@ -435,7 +435,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isTeamJoinDeathReset()}.
      */
     @Test
-    public void testIsTeamJoinDeathReset() {
+    void testIsTeamJoinDeathReset() {
         assertTrue(s.isTeamJoinDeathReset());
     }
 
@@ -443,7 +443,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getGeoLimitSettings()}.
      */
     @Test
-    public void testGetGeoLimitSettings() {
+    void testGetGeoLimitSettings() {
         assertTrue(s.getGeoLimitSettings().isEmpty());
     }
 
@@ -451,7 +451,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getIvSettings()}.
      */
     @Test
-    public void testGetIvSettings() {
+    void testGetIvSettings() {
         assertTrue(s.getIvSettings().isEmpty());
     }
 
@@ -459,7 +459,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getResetEpoch()}.
      */
     @Test
-    public void testGetResetEpoch() {
+    void testGetResetEpoch() {
         assertEquals(0L, s.getResetEpoch());
     }
 
@@ -467,7 +467,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setFriendlyName(java.lang.String)}.
      */
     @Test
-    public void testSetFriendlyName() {
+    void testSetFriendlyName() {
         s.setFriendlyName("test");
         assertEquals("test", s.getFriendlyName());
     }
@@ -476,7 +476,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setWorldName(java.lang.String)}.
      */
     @Test
-    public void testSetWorldName() {
+    void testSetWorldName() {
         s.setWorldName("test");
         assertEquals("test", s.getWorldName());
     }
@@ -485,7 +485,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDifficulty(org.bukkit.Difficulty)}.
      */
     @Test
-    public void testSetDifficulty() {
+    void testSetDifficulty() {
         s.setDifficulty(Difficulty.HARD);
         assertEquals(Difficulty.HARD, s.getDifficulty());
     }
@@ -494,7 +494,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandDistance(int)}.
      */
     @Test
-    public void testSetIslandDistance() {
+    void testSetIslandDistance() {
         s.setIslandDistance(12345);
         assertEquals(12345, s.getIslandDistance());
     }
@@ -503,7 +503,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandProtectionRange(int)}.
      */
     @Test
-    public void testSetIslandProtectionRange() {
+    void testSetIslandProtectionRange() {
         s.setIslandProtectionRange(12345);
         assertEquals(12345, s.getIslandProtectionRange());
     }
@@ -512,7 +512,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandStartX(int)}.
      */
     @Test
-    public void testSetIslandStartX() {
+    void testSetIslandStartX() {
         s.setIslandStartX(12345);
         assertEquals(12345, s.getIslandStartX());
     }
@@ -521,7 +521,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandStartZ(int)}.
      */
     @Test
-    public void testSetIslandStartZ() {
+    void testSetIslandStartZ() {
         s.setIslandStartZ(12345);
         assertEquals(12345, s.getIslandStartZ());
     }
@@ -530,7 +530,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandXOffset(int)}.
      */
     @Test
-    public void testSetIslandXOffset() {
+    void testSetIslandXOffset() {
         s.setIslandXOffset(12345);
         assertEquals(12345, s.getIslandXOffset());
     }
@@ -539,7 +539,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandZOffset(int)}.
      */
     @Test
-    public void testSetIslandZOffset() {
+    void testSetIslandZOffset() {
         s.setIslandZOffset(12345);
         assertEquals(12345, s.getIslandZOffset());
     }
@@ -548,7 +548,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIslandHeight(int)}.
      */
     @Test
-    public void testSetIslandHeight() {
+    void testSetIslandHeight() {
         s.setIslandHeight(12345);
         assertEquals(12345, s.getIslandHeight());
     }
@@ -557,7 +557,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setUseOwnGenerator(boolean)}.
      */
     @Test
-    public void testSetUseOwnGenerator() {
+    void testSetUseOwnGenerator() {
         s.setUseOwnGenerator(true);
         assertTrue(s.isUseOwnGenerator());
     }
@@ -566,7 +566,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setSeaHeight(int)}.
      */
     @Test
-    public void testSetSeaHeight() {
+    void testSetSeaHeight() {
         s.setSeaHeight(12345);
         assertEquals(12345, s.getSeaHeight());
     }
@@ -575,7 +575,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setMaxIslands(int)}.
      */
     @Test
-    public void testSetMaxIslands() {
+    void testSetMaxIslands() {
         s.setMaxIslands(12345);
         assertEquals(12345, s.getMaxIslands());
     }
@@ -584,7 +584,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDefaultGameMode(org.bukkit.GameMode)}.
      */
     @Test
-    public void testSetDefaultGameMode() {
+    void testSetDefaultGameMode() {
         s.setDefaultGameMode(GameMode.SPECTATOR);
         assertEquals(GameMode.SPECTATOR, s.getDefaultGameMode());
     }
@@ -593,7 +593,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setNetherGenerate(boolean)}.
      */
     @Test
-    public void testSetNetherGenerate() {
+    void testSetNetherGenerate() {
         s.setNetherGenerate(false);
         assertFalse(s.isNetherGenerate());
         s.setNetherGenerate(true);
@@ -604,7 +604,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setNetherIslands(boolean)}.
      */
     @Test
-    public void testSetNetherIslands() {
+    void testSetNetherIslands() {
         s.setNetherIslands(false);
         assertFalse(s.isNetherIslands());
         s.setNetherIslands(true);
@@ -615,7 +615,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setNetherRoof(boolean)}.
      */
     @Test
-    public void testSetNetherRoof() {
+    void testSetNetherRoof() {
         s.setNetherRoof(false);
         assertFalse(s.isNetherRoof());
         s.setNetherRoof(true);
@@ -626,7 +626,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setNetherSpawnRadius(int)}.
      */
     @Test
-    public void testSetNetherSpawnRadius() {
+    void testSetNetherSpawnRadius() {
         s.setNetherSpawnRadius(12345);
         assertEquals(12345, s.getNetherSpawnRadius());
     }
@@ -635,7 +635,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setEndGenerate(boolean)}.
      */
     @Test
-    public void testSetEndGenerate() {
+    void testSetEndGenerate() {
         s.setEndGenerate(false);
         assertFalse(s.isEndGenerate());
         s.setEndGenerate(true);
@@ -646,7 +646,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setEndIslands(boolean)}.
      */
     @Test
-    public void testSetEndIslands() {
+    void testSetEndIslands() {
         s.setEndIslands(false);
         assertFalse(s.isEndIslands());
         s.setEndIslands(true);
@@ -657,7 +657,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setRemoveMobsWhitelist(java.util.Set)}.
      */
     @Test
-    public void testSetRemoveMobsWhitelist() {
+    void testSetRemoveMobsWhitelist() {
         s.setRemoveMobsWhitelist(Collections.singleton(EntityType.AXOLOTL));
         assertTrue(s.getRemoveMobsWhitelist().contains(EntityType.AXOLOTL));
     }
@@ -666,7 +666,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setWorldFlags(java.util.Map)}.
      */
     @Test
-    public void testSetWorldFlags() {
+    void testSetWorldFlags() {
         s.setWorldFlags(Map.of("trueFlag", true, "falseFlag", false));
         assertTrue(s.getWorldFlags().get("trueFlag"));
         assertFalse(s.getWorldFlags().get("falseFlag"));
@@ -676,7 +676,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setHiddenFlags(java.util.List)}.
      */
     @Test
-    public void testSetHiddenFlags() {
+    void testSetHiddenFlags() {
         s.setHiddenFlags(List.of("FLAG1", "FLAG2"));
         assertTrue(s.getHiddenFlags().contains("FLAG2"));
         assertFalse(s.getHiddenFlags().contains("FLAG3"));
@@ -686,7 +686,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setParkourAllowedCommands(java.util.List)}.
      */
     @Test
-    public void testSetParkourAllowedCommands() {
+    void testSetParkourAllowedCommands() {
         s.setParkourAllowedCommands(List.of("allowed"));
         assertTrue(s.getParkourAllowedCommands().contains("allowed"));
         assertFalse(s.getParkourAllowedCommands().contains("not-allowed"));
@@ -697,7 +697,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setVisitorBannedCommands(java.util.List)}.
      */
     @Test
-    public void testSetVisitorBannedCommands() {
+    void testSetVisitorBannedCommands() {
         s.setVisitorBannedCommands(List.of("banned"));
         assertTrue(s.getVisitorBannedCommands().contains("banned"));
         assertFalse(s.getVisitorBannedCommands().contains("not-banned"));
@@ -707,7 +707,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setFallingBannedCommands(java.util.List)}.
      */
     @Test
-    public void testSetFallingBannedCommands() {
+    void testSetFallingBannedCommands() {
         s.setFallingBannedCommands(List.of("banned"));
         assertTrue(s.getFallingBannedCommands().contains("banned"));
         assertFalse(s.getFallingBannedCommands().contains("not-banned"));
@@ -717,7 +717,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setMaxTeamSize(int)}.
      */
     @Test
-    public void testSetMaxTeamSize() {
+    void testSetMaxTeamSize() {
         s.setMaxTeamSize(12345);
         assertEquals(12345, s.getMaxTeamSize());
     }
@@ -726,7 +726,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setMaxHomes(int)}.
      */
     @Test
-    public void testSetMaxHomes() {
+    void testSetMaxHomes() {
         s.setMaxHomes(12345);
         assertEquals(12345, s.getMaxHomes());
     }
@@ -735,7 +735,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setResetLimit(int)}.
      */
     @Test
-    public void testSetResetLimit() {
+    void testSetResetLimit() {
         s.setResetLimit(12345);
         assertEquals(12345, s.getResetLimit());
     }
@@ -744,7 +744,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setLeaversLoseReset(boolean)}.
      */
     @Test
-    public void testSetLeaversLoseReset() {
+    void testSetLeaversLoseReset() {
         s.setLeaversLoseReset(false);
         assertFalse(s.isLeaversLoseReset());
         s.setLeaversLoseReset(true);
@@ -755,7 +755,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setKickedKeepInventory(boolean)}.
      */
     @Test
-    public void testSetKickedKeepInventory() {
+    void testSetKickedKeepInventory() {
         s.setKickedKeepInventory(false);
         assertFalse(s.isKickedKeepInventory());
         s.setKickedKeepInventory(true);
@@ -766,7 +766,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinResetMoney(boolean)}.
      */
     @Test
-    public void testSetOnJoinResetMoney() {
+    void testSetOnJoinResetMoney() {
         s.setOnJoinResetMoney(false);
         assertFalse(s.isOnJoinResetMoney());
         s.setOnJoinResetMoney(true);
@@ -777,7 +777,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinResetInventory(boolean)}.
      */
     @Test
-    public void testSetOnJoinResetInventory() {
+    void testSetOnJoinResetInventory() {
         s.setOnJoinResetInventory(false);
         assertFalse(s.isOnJoinResetInventory());
         s.setOnJoinResetInventory(true);
@@ -788,7 +788,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinResetEnderChest(boolean)}.
      */
     @Test
-    public void testSetOnJoinResetEnderChest() {
+    void testSetOnJoinResetEnderChest() {
         s.setOnJoinResetEnderChest(false);
         assertFalse(s.isOnJoinResetEnderChest());
         s.setOnJoinResetEnderChest(true);
@@ -799,7 +799,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveResetMoney(boolean)}.
      */
     @Test
-    public void testSetOnLeaveResetMoney() {
+    void testSetOnLeaveResetMoney() {
         s.setOnLeaveResetMoney(false);
         assertFalse(s.isOnLeaveResetMoney());
         s.setOnLeaveResetMoney(true);
@@ -810,7 +810,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveResetInventory(boolean)}.
      */
     @Test
-    public void testSetOnLeaveResetInventory() {
+    void testSetOnLeaveResetInventory() {
         s.setOnLeaveResetInventory(false);
         assertFalse(s.isOnLeaveResetInventory());
         s.setOnLeaveResetInventory(true);
@@ -821,7 +821,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveResetEnderChest(boolean)}.
      */
     @Test
-    public void testSetOnLeaveResetEnderChest() {
+    void testSetOnLeaveResetEnderChest() {
         s.setOnLeaveResetEnderChest(false);
         assertFalse(s.isOnLeaveResetEnderChest());
         s.setOnLeaveResetEnderChest(true);
@@ -832,7 +832,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setCreateIslandOnFirstLoginEnabled(boolean)}.
      */
     @Test
-    public void testSetCreateIslandOnFirstLoginEnabled() {
+    void testSetCreateIslandOnFirstLoginEnabled() {
         s.setCreateIslandOnFirstLoginEnabled(false);
         assertFalse(s.isCreateIslandOnFirstLoginEnabled());
         s.setCreateIslandOnFirstLoginEnabled(true);
@@ -843,7 +843,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setCreateIslandOnFirstLoginDelay(int)}.
      */
     @Test
-    public void testSetCreateIslandOnFirstLoginDelay() {
+    void testSetCreateIslandOnFirstLoginDelay() {
         s.setCreateIslandOnFirstLoginDelay(12345);
         assertEquals(12345, s.getCreateIslandOnFirstLoginDelay());
     }
@@ -852,7 +852,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setCreateIslandOnFirstLoginAbortOnLogout(boolean)}.
      */
     @Test
-    public void testSetCreateIslandOnFirstLoginAbortOnLogout() {
+    void testSetCreateIslandOnFirstLoginAbortOnLogout() {
         s.setCreateIslandOnFirstLoginAbortOnLogout(false);
         assertFalse(s.isCreateIslandOnFirstLoginAbortOnLogout());
         s.setCreateIslandOnFirstLoginAbortOnLogout(true);
@@ -863,7 +863,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDeathsCounted(boolean)}.
      */
     @Test
-    public void testSetDeathsCounted() {
+    void testSetDeathsCounted() {
         s.setDeathsCounted(false);
         assertFalse(s.isDeathsCounted());
         s.setDeathsCounted(true);
@@ -874,7 +874,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDeathsMax(int)}.
      */
     @Test
-    public void testSetDeathsMax() {
+    void testSetDeathsMax() {
         s.setDeathsMax(12345);
         assertEquals(12345, s.getDeathsMax());
     }
@@ -883,7 +883,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setTeamJoinDeathReset(boolean)}.
      */
     @Test
-    public void testSetTeamJoinDeathReset() {
+    void testSetTeamJoinDeathReset() {
         s.setTeamJoinDeathReset(false);
         assertFalse(s.isTeamJoinDeathReset());
         s.setTeamJoinDeathReset(true);
@@ -894,7 +894,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setGeoLimitSettings(java.util.List)}.
      */
     @Test
-    public void testSetGeoLimitSettings() {
+    void testSetGeoLimitSettings() {
         s.setGeoLimitSettings(List.of("test"));
         assertTrue(s.getGeoLimitSettings().contains("test"));
     }
@@ -903,7 +903,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setIvSettings(java.util.List)}.
      */
     @Test
-    public void testSetIvSettings() {
+    void testSetIvSettings() {
         s.setIvSettings(List.of("test"));
         assertTrue(s.getIvSettings().contains("test"));
     }
@@ -912,7 +912,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setAllowSetHomeInNether(boolean)}.
      */
     @Test
-    public void testSetAllowSetHomeInNether() {
+    void testSetAllowSetHomeInNether() {
         s.setAllowSetHomeInNether(false);
         assertFalse(s.isAllowSetHomeInNether());
         s.setAllowSetHomeInNether(true);
@@ -923,7 +923,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setAllowSetHomeInTheEnd(boolean)}.
      */
     @Test
-    public void testSetAllowSetHomeInTheEnd() {
+    void testSetAllowSetHomeInTheEnd() {
         s.setAllowSetHomeInTheEnd(false);
         assertFalse(s.isAllowSetHomeInTheEnd());
         s.setAllowSetHomeInTheEnd(true);
@@ -934,7 +934,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setRequireConfirmationToSetHomeInNether(boolean)}.
      */
     @Test
-    public void testSetRequireConfirmationToSetHomeInNether() {
+    void testSetRequireConfirmationToSetHomeInNether() {
         s.setRequireConfirmationToSetHomeInNether(false);
         assertFalse(s.isRequireConfirmationToSetHomeInNether());
         s.setRequireConfirmationToSetHomeInNether(true);
@@ -945,7 +945,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setRequireConfirmationToSetHomeInTheEnd(boolean)}.
      */
     @Test
-    public void testSetRequireConfirmationToSetHomeInTheEnd() {
+    void testSetRequireConfirmationToSetHomeInTheEnd() {
         s.setRequireConfirmationToSetHomeInTheEnd(false);
         assertFalse(s.isRequireConfirmationToSetHomeInTheEnd());
         s.setRequireConfirmationToSetHomeInTheEnd(true);
@@ -956,7 +956,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setResetEpoch(long)}.
      */
     @Test
-    public void testSetResetEpoch() {
+    void testSetResetEpoch() {
         s.setResetEpoch(12345);
         assertEquals(12345, s.getResetEpoch());
     }
@@ -965,7 +965,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getPermissionPrefix()}.
      */
     @Test
-    public void testGetPermissionPrefix() {
+    void testGetPermissionPrefix() {
         assertEquals("parkour", s.getPermissionPrefix());
     }
 
@@ -973,7 +973,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isWaterUnsafe()}.
      */
     @Test
-    public void testIsWaterUnsafe() {
+    void testIsWaterUnsafe() {
         assertFalse(s.isWaterUnsafe());
     }
 
@@ -981,7 +981,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultBiome()}.
      */
     @Test
-    public void testGetDefaultBiome() {
+    void testGetDefaultBiome() {
         assertEquals(Biome.PLAINS, s.getDefaultBiome());
     }
 
@@ -989,7 +989,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDefaultBiome(org.bukkit.block.Biome)}.
      */
     @Test
-    public void testSetDefaultBiome() {
+    void testSetDefaultBiome() {
         assertEquals(Biome.PLAINS, s.getDefaultBiome());
         s.setDefaultBiome(Biome.BAMBOO_JUNGLE);
         assertEquals(Biome.BAMBOO_JUNGLE, s.getDefaultBiome());
@@ -999,7 +999,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getBanLimit()}.
      */
     @Test
-    public void testGetBanLimit() {
+    void testGetBanLimit() {
         assertEquals(-1, s.getBanLimit());
     }
 
@@ -1007,7 +1007,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setBanLimit(int)}.
      */
     @Test
-    public void testSetBanLimit() {
+    void testSetBanLimit() {
         assertEquals(-1, s.getBanLimit());
         s.setBanLimit(12345);
         assertEquals(12345, s.getBanLimit());
@@ -1017,7 +1017,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getPlayerCommandAliases()}.
      */
     @Test
-    public void testGetPlayerCommandAliases() {
+    void testGetPlayerCommandAliases() {
         assertEquals("parkour pk",s.getPlayerCommandAliases());
     }
 
@@ -1025,7 +1025,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setPlayerCommandAliases(java.lang.String)}.
      */
     @Test
-    public void testSetPlayerCommandAliases() {
+    void testSetPlayerCommandAliases() {
         assertEquals("parkour pk",s.getPlayerCommandAliases());
         s.setPlayerCommandAliases("aliases");
         assertEquals("aliases",s.getPlayerCommandAliases());
@@ -1035,7 +1035,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getAdminCommandAliases()}.
      */
     @Test
-    public void testGetAdminCommandAliases() {
+    void testGetAdminCommandAliases() {
         assertEquals("parkouradmin pkadmin",s.getAdminCommandAliases());
     }
 
@@ -1043,7 +1043,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setAdminCommandAliases(java.lang.String)}.
      */
     @Test
-    public void testSetAdminCommandAliases() {
+    void testSetAdminCommandAliases() {
         assertEquals("parkouradmin pkadmin",s.getAdminCommandAliases());
         s.setAdminCommandAliases("aliases");
         assertEquals("aliases",s.getAdminCommandAliases());
@@ -1053,7 +1053,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isDeathsResetOnNewIsland()}.
      */
     @Test
-    public void testIsDeathsResetOnNewIsland() {
+    void testIsDeathsResetOnNewIsland() {
         assertTrue(s.isDeathsResetOnNewIsland());
     }
 
@@ -1061,7 +1061,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDeathsResetOnNewIsland(boolean)}.
      */
     @Test
-    public void testSetDeathsResetOnNewIsland() {
+    void testSetDeathsResetOnNewIsland() {
         s.setDeathsResetOnNewIsland(false);
         assertFalse(s.isDeathsResetOnNewIsland());
         s.setDeathsResetOnNewIsland(true);
@@ -1072,7 +1072,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getOnJoinCommands()}.
      */
     @Test
-    public void testGetOnJoinCommands() {
+    void testGetOnJoinCommands() {
         assertTrue(s.getOnJoinCommands().isEmpty());
     }
 
@@ -1080,7 +1080,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinCommands(java.util.List)}.
      */
     @Test
-    public void testSetOnJoinCommands() {
+    void testSetOnJoinCommands() {
         s.setOnJoinCommands(List.of("command", "do this"));
         assertEquals("do this", s.getOnJoinCommands().get(1));
     }
@@ -1089,7 +1089,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getOnLeaveCommands()}.
      */
     @Test
-    public void testGetOnLeaveCommands() {
+    void testGetOnLeaveCommands() {
         assertTrue(s.getOnLeaveCommands().isEmpty());
     }
 
@@ -1097,7 +1097,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveCommands(java.util.List)}.
      */
     @Test
-    public void testSetOnLeaveCommands() {
+    void testSetOnLeaveCommands() {
         s.setOnLeaveCommands(List.of("command", "do this"));
         assertEquals("do this", s.getOnLeaveCommands().get(1));
     }
@@ -1106,7 +1106,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getOnRespawnCommands()}.
      */
     @Test
-    public void testGetOnRespawnCommands() {
+    void testGetOnRespawnCommands() {
         assertTrue(s.getOnRespawnCommands().isEmpty());
     }
 
@@ -1114,7 +1114,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnJoinResetHealth()}.
      */
     @Test
-    public void testIsOnJoinResetHealth() {
+    void testIsOnJoinResetHealth() {
         assertTrue(s.isOnJoinResetHealth());
     }
 
@@ -1122,7 +1122,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinResetHealth(boolean)}.
      */
     @Test
-    public void testSetOnJoinResetHealth() {
+    void testSetOnJoinResetHealth() {
         s.setOnJoinResetHealth(false);
         assertFalse(s.isOnJoinResetHealth());
         s.setOnJoinResetHealth(true);
@@ -1133,7 +1133,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnJoinResetHunger()}.
      */
     @Test
-    public void testIsOnJoinResetHunger() {
+    void testIsOnJoinResetHunger() {
         assertTrue(s.isOnJoinResetHunger());
     }
 
@@ -1141,7 +1141,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinResetHunger(boolean)}.
      */
     @Test
-    public void testSetOnJoinResetHunger() {
+    void testSetOnJoinResetHunger() {
         s.setOnJoinResetHunger(false);
         assertFalse(s.isOnJoinResetHunger());
         s.setOnJoinResetHunger(true);
@@ -1152,7 +1152,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnJoinResetXP()}.
      */
     @Test
-    public void testIsOnJoinResetXP() {
+    void testIsOnJoinResetXP() {
         assertFalse(s.isOnJoinResetXP());
     }
 
@@ -1160,7 +1160,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnJoinResetXP(boolean)}.
      */
     @Test
-    public void testSetOnJoinResetXP() {
+    void testSetOnJoinResetXP() {
         s.setOnJoinResetXP(false);
         assertFalse(s.isOnJoinResetXP());
         s.setOnJoinResetXP(true);
@@ -1171,7 +1171,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnLeaveResetHealth()}.
      */
     @Test
-    public void testIsOnLeaveResetHealth() {
+    void testIsOnLeaveResetHealth() {
         assertFalse(s.isOnLeaveResetHealth());
     }
 
@@ -1179,7 +1179,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveResetHealth(boolean)}.
      */
     @Test
-    public void testSetOnLeaveResetHealth() {
+    void testSetOnLeaveResetHealth() {
         s.setOnLeaveResetHealth(false);
         assertFalse(s.isOnLeaveResetHealth());
         s.setOnLeaveResetHealth(true);
@@ -1190,7 +1190,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnLeaveResetHunger()}.
      */
     @Test
-    public void testIsOnLeaveResetHunger() {
+    void testIsOnLeaveResetHunger() {
         assertFalse(s.isOnLeaveResetHunger());
     }
 
@@ -1198,7 +1198,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveResetHunger(boolean)}.
      */
     @Test
-    public void testSetOnLeaveResetHunger() {
+    void testSetOnLeaveResetHunger() {
         s.setOnLeaveResetHunger(false);
         assertFalse(s.isOnLeaveResetHunger());
         s.setOnLeaveResetHunger(true);
@@ -1209,7 +1209,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isOnLeaveResetXP()}.
      */
     @Test
-    public void testIsOnLeaveResetXP() {
+    void testIsOnLeaveResetXP() {
         assertFalse(s.isOnLeaveResetXP());
     }
 
@@ -1217,7 +1217,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setOnLeaveResetXP(boolean)}.
      */
     @Test
-    public void testSetOnLeaveResetXP() {
+    void testSetOnLeaveResetXP() {
         assertFalse(s.isOnLeaveResetXP());
         s.setOnLeaveResetXP(true);
         assertTrue(s.isOnLeaveResetXP());
@@ -1227,7 +1227,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isPasteMissingIslands()}.
      */
     @Test
-    public void testIsPasteMissingIslands() {
+    void testIsPasteMissingIslands() {
         assertFalse(s.isPasteMissingIslands());
     }
 
@@ -1235,7 +1235,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setPasteMissingIslands(boolean)}.
      */
     @Test
-    public void testSetPasteMissingIslands() {
+    void testSetPasteMissingIslands() {
         assertFalse(s.isPasteMissingIslands());
         s.setPasteMissingIslands(true);
         assertTrue(s.isPasteMissingIslands());
@@ -1247,7 +1247,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isTeleportPlayerToIslandUponIslandCreation()}.
      */
     @Test
-    public void testIsTeleportPlayerToIslandUponIslandCreation() {
+    void testIsTeleportPlayerToIslandUponIslandCreation() {
         assertTrue(s.isTeleportPlayerToIslandUponIslandCreation());
     }
 
@@ -1255,7 +1255,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setTeleportPlayerToIslandUponIslandCreation(boolean)}.
      */
     @Test
-    public void testSetTeleportPlayerToIslandUponIslandCreation() {
+    void testSetTeleportPlayerToIslandUponIslandCreation() {
         assertTrue(s.isTeleportPlayerToIslandUponIslandCreation());
         s.setTeleportPlayerToIslandUponIslandCreation(false);
         assertFalse(s.isTeleportPlayerToIslandUponIslandCreation());
@@ -1265,7 +1265,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getSpawnLimitMonsters()}.
      */
     @Test
-    public void testGetSpawnLimitMonsters() {
+    void testGetSpawnLimitMonsters() {
         assertEquals(-1, s.getSpawnLimitMonsters());
     }
 
@@ -1273,7 +1273,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setSpawnLimitMonsters(int)}.
      */
     @Test
-    public void testSetSpawnLimitMonsters() {
+    void testSetSpawnLimitMonsters() {
         assertEquals(-1, s.getSpawnLimitMonsters());
         s.setSpawnLimitMonsters(12345);
         assertEquals(12345, s.getSpawnLimitMonsters());
@@ -1283,7 +1283,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getSpawnLimitAnimals()}.
      */
     @Test
-    public void testGetSpawnLimitAnimals() {
+    void testGetSpawnLimitAnimals() {
         assertEquals(-1, s.getSpawnLimitAnimals());
     }
 
@@ -1291,7 +1291,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setSpawnLimitAnimals(int)}.
      */
     @Test
-    public void testSetSpawnLimitAnimals() {
+    void testSetSpawnLimitAnimals() {
         assertEquals(-1, s.getSpawnLimitAnimals());
         s.setSpawnLimitAnimals(12345);
         assertEquals(12345, s.getSpawnLimitAnimals());
@@ -1301,7 +1301,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getSpawnLimitWaterAnimals()}.
      */
     @Test
-    public void testGetSpawnLimitWaterAnimals() {
+    void testGetSpawnLimitWaterAnimals() {
         assertEquals(-1, s.getSpawnLimitWaterAnimals());
     }
 
@@ -1309,7 +1309,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setSpawnLimitWaterAnimals(int)}.
      */
     @Test
-    public void testSetSpawnLimitWaterAnimals() {
+    void testSetSpawnLimitWaterAnimals() {
         assertEquals(-1, s.getSpawnLimitWaterAnimals());
         s.setSpawnLimitWaterAnimals(12345);
         assertEquals(12345, s.getSpawnLimitWaterAnimals());
@@ -1319,7 +1319,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getSpawnLimitAmbient()}.
      */
     @Test
-    public void testGetSpawnLimitAmbient() {
+    void testGetSpawnLimitAmbient() {
         assertEquals(-1, s.getSpawnLimitAmbient());
     }
 
@@ -1327,7 +1327,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setSpawnLimitAmbient(int)}.
      */
     @Test
-    public void testSetSpawnLimitAmbient() {
+    void testSetSpawnLimitAmbient() {
         assertEquals(-1, s.getSpawnLimitAmbient());
         s.setSpawnLimitAmbient(12345);
         assertEquals(12345, s.getSpawnLimitAmbient());
@@ -1337,7 +1337,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getTicksPerAnimalSpawns()}.
      */
     @Test
-    public void testGetTicksPerAnimalSpawns() {
+    void testGetTicksPerAnimalSpawns() {
         assertEquals(-1, s.getTicksPerAnimalSpawns());
     }
 
@@ -1345,7 +1345,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setTicksPerAnimalSpawns(int)}.
      */
     @Test
-    public void testSetTicksPerAnimalSpawns() {
+    void testSetTicksPerAnimalSpawns() {
         assertEquals(-1, s.getTicksPerAnimalSpawns());
         s.setTicksPerAnimalSpawns(12345);
         assertEquals(12345, s.getTicksPerAnimalSpawns());
@@ -1355,7 +1355,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getTicksPerMonsterSpawns()}.
      */
     @Test
-    public void testGetTicksPerMonsterSpawns() {
+    void testGetTicksPerMonsterSpawns() {
         assertEquals(-1, s.getTicksPerMonsterSpawns());
     }
 
@@ -1363,7 +1363,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setTicksPerMonsterSpawns(int)}.
      */
     @Test
-    public void testSetTicksPerMonsterSpawns() {
+    void testSetTicksPerMonsterSpawns() {
         assertEquals(-1, s.getTicksPerMonsterSpawns());
         s.setTicksPerMonsterSpawns(12345);
         assertEquals(12345, s.getTicksPerMonsterSpawns());
@@ -1373,7 +1373,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getMaxCoopSize()}.
      */
     @Test
-    public void testGetMaxCoopSize() {
+    void testGetMaxCoopSize() {
         assertEquals(4, s.getMaxCoopSize());
     }
 
@@ -1381,7 +1381,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setMaxCoopSize(int)}.
      */
     @Test
-    public void testSetMaxCoopSize() {
+    void testSetMaxCoopSize() {
         s.setMaxCoopSize(12345);
         assertEquals(12345, s.getMaxCoopSize());
     }
@@ -1390,7 +1390,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getMaxTrustSize()}.
      */
     @Test
-    public void testGetMaxTrustSize() {
+    void testGetMaxTrustSize() {
         assertEquals(4, s.getMaxTrustSize());
     }
 
@@ -1398,7 +1398,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setMaxTrustSize(int)}.
      */
     @Test
-    public void testSetMaxTrustSize() {
+    void testSetMaxTrustSize() {
         s.setMaxTrustSize(12345);
         assertEquals(12345, s.getMaxTrustSize());
     }
@@ -1407,7 +1407,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultNewPlayerAction()}.
      */
     @Test
-    public void testGetDefaultNewPlayerAction() {
+    void testGetDefaultNewPlayerAction() {
         assertEquals("create", s.getDefaultNewPlayerAction());
     }
 
@@ -1415,7 +1415,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDefaultNewPlayerAction(java.lang.String)}.
      */
     @Test
-    public void testSetDefaultNewPlayerAction() {
+    void testSetDefaultNewPlayerAction() {
         s.setDefaultNewPlayerAction("test");
         assertEquals("test", s.getDefaultNewPlayerAction());
     }
@@ -1424,7 +1424,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultPlayerAction()}.
      */
     @Test
-    public void testGetDefaultPlayerAction() {
+    void testGetDefaultPlayerAction() {
         assertEquals("go", s.getDefaultPlayerAction());
     }
 
@@ -1432,7 +1432,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDefaultPlayerAction(java.lang.String)}.
      */
     @Test
-    public void testSetDefaultPlayerAction() {
+    void testSetDefaultPlayerAction() {
         s.setDefaultPlayerAction("test");
         assertEquals("test", s.getDefaultPlayerAction());
     }
@@ -1441,7 +1441,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getMobLimitSettings()}.
      */
     @Test
-    public void testGetMobLimitSettings() {
+    void testGetMobLimitSettings() {
         assertTrue(s.getMobLimitSettings().isEmpty());
     }
 
@@ -1449,7 +1449,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setMobLimitSettings(java.util.List)}.
      */
     @Test
-    public void testSetMobLimitSettings() {
+    void testSetMobLimitSettings() {
         s.setMobLimitSettings(List.of("test"));
         assertEquals("test", s.getMobLimitSettings().get(0));
     }
@@ -1458,7 +1458,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultNetherBiome()}.
      */
     @Test
-    public void testGetDefaultNetherBiome() {
+    void testGetDefaultNetherBiome() {
         assertEquals(Biome.NETHER_WASTES, s.getDefaultNetherBiome());
     }
 
@@ -1466,7 +1466,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDefaultNetherBiome(org.bukkit.block.Biome)}.
      */
     @Test
-    public void testSetDefaultNetherBiome() {
+    void testSetDefaultNetherBiome() {
         assertEquals(Biome.NETHER_WASTES, s.getDefaultNetherBiome());
         s.setDefaultNetherBiome(Biome.BADLANDS);
         assertEquals(Biome.BADLANDS, s.getDefaultNetherBiome());
@@ -1476,7 +1476,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#getDefaultEndBiome()}.
      */
     @Test
-    public void testGetDefaultEndBiome() {
+    void testGetDefaultEndBiome() {
         assertEquals(Biome.THE_END, s.getDefaultEndBiome());
     }
 
@@ -1484,7 +1484,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setDefaultEndBiome(org.bukkit.block.Biome)}.
      */
     @Test
-    public void testSetDefaultEndBiome() {
+    void testSetDefaultEndBiome() {
         assertEquals(Biome.THE_END, s.getDefaultEndBiome());
         s.setDefaultEndBiome(Biome.BADLANDS);
         assertEquals(Biome.BADLANDS, s.getDefaultEndBiome());
@@ -1494,7 +1494,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isMakeNetherPortals()}.
      */
     @Test
-    public void testIsMakeNetherPortals() {
+    void testIsMakeNetherPortals() {
         assertFalse(s.isMakeNetherPortals());
     }
 
@@ -1502,7 +1502,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isMakeEndPortals()}.
      */
     @Test
-    public void testIsMakeEndPortals() {
+    void testIsMakeEndPortals() {
         assertFalse(s.isMakeEndPortals());
     }
 
@@ -1510,7 +1510,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#isPreventVoidDeath()}.
      */
     @Test
-    public void testIsPreventVoidDeath() {
+    void testIsPreventVoidDeath() {
         assertTrue(s.isPreventVoidDeath());
     }
 
@@ -1518,7 +1518,7 @@ class SettingsTest extends CommonTestSetup {
      * Test method for {@link Settings#setPreventVoidDeath(boolean)}.
      */
     @Test
-    public void testSetPreventVoidDeath() {
+    void testSetPreventVoidDeath() {
         s.setPreventVoidDeath(false);
         assertFalse(s.isPreventVoidDeath());
     }
