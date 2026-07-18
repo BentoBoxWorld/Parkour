@@ -12,7 +12,6 @@ import org.bukkit.GameMode;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 
-import com.google.common.base.Enums;
 
 import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.configuration.ConfigComment;
@@ -1775,6 +1774,7 @@ public class Settings implements WorldSettings {
     /**
      * @return the disallowTeamMemberIslands
      */
+    @Override
     public boolean isDisallowTeamMemberIslands() {
         return disallowTeamMemberIslands;
     }

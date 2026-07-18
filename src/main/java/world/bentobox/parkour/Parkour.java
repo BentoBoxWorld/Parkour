@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.entity.SpawnCategory;
 import org.bukkit.event.Listener;
 import org.bukkit.generator.ChunkGenerator;

@@ -34,8 +34,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Player.Spigot;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -52,7 +50,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
-import net.md_5.bungee.api.chat.TextComponent;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.events.island.IslandEnterEvent;
 import world.bentobox.bentobox.api.events.island.IslandExitEvent;
@@ -91,7 +88,7 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      */
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
 
         // Player setup (already done in CommonTestSetup)
@@ -267,7 +264,8 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      */
     @Test
     void testOnPlayerQuit() {
-        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty());
+        PlayerQuitEvent e = new PlayerQuitEvent(mockPlayer, net.kyori.adventure.text.Component.empty(),
+                PlayerQuitEvent.QuitReason.DISCONNECTED);
         crl.onPlayerQuit(e);
         assertFalse(prm.timers().containsKey(uuid));
         assertFalse(prm.checkpoints().containsKey(uuid));
@@ -662,11 +660,11 @@ class CourseRunnerListenerTest extends CommonTestSetup {
      * Check that spigot sent the message
      * @param message - message to check
      */
-    public void checkSpigotMessage(String expectedMessage) {
+    void checkSpigotMessage(String expectedMessage) {
         checkSpigotMessage(expectedMessage, 1);
     }
 
-    public void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
+    void checkSpigotMessage(String expectedMessage, int expectedOccurrences) {
         // BentoBox 3.14 routes User.sendMessage through Adventure: CommandSender.sendMessage(Component)
         ArgumentCaptor<net.kyori.adventure.text.Component> captor = ArgumentCaptor
                 .forClass(net.kyori.adventure.text.Component.class);

@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.util.Vector;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.user.User;

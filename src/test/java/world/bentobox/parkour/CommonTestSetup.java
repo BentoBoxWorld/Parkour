@@ -112,7 +112,7 @@ public abstract class CommonTestSetup {
 
     @BeforeEach
     @SuppressWarnings("java:S1130")
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         closeable = MockitoAnnotations.openMocks(this);
         server = MockBukkit.mock();
 
@@ -236,7 +236,7 @@ public abstract class CommonTestSetup {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    protected void tearDown() throws Exception {
         mockedBukkit.closeOnDemand();
         mockedUtil.closeOnDemand();
         closeable.close();

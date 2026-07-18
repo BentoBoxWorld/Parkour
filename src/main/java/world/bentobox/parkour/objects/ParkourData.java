@@ -138,6 +138,18 @@ public class ParkourData implements DataObject, Comparable<ParkourData> {
         return Integer.compare(this.runCount, o.getRunCount());
     }
 
+    /**
+     * Equality is based on uniqueId (the island's UUID), so it is inconsistent with
+     * {@link #compareTo(ParkourData)}, which orders by runCount only.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ParkourData other && java.util.Objects.equals(this.uniqueId, other.uniqueId);
+    }
 
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hashCode(uniqueId);
+    }
 
 }

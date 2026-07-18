@@ -82,13 +82,11 @@ public class CoursesTab implements Tab {
         addon.getParkourManager().getParkourData().stream()
                 .sorted()
                 .filter(hs -> Objects.nonNull(hs.getWarpSpot()))
-                .forEach(hs -> {
-                    addon.getIslands().getIslandById(hs.getUniqueId()).ifPresent(is -> {
-                        if (is.getOwner() != null) {
-                            heads.add(getHead(hs, is));
-                        }
-                    });
-                });
+                .forEach(hs -> addon.getIslands().getIslandById(hs.getUniqueId()).ifPresent(is -> {
+                    if (is.getOwner() != null) {
+                        heads.add(getHead(hs, is));
+                    }
+                }));
         return heads;
     }
 

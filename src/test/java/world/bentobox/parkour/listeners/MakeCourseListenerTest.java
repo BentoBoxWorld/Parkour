@@ -67,7 +67,7 @@ class MakeCourseListenerTest extends CommonTestSetup {
 
     @Override
     @BeforeEach
-    public void setUp() throws Exception {
+    protected void setUp() throws Exception {
         super.setUp();
         when(addon.getParkourManager()).thenReturn(parkourManager);
         when(addon.inWorld(location)).thenReturn(true);
