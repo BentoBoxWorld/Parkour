@@ -1,4 +1,8 @@
 # Parkour Addon
+
+<!-- BentoBox stats badges: https://download.bentobox.world/admin (Badges tab) -->
+[![Servers](https://download.bentobox.world/badge/Parkour/servers.svg)](https://download.bentobox.world/) [![Popularity](https://download.bentobox.world/badge/Parkour/rank.svg)](https://download.bentobox.world/) [![Downloads](https://download.bentobox.world/badge/Parkour/downloads.svg)](https://download.bentobox.world/) [![Minecraft](https://download.bentobox.world/badge/Parkour/mc.svg)](https://download.bentobox.world/)
+
 <img width="403" alt="parkour" src="https://github.com/BentoBoxWorld/Parkour/assets/4407265/10dcc201-9686-4b3a-b9c4-e5fd52b79b0d">
 
 ## Description
